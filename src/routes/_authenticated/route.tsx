@@ -6,10 +6,16 @@ import { SearchProvider } from '@/context/search-context'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
 import SkipToMain from '@/components/skip-to-main'
+import { Toaster } from '@/components/ui/toaster.tsx'
+import { Search } from '@/components/search.tsx'
+import { ThemeSwitch } from '@/components/theme-switch.tsx'
+import { ProfileDropdown } from '@/components/profile-dropdown.tsx'
+import { Header } from '@/components/layout/header.tsx'
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: async ({ location }) => {
-    if (!(await authProtected())) {
+    const isProtected = await authProtected();
+    if (!isProtected) {
       throw redirect({
         to: '/sign-in',
         search: {
@@ -40,8 +46,16 @@ function RouteComponent() {
             'group-data-[scroll-locked=1]/body:has-[main.fixed-main]:h-svh'
           )}
         >
+          <Header fixed>
+            <Search />
+            <div className='ml-auto flex items-center space-x-4'>
+              <ThemeSwitch />
+              <ProfileDropdown />
+            </div>
+          </Header>
           <Outlet />
         </div>
+        <Toaster />
       </SidebarProvider>
     </SearchProvider>
   )

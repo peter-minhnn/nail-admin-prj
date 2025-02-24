@@ -6,8 +6,8 @@ import get from 'lodash/get'
 import { toast } from 'sonner'
 
 export function handleApiResponse<T>(response: any) {
-  const isSuccess = get(response.data, 'isSuccess', null)
-  if (!isSuccess) {
+  const isSuccess = get(response.data, 'isSuccess', false)
+  if (isSuccess) {
     return {
       type: 'success',
       result: response.data as BaseResponseType<T>,
@@ -20,7 +20,7 @@ export function handleApiResponse<T>(response: any) {
       data: {} as T,
       isSuccess: false,
       messages: get(response, 'data.messages', []),
-      statusCode: response?.statusCode ?? StatusCodes.BAD_REQUEST,
+      statusCode: isSuccess ?? StatusCodes.BAD_REQUEST,
     } as BaseResponseType<T>,
   }
 }

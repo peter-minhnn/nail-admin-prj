@@ -13,7 +13,12 @@ import { handleServerError } from '@/utils/handle-server-error'
 import { toast } from '@/hooks/use-toast'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
+
+//Css
+import 'ckeditor5/ckeditor5.css';
+import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 import './index.css'
+
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 
@@ -60,14 +65,14 @@ const queryClient = new QueryClient({
           })
           useAuthStore.getState().auth.reset()
           const redirect = `${router.history.location.href}`
-          router.navigate({ to: '/sign-in', search: { redirect } }).finally()
+          router.navigate({ to: '/sign-in', search: { redirect } })
         }
         if (error.response?.status === 500) {
           toast({
             variant: 'destructive',
             title: 'Internal Server Error!',
           })
-          router.navigate({ to: '/500' }).finally()
+          router.navigate({ to: '/500' })
         }
         if (error.response?.status === 403) {
           // router.navigate("/forbidden", { replace: true });

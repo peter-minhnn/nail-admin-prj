@@ -1,6 +1,6 @@
 import {
   IconBarrierBlock,
-  IconBug,
+  IconBug, IconEdit,
   IconError404,
   IconLayoutDashboard,
   IconLock,
@@ -38,6 +38,16 @@ export const sidebarData: SidebarData = {
           title: 'Users',
           url: '/users',
           icon: IconUsers,
+        },
+      ],
+    },
+    {
+      title: 'Samples',
+      items: [
+        {
+          title: 'Editor',
+          icon: IconEdit,
+          url: '/samples/editor'
         },
       ],
     },

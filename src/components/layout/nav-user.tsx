@@ -67,8 +67,6 @@ export function NavUser({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuSeparator />
-            <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
               Log out

@@ -1,3 +1,4 @@
+import React from 'react'
 import { cn } from '@/lib/utils'
 import {
   AlertDialog,
@@ -22,10 +23,10 @@ interface ConfirmDialogProps {
   handleConfirm: () => void
   isLoading?: boolean
   className?: string
-  children?: React.ReactNode
+  children: React.ReactNode
 }
 
-export function ConfirmDialog(props: ConfirmDialogProps) {
+export function ConfirmDialog(props: Readonly<ConfirmDialogProps>) {
   const {
     title,
     desc,
@@ -39,9 +40,10 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     handleConfirm,
     ...actions
   } = props
+  // @ts-ignore
   return (
     <AlertDialog {...actions}>
-      <AlertDialogContent className={cn(className && className)}>
+      <AlertDialogContent className={cn(className)}>
         <AlertDialogHeader className='text-left'>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription asChild>

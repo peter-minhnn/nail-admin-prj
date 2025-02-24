@@ -20,7 +20,7 @@ export type ResultType<T = any> = {
   result: BaseResponseType<T>
 }
 
-export interface PaginationState {
+export type PaginationState = {
   pageIndex: number
   pageSize: number
 }

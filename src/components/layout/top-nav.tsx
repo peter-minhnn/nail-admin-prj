@@ -1,3 +1,4 @@
+import { HTMLAttributes } from 'react'
 import { Link } from '@tanstack/react-router'
 import { IconMenu } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
@@ -9,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
+interface TopNavProps extends HTMLAttributes<HTMLElement> {
   links: {
     title: string
     href: string
@@ -18,7 +19,7 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   }[]
 }
 
-export function TopNav({ className, links, ...props }: TopNavProps) {
+export function TopNav({ className, links, ...props }: Readonly<TopNavProps>) {
   return (
     <>
       <div className='md:hidden'>

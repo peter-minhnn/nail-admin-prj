@@ -19,7 +19,6 @@ authAxiosInstance.interceptors.request.use(async (config) => {
 })
 
 authAxiosInstance.interceptors.response.use(function (response: AxiosResponse) {
-  console.log('response', response)
   return response
 })
 
