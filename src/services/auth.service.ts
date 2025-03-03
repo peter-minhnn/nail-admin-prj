@@ -9,23 +9,32 @@ import { BaseResponseType } from '@/types/base.type.ts'
 import { UserLoginRequestType } from '@/types/user.type'
 import { useAxios } from '@/hooks/use-axios.ts'
 
-export const login = async <T>(data: UserLoginRequestType) => {
+export const login = async (data: UserLoginRequestType) => {
   try {
     const response = await useAxios.post<
       null,
-      BaseResponseType<T>,
+      BaseResponseType,
       UserLoginRequestType
     >(apiRoutes.login, data);
-    return handleApiResponse<T>(response)
+    return handleApiResponse<any>(response)
   } catch (e) {
-    return handleApiCatchResponse<T>(e)
+    return handleApiCatchResponse<any>(e)
   }
 }
 
 export const authProtected = async (): Promise<boolean> => {
   try {
     const response = await axiosConfig.post(apiRoutes.protected)
-    return response.status === StatusCodes.OK
+    return response.status === StatusCodes.CREATED
+  } catch (e) {
+    return false
+  }
+}
+
+export const logout = async (): Promise<boolean> => {
+  try {
+    const response = await axiosConfig.post(apiRoutes.logout)
+    return response.status === StatusCodes.CREATED
   } catch (e) {
     return false
   }

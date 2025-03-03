@@ -33,6 +33,9 @@ const authForgotPasswordLazyImport = createFileRoute(
 const AuthenticatedUsersIndexLazyImport = createFileRoute(
   '/_authenticated/users/',
 )()
+const AuthenticatedBannersIndexLazyImport = createFileRoute(
+  '/_authenticated/banners/',
+)()
 const AuthenticatedSamplesEditorIndexLazyImport = createFileRoute(
   '/_authenticated/samples/editor/',
 )()
@@ -135,6 +138,15 @@ const AuthenticatedUsersIndexLazyRoute =
     import('./routes/_authenticated/users/index.lazy').then((d) => d.Route),
   )
 
+const AuthenticatedBannersIndexLazyRoute =
+  AuthenticatedBannersIndexLazyImport.update({
+    id: '/banners/',
+    path: '/banners/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/banners/index.lazy').then((d) => d.Route),
+  )
+
 const AuthenticatedSamplesEditorIndexLazyRoute =
   AuthenticatedSamplesEditorIndexLazyImport.update({
     id: '/samples/editor/',
@@ -234,6 +246,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/banners/': {
+      id: '/_authenticated/banners/'
+      path: '/banners'
+      fullPath: '/banners'
+      preLoaderRoute: typeof AuthenticatedBannersIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
@@ -255,12 +274,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedBannersIndexLazyRoute: typeof AuthenticatedBannersIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
   AuthenticatedSamplesEditorIndexLazyRoute: typeof AuthenticatedSamplesEditorIndexLazyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedBannersIndexLazyRoute: AuthenticatedBannersIndexLazyRoute,
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
   AuthenticatedSamplesEditorIndexLazyRoute:
     AuthenticatedSamplesEditorIndexLazyRoute,
@@ -281,6 +302,7 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404LazyRoute
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
+  '/banners': typeof AuthenticatedBannersIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
   '/samples/editor': typeof AuthenticatedSamplesEditorIndexLazyRoute
 }
@@ -296,6 +318,7 @@ export interface FileRoutesByTo {
   '/404': typeof errors404LazyRoute
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
+  '/banners': typeof AuthenticatedBannersIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
   '/samples/editor': typeof AuthenticatedSamplesEditorIndexLazyRoute
 }
@@ -314,6 +337,7 @@ export interface FileRoutesById {
   '/(errors)/500': typeof errors500LazyRoute
   '/(errors)/503': typeof errors503LazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/banners/': typeof AuthenticatedBannersIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
   '/_authenticated/samples/editor/': typeof AuthenticatedSamplesEditorIndexLazyRoute
 }
@@ -332,6 +356,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/503'
     | '/'
+    | '/banners'
     | '/users'
     | '/samples/editor'
   fileRoutesByTo: FileRoutesByTo
@@ -346,6 +371,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/503'
     | '/'
+    | '/banners'
     | '/users'
     | '/samples/editor'
   id:
@@ -362,6 +388,7 @@ export interface FileRouteTypes {
     | '/(errors)/500'
     | '/(errors)/503'
     | '/_authenticated/'
+    | '/_authenticated/banners/'
     | '/_authenticated/users/'
     | '/_authenticated/samples/editor/'
   fileRoutesById: FileRoutesById
@@ -422,6 +449,7 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/route.tsx",
       "children": [
         "/_authenticated/",
+        "/_authenticated/banners/",
         "/_authenticated/users/",
         "/_authenticated/samples/editor/"
       ]
@@ -458,6 +486,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/banners/": {
+      "filePath": "_authenticated/banners/index.lazy.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/users/": {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { v4 as uuid } from 'uuid'
-import { useLangStore } from '@/stores/langStore.ts'
+import { useLangStore } from '@/stores/lang-store.ts'
 import { Card } from '@/components/ui/card'
 import { PageContainer } from '@/components/layout/page-container.tsx'
 import AuthLayout from '../auth-layout'

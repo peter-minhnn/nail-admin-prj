@@ -4,9 +4,8 @@ export type LocalStorageStateType<T> = {
 }
 
 export type BaseResponseType<T = any> = {
-  messages: string[]
-  statusCode: number
-  isSuccess: boolean
+  message: string
+  success: boolean
   data: T
 }
 
@@ -60,3 +59,5 @@ export type ActionType =
   | ''
 
 export type ExportExcelType = 'page' | 'all'
+
+export type DialogType = 'create' | 'update' | 'delete' | 'import'

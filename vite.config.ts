@@ -18,17 +18,18 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:4001',
+        target: 'https://dejavu.api.langgao.net',
         changeOrigin: true,
         secure: false,
         cookiePathRewrite: {
           '*': '/',
         },
         cookieDomainRewrite: {
-          '*': 'localhost',
+          '*': 'dejavu.api.langgao.net',
         },
       },
     },
+    cors: true
   },
   envDir: './env',
 })

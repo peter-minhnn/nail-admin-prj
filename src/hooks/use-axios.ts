@@ -24,6 +24,11 @@ export const useAxios = {
   delete: async <TData, TResponse, T>(url: string) => {
     return await axiosConfig.delete<TData, TResponse, T>(url)
   },
+  upload: async <TData, TResponse, T>(url: string, body: T) => {
+    return await axiosConfig.post<TData, TResponse>(url, body, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+  },
   getResponse: <T>(
     response: BaseResponseType<T>,
     type: 'list' | 'object' | 'error' = 'list'

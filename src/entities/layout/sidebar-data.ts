@@ -1,7 +1,7 @@
 import {
   IconBarrierBlock,
   IconBug, IconEdit,
-  IconError404,
+  IconError404, IconImageInPicture,
   IconLayoutDashboard,
   IconLock,
   IconLockAccess,
@@ -10,7 +10,7 @@ import {
   IconUsers,
 } from '@tabler/icons-react'
 import { Command } from 'lucide-react'
-import { type SidebarData } from '../types'
+import { SidebarData } from '@/components/layout/types.ts'
 
 export const sidebarData: SidebarData = {
   user: {
@@ -27,15 +27,25 @@ export const sidebarData: SidebarData = {
   ],
   navGroups: [
     {
-      title: 'General',
+      title: 'menu.group.general',
       items: [
         {
-          title: 'Dashboard',
+          title: 'menu.dashboard',
           url: '/',
           icon: IconLayoutDashboard,
+        }
+      ],
+    },
+    {
+      title: 'menu.group.homepage',
+      items: [
+        {
+          title: 'menu.banners',
+          url: '/banners',
+          icon: IconImageInPicture,
         },
         {
-          title: 'Users',
+          title: 'menu.users',
           url: '/users',
           icon: IconUsers,
         },

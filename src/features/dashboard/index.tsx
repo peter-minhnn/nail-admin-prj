@@ -1,23 +1,19 @@
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useLangStore } from '@/stores/langStore.ts'
+import { useLangStore } from '@/stores/lang-store.ts'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-
-// import {login} from "@/services/auth.service.ts";
+import { Button } from '@/components/ui/button.tsx'
+import { toast } from 'sonner'
 
 export default function Dashboard() {
   const { setLangKey } = useLangStore()
   const intl = useIntl()
 
   useEffect(() => setLangKey('dashboard'), [])
-
-  useEffect(() => {
-    // login({userName: 'admin', password: 'Genie@1234!'}).finally();
-  }, [])
 
   return (
     <>
@@ -36,6 +32,7 @@ export default function Dashboard() {
           <h1 className='text-2xl font-bold tracking-tight'>
             {intl.formatMessage({ id: 'title' })}
           </h1>
+          <Button variant='secondary' size='sm' onClick={() => toast.error("Error")}>Click Me</Button>
         </div>
       </Main>
     </>

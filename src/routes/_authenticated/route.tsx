@@ -6,11 +6,11 @@ import { SearchProvider } from '@/context/search-context'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
 import SkipToMain from '@/components/skip-to-main'
-import { Toaster } from '@/components/ui/toaster.tsx'
 import { Search } from '@/components/search.tsx'
 import { ThemeSwitch } from '@/components/theme-switch.tsx'
 import { ProfileDropdown } from '@/components/profile-dropdown.tsx'
 import { Header } from '@/components/layout/header.tsx'
+import { Toaster } from 'sonner'
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: async ({ location }) => {
@@ -55,7 +55,7 @@ function RouteComponent() {
           </Header>
           <Outlet />
         </div>
-        <Toaster />
+        <Toaster position='top-center' richColors/>
       </SidebarProvider>
     </SearchProvider>
   )

@@ -3,7 +3,7 @@ import { LocalStorageKey } from '@/config/base.enum.ts'
 import { LocalStorageStateType } from '@/types/base.type.ts'
 
 const authAxiosInstance = axios.create({
-  baseURL: 'http://localhost:4001/api',
+  baseURL: import.meta.env.VITE_BASE_API_URL,
   headers: {
     'Access-Control-Allow-Origin': '*', // Required for CORS
   },

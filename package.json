@@ -13,7 +13,6 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-react": "^9.5.0",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -39,8 +38,6 @@
     "@tanstack/react-router": "^1.109.2",
     "@tanstack/react-table": "^8.20.5",
     "axios": "^1.7.9",
-    "ckeditor5": "^44.2.1",
-    "ckeditor5-premium-features": "^44.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.0.4",
@@ -52,8 +49,10 @@
     "react": "^19.0.0",
     "react-day-picker": "9.5.1",
     "react-dom": "^19.0.0",
+    "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.54.0",
     "react-intl": "^7.1.6",
+    "react-quill-new": "^3.3.3",
     "react-smooth": "^4.0.4",
     "recharts": "^2.15.1",
     "sonner": "^1.7.4",

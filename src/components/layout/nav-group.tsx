@@ -27,13 +27,17 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { NavCollapsible, NavItem, NavLink, type NavGroup } from './types'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 export function NavGroup({ title, items }: Readonly<NavGroup>) {
   const { state } = useSidebar()
   const href = useLocation({ select: (location) => location.href })
+
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>{title}</SidebarGroupLabel>
+      <SidebarGroupLabel>
+        <FormattedMessage id={title} />
+      </SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
           const key = `${item.title}-${item.url}`
@@ -54,7 +58,7 @@ export function NavGroup({ title, items }: Readonly<NavGroup>) {
 }
 
 const NavBadge = ({ children }: { children: ReactNode }) => (
-  <Badge className='rounded-full px-1 py-0 text-xs'>{children}</Badge>
+  <Badge className="rounded-full px-1 py-0 text-xs">{children}</Badge>
 )
 
 const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
@@ -68,7 +72,7 @@ const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
       >
         <Link to={item.url} onClick={() => setOpenMobile(false)}>
           {item.icon && <item.icon />}
-          <span>{item.title}</span>
+          <span><FormattedMessage id={item.title} /></span>
           {item.badge && <NavBadge>{item.badge}</NavBadge>}
         </Link>
       </SidebarMenuButton>
@@ -77,29 +81,32 @@ const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
 }
 
 const SidebarMenuCollapsible = ({
-  item,
-  href,
-}: {
+                                  item,
+                                  href,
+                                }: {
   item: NavCollapsible
   href: string
 }) => {
   const { setOpenMobile } = useSidebar()
+  const intl = useIntl()
+
   return (
     <Collapsible
       asChild
       defaultOpen={checkIsActive(href, item, true)}
-      className='group/collapsible'
+      className="group/collapsible"
     >
       <SidebarMenuItem>
         <CollapsibleTrigger asChild>
-          <SidebarMenuButton tooltip={item.title}>
+          <SidebarMenuButton tooltip={item.title ? intl.formatMessage({ id: item.title }) : ''}>
             {item.icon && <item.icon />}
-            <span>{item.title}</span>
+            <span><FormattedMessage id={item.title} /></span>
             {item.badge && <NavBadge>{item.badge}</NavBadge>}
-            <ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
+            <ChevronRight
+              className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
-        <CollapsibleContent className='CollapsibleContent'>
+        <CollapsibleContent className="CollapsibleContent">
           <SidebarMenuSub>
             {item.items.map((subItem) => (
               <SidebarMenuSubItem key={subItem.title}>
@@ -109,7 +116,7 @@ const SidebarMenuCollapsible = ({
                 >
                   <Link to={subItem.url} onClick={() => setOpenMobile(false)}>
                     {subItem.icon && <subItem.icon />}
-                    <span>{subItem.title}</span>
+                    <span><FormattedMessage id={subItem.title} /></span>
                     {subItem.badge && <NavBadge>{subItem.badge}</NavBadge>}
                   </Link>
                 </SidebarMenuSubButton>
@@ -123,9 +130,9 @@ const SidebarMenuCollapsible = ({
 }
 
 const SidebarMenuCollapsedDropdown = ({
-  item,
-  href,
-}: {
+                                        item,
+                                        href,
+                                      }: {
   item: NavCollapsible
   href: string
 }) => {
@@ -138,12 +145,13 @@ const SidebarMenuCollapsedDropdown = ({
             isActive={checkIsActive(href, item)}
           >
             {item.icon && <item.icon />}
-            <span>{item.title}</span>
+            <span><FormattedMessage id={item.title} /></span>
             {item.badge && <NavBadge>{item.badge}</NavBadge>}
-            <ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
+            <ChevronRight
+              className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
           </SidebarMenuButton>
         </DropdownMenuTrigger>
-        <DropdownMenuContent side='right' align='start' sideOffset={4}>
+        <DropdownMenuContent side="right" align="start" sideOffset={4}>
           <DropdownMenuLabel>
             {item.title} {item.badge ? `(${item.badge})` : ''}
           </DropdownMenuLabel>
@@ -155,9 +163,9 @@ const SidebarMenuCollapsedDropdown = ({
                 className={`${checkIsActive(href, sub) ? 'bg-secondary' : ''}`}
               >
                 {sub.icon && <sub.icon />}
-                <span className='max-w-52 text-wrap'>{sub.title}</span>
+                <span className="max-w-52 text-wrap"><FormattedMessage id={sub.title} /></span>
                 {sub.badge && (
-                  <span className='ml-auto text-xs'>{sub.badge}</span>
+                  <span className="ml-auto text-xs">{sub.badge}</span>
                 )}
               </Link>
             </DropdownMenuItem>

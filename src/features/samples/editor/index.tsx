@@ -1,12 +1,13 @@
-import { MouseEvent, useEffect, useState } from 'react'
+import { lazy, MouseEvent, Suspense, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useLangStore } from '@/stores/langStore.ts'
+import { useLangStore } from '@/stores/lang-store.ts'
 import { PageContainer } from '@/components/layout/page-container.tsx'
-import { ReactCKEditor } from '@/components/ck-editor.tsx'
 import { Main } from '@/components/layout/main.tsx'
 import PageContent from '@/components/page-content.tsx'
 import { EditorPrimaryButtons } from '@/features/samples/editor/components'
 import { defaultEditorValue } from '@/features/samples/editor/data.mock.ts'
+
+const QuillEditor = lazy(() => import('@/components/quill-editor.tsx'))
 
 export default function SampleEditor() {
   const { setLangKey } = useLangStore()
@@ -27,7 +28,9 @@ export default function SampleEditor() {
           description={intl.formatMessage({ id: 'editor.description' })}
           headerChildren={<EditorPrimaryButtons onClick={handleOnClickSave}/>}
         >
-          <ReactCKEditor value={editorValue} setValue={setEditorValue} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <QuillEditor value={editorValue} setValue={setEditorValue} />
+          </Suspense>
         </PageContent>
       </Main>
     </PageContainer>

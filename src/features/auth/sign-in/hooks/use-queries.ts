@@ -11,10 +11,10 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: async (data: UserLoginRequestType) => await login(data),
     onSuccess: (response) => {
-      const isSuccess = get(response, 'result.isSuccess', false)
+      const isSuccess = get(response, 'result.success', false)
       const message = get(
         response,
-        'result.messages[0]',
+        'result.message',
         !isSuccess
           ? 'Username or password incorrect. Please check!'
           : 'Login successful'

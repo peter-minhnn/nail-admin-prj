@@ -1,12 +1,13 @@
 'use client'
 
-import { StatusCodes } from '@/config/base.enum.ts'
-import { BaseResponseType, ResultType } from '@/types/base.type'
 import get from 'lodash/get'
 import { toast } from 'sonner'
+import { StatusCodes } from '@/config/base.enum.ts'
+import { BaseResponseType, ResultType } from '@/types/base.type'
+import { logout } from '@/services/auth.service.ts'
 
 export function handleApiResponse<T>(response: any) {
-  const isSuccess = get(response.data, 'isSuccess', false)
+  const isSuccess = get(response.data, 'success', false)
   if (isSuccess) {
     return {
       type: 'success',
@@ -18,9 +19,8 @@ export function handleApiResponse<T>(response: any) {
     type: 'error',
     result: {
       data: {} as T,
-      isSuccess: false,
-      messages: get(response, 'data.messages', []),
-      statusCode: isSuccess ?? StatusCodes.BAD_REQUEST,
+      success: false,
+      message: get(response, 'data.message', 'Something went wrong'),
     } as BaseResponseType<T>,
   }
 }
@@ -30,9 +30,8 @@ export async function handleApiCatchResponse<T>(e: any): Promise<ResultType> {
     return {
       type: 'error',
       result: {
-        isSuccess: false,
-        messages: ['Network error'],
-        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        success: false,
+        message: 'Network error',
         data: null,
       } as BaseResponseType<T>,
     }
@@ -44,9 +43,8 @@ export async function handleApiCatchResponse<T>(e: any): Promise<ResultType> {
   return {
     type: 'error',
     result: {
-      isSuccess: false,
-      messages: messageError ?? ['Something went wrong'],
-      statusCode: e?.status ?? StatusCodes.INTERNAL_SERVER_ERROR,
+      success: false,
+      message: messageError ?? ['Something went wrong'],
       data: null,
     } as BaseResponseType<T>,
   }
@@ -58,7 +56,7 @@ async function redirectPageErrors(e: any) {
       window.location.href = '/404'
       break
     case StatusCodes.UNAUTHORIZED:
-      // await logout();
+      await logout();
       break
     case StatusCodes.SERVICE_UNAVAILABLE:
       window.location.href = '/maintenance'

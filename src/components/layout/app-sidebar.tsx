@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react'
+import { ComponentProps, useEffect, useState } from 'react'
 import {
   Sidebar,
   SidebarContent,
@@ -9,17 +9,24 @@ import {
 import { NavGroup } from '@/components/layout/nav-group'
 import { NavUser } from '@/components/layout/nav-user'
 import { TeamSwitcher } from '@/components/layout/team-switcher'
-import { sidebarData } from './data/sidebar-data'
+import { sidebarData } from '@/entities/layout'
 
 export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
-  return (
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, [])
+
+  return isMounted && (
     <Sidebar collapsible='icon' variant='floating' {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={sidebarData.teams} />
       </SidebarHeader>
       <SidebarContent>
-        {sidebarData.navGroups.map((props) => (
-          <NavGroup key={props.title} {...props} />
+        {sidebarData.navGroups.map((props, index) => (
+          <NavGroup key={`${props.title}-${index}`} {...props} />
         ))}
       </SidebarContent>
       <SidebarFooter>

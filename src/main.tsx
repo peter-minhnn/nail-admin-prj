@@ -8,15 +8,13 @@ import {
 } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { LocalizationWrapper } from '@/i18n/localization-wrapper.tsx'
-import { useAuthStore } from '@/stores/authStore'
+import { useAuthStore } from '@/stores/auth-store.ts'
 import { handleServerError } from '@/utils/handle-server-error'
 import { toast } from '@/hooks/use-toast'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
 
 //Css
-import 'ckeditor5/ckeditor5.css';
-import 'ckeditor5-premium-features/ckeditor5-premium-features.css';
 import './index.css'
 
 // Generated Routes
@@ -105,13 +103,13 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <LocalizationWrapper>
-          <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
+          <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
             <FontProvider>
               <RouterProvider router={router} />
             </FontProvider>
           </ThemeProvider>
         </LocalizationWrapper>
       </QueryClientProvider>
-    </StrictMode>
+    </StrictMode>,
   )
 }
