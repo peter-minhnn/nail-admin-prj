@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: Readonly<Props>) {
       className='container grid h-svh flex-col items-center justify-center bg-primary-foreground lg:max-w-none lg:px-0'
       key={useId()}
       style={{
-        backgroundImage: 'url(/src/assets/bg_daotao.jpg)',
+        backgroundImage: 'url(/images/bg_daotao.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

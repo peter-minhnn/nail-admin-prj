@@ -33,7 +33,7 @@
     "^@tanstack/react-table$",
     "^@tabler/icons-react$",
     "<THIRD_PARTY_MODULES>",
-    "^@/assets/(.*)",
+    "^@/public/(.*)",
     "^@/api/(.*)$",
     "^@/stores/(.*)$",
     "^@/lib/(.*)$",
