@@ -36,13 +36,11 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5173,
-    cors: true,
     proxy: {
       '/auth': {
         target: 'https://dejavu.api.langgao.net',
         changeOrigin: true,
-        secure: false, // Ignore SSL issues in dev
+        secure: true, // Ignore SSL issues in dev
       },
     },
   },
