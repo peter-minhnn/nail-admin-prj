@@ -24,7 +24,7 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
-    sourcemap: false, // 소스맵 생성 비활성화
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -39,16 +39,10 @@ export default defineConfig({
     port: 5173,
     cors: true,
     proxy: {
-      '/api': {
+      '/auth': {
         target: 'https://dejavu.api.langgao.net',
         changeOrigin: true,
-        secure: false,
-        cookiePathRewrite: {
-          '*': '/',
-        },
-        cookieDomainRewrite: {
-          '*': 'dejavu.api.langgao.net',
-        },
+        secure: false, // Ignore SSL issues in dev
       },
     },
   },
