@@ -16,7 +16,7 @@ interface DataTableViewOptionsProps<TData> {
 
 export function DataTableViewOptions<TData>({
   table,
-}: DataTableViewOptionsProps<TData>) {
+}: Readonly<DataTableViewOptionsProps<TData>>) {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
