@@ -1,20 +1,20 @@
 import Cookies from 'js-cookie'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { authProtected } from '@/services/auth.service.ts'
+import { Toaster } from 'sonner'
 import { cn } from '@/lib/utils'
 import { SearchProvider } from '@/context/search-context'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
-import SkipToMain from '@/components/skip-to-main'
-import { Search } from '@/components/search.tsx'
-import { ThemeSwitch } from '@/components/theme-switch.tsx'
-import { ProfileDropdown } from '@/components/profile-dropdown.tsx'
 import { Header } from '@/components/layout/header.tsx'
-import { Toaster } from 'sonner'
+import { ProfileDropdown } from '@/components/profile-dropdown.tsx'
+import { Search } from '@/components/search.tsx'
+import SkipToMain from '@/components/skip-to-main'
+import { ThemeSwitch } from '@/components/theme-switch.tsx'
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: async ({ location }) => {
-    const isProtected = await authProtected();
+    const isProtected = await authProtected()
     if (!isProtected) {
       throw redirect({
         to: '/sign-in',
@@ -55,7 +55,7 @@ function RouteComponent() {
           </Header>
           <Outlet />
         </div>
-        <Toaster position='top-center' richColors/>
+        <Toaster position='top-center' richColors />
       </SidebarProvider>
     </SearchProvider>
   )

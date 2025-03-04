@@ -10,9 +10,9 @@ import {
 } from 'react-hook-form'
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
+import { useIntl } from 'react-intl'
 import { cn } from '@/lib/utils'
 import { Label } from '@/components/ui/label'
-import { useIntl } from 'react-intl'
 
 const Form = FormProvider
 
@@ -24,15 +24,15 @@ type FormFieldContextValue<
 }
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue,
+  {} as FormFieldContextValue
 )
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
-    ...props
-  }: ControllerProps<TFieldValues, TName>) => {
+  ...props
+}: ControllerProps<TFieldValues, TName>) => {
   const value = useMemo(() => ({ name: props.name }), [props.name])
   return (
     <FormFieldContext.Provider value={value}>
@@ -69,7 +69,7 @@ type FormItemContextValue = {
 }
 
 const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue,
+  {} as FormItemContextValue
 )
 
 const FormItem = React.forwardRef<
@@ -90,8 +90,8 @@ FormItem.displayName = 'FormItem'
 const FormLabel = React.forwardRef<
   React.ComponentRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {
-  required?: boolean
-}
+    required?: boolean
+  }
 >(({ className, required, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
@@ -103,7 +103,7 @@ const FormLabel = React.forwardRef<
       {...props}
     >
       {props.children}
-      {required && <span className="text-destructive">*</span>}
+      {required && <span className='text-destructive'>*</span>}
     </Label>
   )
 })
@@ -154,7 +154,9 @@ const FormMessage = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField()
   const intl = useIntl()
-  const body = error?.message ? intl.formatMessage({ id: error.message }) : children
+  const body = error?.message
+    ? intl.formatMessage({ id: error.message })
+    : children
 
   if (!body) {
     return null

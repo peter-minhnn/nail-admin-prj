@@ -1,7 +1,9 @@
 import {
   IconBarrierBlock,
-  IconBug, IconEdit,
-  IconError404, IconImageInPicture,
+  IconBug,
+  IconEdit,
+  IconError404,
+  IconImageInPicture,
   IconLayoutDashboard,
   IconLock,
   IconLockAccess,
@@ -33,7 +35,7 @@ export const sidebarData: SidebarData = {
           title: 'menu.dashboard',
           url: '/',
           icon: IconLayoutDashboard,
-        }
+        },
       ],
     },
     {
@@ -57,7 +59,7 @@ export const sidebarData: SidebarData = {
         {
           title: 'Editor',
           icon: IconEdit,
-          url: '/samples/editor'
+          url: '/samples/editor',
         },
       ],
     },

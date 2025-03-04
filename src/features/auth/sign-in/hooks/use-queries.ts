@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
-import get from 'lodash/get'
-import { toast } from 'sonner'
 import { login } from '@/services/auth.service.ts'
 import { UserLoginRequestType } from '@/types/user.type.ts'
+import get from 'lodash/get'
+import { toast } from 'sonner'
 
 export const useLogin = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return useMutation({
     mutationFn: async (data: UserLoginRequestType) => await login(data),
@@ -24,7 +24,7 @@ export const useLogin = () => {
         return toast.error(message)
       }
       toast.success(message)
-      navigate({ to: '/' }).finally();
+      navigate({ to: '/' }).finally()
     },
     onError: () => toast.error('Login failed. Please try again!'),
   })

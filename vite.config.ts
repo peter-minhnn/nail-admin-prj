@@ -29,7 +29,7 @@ export default defineConfig({
         },
       },
     },
-    cors: true
+    cors: true,
   },
   envDir: './env',
 })

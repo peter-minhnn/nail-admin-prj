@@ -1,7 +1,3 @@
 export default function Banners() {
-  return (
-    <div>
-      BannersPage
-    </div>
-  );
+  return <div>BannersPage</div>
 }

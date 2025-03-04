@@ -20,11 +20,11 @@ export const append = (params: Record<string, string | number | boolean>) => {
 }
 
 export const createQueryParams = (
-  params: Record<string, string | number | boolean>,
+  params: Record<string, string | number | boolean>
 ) => {
   const appendParams = append(params)
   const urlParams = new URLSearchParams(
-    Object.entries(appendParams) as string[][],
+    Object.entries(appendParams) as string[][]
   ).toString()
   return `${urlParams ? '?' + urlParams : ''}`
 }

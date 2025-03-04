@@ -1,11 +1,11 @@
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import { LocalStorageKey } from '@/config/base.enum.ts'
+import { languages } from '@/entities/languages'
+import { LocalStorageStateType } from '@/types/base.type.ts'
+import { Locale } from '@/types/lang.type.ts'
 import get from 'lodash/get'
 import merge from 'lodash/merge'
 import { IntlProvider } from 'react-intl'
-import { LocalStorageStateType } from '@/types/base.type.ts'
-import { Locale } from '@/types/lang.type.ts'
-import { languages } from '@/entities/languages'
-import { LocalStorageKey } from '@/config/base.enum.ts'
 import { ILangStateData, useLocaleStore } from '@/stores/lang-store.ts'
 
 const localeStateKey = 'state.locale'
@@ -25,7 +25,7 @@ export const LocalizationWrapper = ({ children }: { children: ReactNode }) => {
 
   const handleSetLocale = useCallback(async () => {
     const cookieLocale = localStorage.getItem(
-      LocalStorageKey.LOCALE,
+      LocalStorageKey.LOCALE
     )! as unknown as LocalStorageStateType<ILangStateData>
     const locale = get(cookieLocale, localeStateKey, 'vi')
     const newMessages = await loadMessages(locale)
@@ -34,7 +34,7 @@ export const LocalizationWrapper = ({ children }: { children: ReactNode }) => {
 
   const memoizedIntlProvider = useMemo(() => {
     const localeStore = localStorage.getItem(
-      LocalStorageKey.LOCALE,
+      LocalStorageKey.LOCALE
     )! as unknown as LocalStorageStateType<ILangStateData>
     const locale = get(localeStore, localeStateKey, 'vi')
 
@@ -57,7 +57,7 @@ export const LocalizationWrapper = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const cookieLocale = localStorage.getItem(
-      LocalStorageKey.LOCALE,
+      LocalStorageKey.LOCALE
     )! as unknown as LocalStorageStateType<ILangStateData>
     const locale = get(cookieLocale, localeStateKey, 'vi')
     setLocale(locale)

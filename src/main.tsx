@@ -13,10 +13,8 @@ import { handleServerError } from '@/utils/handle-server-error'
 import { toast } from '@/hooks/use-toast'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
-
 //Css
 import './index.css'
-
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 
@@ -103,13 +101,13 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <LocalizationWrapper>
-          <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
             <FontProvider>
               <RouterProvider router={router} />
             </FontProvider>
           </ThemeProvider>
         </LocalizationWrapper>
       </QueryClientProvider>
-    </StrictMode>,
+    </StrictMode>
   )
 }

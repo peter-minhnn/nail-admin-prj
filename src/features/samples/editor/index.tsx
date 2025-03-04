@@ -1,8 +1,8 @@
 import { lazy, MouseEvent, Suspense, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useLangStore } from '@/stores/lang-store.ts'
-import { PageContainer } from '@/components/layout/page-container.tsx'
 import { Main } from '@/components/layout/main.tsx'
+import { PageContainer } from '@/components/layout/page-container.tsx'
 import PageContent from '@/components/page-content.tsx'
 import { EditorPrimaryButtons } from '@/features/samples/editor/components'
 import { defaultEditorValue } from '@/features/samples/editor/data.mock.ts'
@@ -26,7 +26,7 @@ export default function SampleEditor() {
         <PageContent
           title={intl.formatMessage({ id: 'editor.title' })}
           description={intl.formatMessage({ id: 'editor.description' })}
-          headerChildren={<EditorPrimaryButtons onClick={handleOnClickSave}/>}
+          headerChildren={<EditorPrimaryButtons onClick={handleOnClickSave} />}
         >
           <Suspense fallback={<div>Loading...</div>}>
             <QuillEditor value={editorValue} setValue={setEditorValue} />

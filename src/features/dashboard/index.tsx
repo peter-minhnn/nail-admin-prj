@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
+import { toast } from 'sonner'
 import { useLangStore } from '@/stores/lang-store.ts'
+import { Button } from '@/components/ui/button.tsx'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { Button } from '@/components/ui/button.tsx'
-import { toast } from 'sonner'
 
 export default function Dashboard() {
   const { setLangKey } = useLangStore()
@@ -32,7 +32,13 @@ export default function Dashboard() {
           <h1 className='text-2xl font-bold tracking-tight'>
             {intl.formatMessage({ id: 'title' })}
           </h1>
-          <Button variant='secondary' size='sm' onClick={() => toast.error("Error")}>Click Me</Button>
+          <Button
+            variant='secondary'
+            size='sm'
+            onClick={() => toast.error('Error')}
+          >
+            Click Me
+          </Button>
         </div>
       </Main>
     </>

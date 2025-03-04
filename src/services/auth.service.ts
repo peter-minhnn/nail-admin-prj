@@ -15,7 +15,7 @@ export const login = async (data: UserLoginRequestType) => {
       null,
       BaseResponseType,
       UserLoginRequestType
-    >(apiRoutes.login, data);
+    >(apiRoutes.login, data)
     return handleApiResponse<any>(response)
   } catch (e) {
     return handleApiCatchResponse<any>(e)

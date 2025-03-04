@@ -1,4 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
+import { logout } from '@/services/auth.service.ts'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -10,7 +11,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { logout } from '@/services/auth.service.ts'
 
 export function ProfileDropdown() {
   const navigate = useNavigate()
@@ -37,7 +37,7 @@ export function ProfileDropdown() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={async () => {
-            const isLogout = await logout();
+            const isLogout = await logout()
             if (isLogout) {
               navigate({ to: '/sign-in', search: location.href }).finally()
             }

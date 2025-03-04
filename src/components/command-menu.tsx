@@ -6,6 +6,7 @@ import {
   IconMoon,
   IconSun,
 } from '@tabler/icons-react'
+import { sidebarData } from '@/entities/layout'
 import { useSearch } from '@/hooks/use-search-context.tsx'
 import { useTheme } from '@/hooks/use-theme-context.tsx'
 import {
@@ -17,7 +18,6 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import { sidebarData } from '@/entities/layout'
 import { ScrollArea } from './ui/scroll-area'
 
 export function CommandMenu() {

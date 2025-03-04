@@ -1,16 +1,15 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 
-export interface InputProps
-  extends React.ComponentProps<'input'> {
-  errorMessage?: string | string[];
-  hasError?: boolean;
+export interface InputProps extends React.ComponentProps<'input'> {
+  errorMessage?: string | string[]
+  hasError?: boolean
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, errorMessage, hasError, ...props }, ref) => {
     return (
-      <div className="flex flex-col gap-1 w-full">
+      <div className='flex w-full flex-col gap-1'>
         <input
           type={type}
           className={cn(
@@ -18,15 +17,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {
               [className as string]: className,
               'border border-red-500': errorMessage ?? hasError,
-            },
+            }
           )}
           ref={ref}
           {...props}
         />
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+        {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
       </div>
     )
-  },
+  }
 )
 Input.displayName = 'Input'
 

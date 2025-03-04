@@ -1,10 +1,10 @@
 'use client'
 
+import { StatusCodes } from '@/config/base.enum.ts'
+import { logout } from '@/services/auth.service.ts'
+import { BaseResponseType, ResultType } from '@/types/base.type'
 import get from 'lodash/get'
 import { toast } from 'sonner'
-import { StatusCodes } from '@/config/base.enum.ts'
-import { BaseResponseType, ResultType } from '@/types/base.type'
-import { logout } from '@/services/auth.service.ts'
 
 export function handleApiResponse<T>(response: any) {
   const isSuccess = get(response.data, 'success', false)
@@ -56,7 +56,7 @@ async function redirectPageErrors(e: any) {
       window.location.href = '/404'
       break
     case StatusCodes.UNAUTHORIZED:
-      await logout();
+      await logout()
       break
     case StatusCodes.SERVICE_UNAVAILABLE:
       window.location.href = '/maintenance'
