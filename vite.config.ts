@@ -38,6 +38,19 @@ export default defineConfig({
   server: {
     port: 5173,
     cors: true,
+    proxy: {
+      '/api': {
+        target: 'https://dejavu.api.langgao.net',
+        changeOrigin: true,
+        secure: false,
+        cookiePathRewrite: {
+          '*': '/',
+        },
+        cookieDomainRewrite: {
+          '*': 'dejavu.api.langgao.net',
+        },
+      },
+    },
   },
   envDir: './env',
 })
