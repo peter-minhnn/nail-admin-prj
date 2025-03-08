@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Slot } from '@radix-ui/react-slot'
+import { Slot, Slottable } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
@@ -10,6 +11,8 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+        add: 'bg-blue-500 text-primary-foreground shadow hover:bg-blue-500/90 dark:text-white',
+        save: 'bg-[#E48E43] text-primary-foreground shadow hover:bg-[#E48E43]/90',
         destructive:
           'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         outline:
@@ -40,7 +43,7 @@ interface IconProps {
 
 interface IconRefProps {
   Icon?: never
-  iconPlacement?: undefined
+  iconPlacement?: string
 }
 
 export type ButtonIconProps = IconProps | IconRefProps
@@ -49,17 +52,52 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  loading?: boolean
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+const Button = React.forwardRef<
+  HTMLButtonElement,
+  ButtonProps & ButtonIconProps
+>(
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      Icon,
+      iconPlacement,
+      loading,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : 'button'
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {Icon && iconPlacement === 'left' && (
+          <div className='group-hover:translate-x-100 w-0 translate-x-[0%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:pr-2 group-hover:opacity-100'>
+            <Icon />
+          </div>
+        )}
+        <Slottable>
+          {loading && (
+            <Loader2
+              className={cn('h-4 w-4 animate-spin', props.children && 'mr-2')}
+            />
+          )}
+          {props.children}
+        </Slottable>
+        {Icon && iconPlacement === 'right' && (
+          <div className='w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100'>
+            <Icon />
+          </div>
+        )}
+      </Comp>
     )
   }
 )

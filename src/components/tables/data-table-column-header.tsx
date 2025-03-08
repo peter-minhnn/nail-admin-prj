@@ -6,6 +6,7 @@ import {
   EyeNoneIcon,
 } from '@radix-ui/react-icons'
 import { Column } from '@tanstack/react-table'
+import { FormattedMessage } from 'react-intl'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -28,7 +29,11 @@ export function DataTableColumnHeader<TData, TValue>({
   className,
 }: Readonly<DataTableColumnHeaderProps<TData, TValue>>) {
   if (!column.getCanSort()) {
-    return <div className={cn(className)}>{title}</div>
+    return (
+      <div className={cn(className)}>
+        <FormattedMessage id={title} />
+      </div>
+    )
   }
 
   return (
@@ -40,7 +45,9 @@ export function DataTableColumnHeader<TData, TValue>({
             size='sm'
             className='-ml-3 h-8 data-[state=open]:bg-accent'
           >
-            <span>{title}</span>
+            <span>
+              <FormattedMessage id={title} />
+            </span>
             {column.getIsSorted() === 'desc' ? (
               <ArrowDownIcon className='ml-2 h-4 w-4' />
             ) : column.getIsSorted() === 'asc' ? (

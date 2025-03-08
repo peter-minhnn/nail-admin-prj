@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { ReactElement, ReactNode, useEffect, useMemo, useState } from 'react'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -13,6 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { FormattedMessage } from 'react-intl'
 import {
   Table,
   TableBody,
@@ -21,25 +22,30 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Skeleton } from '@/components/ui'
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  toolBarChildren?: ReactNode
+  languagePrefix: string
+  loading?: boolean
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  toolBarChildren,
+  languagePrefix,
+  loading,
 }: Readonly<DataTableProps<TData, TValue>>) {
-  const [rowSelection, setRowSelection] = React.useState({})
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [rowSelection, setRowSelection] = useState({})
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [tableLoading, setTableLoading] = useState<boolean>(true)
 
   const table = useReactTable({
     data,
@@ -63,9 +69,43 @@ export function DataTable<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
+  const memoizedLoading: ReactElement | ReactElement[] | null = useMemo(() => {
+    if (!table.getRowModel().rows?.length && !tableLoading) {
+      return (
+        <TableRow>
+          <TableCell colSpan={columns.length} className='h-24 text-center'>
+            <FormattedMessage id='common.noResults' />
+          </TableCell>
+        </TableRow>
+      )
+    }
+
+    if (!tableLoading) return null
+
+    return Array.from({ length: 1 }).map((_: any, index) => (
+      <TableRow key={`${_}-${index}`}>
+        {columns.map((column) => (
+          <TableCell key={column.id}>
+            <Skeleton className='h-5' />
+          </TableCell>
+        ))}
+      </TableRow>
+    ))
+  }, [tableLoading, table])
+
+  useEffect(() => {
+    if (!loading) {
+      setTimeout(() => setTableLoading(false), 500)
+    }
+
+    return () => setTableLoading(true)
+  }, [loading])
+
   return (
     <div className='space-y-4'>
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} languagePrefix={languagePrefix}>
+        {toolBarChildren}
+      </DataTableToolbar>
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
@@ -87,36 +127,27 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className='h-24 text-center'
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
+            {table.getRowModel().rows?.length && !tableLoading
+              ? table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              : memoizedLoading}
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {Boolean(data?.length) && <DataTablePagination table={table} />}
     </div>
   )
 }

@@ -2,11 +2,12 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import mkcert from 'vite-plugin-mkcert'
 import vercel from 'vite-plugin-vercel'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), TanStackRouterVite(), vercel()],
+  plugins: [react(), TanStackRouterVite(), vercel(), mkcert()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

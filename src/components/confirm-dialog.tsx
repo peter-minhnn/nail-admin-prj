@@ -23,7 +23,7 @@ interface ConfirmDialogProps {
   handleConfirm: () => void
   isLoading?: boolean
   className?: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export function ConfirmDialog(props: Readonly<ConfirmDialogProps>) {

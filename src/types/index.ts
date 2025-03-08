@@ -9,13 +9,13 @@ export type {
   MetaType,
   ResultType,
   PaginationState,
-} from './base.type.ts'
+} from './base.type'
 export type {
   Locale,
   defaultLocale,
   LocaleCurrency,
   LocaleUnitCurrency,
-} from './lang.type.ts'
+} from './lang.type'
 export type {
   User,
   UserLoginRequestType,
@@ -24,4 +24,5 @@ export type {
   UserRolePagesType,
   UserFilterType,
   UserRoleType,
-} from './user.type.ts'
+} from './user.type'
+export type { BannersListType, BannersRequestType } from './banners.type'

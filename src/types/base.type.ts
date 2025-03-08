@@ -35,9 +35,11 @@ export type MetaType = {
 
 export type CommonType = {
   createdBy: string
-  createdDate: string
+  createdAt: string
   updatedBy: string
-  updatedDate: string
+  updatedAt: string
+  isActived: boolean
+  isDeleted: boolean
 }
 
 export type CommonCodeType = {
@@ -60,4 +62,4 @@ export type ActionType =
 
 export type ExportExcelType = 'page' | 'all'
 
-export type DialogType = 'create' | 'update' | 'delete' | 'import'
+export type DialogType = 'create' | 'update' | 'delete' | 'import' | ''

@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { v4 as uuid } from 'uuid'
 import { useLangStore } from '@/stores/lang-store.ts'
-import { Card } from '@/components/ui'
 import { PageContainer } from '@/components/layout/page-container.tsx'
+import { Card } from '@/components/ui'
 import AuthLayout from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
 
-const BrTag = () => <br key={uuid()} />
+const BrTag = () => <br />
 
 export default function SignIn() {
   const { setLangKey } = useLangStore()
@@ -30,7 +29,7 @@ export default function SignIn() {
               />
             </p>
           </div>
-          <UserAuthForm key={uuid()} />
+          <UserAuthForm />
         </Card>
       </AuthLayout>
     </PageContainer>

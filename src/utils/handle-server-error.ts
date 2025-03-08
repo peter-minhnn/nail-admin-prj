@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios'
 import { toast } from '@/hooks/use-toast'
 
-export function handleServerError(error: unknown) {
+export const handleServerError = (error: unknown)=> {
   // eslint-disable-next-line no-console
   console.log(error)
 

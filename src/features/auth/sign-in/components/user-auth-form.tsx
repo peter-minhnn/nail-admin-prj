@@ -54,7 +54,7 @@ export function UserAuthForm({
             <FormField
               control={form.control}
               name='userName'
-              render={({ field }) => (
+              render={({ field, formState: { errors } }) => (
                 <FormItem className='space-y-1'>
                   <FormLabel>
                     <FormattedMessage id='signIn.username' />
@@ -64,6 +64,7 @@ export function UserAuthForm({
                       placeholder={intl.formatMessage({
                         id: 'signIn.userNamePlaceholder',
                       })}
+                      hasError={!!errors.userName?.message}
                       {...field}
                     />
                   </FormControl>
@@ -74,7 +75,7 @@ export function UserAuthForm({
             <FormField
               control={form.control}
               name='password'
-              render={({ field }) => (
+              render={({ field, formState: { errors } }) => (
                 <FormItem className='space-y-1'>
                   <div className='flex items-center justify-between'>
                     <FormLabel>
@@ -88,7 +89,11 @@ export function UserAuthForm({
                     </Link>
                   </div>
                   <FormControl>
-                    <PasswordInput placeholder='********' {...field} />
+                    <PasswordInput
+                      placeholder='********'
+                      hasError={!!errors.password?.message}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

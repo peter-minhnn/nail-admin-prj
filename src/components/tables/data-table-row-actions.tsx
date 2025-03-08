@@ -2,6 +2,8 @@ import { Dispatch, SetStateAction } from 'react'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Row } from '@tanstack/react-table'
 import { IconTrash } from '@tabler/icons-react'
+import { DialogType } from '@/types/base.type.ts'
+import { FormattedMessage } from 'react-intl'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -15,8 +17,10 @@ import {
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>
   schema: any
-  setCurrentRow: Dispatch<SetStateAction<TData>>
-  setOpen: Dispatch<SetStateAction<string>>
+  setCurrentRow?: Dispatch<SetStateAction<TData | null>>
+  setOpen: Dispatch<SetStateAction<DialogType>>
+  suppressEditRow?: boolean
+  suppressDeleteRow?: boolean
 }
 
 export function DataTableRowActions<TData>({
@@ -24,6 +28,8 @@ export function DataTableRowActions<TData>({
   schema,
   setCurrentRow,
   setOpen,
+  suppressEditRow,
+  suppressDeleteRow,
 }: Readonly<DataTableRowActionsProps<TData>>) {
   const rowData = schema.parse(row.original)
 
@@ -39,26 +45,33 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[160px]'>
-        <DropdownMenuItem
-          onClick={() => {
-            setCurrentRow(rowData)
-            setOpen('update')
-          }}
-        >
-          Edit
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => {
-            setCurrentRow(rowData)
-            setOpen('delete')
-          }}
-        >
-          Delete
-          <DropdownMenuShortcut>
-            <IconTrash size={16} />
-          </DropdownMenuShortcut>
-        </DropdownMenuItem>
+        {!suppressEditRow && (
+          <>
+            <DropdownMenuItem
+              onClick={() => {
+                setCurrentRow?.(rowData)
+                setOpen('update')
+              }}
+            >
+              <FormattedMessage id='common.editBtn' />
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        )}
+        {!suppressDeleteRow && (
+          <DropdownMenuItem
+            onClick={() => {
+              setCurrentRow?.(rowData)
+              setOpen('delete')
+            }}
+            className='!text-red-500'
+          >
+            <FormattedMessage id='common.deleteBtn' />
+            <DropdownMenuShortcut>
+              <IconTrash size={16} />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )

@@ -1,4 +1,4 @@
-export const append = (params: Record<string, string | number | boolean>) => {
+const append = (params: Record<string, string | number | boolean>) => {
   let objParams = {}
   for (const key of Object.keys(params)) {
     const element = params[key]
@@ -27,4 +27,41 @@ export const createQueryParams = (
     Object.entries(appendParams) as string[][]
   ).toString()
   return `${urlParams ? '?' + urlParams : ''}`
+}
+
+export const downloadExcelFile = (data: any, fileName: string) => {
+  // Create a Blob object with the data and the correct MIME type
+  const blob = new Blob([data], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  })
+
+  // Create a URL for the Blob object
+  const url = window.URL.createObjectURL(blob)
+
+  // Create an anchor element
+  const a = document.createElement('a')
+  a.href = url
+  a.download = fileName
+  document.body.appendChild(a)
+  a.click()
+  window.URL.revokeObjectURL(url)
+  document.body.removeChild(a)
+}
+
+export const downloadImageFromLink = async (link: string, fileName: string) => {
+  try {
+    const response = await fetch(link)
+    const blob = await response.blob()
+    const imageUrl = window.URL.createObjectURL(blob)
+
+    const a = document.createElement('a')
+    a.href = imageUrl
+    a.download = fileName
+    document.body.appendChild(a)
+    a.click()
+    window.URL.revokeObjectURL(imageUrl)
+    document.body.removeChild(a)
+  } catch (error) {
+    console.error('Error downloading the image:', error)
+  }
 }

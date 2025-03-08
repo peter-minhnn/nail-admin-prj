@@ -1,8 +1,7 @@
-'use client'
-
+import { FileType } from '@/types/file.type.ts'
 import { Paperclip } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { DropzoneOptions } from 'react-dropzone'
+import { FormattedMessage } from 'react-intl'
 import {
   FileUploader,
   FileUploaderContent,
@@ -11,7 +10,6 @@ import {
 } from '@/components/ui/file-upload'
 
 const FileSvgDraw = () => {
-  const t = useTranslations('CommonMessages')
   return (
     <>
       <svg
@@ -30,10 +28,15 @@ const FileSvgDraw = () => {
         />
       </svg>
       <p className='mb-1 text-sm text-gray-500 dark:text-gray-400'>
-        <span className='font-semibold'>{t('clickToUpload')}</span>
-        &nbsp; {t('orDragAndDrop')}
+        <span className='font-semibold'>
+          <FormattedMessage id='common.clickToUpload' />
+        </span>
+        &nbsp;
+        <FormattedMessage id='common.orDragAndDrop' />
       </p>
-      <p className='text-xs text-gray-500 dark:text-gray-400'>JPEG, PNG, JPG</p>
+      <p className='text-xs text-gray-500 dark:text-gray-400'>
+        JPEG, PNG, JPG, GIF
+      </p>
     </>
   )
 }
@@ -42,12 +45,14 @@ type FileUploadProps = {
   files: File[] | null
   onValueChange?: (value: File[] | null) => void
   dropZoneConfigs?: DropzoneOptions
+  resultFiles?: (files: FileType[]) => void
 }
 
 const FileUpload = ({
   files,
   onValueChange,
   dropZoneConfigs,
+  resultFiles,
 }: FileUploadProps) => {
   const dropZoneConfig = {
     maxFiles: dropZoneConfigs?.maxFiles ?? 1,
@@ -60,7 +65,8 @@ const FileUpload = ({
       value={files}
       onValueChange={onValueChange}
       dropzoneOptions={dropZoneConfig}
-      className='relative rounded-lg bg-background p-2'
+      resultFiles={resultFiles}
+      className='relative rounded-lg bg-background p-0.5'
     >
       <FileInput className='outline-dashed outline-1'>
         <div className='flex w-full flex-col items-center justify-center pb-4 pt-3'>

@@ -1,0 +1,15 @@
+{
+  "banners.headerTitle": "Biểu ngữ",
+  "banners.deleteSelected": "Xóa biểu ngữ đã chọn",
+  "banners.title": "Tiêu đề",
+  "banners.filePath": "Hình ảnh",
+  "banners.description": "Quản lý biểu ngữ",
+  "banners.namePlaceholder": "Nhập tiêu đề...",
+  "banners.dialogAddTitle": "Thêm biểu ngữ",
+  "banners.dialogAddDescription": "Nhập thông tin biểu ngữ. Hãy chắc chắn rằng bạn đã nhập đúng thông tin.",
+  "banners.dialogEditTitle": "Chỉnh sửa biểu ngữ",
+  "banners.dialogEditDescription": "Chỉnh sửa thông tin biểu ngữ. Hãy chắc chắn rằng bạn đã nhập đúng thông tin.",
+  "banners.errors.titleRequired": "Tiêu đề không được để trống",
+  "banners.errors.filePathRequired": "Hình ảnh không được để trống",
+  "banners.id": "ID"
+}

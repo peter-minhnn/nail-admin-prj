@@ -1,7 +1,6 @@
 import Cookies from 'js-cookie'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { authProtected } from '@/services/auth.service.ts'
-import { Toaster } from 'sonner'
 import { cn } from '@/lib/utils'
 import { SearchProvider } from '@/context/search-context'
 import { SidebarProvider } from '@/components/ui/sidebar'
@@ -11,6 +10,7 @@ import { ProfileDropdown } from '@/components/profile-dropdown.tsx'
 import { Search } from '@/components/search.tsx'
 import SkipToMain from '@/components/skip-to-main'
 import { ThemeSwitch } from '@/components/theme-switch.tsx'
+import { Toaster } from '@/components/ui'
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: async ({ location }) => {
@@ -55,7 +55,7 @@ function RouteComponent() {
           </Header>
           <Outlet />
         </div>
-        <Toaster position='top-center' richColors />
+        <Toaster position='top-center' richColors  />
       </SidebarProvider>
     </SearchProvider>
   )
