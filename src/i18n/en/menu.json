@@ -3,5 +3,6 @@
   "menu.group.homepage": "Homepage",
   "menu.dashboard": "Dashboard",
   "menu.banners": "Banners",
-  "menu.users": "Users"
+  "menu.users": "Users",
+  "menu.albums": "Albums"
 }

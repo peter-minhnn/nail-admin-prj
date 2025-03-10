@@ -38,7 +38,7 @@ export type CommonType = {
   createdAt: string
   updatedBy: string
   updatedAt: string
-  isActived: boolean
+  isActive: boolean
   isDeleted: boolean
 }
 
@@ -62,4 +62,15 @@ export type ActionType =
 
 export type ExportExcelType = 'page' | 'all'
 
-export type DialogType = 'create' | 'update' | 'delete' | 'import' | ''
+export type DialogType =
+  | 'create'
+  | 'update'
+  | 'delete'
+  | 'import'
+  | 'carousel'
+  | ''
+
+export type QueryType = {
+  onSuccess?: (response: ResultType) => Promise<void>
+  onError?: (error: Error) => void
+}

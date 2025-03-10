@@ -44,16 +44,20 @@ export const LocalizationWrapper = ({ children }: { children: ReactNode }) => {
       <IntlProvider
         locale={locale}
         messages={messages}
-        onError={() => handleSetLocale().finally()}
+        onError={() => {
+          if (!messages) {
+            handleSetLocale().finally()
+          }
+        }}
       >
         {children}
       </IntlProvider>
     )
-  }, [messages, children, handleSetLocale])
+  }, [messages])
 
   useEffect(() => {
     handleSetLocale().finally()
-  }, [locale, handleSetLocale])
+  }, [])
 
   useEffect(() => {
     const cookieLocale = localStorage.getItem(

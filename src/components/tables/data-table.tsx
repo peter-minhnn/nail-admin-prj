@@ -1,4 +1,12 @@
-import { ReactElement, ReactNode, useEffect, useMemo, useState } from 'react'
+import {
+  Dispatch,
+  ReactElement,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -12,6 +20,8 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  getExpandedRowModel,
+  ExpandedState,
 } from '@tanstack/react-table'
 import { FormattedMessage } from 'react-intl'
 import {
@@ -32,6 +42,11 @@ interface DataTableProps<TData, TValue> {
   toolBarChildren?: ReactNode
   languagePrefix: string
   loading?: boolean
+  expandedRow?: boolean
+  expandedKey?: string
+  expanded?: ExpandedState
+  setExpanded?: Dispatch<SetStateAction<ExpandedState>>
+  suppressShowToolbar?: boolean
 }
 
 export function DataTable<TData, TValue>({
@@ -40,6 +55,11 @@ export function DataTable<TData, TValue>({
   toolBarChildren,
   languagePrefix,
   loading,
+  expandedKey,
+  expandedRow,
+  setExpanded,
+  expanded,
+  suppressShowToolbar = false,
 }: Readonly<DataTableProps<TData, TValue>>) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -55,6 +75,7 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
+      ...(expandedRow ? { expanded } : {}),
     },
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
@@ -67,6 +88,13 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    ...(expandedRow
+      ? {
+          getExpandedRowModel: getExpandedRowModel(),
+          getSubRows: (row: TData) => row[expandedKey as keyof TData] as any,
+          onExpandedChange: setExpanded,
+        }
+      : {}),
   })
 
   const memoizedLoading: ReactElement | ReactElement[] | null = useMemo(() => {
@@ -82,8 +110,8 @@ export function DataTable<TData, TValue>({
 
     if (!tableLoading) return null
 
-    return Array.from({ length: 1 }).map((_: any, index) => (
-      <TableRow key={`${_}-${index}`}>
+    return Array.from({ length: 5 }).map((_: any, index) => (
+      <TableRow key={`${_}-${index}`} className='h-16'>
         {columns.map((column) => (
           <TableCell key={column.id}>
             <Skeleton className='h-5' />
@@ -103,9 +131,11 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className='space-y-4'>
-      <DataTableToolbar table={table} languagePrefix={languagePrefix}>
-        {toolBarChildren}
-      </DataTableToolbar>
+      {!suppressShowToolbar && (
+        <DataTableToolbar table={table} languagePrefix={languagePrefix}>
+          {toolBarChildren}
+        </DataTableToolbar>
+      )}
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

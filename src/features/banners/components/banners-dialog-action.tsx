@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
 import { IconDeviceFloppy } from '@tabler/icons-react'
 import { DialogType, ResultType } from '@/types/base.type.ts'
+import { handleServerResponse } from '@/utils'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { toast } from 'sonner'
 import {
@@ -26,7 +27,6 @@ import {
 import FileUpload from '@/components/upload.tsx'
 import { bannersSchema, BannersType } from '@/features/banners/data/schema.ts'
 import { usePostBanners } from '@/features/banners/hooks/use-queries.ts'
-import { handleServerResponse } from '@/utils'
 
 type CommonDialogsProps = {
   open: boolean
@@ -96,8 +96,8 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
         form.reset()
       }}
     >
-      <DialogContent className="sm:max-w-lg">
-        <DialogHeader className="text-left">
+      <DialogContent className='sm:max-w-lg'>
+        <DialogHeader className='text-left'>
           <DialogTitle>
             <FormattedMessage id={props.title} />
           </DialogTitle>
@@ -105,28 +105,28 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
             {props.description && <FormattedMessage id={props.description} />}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="-mr-4 h-[20.25rem] w-full py-1 pr-4">
+        <ScrollArea className='-mr-4 h-[20.25rem] w-full py-1 pr-4'>
           <Form {...form}>
             <form
-              id="banners-form"
+              id='banners-form'
               onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col gap-3 space-y-4 p-0.5"
+              className='flex flex-col gap-3 space-y-4 p-0.5'
             >
               <FormField
                 control={form.control}
-                name="title"
+                name='title'
                 render={({ field }) => (
-                  <FormItem className="flex w-full flex-col">
+                  <FormItem className='flex w-full flex-col'>
                     <FormLabel>
-                      <FormattedMessage id="banners.title" />
+                      <FormattedMessage id='banners.title' />
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder={intl.formatMessage({
                           id: 'banners.namePlaceholder',
                         })}
-                        className="w-full"
-                        autoComplete="off"
+                        className='w-full'
+                        autoComplete='off'
                         hasError={!!form.formState.errors?.title?.message}
                         {...field}
                       />
@@ -137,11 +137,11 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
               />
               <FormField
                 control={form.control}
-                name="filePath"
+                name='filePath'
                 render={() => (
-                  <FormItem className="w-full">
+                  <FormItem className='w-full'>
                     <FormLabel>
-                      <FormattedMessage id="banners.filePath" />
+                      <FormattedMessage id='banners.filePath' />
                     </FormLabel>
                     <FileUpload
                       files={files}
@@ -156,14 +156,14 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
         </ScrollArea>
         <DialogFooter>
           <Button
-            type="submit"
-            form="banners-form"
-            variant="save"
+            type='submit'
+            form='banners-form'
+            variant='save'
             disabled={status === 'pending'}
             loading={status === 'pending'}
           >
             <IconDeviceFloppy size={18} />
-            <FormattedMessage id="common.btnSaveChanges" />
+            <FormattedMessage id='common.btnSaveChanges' />
           </Button>
         </DialogFooter>
       </DialogContent>

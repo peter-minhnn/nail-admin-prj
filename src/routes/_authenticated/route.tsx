@@ -55,7 +55,7 @@ function RouteComponent() {
           </Header>
           <Outlet />
         </div>
-        <Toaster position='top-center' richColors  />
+        <Toaster position='top-center' richColors />
       </SidebarProvider>
     </SearchProvider>
   )

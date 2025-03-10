@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import { DialogType } from '@/types/base.type.ts'
+import { v4 as uuid } from 'uuid'
 import { downloadImageFromLink } from '@/utils/common.ts'
 import LongText from '@/components/long-text'
 import { DataTableColumnHeader } from '@/components/tables/data-table-column-header.tsx'
@@ -16,11 +17,10 @@ type BannersColumnsProps = {
 
 export const useColumns = ({
   setOpen,
-                             setCurrentRow
+  setCurrentRow,
 }: BannersColumnsProps): ColumnDef<BannersType>[] => {
-  const handleOpenImageLink = async (imgLink: string) => {
-    const domain = import.meta.env.VITE_BASE_API_URL
-    await downloadImageFromLink(`${domain}/${imgLink}`, 'image')
+  const handleOpenImageLink = async (imgLink: string, fileName: string) => {
+    await downloadImageFromLink(imgLink, fileName ?? `image-${uuid()}`)
   }
 
   return [
@@ -42,19 +42,26 @@ export const useColumns = ({
       enableHiding: true,
     },
     {
-      id: 'filePath',
-      accessorKey: 'filePath',
+      id: 'originalName',
+      accessorKey: 'originalName',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='banners.filePath' />
+        <DataTableColumnHeader column={column} title='banners.originalName' />
       ),
       cell: ({ row }) => {
         return (
           <Button
             type='button'
             className='w-full cursor-pointer justify-start border-0 bg-transparent text-blue-500 shadow-none hover:bg-transparent hover:text-blue-400/90'
-            onClick={() => handleOpenImageLink(row.getValue('filePath'))}
+            onClick={() =>
+              handleOpenImageLink(
+                row.getValue('url'),
+                row.getValue('originalName')
+              )
+            }
           >
-            <LongText className='max-w-96'>{row.getValue('filePath')}</LongText>
+            <LongText className='max-w-96'>
+              {row.getValue('originalName')}
+            </LongText>
           </Button>
         )
       },

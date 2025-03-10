@@ -1,4 +1,5 @@
 import {
+  IconAlbum,
   IconBarrierBlock,
   IconBug,
   IconEdit,
@@ -45,6 +46,11 @@ export const sidebarData: SidebarData = {
           title: 'menu.banners',
           url: '/banners',
           icon: IconImageInPicture,
+        },
+        {
+          title: 'menu.albums',
+          url: '/albums',
+          icon: IconAlbum,
         },
         {
           title: 'menu.users',

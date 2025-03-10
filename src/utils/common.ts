@@ -65,3 +65,11 @@ export const downloadImageFromLink = async (link: string, fileName: string) => {
     console.error('Error downloading the image:', error)
   }
 }
+
+export const sliceArray = (arr: any[], size: number): any[][] => {
+  const result = []
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size))
+  }
+  return result
+}

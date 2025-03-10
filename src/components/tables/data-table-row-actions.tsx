@@ -18,7 +18,7 @@ interface DataTableRowActionsProps<TData> {
   row: Row<TData>
   schema: any
   setCurrentRow?: Dispatch<SetStateAction<TData | null>>
-  setOpen: Dispatch<SetStateAction<DialogType>>
+  setOpen?: Dispatch<SetStateAction<DialogType>>
   suppressEditRow?: boolean
   suppressDeleteRow?: boolean
 }
@@ -50,7 +50,7 @@ export function DataTableRowActions<TData>({
             <DropdownMenuItem
               onClick={() => {
                 setCurrentRow?.(rowData)
-                setOpen('update')
+                setOpen?.('update')
               }}
             >
               <FormattedMessage id='common.editBtn' />
@@ -62,7 +62,7 @@ export function DataTableRowActions<TData>({
           <DropdownMenuItem
             onClick={() => {
               setCurrentRow?.(rowData)
-              setOpen('delete')
+              setOpen?.('delete')
             }}
             className='!text-red-500'
           >

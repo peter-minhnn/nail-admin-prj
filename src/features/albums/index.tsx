@@ -1,29 +1,35 @@
 import { useEffect, useState } from 'react'
+import { FileType } from '@/types'
 import { DialogType, ResultType } from '@/types/base.type.ts'
 import { handleServerResponse } from '@/utils'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { toast } from 'sonner'
 import { v4 as uuid } from 'uuid'
 import { ConfirmDialog } from '@/components/confirm-dialog.tsx'
 import { Main } from '@/components/layout/main.tsx'
-import { DataTable } from '@/components/tables/data-table.tsx'
+import { DataTable } from '@/components/tables'
 import {
-  BannersButtons,
+  AlbumsButtons,
+  AlbumDetailDialog,
   useColumns,
-  BannersDialog,
-} from '@/features/banners/components'
-import { BannersType } from '@/features/banners/data/schema.ts'
+  AlbumsGalleryDialog,
+} from '@/features/albums/components'
 import {
-  useDeleteBanners,
-  useGetBanners,
-} from '@/features/banners/hooks/use-queries.ts'
+  AlbumsDataType,
+  albumsListSchema,
+} from '@/features/albums/data/schema.ts'
+import {
+  useDeleteAlbum,
+  useGetAlbums,
+} from '@/features/albums/hooks/use-queries.ts'
 
-export default function Banners() {
+export default function Albums() {
   const [open, setOpen] = useState<DialogType>('')
-  const [dataSource, setDataSource] = useState<BannersType[]>([])
-  const [currentRow, setCurrentRow] = useState<BannersType | null>(null)
-
-  const { data, refetch, status, isRefetching } = useGetBanners()
+  const [dataSource, setDataSource] = useState<AlbumsDataType[]>([])
+  const [currentRow, setCurrentRow] = useState<AlbumsDataType | null>(null)
+  const [images, setImages] = useState<FileType[]>([])
+  const intl = useIntl()
+  const { data, refetch, status, isRefetching } = useGetAlbums()
 
   const onRefresh = () => {
     refetch().finally()
@@ -44,43 +50,69 @@ export default function Banners() {
     setOpen('')
   }
 
-  const columns = useColumns({ setOpen, setCurrentRow })
+  const handleOpenAlbums = (values: FileType[]) => {
+    setOpen('carousel')
+    setImages(values)
+  }
 
-  const { mutateAsync } = useDeleteBanners({ onSuccess, onError })
+  const columns = useColumns({ setOpen, setCurrentRow, handleOpenAlbums })
+
+  const { mutateAsync } = useDeleteAlbum({ onSuccess, onError })
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    setDataSource(data)
-  }, [status, isRefetching])
+    setDataSource(data ? albumsListSchema.parse(data) : [])
+  }, [status, isRefetching, data])
 
   return (
     <Main>
       <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
         <div>
           <h2 className='text-2xl font-bold tracking-tight'>
-            <FormattedMessage id='banners.headerTitle' />
+            <FormattedMessage id='albums.headerTitle' />
           </h2>
           <p className='text-muted-foreground'>
-            <FormattedMessage id='banners.description' />
+            <FormattedMessage id='albums.description' />
           </p>
         </div>
-        <BannersButtons onRefresh={onRefresh} onAdd={onAdd} />
+        <AlbumsButtons onRefresh={onRefresh} onAdd={onAdd} />
       </div>
       <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
         <DataTable
           columns={columns}
           data={dataSource}
-          languagePrefix='banners'
+          languagePrefix='albums'
           loading={status === 'pending' || isRefetching}
         />
       </div>
       {open === 'create' && (
-        <BannersDialog
-          title='banners.dialogAddTitle'
+        <AlbumDetailDialog
+          title='albums.dialogAddTitle'
           type='create'
           open={open === 'create'}
           setOpen={setOpen}
-          description='banners.dialogAddDescription'
+          description='albums.dialogAddDescription'
+          intl={intl}
+        />
+      )}
+      {open === 'update' && (
+        <AlbumDetailDialog
+          title='albums.dialogEditTitle'
+          type='update'
+          open={open === 'update'}
+          setOpen={setOpen}
+          description='albums.dialogEditDescription'
+          currentRow={currentRow}
+          intl={intl}
+        />
+      )}
+      {open === 'carousel' && (
+        <AlbumsGalleryDialog
+          title='albums.dialogGalleryTitle'
+          open={open === 'carousel'}
+          setOpen={setOpen}
+          description='albums.dialogGalleryDescription'
+          images={images}
         />
       )}
       {open === 'delete' && currentRow && (
@@ -103,7 +135,7 @@ export default function Banners() {
           }
           desc={
             <FormattedMessage
-              id='banners.messages.deleteDescription'
+              id='albums.messages.deleteDescription'
               values={{
                 deleteId: <strong key={uuid()}>{currentRow.id!}</strong>,
                 br: <br key={uuid()} />,

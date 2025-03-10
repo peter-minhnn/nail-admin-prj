@@ -22,5 +22,8 @@
   "common.messages.deleteError": "Xóa thất bại",
   "common.messages.deleteConfirm": "Bạn có chắc chắn muốn xóa?",
   "common.messages.deleteConfirmSelected": "Bạn có chắc chắn muốn xóa {deleteCount} mục đã chọn?",
-  "common.messages.deleteConfirmSelectedAll": "Bạn có chắc chắn muốn xóa tất cả {deleteCount} mục đã chọn?"
+  "common.messages.deleteConfirmSelectedAll": "Bạn có chắc chắn muốn xóa tất cả {deleteCount} mục đã chọn?",
+  "common.active": "Hoạt động",
+  "common.inactive": "Không hoạt động",
+  "common.btnCancel": "Hủy"
 }

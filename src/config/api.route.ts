@@ -10,4 +10,8 @@ export const apiRoutes = {
     general: '/files',
     deleteFile: (fileName: string) => `/files/${fileName}`,
   },
+  albums: {
+    general: '/albums',
+    withId: (id: number) => `/albums/${id}`,
+  },
 }

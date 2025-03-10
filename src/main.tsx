@@ -8,8 +8,8 @@ import {
 } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { LocalizationWrapper } from '@/i18n/localization-wrapper.tsx'
-import { useAuthStore } from '@/stores/auth-store.ts'
 import { handleServerError } from '@/utils'
+import { useAuthStore } from '@/stores/auth-store.ts'
 import { toast } from '@/hooks/use-toast'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
@@ -71,7 +71,7 @@ const queryClient = new QueryClient({
           router.navigate({ to: '/500' })
         }
         if (error.response?.status === 403) {
-          router.navigate({ to: '/403' });
+          router.navigate({ to: '/403' })
         }
       }
     },

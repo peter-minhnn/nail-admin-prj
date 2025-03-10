@@ -29,6 +29,11 @@ export const useAxios = {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   },
+  putFormData: async <TData, TResponse, T>(url: string, body: T) => {
+    return await axiosConfig.put<TData, TResponse>(url, body, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+  },
   getResponse: <T>(
     response: BaseResponseType<T>,
     type: 'list' | 'object' | 'error' = 'list'

@@ -261,7 +261,10 @@ export const FileUploader = forwardRef<
         setIsFileTooBig(true)
         setFiles([])
         onValueChange?.([])
-        toast.error(`File is too large. Max size is ${formatFileSize(maxSize)}`)
+        files?.length &&
+          toast.error(
+            `File is too large. Max size is ${formatFileSize(maxSize)}`
+          )
       },
       onDropAccepted: () => setIsFileTooBig(false),
     })

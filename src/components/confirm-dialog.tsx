@@ -1,4 +1,5 @@
 import React from 'react'
+import { IconCancel, IconCheck, IconTrash } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import {
   AlertDialog,
@@ -53,6 +54,7 @@ export function ConfirmDialog(props: Readonly<ConfirmDialogProps>) {
         {children}
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isLoading}>
+            <IconCancel size={18} />
             {cancelBtnText ?? 'Cancel'}
           </AlertDialogCancel>
           <Button
@@ -60,6 +62,7 @@ export function ConfirmDialog(props: Readonly<ConfirmDialogProps>) {
             onClick={handleConfirm}
             disabled={disabled || isLoading}
           >
+            {destructive ? <IconTrash size={18} /> : <IconCheck size={18} />}
             {confirmText ?? 'Continue'}
           </Button>
         </AlertDialogFooter>

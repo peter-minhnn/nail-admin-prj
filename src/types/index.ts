@@ -9,6 +9,8 @@ export type {
   MetaType,
   ResultType,
   PaginationState,
+  QueryType,
+  DialogType,
 } from './base.type'
 export type {
   Locale,
@@ -26,3 +28,5 @@ export type {
   UserRoleType,
 } from './user.type'
 export type { BannersListType, BannersRequestType } from './banners.type'
+export type { FileType } from './file.type'
+export type { AlbumsType, AlbumsRequestType } from './albums.type'

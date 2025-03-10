@@ -11,3 +11,10 @@ export const localeNames: Record<Locale, string> = {
   vi: 'Vietnamese',
   en: 'English (US)',
 }
+
+export type LocaleStateType = {
+  state: {
+    locale: Locale
+  }
+  version: number
+}

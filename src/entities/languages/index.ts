@@ -6,6 +6,11 @@ const languages = [
   'menu',
   'banners',
   'common',
+  'albums',
 ]
 
-export { languages }
+enum LocalStorageKeys {
+  LOCALE = 'locale',
+}
+
+export { languages, LocalStorageKeys }

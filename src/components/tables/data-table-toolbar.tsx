@@ -10,12 +10,14 @@ interface DataTableToolbarProps<TData> {
   table: Table<TData>
   children: ReactNode
   languagePrefix: string
+  searchKey?: string
 }
 
 export function DataTableToolbar<TData>({
   table,
   children,
   languagePrefix,
+  searchKey,
 }: Readonly<DataTableToolbarProps<TData>>) {
   const isFiltered = table.getState().columnFilters.length > 0
   const intl = useIntl()
@@ -27,9 +29,19 @@ export function DataTableToolbar<TData>({
           placeholder={intl.formatMessage({
             id: 'common.searchFilterPlaceholder',
           })}
-          value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
+          value={
+            searchKey
+              ? ((table
+                  .getColumn(searchKey ?? '')
+                  ?.getFilterValue() as string) ?? '')
+              : ''
+          }
           onChange={(event) =>
-            table.getColumn('title')?.setFilterValue(event.target.value)
+            searchKey
+              ? table
+                  .getColumn(searchKey ?? '')
+                  ?.setFilterValue(event.target.value)
+              : null
           }
           className='h-8 w-[150px] lg:w-[250px]'
         />
