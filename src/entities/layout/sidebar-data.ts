@@ -1,6 +1,7 @@
 import {
   IconAlbum,
   IconBarrierBlock,
+  IconBrandBlogger,
   IconBug,
   IconEdit,
   IconError404,
@@ -23,9 +24,9 @@ export const sidebarData: SidebarData = {
   },
   teams: [
     {
-      name: 'Nail Admin',
+      name: 'DEJAVU',
       logo: Command,
-      plan: 'Professional Management',
+      plan: 'Admin Management',
     },
   ],
   navGroups: [
@@ -51,6 +52,11 @@ export const sidebarData: SidebarData = {
           title: 'menu.albums',
           url: '/albums',
           icon: IconAlbum,
+        },
+        {
+          title: 'menu.posts',
+          url: '/posts',
+          icon: IconBrandBlogger,
         },
         {
           title: 'menu.users',

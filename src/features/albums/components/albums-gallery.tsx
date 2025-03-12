@@ -65,7 +65,7 @@ export const AlbumsGalleryDialog: FC<AlbumsGalleryDialogsProps> = (props) => {
             {props.description && <FormattedMessage id={props.description} />}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className='-mr-4 h-[50rem] w-full py-2'>
+        <ScrollArea className='-mr-4 h-[40rem] w-full py-2'>
           <div className='grid grid-cols-2 gap-4 md:grid-cols-3'>
             {memoizedImageGroups}
           </div>

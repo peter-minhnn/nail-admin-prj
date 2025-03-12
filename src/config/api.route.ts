@@ -1,3 +1,6 @@
+import { PostsFilterParams } from '@/types/posts.type.ts'
+import { createQueryParams } from '@/utils'
+
 export const apiRoutes = {
   login: '/auth/login',
   protected: '/auth/protected',
@@ -13,5 +16,11 @@ export const apiRoutes = {
   albums: {
     general: '/albums',
     withId: (id: number) => `/albums/${id}`,
+  },
+  posts: {
+    general: '/posts',
+    withParams: (params: PostsFilterParams) =>
+      `/posts${createQueryParams({...params, order: 'DESC'})}`,
+    withId: (id: number) => `/posts/${id}`,
   },
 }

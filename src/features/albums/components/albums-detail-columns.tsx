@@ -52,7 +52,7 @@ export const useAlbumsDetailColumns = ({
         />
       ),
       cell: ({ row }) => (
-        <Avatar className='m-auto lg:h-16 lg:w-16'>
+        <Avatar className='m-auto lg:h-16 lg:w-16' key={row.original.id}>
           <AvatarImage
             src={row.getValue('url')}
             alt={get(row, ['original', 'fileName'], '')}
@@ -72,11 +72,12 @@ export const useAlbumsDetailColumns = ({
       ),
       cell: ({ row }) => (
         <Button
+          key={row.original.id}
           className='w-full cursor-pointer justify-start border-0 bg-transparent text-blue-500 shadow-none hover:bg-transparent hover:text-blue-400/90'
           type='button'
           onClick={() => handleOpenImageLink(get(row, ['original', 'url'], ''))}
         >
-          <LongText className='max-w-96'>
+          <LongText className='max-w-72'>
             {row.getValue('originalName')}
           </LongText>
         </Button>
@@ -100,7 +101,7 @@ export const useAlbumsDetailColumns = ({
             (item) => item.value === row.getValue('isActive')
           )?.label ?? ''
         return (
-          <div className='flex justify-center space-x-2'>
+          <div className='flex justify-center space-x-2' key={row.original.id}>
             {name && (
               <Badge
                 variant='outline'

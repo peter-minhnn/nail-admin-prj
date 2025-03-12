@@ -25,6 +25,7 @@ import {
   Updater,
   PaginationState,
 } from '@tanstack/react-table'
+import { PostsFilterParams } from '@/types'
 import { FormattedMessage } from 'react-intl'
 import { v4 as uuid } from 'uuid'
 import {
@@ -35,9 +36,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { DataTablePagination } from '@/components/tables'
 import { Skeleton } from '@/components/ui'
-import { DataTablePagination } from './data-table-pagination'
-import { DataTableToolbar } from './data-table-toolbar'
+import { PostsDataTableToolbar } from '@/features/posts/components'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -53,13 +54,12 @@ interface DataTableProps<TData, TValue> {
   pagination?: PaginationState
   rowCount?: number
   onPaginationChange?: (pagination: Updater<PaginationState>) => void
-  searchKey?: string
+  setFilterParams: Dispatch<SetStateAction<PostsFilterParams>>
 }
 
-export function DataTable<TData, TValue>({
+export function PostsDataTable<TData, TValue>({
   columns,
   data,
-  toolBarChildren,
   languagePrefix,
   loading,
   expandedKey,
@@ -70,7 +70,7 @@ export function DataTable<TData, TValue>({
   pagination,
   rowCount,
   onPaginationChange,
-  searchKey,
+  setFilterParams,
 }: Readonly<DataTableProps<TData, TValue>>) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -142,7 +142,7 @@ export function DataTable<TData, TValue>({
         ))}
       </TableRow>
     ))
-  }, [tableLoading, table])
+  }, [tableLoading, table.getRowModel().rows])
 
   useEffect(() => {
     if (!loading) {
@@ -155,13 +155,11 @@ export function DataTable<TData, TValue>({
   return (
     <div className='space-y-4'>
       {!suppressShowToolbar && (
-        <DataTableToolbar
+        <PostsDataTableToolbar
           table={table}
           languagePrefix={languagePrefix}
-          searchKey={searchKey}
-        >
-          {toolBarChildren}
-        </DataTableToolbar>
+          setFilterParams={setFilterParams}
+        />
       )}
       <div className='rounded-md border'>
         <Table>

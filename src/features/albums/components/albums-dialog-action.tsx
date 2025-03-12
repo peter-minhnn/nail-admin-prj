@@ -28,7 +28,7 @@ import {
   Separator,
 } from '@/components/ui'
 import FileUpload from '@/components/upload.tsx'
-import { useAlbumsDetailColumns } from '@/features/albums/components'
+import { useAlbumsDetailColumns } from '@/features/albums/components/index.ts'
 import {
   AlbumsDataType,
   AlbumsDetailDataType,
@@ -238,7 +238,7 @@ export const AlbumDetailDialog: FC<AlbumsDialogsProps> = (props) => {
                 name='thumbnail'
                 render={() => (
                   <FormItem className='flex w-full flex-col'>
-                    <FormLabel required>
+                    <FormLabel required={!isEdit}>
                       <FormattedMessage id='albums.thumbnail' />
                     </FormLabel>
                     <FormControl>
@@ -309,7 +309,7 @@ export const AlbumDetailDialog: FC<AlbumsDialogsProps> = (props) => {
                 name='details'
                 render={() => (
                   <FormItem className='flex w-full flex-col'>
-                    <FormLabel required>
+                    <FormLabel required={!isEdit}>
                       <FormattedMessage id='albums.details' />
                     </FormLabel>
                     <FormControl>

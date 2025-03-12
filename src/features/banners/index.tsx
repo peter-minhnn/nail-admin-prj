@@ -18,7 +18,7 @@ import {
   useGetBanners,
 } from '@/features/banners/hooks/use-queries.ts'
 
-export default function Banners() {
+export default function BannersComponent() {
   const [open, setOpen] = useState<DialogType>('')
   const [dataSource, setDataSource] = useState<BannersType[]>([])
   const [currentRow, setCurrentRow] = useState<BannersType | null>(null)

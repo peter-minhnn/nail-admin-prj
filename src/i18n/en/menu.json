@@ -4,5 +4,6 @@
   "menu.dashboard": "Dashboard",
   "menu.banners": "Banners",
   "menu.users": "Users",
-  "menu.albums": "Albums"
+  "menu.albums": "Albums",
+  "menu.posts": "Posts"
 }

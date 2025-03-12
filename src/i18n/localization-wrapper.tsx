@@ -57,7 +57,7 @@ export const LocalizationWrapper = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     handleSetLocale().finally()
-  }, [])
+  }, [locale])
 
   useEffect(() => {
     const cookieLocale = localStorage.getItem(

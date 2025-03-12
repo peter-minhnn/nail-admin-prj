@@ -46,6 +46,7 @@ type FileUploadProps = {
   onValueChange?: (value: File[] | null) => void
   dropZoneConfigs?: DropzoneOptions
   resultFiles?: (files: FileType[]) => void
+  disabled?: boolean
 }
 
 const FileUpload = ({
@@ -53,6 +54,7 @@ const FileUpload = ({
   onValueChange,
   dropZoneConfigs,
   resultFiles,
+  disabled,
 }: FileUploadProps) => {
   const dropZoneConfig = {
     maxFiles: dropZoneConfigs?.maxFiles ?? 1,
@@ -68,7 +70,7 @@ const FileUpload = ({
       resultFiles={resultFiles}
       className='relative rounded-lg bg-background p-0.5'
     >
-      <FileInput className='outline-dashed outline-1'>
+      <FileInput className='outline-dashed outline-1' disabled={disabled}>
         <div className='flex w-full flex-col items-center justify-center pb-4 pt-3'>
           <FileSvgDraw />
         </div>

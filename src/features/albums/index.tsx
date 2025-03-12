@@ -23,7 +23,7 @@ import {
   useGetAlbums,
 } from '@/features/albums/hooks/use-queries.ts'
 
-export default function Albums() {
+export default function AlbumsComponent() {
   const [open, setOpen] = useState<DialogType>('')
   const [dataSource, setDataSource] = useState<AlbumsDataType[]>([])
   const [currentRow, setCurrentRow] = useState<AlbumsDataType | null>(null)

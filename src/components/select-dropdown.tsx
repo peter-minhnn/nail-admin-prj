@@ -1,4 +1,5 @@
 import { IconLoader } from '@tabler/icons-react'
+import { FormattedMessage } from 'react-intl'
 import { cn } from '@/lib/utils'
 import { FormControl } from '@/components/ui/form'
 import {
@@ -18,6 +19,7 @@ interface SelectDropdownProps {
   disabled?: boolean
   className?: string
   isControlled?: boolean
+  isStatic?: boolean
 }
 
 export function SelectDropdown({
@@ -29,7 +31,8 @@ export function SelectDropdown({
   disabled,
   className = '',
   isControlled = false,
-}: SelectDropdownProps) {
+  isStatic = true,
+}: Readonly<SelectDropdownProps>) {
   const defaultState = isControlled
     ? { value: defaultValue, onValueChange }
     : { defaultValue, onValueChange }
@@ -52,7 +55,7 @@ export function SelectDropdown({
         ) : (
           items?.map(({ label, value }) => (
             <SelectItem key={value} value={value}>
-              {label}
+              {!isStatic ? label : <FormattedMessage id={label} />}
             </SelectItem>
           ))
         )}

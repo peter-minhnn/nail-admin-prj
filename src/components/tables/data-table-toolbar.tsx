@@ -27,7 +27,7 @@ export function DataTableToolbar<TData>({
       <div className='flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2'>
         <Input
           placeholder={intl.formatMessage({
-            id: 'common.searchFilterPlaceholder',
+            id: 'posts.searchFilterPlaceholder',
           })}
           value={
             searchKey

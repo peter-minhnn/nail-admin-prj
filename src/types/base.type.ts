@@ -6,6 +6,7 @@ export type LocalStorageStateType<T> = {
 export type BaseResponseType<T = any> = {
   message: string
   success: boolean
+  errors?: string[]
   data: T
 }
 
@@ -34,12 +35,12 @@ export type MetaType = {
 }
 
 export type CommonType = {
-  createdBy: string
-  createdAt: string
-  updatedBy: string
-  updatedAt: string
-  isActive: boolean
-  isDeleted: boolean
+  createdBy?: string
+  createdAt?: string
+  updatedBy?: string
+  updatedAt?: string
+  isActive?: boolean
+  isDeleted?: boolean
 }
 
 export type CommonCodeType = {
@@ -68,6 +69,7 @@ export type DialogType =
   | 'delete'
   | 'import'
   | 'carousel'
+  | 'preview'
   | ''
 
 export type QueryType = {

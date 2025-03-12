@@ -136,7 +136,7 @@ export const useColumns = ({
       cell: ({ row }) => (
         <Button
           type='button'
-          className='w-full cursor-pointer justify-start border-0 bg-transparent text-blue-500 shadow-none hover:bg-transparent hover:text-blue-400/90'
+          className='link-button'
           onClick={() => handleOpenAlbums?.(row.getValue('details'))}
         >
           <FormattedMessage id='albums.clickToViewAlbums' />

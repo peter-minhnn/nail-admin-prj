@@ -39,12 +39,16 @@ export async function handleApiCatchResponse<T>(e: any): Promise<ResultType> {
 
   await redirectPageErrors(e)
 
-  const messageError = get(e.response, 'data.messages', [])
+  const messageError = get(
+    e.response,
+    ['data', 'errors', '0'],
+    e.response?.data?.message || null
+  )
   return {
     type: 'error',
     result: {
       success: false,
-      message: messageError ?? ['Something went wrong'],
+      message: messageError ?? null,
       data: null,
     } as BaseResponseType<T>,
   }

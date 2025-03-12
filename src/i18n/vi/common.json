@@ -25,5 +25,14 @@
   "common.messages.deleteConfirmSelectedAll": "Bạn có chắc chắn muốn xóa tất cả {deleteCount} mục đã chọn?",
   "common.active": "Hoạt động",
   "common.inactive": "Không hoạt động",
-  "common.btnCancel": "Hủy"
+  "common.btnCancel": "Hủy",
+  "common.yes": "Có",
+  "common.no": "Không",
+  "common.logout": "Đăng xuất",
+  "common.light": "Sáng",
+  "common.dark": "Tối",
+  "common.system": "Hệ thống",
+  "common.messages.errorOccurred": "Có lỗi xảy ra khi gọi API. Vui lòng thử lại sau.",
+  "common.clearFilters": "Xóa bộ lọc",
+  "common.selected": "đã chọn"
 }

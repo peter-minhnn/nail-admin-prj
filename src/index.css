@@ -128,6 +128,10 @@
   .faded-bottom {
     @apply after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:hidden after:h-32 after:w-full after:bg-[linear-gradient(180deg,_transparent_10%,_hsl(var(--background))_70%)] after:md:block;
   }
+
+  .link-button {
+    @apply w-full cursor-pointer justify-start border-0 bg-transparent text-blue-500 shadow-none hover:!bg-transparent hover:text-blue-400/90;
+  }
 }
 
 @layer base {
@@ -171,4 +175,8 @@
 .ck.ck-editor__editable_inline {
   padding-left: 1.5em;
   padding-right: 1.5em;
+}
+
+.ql-container.ql-snow {
+  min-height: auto;
 }

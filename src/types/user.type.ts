@@ -1,3 +1,5 @@
+import { CommonType } from '@/types/base.type.ts'
+
 export type UserLoginRequestType = {
   userName: string
   password: string
@@ -40,16 +42,15 @@ export type UserFilterType = {
 }
 
 export type User = {
-  avatar: string
-  birthDate: string
+  avatar?: string
+  birthDate?: string
   companyId: number
-  createdAt: Date | null
-  email: string
-  firstName: string
-  gender: number
-  isActive: boolean
-  lastName: string
-  phoneNumber: string
+  email?: string
+  firstName?: string
+  gender?: number
+  isActive?: boolean
+  lastName?: string
+  phoneNumber?: string
   roleCode: string
   userName: string
-}
+} & CommonType

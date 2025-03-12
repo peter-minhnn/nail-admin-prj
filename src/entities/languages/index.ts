@@ -7,6 +7,7 @@ const languages = [
   'banners',
   'common',
   'albums',
+  'posts',
 ]
 
 enum LocalStorageKeys {

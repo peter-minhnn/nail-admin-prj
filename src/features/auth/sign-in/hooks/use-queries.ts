@@ -1,5 +1,7 @@
+import Cookie from 'js-cookie'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
+import { CookieStorageKeys } from '@/entities/common-data.ts'
 import { login } from '@/services/auth.service.ts'
 import { UserLoginRequestType } from '@/types/user.type.ts'
 import get from 'lodash/get'
@@ -24,6 +26,10 @@ export const useLogin = () => {
         return toast.error(message)
       }
       toast.success(message)
+      const userInfo = get(response, ['result', 'data'], null)
+      if (userInfo) {
+        Cookie.set(CookieStorageKeys.USER_INFO, JSON.stringify(userInfo))
+      }
       navigate({ to: '/' }).finally()
     },
     onError: () => toast.error('Login failed. Please try again!'),
