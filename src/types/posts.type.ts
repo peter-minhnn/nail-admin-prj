@@ -1,3 +1,5 @@
+import { PostsDataType } from '@/features/posts/data/schema.ts'
+
 export type PostsType = {
   id?: number
   titleEn: string
@@ -19,3 +21,8 @@ export type PostsFilterParams = {
 }
 
 export type PostType = 'news' | 'activity' | 'service'
+
+export type SortDataType = {
+  isDragEnd: boolean
+  newRows: PostsDataType[]
+}

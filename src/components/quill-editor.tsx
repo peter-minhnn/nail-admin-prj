@@ -5,16 +5,15 @@ import {
   useState,
   useEffect,
   useMemo,
-  ReactElement,
+  ReactElement, useCallback,
 } from 'react'
 import { BaseResponseType } from '@/types'
-import get from 'lodash/get'
 import { FormattedMessage } from 'react-intl'
 import ReactQuill from 'react-quill-new'
 import 'react-quill-new/dist/quill.snow.css'
-import { toast } from 'sonner'
 import { cn } from '@/lib/utils.ts'
 import { useAxios } from '@/hooks/use-axios.ts'
+import get from 'lodash/get'
 
 type QuillEditorProps = {
   className?: string
@@ -28,6 +27,12 @@ type QuillEditorProps = {
   readOnly?: boolean
   hideToolbar?: boolean
 }
+
+// Custom clipboard matcher to handle pasted images
+const imageHandlerClipboard = (_: any, delta: any) => {
+  // Return the delta as-is; we'll handle the image in the paste event
+  return delta;
+};
 
 const QuillEditor = (props: Readonly<QuillEditorProps>) => {
   const {
@@ -45,7 +50,81 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
   } = props
 
   const quillRef = useRef(null)
-  const [isLayoutReady, setIsLayoutReady] = useState(false)
+  const [isLayoutReady, setIsLayoutReady] = useState<boolean>(false)
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+
+  // Upload image to server
+  const uploadImage = useCallback(async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await useAxios.postFormData<
+        any,
+        BaseResponseType,
+        any
+      >('/files', formData)
+      return get(response, ['data', 'data', 'url'], '');
+    } catch (error) {
+      console.error('Image upload failed:', error);
+      throw error;
+    }
+  }, []);
+
+  // Handle paste event for images
+  const handlePaste = useCallback(
+    async (e: any) => {
+      const clipboardData = e.clipboardData;
+      const items = clipboardData.items;
+
+      for (const element of items) {
+        if (element.type.indexOf('image') !== -1) {
+          e.preventDefault() // Prevent default paste behavior
+          const file = element.getAsFile();
+          if (file) {
+            setIsUploading(true);
+            try {
+              const imageUrl = await uploadImage(file);
+              const editor = (quillRef.current! as any)?.getEditor();
+              const range = editor.getSelection() || { index: 0 };
+              editor.insertEmbed(range.index, 'image', imageUrl);
+            } catch (error) {
+              alert('Failed to upload pasted image');
+            } finally {
+              setIsUploading(false);
+            }
+          }
+          break; // Handle only one image per paste
+        }
+      }
+    },
+    [uploadImage],
+  );
+
+  // Handle image upload from toolbar button
+  const imageHandler = useCallback(() => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (file) {
+        setIsUploading(true);
+        try {
+          const imageUrl = await uploadImage(file);
+          const editor = (quillRef.current! as any)?.getEditor();
+          const range = editor.getSelection() || { index: 0 };
+          editor.insertEmbed(range.index, 'image', imageUrl);
+        } catch (error) {
+          alert('Failed to upload image');
+        } finally {
+          setIsUploading(false);
+        }
+      }
+    };
+  }, [uploadImage]);
 
   // Quill modules configuration
   const modules = useMemo(() => {
@@ -70,47 +149,12 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
         handlers: {
           image: imageHandler,
         },
+        clipboard: {
+          matchers: [['img', imageHandlerClipboard]], // Custom matcher for clipboard
+        },
       },
     }
   }, [isLayoutReady, hideToolbar])
-
-  // Handle image upload
-  function imageHandler() {
-    const input = document.createElement('input')
-    input.setAttribute('type', 'file')
-    input.setAttribute('accept', 'image/*')
-    input.click()
-
-    input.onchange = async () => {
-      const file = input.files?.[0]
-      if (file) {
-        try {
-          // Create form data
-          const formData = new FormData()
-          formData.append('file', file)
-
-          // Upload to server
-          const response = await useAxios.postFormData<
-            any,
-            BaseResponseType,
-            any
-          >('/files', formData)
-          console.log('response', response)
-
-          // Get the URL from server response
-          const imageUrl = get(response, ['data', 'data', 'url'], '')
-
-          // Insert image into editor
-          const editor = (quillRef.current! as any)?.getEditor()
-          const range = editor.getSelection()
-          editor.insertEmbed(range.index, 'image', imageUrl)
-        } catch (error) {
-          console.error('Image upload failed:', error)
-          toast.error(' Failed to upload image: ' + error)
-        }
-      }
-    }
-  }
 
   // Handle editor content change
   const handleChange = (html: string) => {
@@ -123,6 +167,7 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
 
     return (
       <>
+        {isUploading && <div>Uploading image...</div>}
         <ReactQuill
           {...rest}
           ref={quillRef}
@@ -142,13 +187,26 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
         )}
       </>
     )
-  }, [value, modules, hasError, helperText])
+  }, [value, modules, hasError, helperText, isUploading])
 
   useEffect(() => {
     setIsLayoutReady(true)
 
     return () => setIsLayoutReady(false)
   }, [])
+
+  // Register paste event listener when component mounts
+  useEffect(() => {
+    if (quillRef.current && isLayoutReady) {
+      const editor = (quillRef.current as any)?.getEditor();
+      editor.root.addEventListener('paste', handlePaste);
+
+      // Cleanup listener on unmount
+      return () => {
+        editor.root.removeEventListener('paste', handlePaste);
+      };
+    }
+  }, [handlePaste, isLayoutReady]);
 
   return <div className={cn('', className)}>{memoizedReactQuill}</div>
 }

@@ -15,7 +15,7 @@
   "posts.contentEnPlaceholder": "Nhập nội dung (Tiếng Anh)",
   "posts.id": "ID",
   "posts.isPublish": "Hiển thị",
-  "posts.sortOrder": "Thứ tự sắp xếp",
+  "posts.sortOrder": "Thứ tự ưu tiên",
   "posts.thumbnail": "Hình ảnh đại diện",
   "posts.news": "Tin tức",
   "posts.activity": "Hoạt động",
@@ -28,5 +28,7 @@
   "posts.showContent": "Xem nội dung",
   "posts.dialogPreviewTitle": "Nội dung",
   "posts.dialogPreviewDescription": "Xem nội dung bài viết đã tạo",
-  "posts.searchFilterPlaceholder": "Tìm kiếm tên bài viết..."
+  "posts.searchFilterPlaceholder": "Tìm kiếm tên bài viết...",
+  "posts.sortOrderPlaceholder": "Sắp xếp theo thứ tự",
+  "posts.messages.updateSuccess": "Cập nhật thứ tự bài viết thành công"
 }

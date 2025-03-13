@@ -33,6 +33,18 @@ export const useColumns = ({
 }: PostsColumnsProps): ColumnDef<PostsDataType>[] => {
   return [
     {
+      id: 'sortOrder',
+      accessorKey: 'sortOrder',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title='posts.sortOrder' className='w-max min-w-fit'/>
+      ),
+      cell: ({ row }) => (
+        <LongText className='max-w-96 text-center'>{row.getValue('sortOrder')}</LongText>
+      ),
+      enableHiding: false,
+      enableSorting: false
+    },
+    {
       id: 'id',
       accessorKey: 'id',
       header: 'ID',

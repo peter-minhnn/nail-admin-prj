@@ -16,7 +16,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
-import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as auth500Import } from './routes/(auth)/500'
 
 // Create Virtual Routes
@@ -26,13 +25,6 @@ const errors500LazyImport = createFileRoute('/(errors)/500')()
 const errors404LazyImport = createFileRoute('/(errors)/404')()
 const errors403LazyImport = createFileRoute('/(errors)/403')()
 const errors401LazyImport = createFileRoute('/(errors)/401')()
-const authSignUpLazyImport = createFileRoute('/(auth)/sign-up')()
-const authForgotPasswordLazyImport = createFileRoute(
-  '/(auth)/forgot-password',
-)()
-const AuthenticatedUsersIndexLazyImport = createFileRoute(
-  '/_authenticated/users/',
-)()
 const AuthenticatedPostsIndexLazyImport = createFileRoute(
   '/_authenticated/posts/',
 )()
@@ -41,9 +33,6 @@ const AuthenticatedBannersIndexLazyImport = createFileRoute(
 )()
 const AuthenticatedAlbumsIndexLazyImport = createFileRoute(
   '/_authenticated/albums/',
-)()
-const AuthenticatedSamplesEditorIndexLazyImport = createFileRoute(
-  '/_authenticated/samples/editor/',
 )()
 
 // Create/Update Routes
@@ -99,33 +88,9 @@ const errors401LazyRoute = errors401LazyImport
   } as any)
   .lazy(() => import('./routes/(errors)/401.lazy').then((d) => d.Route))
 
-const authSignUpLazyRoute = authSignUpLazyImport
-  .update({
-    id: '/(auth)/sign-up',
-    path: '/sign-up',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(auth)/sign-up.lazy').then((d) => d.Route))
-
-const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
-  .update({
-    id: '/(auth)/forgot-password',
-    path: '/forgot-password',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() =>
-    import('./routes/(auth)/forgot-password.lazy').then((d) => d.Route),
-  )
-
 const authSignInRoute = authSignInImport.update({
   id: '/(auth)/sign-in',
   path: '/sign-in',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const authOtpRoute = authOtpImport.update({
-  id: '/(auth)/otp',
-  path: '/otp',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -134,15 +99,6 @@ const auth500Route = auth500Import.update({
   path: '/500',
   getParentRoute: () => rootRoute,
 } as any)
-
-const AuthenticatedUsersIndexLazyRoute =
-  AuthenticatedUsersIndexLazyImport.update({
-    id: '/users/',
-    path: '/users/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/users/index.lazy').then((d) => d.Route),
-  )
 
 const AuthenticatedPostsIndexLazyRoute =
   AuthenticatedPostsIndexLazyImport.update({
@@ -171,17 +127,6 @@ const AuthenticatedAlbumsIndexLazyRoute =
     import('./routes/_authenticated/albums/index.lazy').then((d) => d.Route),
   )
 
-const AuthenticatedSamplesEditorIndexLazyRoute =
-  AuthenticatedSamplesEditorIndexLazyImport.update({
-    id: '/samples/editor/',
-    path: '/samples/editor/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/samples/editor/index.lazy').then(
-      (d) => d.Route,
-    ),
-  )
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -200,32 +145,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof auth500Import
       parentRoute: typeof rootRoute
     }
-    '/(auth)/otp': {
-      id: '/(auth)/otp'
-      path: '/otp'
-      fullPath: '/otp'
-      preLoaderRoute: typeof authOtpImport
-      parentRoute: typeof rootRoute
-    }
     '/(auth)/sign-in': {
       id: '/(auth)/sign-in'
       path: '/sign-in'
       fullPath: '/sign-in'
       preLoaderRoute: typeof authSignInImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/forgot-password': {
-      id: '/(auth)/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof authForgotPasswordLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-up': {
-      id: '/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof authSignUpLazyImport
       parentRoute: typeof rootRoute
     }
     '/(errors)/401': {
@@ -291,20 +215,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPostsIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/users/': {
-      id: '/_authenticated/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedUsersIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/samples/editor/': {
-      id: '/_authenticated/samples/editor/'
-      path: '/samples/editor'
-      fullPath: '/samples/editor'
-      preLoaderRoute: typeof AuthenticatedSamplesEditorIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
   }
 }
 
@@ -315,8 +225,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAlbumsIndexLazyRoute: typeof AuthenticatedAlbumsIndexLazyRoute
   AuthenticatedBannersIndexLazyRoute: typeof AuthenticatedBannersIndexLazyRoute
   AuthenticatedPostsIndexLazyRoute: typeof AuthenticatedPostsIndexLazyRoute
-  AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
-  AuthenticatedSamplesEditorIndexLazyRoute: typeof AuthenticatedSamplesEditorIndexLazyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -324,9 +232,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAlbumsIndexLazyRoute: AuthenticatedAlbumsIndexLazyRoute,
   AuthenticatedBannersIndexLazyRoute: AuthenticatedBannersIndexLazyRoute,
   AuthenticatedPostsIndexLazyRoute: AuthenticatedPostsIndexLazyRoute,
-  AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
-  AuthenticatedSamplesEditorIndexLazyRoute:
-    AuthenticatedSamplesEditorIndexLazyRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -335,10 +240,7 @@ const AuthenticatedRouteRouteWithChildren =
 export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
   '/500': typeof errors500LazyRoute
-  '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
-  '/forgot-password': typeof authForgotPasswordLazyRoute
-  '/sign-up': typeof authSignUpLazyRoute
   '/401': typeof errors401LazyRoute
   '/403': typeof errors403LazyRoute
   '/404': typeof errors404LazyRoute
@@ -347,16 +249,11 @@ export interface FileRoutesByFullPath {
   '/albums': typeof AuthenticatedAlbumsIndexLazyRoute
   '/banners': typeof AuthenticatedBannersIndexLazyRoute
   '/posts': typeof AuthenticatedPostsIndexLazyRoute
-  '/users': typeof AuthenticatedUsersIndexLazyRoute
-  '/samples/editor': typeof AuthenticatedSamplesEditorIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/500': typeof errors500LazyRoute
-  '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
-  '/forgot-password': typeof authForgotPasswordLazyRoute
-  '/sign-up': typeof authSignUpLazyRoute
   '/401': typeof errors401LazyRoute
   '/403': typeof errors403LazyRoute
   '/404': typeof errors404LazyRoute
@@ -365,18 +262,13 @@ export interface FileRoutesByTo {
   '/albums': typeof AuthenticatedAlbumsIndexLazyRoute
   '/banners': typeof AuthenticatedBannersIndexLazyRoute
   '/posts': typeof AuthenticatedPostsIndexLazyRoute
-  '/users': typeof AuthenticatedUsersIndexLazyRoute
-  '/samples/editor': typeof AuthenticatedSamplesEditorIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/(auth)/500': typeof auth500Route
-  '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
-  '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
-  '/(auth)/sign-up': typeof authSignUpLazyRoute
   '/(errors)/401': typeof errors401LazyRoute
   '/(errors)/403': typeof errors403LazyRoute
   '/(errors)/404': typeof errors404LazyRoute
@@ -386,8 +278,6 @@ export interface FileRoutesById {
   '/_authenticated/albums/': typeof AuthenticatedAlbumsIndexLazyRoute
   '/_authenticated/banners/': typeof AuthenticatedBannersIndexLazyRoute
   '/_authenticated/posts/': typeof AuthenticatedPostsIndexLazyRoute
-  '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
-  '/_authenticated/samples/editor/': typeof AuthenticatedSamplesEditorIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -395,10 +285,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/500'
-    | '/otp'
     | '/sign-in'
-    | '/forgot-password'
-    | '/sign-up'
     | '/401'
     | '/403'
     | '/404'
@@ -407,15 +294,10 @@ export interface FileRouteTypes {
     | '/albums'
     | '/banners'
     | '/posts'
-    | '/users'
-    | '/samples/editor'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/500'
-    | '/otp'
     | '/sign-in'
-    | '/forgot-password'
-    | '/sign-up'
     | '/401'
     | '/403'
     | '/404'
@@ -424,16 +306,11 @@ export interface FileRouteTypes {
     | '/albums'
     | '/banners'
     | '/posts'
-    | '/users'
-    | '/samples/editor'
   id:
     | '__root__'
     | '/_authenticated'
     | '/(auth)/500'
-    | '/(auth)/otp'
     | '/(auth)/sign-in'
-    | '/(auth)/forgot-password'
-    | '/(auth)/sign-up'
     | '/(errors)/401'
     | '/(errors)/403'
     | '/(errors)/404'
@@ -443,18 +320,13 @@ export interface FileRouteTypes {
     | '/_authenticated/albums/'
     | '/_authenticated/banners/'
     | '/_authenticated/posts/'
-    | '/_authenticated/users/'
-    | '/_authenticated/samples/editor/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   auth500Route: typeof auth500Route
-  authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
-  authForgotPasswordLazyRoute: typeof authForgotPasswordLazyRoute
-  authSignUpLazyRoute: typeof authSignUpLazyRoute
   errors401LazyRoute: typeof errors401LazyRoute
   errors403LazyRoute: typeof errors403LazyRoute
   errors404LazyRoute: typeof errors404LazyRoute
@@ -465,10 +337,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   auth500Route: auth500Route,
-  authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
-  authForgotPasswordLazyRoute: authForgotPasswordLazyRoute,
-  authSignUpLazyRoute: authSignUpLazyRoute,
   errors401LazyRoute: errors401LazyRoute,
   errors403LazyRoute: errors403LazyRoute,
   errors404LazyRoute: errors404LazyRoute,
@@ -488,10 +357,7 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated",
         "/(auth)/500",
-        "/(auth)/otp",
         "/(auth)/sign-in",
-        "/(auth)/forgot-password",
-        "/(auth)/sign-up",
         "/(errors)/401",
         "/(errors)/403",
         "/(errors)/404",
@@ -505,25 +371,14 @@ export const routeTree = rootRoute
         "/_authenticated/",
         "/_authenticated/albums/",
         "/_authenticated/banners/",
-        "/_authenticated/posts/",
-        "/_authenticated/users/",
-        "/_authenticated/samples/editor/"
+        "/_authenticated/posts/"
       ]
     },
     "/(auth)/500": {
       "filePath": "(auth)/500.tsx"
     },
-    "/(auth)/otp": {
-      "filePath": "(auth)/otp.tsx"
-    },
     "/(auth)/sign-in": {
       "filePath": "(auth)/sign-in.tsx"
-    },
-    "/(auth)/forgot-password": {
-      "filePath": "(auth)/forgot-password.lazy.tsx"
-    },
-    "/(auth)/sign-up": {
-      "filePath": "(auth)/sign-up.lazy.tsx"
     },
     "/(errors)/401": {
       "filePath": "(errors)/401.lazy.tsx"
@@ -554,14 +409,6 @@ export const routeTree = rootRoute
     },
     "/_authenticated/posts/": {
       "filePath": "_authenticated/posts/index.lazy.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/users/": {
-      "filePath": "_authenticated/users/index.lazy.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/samples/editor/": {
-      "filePath": "_authenticated/samples/editor/index.lazy.tsx",
       "parent": "/_authenticated"
     }
   }

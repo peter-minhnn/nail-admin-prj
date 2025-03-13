@@ -2,7 +2,6 @@ import { HTMLAttributes } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@tanstack/react-router'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -77,17 +76,6 @@ export function UserAuthForm({
               name='password'
               render={({ field, formState: { errors } }) => (
                 <FormItem className='space-y-1'>
-                  <div className='flex items-center justify-between'>
-                    <FormLabel>
-                      <FormattedMessage id='signIn.password' />
-                    </FormLabel>
-                    <Link
-                      to='/forgot-password'
-                      className='text-sm font-medium text-muted-foreground hover:opacity-75'
-                    >
-                      <FormattedMessage id='signIn.forgotPassword' />
-                    </Link>
-                  </div>
                   <FormControl>
                     <PasswordInput
                       placeholder='********'

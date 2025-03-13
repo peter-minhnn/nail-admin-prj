@@ -37,6 +37,7 @@ import {
   usePostPosts,
   usePutPosts,
 } from '@/features/posts/hooks/use-queries.ts'
+import { NumberInput } from '@/components/number-input.tsx'
 
 type CommonDialogsProps = {
   open: boolean
@@ -48,6 +49,7 @@ type CommonDialogsProps = {
 
 type PostsAddDialogsProps = {
   type: 'create'
+  maxOrder: number
 } & CommonDialogsProps
 
 type PostsEditDialogsProps = {
@@ -79,7 +81,7 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
       ? {
           ...props.currentRow,
         }
-      : defaultValues,
+      : {...defaultValues, sortOrder: props.type === 'create' ? props.maxOrder + 1 : 0 },
   })
 
   const [thumbnailFiles, setThumbnailFiles] = useState<File[]>([])
@@ -201,23 +203,32 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name='postType'
-                  render={({ field }) => (
-                    <FormItem className='w-full'>
-                      <FormLabel required>
-                        <FormattedMessage id='posts.postType' />
-                      </FormLabel>
-                      <SelectDropdown
-                        defaultValue={field.value}
-                        items={PostsStatusList}
-                        onValueChange={field.onChange}
-                      />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className='flex flex-col gap-2 w-full'>
+                  <FormField
+                    control={form.control}
+                    name='postType'
+                    render={({ field }) => (
+                      <FormItem className='w-full'>
+                        <FormLabel required>
+                          <FormattedMessage id='posts.postType' />
+                        </FormLabel>
+                        <SelectDropdown
+                          defaultValue={field.value}
+                          items={PostsStatusList}
+                          onValueChange={field.onChange}
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <NumberInput
+                    form={form}
+                    name="sortOrder"
+                    label={props.intl.formatMessage({ id: 'posts.sortOrder' })}
+                    namespace="ProductMessages"
+                    placeholder={props.intl.formatMessage({ id: 'posts.sortOrderPlaceholder' })}
+                  />
+                </div>
               </div>
               <Separator />
               <div className='flex flex-row items-center gap-2'>

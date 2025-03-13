@@ -18,8 +18,9 @@ import {
 import { PostsDataType, postsListSchema } from '@/features/posts/data/schema.ts'
 import {
   useDeletePost,
-  useGetPosts,
+  useGetPosts, usePutPosts,
 } from '@/features/posts/hooks/use-queries.ts'
+import { SortDataType } from '@/types/posts.type.ts'
 
 export default function PostsComponent() {
   const intl = useIntl()
@@ -31,7 +32,7 @@ export default function PostsComponent() {
         page: 1,
         take: 10,
       },
-    }
+    },
   )
   const [currentRow, setCurrentRow] = useState<PostsDataType | null>(null)
   const [filterParams, setFilterParams] = useState<PostsFilterParams>({
@@ -44,24 +45,33 @@ export default function PostsComponent() {
     pageSize: 10,
   })
   const [contentLocale, setContentLocale] = useState<'vi' | 'en'>('vi')
+  const [sortData, setSortData] = useState<SortDataType>({
+    isDragEnd: false,
+    newRows: [],
+  })
 
   const { data, refetch, status, isRefetching } = useGetPosts(filterParams)
 
-  console.log('filterParams', filterParams)
+  const onSuccess = async (response: any) => {
+    handleServerResponse(response)
+    if (response.type === 'success') {
+      setOpen('')
+      setCurrentRow(null)
+      await refetch().finally()
+    }
+  }
+
+  const onError = (error: Error) => {
+    console.log(error)
+    toast.error('common.messages.errorOccurred')
+  }
+
   const { mutateAsync } = useDeletePost({
-    onSuccess: async (response) => {
-      handleServerResponse(response)
-      if (response.type === 'success') {
-        setOpen('')
-        setCurrentRow(null)
-        await refetch().finally()
-      }
-    },
-    onError: (error) => {
-      console.log(error)
-      toast.error('common.messages.errorOccurred')
-    },
+    onSuccess,
+    onError,
   })
+
+  const { mutateAsync: updateMutateAsync } = usePutPosts({})
 
   const handleShowContent = (locale: 'vi' | 'en') => {
     setOpen('preview')
@@ -76,6 +86,23 @@ export default function PostsComponent() {
 
   const onAdd = () => {
     setOpen('create')
+  }
+
+  const handleUpdateSortData = async () => {
+    const response = sortData.newRows.map(async (row) => await updateMutateAsync(row))
+    try {
+      const result = await Promise.all(response);
+      if (result.every((item) => item.type === 'success')) {
+        toast.success(intl.formatMessage({ id: 'posts.messages.updateSuccess' }))
+        onRefresh();
+      }
+    }
+    finally {
+      setSortData({
+        isDragEnd: false,
+        newRows: [],
+      })
+    }
   }
 
   useEffect(() => {
@@ -96,20 +123,30 @@ export default function PostsComponent() {
     }))
   }, [pagination])
 
+  useEffect(() => {
+    if (!sortData.isDragEnd) return
+    handleUpdateSortData().finally()
+
+    return () => setSortData({
+      isDragEnd: false,
+      newRows: [],
+    })
+  }, [sortData])
+
   return (
     <Main>
-      <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
+      <div className="mb-2 flex flex-wrap items-center justify-between space-y-2">
         <div>
-          <h2 className='text-2xl font-bold tracking-tight'>
-            <FormattedMessage id='posts.headerTitle' />
+          <h2 className="text-2xl font-bold tracking-tight">
+            <FormattedMessage id="posts.headerTitle" />
           </h2>
-          <p className='text-muted-foreground'>
-            <FormattedMessage id='posts.headerDescription' />
+          <p className="text-muted-foreground">
+            <FormattedMessage id="posts.headerDescription" />
           </p>
         </div>
         <PostsButtons onRefresh={onRefresh} onAdd={onAdd} />
       </div>
-      <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
+      <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
         <PostsDataTable
           columns={columns}
           data={dataSource.data}
@@ -118,10 +155,11 @@ export default function PostsComponent() {
             pageSize: filterParams.take,
           }}
           rowCount={dataSource.meta.itemCount ?? 0}
-          languagePrefix='posts'
+          languagePrefix="posts"
           loading={status === 'pending' || isRefetching}
           onPaginationChange={setPagination}
           setFilterParams={setFilterParams}
+          setSortData={setSortData}
         />
       </div>
       {open === 'create' && (
@@ -129,9 +167,10 @@ export default function PostsComponent() {
           open={open === 'create'}
           setOpen={setOpen}
           intl={intl}
-          title='posts.dialogAddTitle'
-          type='create'
-          description='posts.dialogAddDescription'
+          title="posts.dialogAddTitle"
+          type="create"
+          description="posts.dialogAddDescription"
+          maxOrder={dataSource.data.length ? Number(dataSource.data[0].id) : 0}
         />
       )}
       {open === 'update' && (
@@ -139,18 +178,18 @@ export default function PostsComponent() {
           open={open === 'update'}
           setOpen={setOpen}
           intl={intl}
-          title='posts.dialogEditTitle'
-          type='update'
-          description='posts.dialogEditDescription'
+          title="posts.dialogEditTitle"
+          type="update"
+          description="posts.dialogEditDescription"
           currentRow={currentRow}
         />
       )}
       {open === 'preview' && (
         <PostsPreviewDialog
           open={open === 'preview'}
-          title='posts.dialogPreviewTitle'
+          title="posts.dialogPreviewTitle"
           setOpen={setOpen}
-          description='posts.dialogPreviewDescription'
+          description="posts.dialogPreviewDescription"
           value={
             contentLocale === 'vi'
               ? currentRow?.contentVi
@@ -169,23 +208,23 @@ export default function PostsComponent() {
           handleConfirm={async () => {
             await mutateAsync(currentRow.id!)
           }}
-          className='max-w-md'
+          className="max-w-md"
           title={
             <FormattedMessage
-              id='common.messages.deleteConfirmSelected'
+              id="common.messages.deleteConfirmSelected"
               values={{ deleteCount: 1 }}
             />
           }
           desc={
             <FormattedMessage
-              id='albums.messages.deleteDescription'
+              id="albums.messages.deleteDescription"
               values={{
                 deleteId: <strong key={uuid()}>{currentRow.id!}</strong>,
                 br: <br key={uuid()} />,
               }}
             />
           }
-          confirmText='Delete'
+          confirmText="Delete"
         />
       )}
     </Main>
