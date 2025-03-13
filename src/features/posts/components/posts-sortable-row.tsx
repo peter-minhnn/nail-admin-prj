@@ -47,7 +47,7 @@ export const PostsSortableRow = ({
       {/* Drag Handle */}
       <TableCell
         id={uuid()}
-        className='w-14 cursor-move p-2 text-center'
+        className='min-w-12 cursor-move p-2 text-center'
         {...attributes}
         {...listeners}
       >

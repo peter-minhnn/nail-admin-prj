@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Row } from '@tanstack/react-table'
-import { IconTrash } from '@tabler/icons-react'
+import { IconPencil, IconTrash } from '@tabler/icons-react'
 import { DialogType } from '@/types/base.type.ts'
 import { FormattedMessage } from 'react-intl'
 import { Button } from '@/components/ui/button'
@@ -54,6 +54,9 @@ export function DataTableRowActions<TData>({
               }}
             >
               <FormattedMessage id='common.editBtn' />
+              <DropdownMenuShortcut>
+                <IconPencil size={18} />
+              </DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </>

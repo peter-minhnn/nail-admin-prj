@@ -10,7 +10,6 @@ import { ProfileDropdown } from '@/components/profile-dropdown.tsx'
 import { Search } from '@/components/search.tsx'
 import SkipToMain from '@/components/skip-to-main'
 import { ThemeSwitch } from '@/components/theme-switch.tsx'
-import { Toaster } from '@/components/ui'
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: async ({ location }) => {
@@ -55,7 +54,6 @@ function RouteComponent() {
           </Header>
           <Outlet />
         </div>
-        <Toaster position='top-center' richColors />
       </SidebarProvider>
     </SearchProvider>
   )
