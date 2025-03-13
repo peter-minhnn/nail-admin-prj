@@ -1,8 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import { DialogType } from '@/types/base.type.ts'
-import { v4 as uuid } from 'uuid'
-import { downloadImageFromLink } from '@/utils/common.ts'
 import LongText from '@/components/long-text'
 import { DataTableColumnHeader } from '@/components/tables/data-table-column-header.tsx'
 import { DataTableRowActions } from '@/components/tables/data-table-row-actions.tsx'
@@ -19,8 +17,8 @@ export const useColumns = ({
   setOpen,
   setCurrentRow,
 }: BannersColumnsProps): ColumnDef<BannersType>[] => {
-  const handleOpenImageLink = async (imgLink: string, fileName: string) => {
-    await downloadImageFromLink(imgLink, fileName ?? `image-${uuid()}`)
+  const handleOpenImageLink = async (imgLink: string) => {
+    window.open(imgLink, '_blank')
   }
 
   return [
@@ -52,12 +50,7 @@ export const useColumns = ({
           <Button
             type='button'
             className='w-full cursor-pointer justify-start border-0 bg-transparent text-blue-500 shadow-none hover:bg-transparent hover:text-blue-400/90'
-            onClick={() =>
-              handleOpenImageLink(
-                row.getValue('url'),
-                row.getValue('originalName')
-              )
-            }
+            onClick={() => handleOpenImageLink(row.original.url)}
           >
             <LongText className='max-w-96'>
               {row.getValue('originalName')}

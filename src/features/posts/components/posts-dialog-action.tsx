@@ -8,6 +8,7 @@ import { handleServerResponse } from '@/utils'
 import { FormattedMessage, IntlShape } from 'react-intl'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils.ts'
+import { NumberInput } from '@/components/number-input.tsx'
 import QuillEditor from '@/components/quill-editor.tsx'
 import { SelectDropdown } from '@/components/select-dropdown.tsx'
 import {
@@ -37,7 +38,6 @@ import {
   usePostPosts,
   usePutPosts,
 } from '@/features/posts/hooks/use-queries.ts'
-import { NumberInput } from '@/components/number-input.tsx'
 
 type CommonDialogsProps = {
   open: boolean
@@ -81,7 +81,10 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
       ? {
           ...props.currentRow,
         }
-      : {...defaultValues, sortOrder: props.type === 'create' ? props.maxOrder + 1 : 0 },
+      : {
+          ...defaultValues,
+          sortOrder: props.type === 'create' ? props.maxOrder + 1 : 0,
+        },
   })
 
   const [thumbnailFiles, setThumbnailFiles] = useState<File[]>([])
@@ -203,7 +206,7 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
                     </FormItem>
                   )}
                 />
-                <div className='flex flex-col gap-2 w-full'>
+                <div className='flex w-full flex-col gap-2'>
                   <FormField
                     control={form.control}
                     name='postType'
@@ -223,10 +226,12 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
                   />
                   <NumberInput
                     form={form}
-                    name="sortOrder"
+                    name='sortOrder'
                     label={props.intl.formatMessage({ id: 'posts.sortOrder' })}
-                    namespace="ProductMessages"
-                    placeholder={props.intl.formatMessage({ id: 'posts.sortOrderPlaceholder' })}
+                    namespace='ProductMessages'
+                    placeholder={props.intl.formatMessage({
+                      id: 'posts.sortOrderPlaceholder',
+                    })}
                   />
                 </div>
               </div>

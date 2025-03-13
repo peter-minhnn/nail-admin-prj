@@ -36,13 +36,19 @@ export const useColumns = ({
       id: 'sortOrder',
       accessorKey: 'sortOrder',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='posts.sortOrder' className='w-max min-w-fit'/>
+        <DataTableColumnHeader
+          column={column}
+          title='posts.sortOrder'
+          className='w-max min-w-fit'
+        />
       ),
       cell: ({ row }) => (
-        <LongText className='max-w-96 text-center'>{row.getValue('sortOrder')}</LongText>
+        <LongText className='max-w-96 text-center'>
+          {row.getValue('sortOrder')}
+        </LongText>
       ),
       enableHiding: false,
-      enableSorting: false
+      enableSorting: false,
     },
     {
       id: 'id',

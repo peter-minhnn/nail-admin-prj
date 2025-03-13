@@ -28,6 +28,9 @@ const errors401LazyImport = createFileRoute('/(errors)/401')()
 const AuthenticatedPostsIndexLazyImport = createFileRoute(
   '/_authenticated/posts/',
 )()
+const AuthenticatedContactsIndexLazyImport = createFileRoute(
+  '/_authenticated/contacts/',
+)()
 const AuthenticatedBannersIndexLazyImport = createFileRoute(
   '/_authenticated/banners/',
 )()
@@ -107,6 +110,15 @@ const AuthenticatedPostsIndexLazyRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/posts/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedContactsIndexLazyRoute =
+  AuthenticatedContactsIndexLazyImport.update({
+    id: '/contacts/',
+    path: '/contacts/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/contacts/index.lazy').then((d) => d.Route),
   )
 
 const AuthenticatedBannersIndexLazyRoute =
@@ -208,6 +220,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBannersIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/contacts/': {
+      id: '/_authenticated/contacts/'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof AuthenticatedContactsIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/posts/': {
       id: '/_authenticated/posts/'
       path: '/posts'
@@ -224,6 +243,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAlbumsIndexLazyRoute: typeof AuthenticatedAlbumsIndexLazyRoute
   AuthenticatedBannersIndexLazyRoute: typeof AuthenticatedBannersIndexLazyRoute
+  AuthenticatedContactsIndexLazyRoute: typeof AuthenticatedContactsIndexLazyRoute
   AuthenticatedPostsIndexLazyRoute: typeof AuthenticatedPostsIndexLazyRoute
 }
 
@@ -231,6 +251,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAlbumsIndexLazyRoute: AuthenticatedAlbumsIndexLazyRoute,
   AuthenticatedBannersIndexLazyRoute: AuthenticatedBannersIndexLazyRoute,
+  AuthenticatedContactsIndexLazyRoute: AuthenticatedContactsIndexLazyRoute,
   AuthenticatedPostsIndexLazyRoute: AuthenticatedPostsIndexLazyRoute,
 }
 
@@ -248,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/albums': typeof AuthenticatedAlbumsIndexLazyRoute
   '/banners': typeof AuthenticatedBannersIndexLazyRoute
+  '/contacts': typeof AuthenticatedContactsIndexLazyRoute
   '/posts': typeof AuthenticatedPostsIndexLazyRoute
 }
 
@@ -261,6 +283,7 @@ export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/albums': typeof AuthenticatedAlbumsIndexLazyRoute
   '/banners': typeof AuthenticatedBannersIndexLazyRoute
+  '/contacts': typeof AuthenticatedContactsIndexLazyRoute
   '/posts': typeof AuthenticatedPostsIndexLazyRoute
 }
 
@@ -277,6 +300,7 @@ export interface FileRoutesById {
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/albums/': typeof AuthenticatedAlbumsIndexLazyRoute
   '/_authenticated/banners/': typeof AuthenticatedBannersIndexLazyRoute
+  '/_authenticated/contacts/': typeof AuthenticatedContactsIndexLazyRoute
   '/_authenticated/posts/': typeof AuthenticatedPostsIndexLazyRoute
 }
 
@@ -293,6 +317,7 @@ export interface FileRouteTypes {
     | '/'
     | '/albums'
     | '/banners'
+    | '/contacts'
     | '/posts'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -305,6 +330,7 @@ export interface FileRouteTypes {
     | '/'
     | '/albums'
     | '/banners'
+    | '/contacts'
     | '/posts'
   id:
     | '__root__'
@@ -319,6 +345,7 @@ export interface FileRouteTypes {
     | '/_authenticated/'
     | '/_authenticated/albums/'
     | '/_authenticated/banners/'
+    | '/_authenticated/contacts/'
     | '/_authenticated/posts/'
   fileRoutesById: FileRoutesById
 }
@@ -371,6 +398,7 @@ export const routeTree = rootRoute
         "/_authenticated/",
         "/_authenticated/albums/",
         "/_authenticated/banners/",
+        "/_authenticated/contacts/",
         "/_authenticated/posts/"
       ]
     },
@@ -405,6 +433,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/banners/": {
       "filePath": "_authenticated/banners/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/contacts/": {
+      "filePath": "_authenticated/contacts/index.lazy.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/posts/": {

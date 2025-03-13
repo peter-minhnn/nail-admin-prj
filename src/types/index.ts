@@ -31,3 +31,8 @@ export type { BannersListType, BannersRequestType } from './banners.type'
 export type { FileType } from './file.type'
 export type { AlbumsType, AlbumsRequestType } from './albums.type'
 export type { PostsType, PostType, PostsFilterParams } from './posts.type'
+export type {
+  ContactType,
+  ContactFilterParams,
+  ContactExportParams,
+} from './contact.type'

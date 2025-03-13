@@ -1,4 +1,5 @@
-import { PostsFilterParams } from '@/types/posts.type.ts'
+import { ContactFilterParams, PostsFilterParams } from '@/types'
+import { ContactExportParams } from '@/types/contact.type.ts'
 import { createQueryParams } from '@/utils'
 
 export const apiRoutes = {
@@ -20,7 +21,14 @@ export const apiRoutes = {
   posts: {
     general: '/posts',
     withParams: (params: PostsFilterParams) =>
-      `/posts${createQueryParams({...params, order: 'DESC'})}`,
+      `/posts${createQueryParams({ ...params, order: 'DESC' })}`,
     withId: (id: number) => `/posts/${id}`,
+  },
+  contacts: {
+    general: '/contacts',
+    exportExcel: (params: ContactExportParams) =>
+      `/contacts/export${createQueryParams(params)}`,
+    withParams: (params: ContactFilterParams) =>
+      `/contacts${createQueryParams({ ...params, order: 'DESC' })}`,
   },
 }

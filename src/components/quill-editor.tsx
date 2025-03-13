@@ -5,15 +5,16 @@ import {
   useState,
   useEffect,
   useMemo,
-  ReactElement, useCallback,
+  ReactElement,
+  useCallback,
 } from 'react'
 import { BaseResponseType } from '@/types'
+import get from 'lodash/get'
 import { FormattedMessage } from 'react-intl'
 import ReactQuill from 'react-quill-new'
 import 'react-quill-new/dist/quill.snow.css'
 import { cn } from '@/lib/utils.ts'
 import { useAxios } from '@/hooks/use-axios.ts'
-import get from 'lodash/get'
 
 type QuillEditorProps = {
   className?: string
@@ -31,8 +32,8 @@ type QuillEditorProps = {
 // Custom clipboard matcher to handle pasted images
 const imageHandlerClipboard = (_: any, delta: any) => {
   // Return the delta as-is; we'll handle the image in the paste event
-  return delta;
-};
+  return delta
+}
 
 const QuillEditor = (props: Readonly<QuillEditorProps>) => {
   const {
@@ -51,80 +52,79 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
 
   const quillRef = useRef(null)
   const [isLayoutReady, setIsLayoutReady] = useState<boolean>(false)
-  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [isUploading, setIsUploading] = useState<boolean>(false)
 
   // Upload image to server
   const uploadImage = useCallback(async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
+    const formData = new FormData()
+    formData.append('file', file)
 
     try {
-      const response = await useAxios.postFormData<
-        any,
-        BaseResponseType,
-        any
-      >('/files', formData)
-      return get(response, ['data', 'data', 'url'], '');
+      const response = await useAxios.postFormData<any, BaseResponseType, any>(
+        '/files',
+        formData
+      )
+      return get(response, ['data', 'data', 'url'], '')
     } catch (error) {
-      console.error('Image upload failed:', error);
-      throw error;
+      console.error('Image upload failed:', error)
+      throw error
     }
-  }, []);
+  }, [])
 
   // Handle paste event for images
   const handlePaste = useCallback(
     async (e: any) => {
-      const clipboardData = e.clipboardData;
-      const items = clipboardData.items;
+      const clipboardData = e.clipboardData
+      const items = clipboardData.items
 
       for (const element of items) {
         if (element.type.indexOf('image') !== -1) {
           e.preventDefault() // Prevent default paste behavior
-          const file = element.getAsFile();
+          const file = element.getAsFile()
           if (file) {
-            setIsUploading(true);
+            setIsUploading(true)
             try {
-              const imageUrl = await uploadImage(file);
-              const editor = (quillRef.current! as any)?.getEditor();
-              const range = editor.getSelection() || { index: 0 };
-              editor.insertEmbed(range.index, 'image', imageUrl);
+              const imageUrl = await uploadImage(file)
+              const editor = (quillRef.current! as any)?.getEditor()
+              const range = editor.getSelection() || { index: 0 }
+              editor.insertEmbed(range.index, 'image', imageUrl)
             } catch (error) {
-              alert('Failed to upload pasted image');
+              alert('Failed to upload pasted image')
             } finally {
-              setIsUploading(false);
+              setIsUploading(false)
             }
           }
-          break; // Handle only one image per paste
+          break // Handle only one image per paste
         }
       }
     },
-    [uploadImage],
-  );
+    [uploadImage]
+  )
 
   // Handle image upload from toolbar button
   const imageHandler = useCallback(() => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
+    const input = document.createElement('input')
+    input.setAttribute('type', 'file')
+    input.setAttribute('accept', 'image/*')
+    input.click()
 
     input.onchange = async () => {
-      const file = input.files?.[0];
+      const file = input.files?.[0]
       if (file) {
-        setIsUploading(true);
+        setIsUploading(true)
         try {
-          const imageUrl = await uploadImage(file);
-          const editor = (quillRef.current! as any)?.getEditor();
-          const range = editor.getSelection() || { index: 0 };
-          editor.insertEmbed(range.index, 'image', imageUrl);
+          const imageUrl = await uploadImage(file)
+          const editor = (quillRef.current! as any)?.getEditor()
+          const range = editor.getSelection() || { index: 0 }
+          editor.insertEmbed(range.index, 'image', imageUrl)
         } catch (error) {
-          alert('Failed to upload image');
+          alert('Failed to upload image')
         } finally {
-          setIsUploading(false);
+          setIsUploading(false)
         }
       }
-    };
-  }, [uploadImage]);
+    }
+  }, [uploadImage])
 
   // Quill modules configuration
   const modules = useMemo(() => {
@@ -198,15 +198,15 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
   // Register paste event listener when component mounts
   useEffect(() => {
     if (quillRef.current && isLayoutReady) {
-      const editor = (quillRef.current as any)?.getEditor();
-      editor.root.addEventListener('paste', handlePaste);
+      const editor = (quillRef.current as any)?.getEditor()
+      editor.root.addEventListener('paste', handlePaste)
 
       // Cleanup listener on unmount
       return () => {
-        editor.root.removeEventListener('paste', handlePaste);
-      };
+        editor.root.removeEventListener('paste', handlePaste)
+      }
     }
-  }, [handlePaste, isLayoutReady]);
+  }, [handlePaste, isLayoutReady])
 
   return <div className={cn('', className)}>{memoizedReactQuill}</div>
 }

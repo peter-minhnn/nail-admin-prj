@@ -1,0 +1,10 @@
+{
+  "contacts.headerTitle": "Liên hệ",
+  "contacts.headerDescription": "Quản lý liên hệ",
+  "contacts.firstName": "Tên",
+  "contacts.lastName": "Họ",
+  "contacts.email": "Email",
+  "contacts.phoneNumber": "Số điện thoại",
+  "contacts.subject": "Chủ đề",
+  "contacts.content": "Nội dung"
+}

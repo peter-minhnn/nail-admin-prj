@@ -34,5 +34,9 @@
   "common.system": "Hệ thống",
   "common.messages.errorOccurred": "Có lỗi xảy ra khi gọi API. Vui lòng thử lại sau.",
   "common.clearFilters": "Xóa bộ lọc",
-  "common.selected": "đã chọn"
+  "common.selected": "đã chọn",
+  "common.exportExcelBtn": "Xuất Excel",
+  "common.messages.exportExcelError": "Xuất Excel thất bại",
+  "common.messages.exportExcelSuccess": "Xuất Excel thành công",
+  "common.commandMenuSearchPlaceholder": "Nhập hoặc tìm kiếm"
 }

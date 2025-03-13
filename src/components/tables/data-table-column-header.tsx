@@ -37,13 +37,15 @@ export function DataTableColumnHeader<TData, TValue>({
   }
 
   return (
-    <div className={cn('flex items-center space-x-2', className)}>
+    <div
+      className={cn('flex items-center justify-center space-x-2', className)}
+    >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             variant='ghost'
             size='sm'
-            className='-ml-3 h-8 data-[state=open]:bg-accent'
+            className='-ml-3 h-8 text-center data-[state=open]:bg-accent'
           >
             <span>
               <FormattedMessage id={title} />
