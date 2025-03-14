@@ -33,7 +33,6 @@ export const AlbumsGalleryDialog: FC<AlbumsGalleryDialogsProps> = (props) => {
   const memoizedImageGroups: ReactElement[] | null = useMemo(() => {
     if (!imageGroups.length) return null
 
-    console.log('imageGroups', imageGroups)
     return imageGroups.map((image: FileType) => (
       <div key={image.id}>
         <img
