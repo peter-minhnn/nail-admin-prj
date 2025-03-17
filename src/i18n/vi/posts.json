@@ -30,5 +30,7 @@
   "posts.dialogPreviewDescription": "Xem nội dung bài viết đã tạo",
   "posts.searchFilterPlaceholder": "Tìm kiếm tên bài viết...",
   "posts.sortOrderPlaceholder": "Sắp xếp theo thứ tự",
-  "posts.messages.updateSuccess": "Cập nhật thứ tự bài viết thành công"
+  "posts.messages.updateSuccess": "Cập nhật thứ tự bài viết thành công",
+  "posts.training": "Đào tạo",
+  "posts.product": "Sản phẩm"
 }

@@ -5,6 +5,8 @@ const postsTypeSchema = z.union([
   z.literal('news'),
   z.literal('activity'),
   z.literal('service'),
+  z.literal('training'),
+  z.literal('product'),
 ])
 
 const postsSchema = z.object({
