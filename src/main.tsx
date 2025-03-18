@@ -10,6 +10,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { LocalizationWrapper } from '@/i18n/localization-wrapper.tsx'
 import { handleServerError } from '@/utils'
 import { useAuthStore } from '@/stores/auth-store.ts'
+import { SeoProvider } from '@/context/seo-provider.tsx'
 import { toast } from '@/hooks/use-toast'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
@@ -61,17 +62,17 @@ const queryClient = new QueryClient({
           })
           useAuthStore.getState().auth.reset()
           const redirect = `${router.history.location.href}`
-          router.navigate({ to: '/sign-in', search: { redirect } })
+          router.navigate({ to: '/admin/sign-in', search: { redirect } })
         }
         if (error.response?.status === 500) {
           toast({
             variant: 'destructive',
             title: 'Internal Server Error!',
           })
-          router.navigate({ to: '/500' })
+          router.navigate({ to: '/admin/500' })
         }
         if (error.response?.status === 403) {
-          router.navigate({ to: '/403' })
+          router.navigate({ to: '/admin/403' })
         }
       }
     },
@@ -99,15 +100,17 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <LocalizationWrapper>
-          <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
-            <FontProvider>
-              <RouterProvider router={router} />
-            </FontProvider>
-          </ThemeProvider>
-        </LocalizationWrapper>
-      </QueryClientProvider>
+      <SeoProvider>
+        <QueryClientProvider client={queryClient}>
+          <LocalizationWrapper>
+            <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
+              <FontProvider>
+                <RouterProvider router={router} />
+              </FontProvider>
+            </ThemeProvider>
+          </LocalizationWrapper>
+        </QueryClientProvider>
+      </SeoProvider>
     </StrictMode>
   )
 }

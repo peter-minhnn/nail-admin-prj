@@ -4,12 +4,12 @@ import {
   handleApiResponse,
 } from '@/services/api.service.ts'
 import { BaseResponseType, BannersRequestType, BannersListType } from '@/types'
-import { useAxios } from '@/hooks/use-axios.ts'
-import { BannersType } from '@/features/banners/data/schema.ts'
+import { useAuthAxios } from '@/hooks/use-axios.ts'
+import { BannersType } from '@/features/(admin)/banners/data/schema.ts'
 
 export const getBanners = async () => {
   try {
-    const response = await useAxios.get<
+    const response = await useAuthAxios.get<
       null,
       BaseResponseType,
       BannersListType
@@ -26,7 +26,7 @@ export const saveChanges = async (data: BannersRequestType) => {
   formData.append('file', data.file)
 
   try {
-    const response = await useAxios.postFormData<
+    const response = await useAuthAxios.postFormData<
       null,
       BaseResponseType,
       FormData
@@ -39,9 +39,11 @@ export const saveChanges = async (data: BannersRequestType) => {
 
 export const deleteBanners = async (id: number) => {
   try {
-    const response = await useAxios.delete<null, BaseResponseType, BannersType>(
-      apiRoutes.banners.delete(id)
-    )
+    const response = await useAuthAxios.delete<
+      null,
+      BaseResponseType,
+      BannersType
+    >(apiRoutes.banners.delete(id))
     return handleApiResponse<any>(response)
   } catch (e) {
     return handleApiCatchResponse<any>(e)

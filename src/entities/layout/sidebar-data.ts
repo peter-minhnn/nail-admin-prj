@@ -6,7 +6,7 @@ import {
   IconLayoutDashboard,
 } from '@tabler/icons-react'
 import { Command } from 'lucide-react'
-import { SidebarData } from '@/components/layout/types.ts'
+import { SidebarData } from '@/components/(admin)/layout/types.ts'
 
 export const sidebarData: SidebarData = {
   user: {
@@ -27,7 +27,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'menu.dashboard',
-          url: '/',
+          url: '/admin',
           icon: IconLayoutDashboard,
         },
       ],
@@ -37,22 +37,22 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'menu.banners',
-          url: '/banners',
+          url: '/admin/banners',
           icon: IconImageInPicture,
         },
         {
           title: 'menu.albums',
-          url: '/albums',
+          url: '/admin/albums',
           icon: IconAlbum,
         },
         {
           title: 'menu.posts',
-          url: '/posts',
+          url: '/admin/posts',
           icon: IconBrandBlogger,
         },
         {
           title: 'menu.contacts',
-          url: '/contacts',
+          url: '/admin/contacts',
           icon: IconCards,
         },
       ],

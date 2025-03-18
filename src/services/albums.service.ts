@@ -4,11 +4,11 @@ import {
   handleApiResponse,
 } from '@/services/api.service.ts'
 import { BaseResponseType, AlbumsRequestType, AlbumsType } from '@/types'
-import { useAxios } from '@/hooks/use-axios.ts'
+import { useAuthAxios } from '@/hooks/use-axios.ts'
 
 export const getAlbums = async () => {
   try {
-    const response = await useAxios.get<null, BaseResponseType, AlbumsType>(
+    const response = await useAuthAxios.get<null, BaseResponseType, AlbumsType>(
       apiRoutes.albums.general
     )
     return handleApiResponse<any>(response)
@@ -40,7 +40,7 @@ const createFormData = (data: AlbumsRequestType) => {
 
 export const createAlbum = async (data: AlbumsRequestType) => {
   try {
-    const response = await useAxios.postFormData<
+    const response = await useAuthAxios.postFormData<
       null,
       BaseResponseType,
       FormData
@@ -53,7 +53,7 @@ export const createAlbum = async (data: AlbumsRequestType) => {
 
 export const updateAlbum = async (data: AlbumsRequestType) => {
   try {
-    const response = await useAxios.putFormData<
+    const response = await useAuthAxios.putFormData<
       null,
       BaseResponseType,
       FormData
@@ -66,7 +66,7 @@ export const updateAlbum = async (data: AlbumsRequestType) => {
 
 export const deleteAlbum = async (id: number) => {
   try {
-    const response = await useAxios.delete<null, BaseResponseType, null>(
+    const response = await useAuthAxios.delete<null, BaseResponseType, null>(
       apiRoutes.albums.withId(id)
     )
     return handleApiResponse<any>(response)

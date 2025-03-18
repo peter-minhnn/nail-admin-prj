@@ -1,4 +1,4 @@
-import { PostsDataType } from '@/features/posts/data/schema.ts'
+import { PostsDataType } from '@/features/(admin)/posts/data/schema.ts'
 
 export type PostsType = {
   id?: number

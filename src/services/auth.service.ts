@@ -7,11 +7,11 @@ import {
 } from '@/services/api.service'
 import { BaseResponseType } from '@/types/base.type.ts'
 import { UserLoginRequestType } from '@/types/user.type'
-import { useAxios } from '@/hooks/use-axios.ts'
+import { useAuthAxios } from '@/hooks/use-axios.ts'
 
 export const login = async (data: UserLoginRequestType) => {
   try {
-    const response = await useAxios.post<
+    const response = await useAuthAxios.post<
       null,
       BaseResponseType,
       UserLoginRequestType

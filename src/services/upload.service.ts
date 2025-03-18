@@ -4,13 +4,13 @@ import {
   handleApiResponse,
 } from '@/services/api.service.ts'
 import { BaseResponseType } from '@/types'
-import { useAxios } from '@/hooks/use-axios.ts'
+import { useAuthAxios } from '@/hooks/use-axios.ts'
 
 export const uploadFile = async (file: File) => {
   const formData = new FormData()
   formData.append('file', file)
   try {
-    const response = await useAxios.postFormData<
+    const response = await useAuthAxios.postFormData<
       null,
       BaseResponseType,
       FormData
@@ -25,7 +25,7 @@ export const uploadFiles = async (files: File[]) => {
   const formData = new FormData()
   files.forEach((file) => formData.append('file', file))
   try {
-    const response = await useAxios.post<null, BaseResponseType, FormData>(
+    const response = await useAuthAxios.post<null, BaseResponseType, FormData>(
       apiRoutes.upload.general,
       formData
     )
@@ -37,9 +37,11 @@ export const uploadFiles = async (files: File[]) => {
 
 export const deleteFile = async (fileName: string) => {
   try {
-    const response = await useAxios.delete<null, BaseResponseType, FormData>(
-      apiRoutes.upload.deleteFile(fileName)
-    )
+    const response = await useAuthAxios.delete<
+      null,
+      BaseResponseType,
+      FormData
+    >(apiRoutes.upload.deleteFile(fileName))
     return handleApiResponse<any>(response)
   } catch (e) {
     return handleApiCatchResponse<any>(e)

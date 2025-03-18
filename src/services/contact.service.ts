@@ -6,13 +6,15 @@ import {
 } from '@/services/api.service.ts'
 import { BaseResponseType, ContactFilterParams, ContactType } from '@/types'
 import { ContactExportParams } from '@/types/contact.type.ts'
-import { useAxios } from '@/hooks/use-axios.ts'
+import { useAuthAxios } from '@/hooks/use-axios.ts'
 
 export const getContacts = async (params: ContactFilterParams) => {
   try {
-    const response = await useAxios.get<null, BaseResponseType, ContactType>(
-      apiRoutes.contacts.withParams(params)
-    )
+    const response = await useAuthAxios.get<
+      null,
+      BaseResponseType,
+      ContactType
+    >(apiRoutes.contacts.withParams(params))
     return handleApiResponse<any>(response)
   } catch (e) {
     return handleApiCatchResponse<any>(e)

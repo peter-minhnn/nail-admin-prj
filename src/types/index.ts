@@ -36,3 +36,4 @@ export type {
   ContactFilterParams,
   ContactExportParams,
 } from './contact.type'
+export type { NavbarType, LanguageType } from './navbar.type'

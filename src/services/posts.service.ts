@@ -5,11 +5,11 @@ import {
 } from '@/services/api.service.ts'
 import { BaseResponseType, PostsType } from '@/types'
 import { PostsFilterParams } from '@/types/posts.type.ts'
-import { useAxios } from '@/hooks/use-axios.ts'
+import { useAuthAxios } from '@/hooks/use-axios.ts'
 
 export const getPosts = async (params: PostsFilterParams) => {
   try {
-    const response = await useAxios.get<null, BaseResponseType, PostsType>(
+    const response = await useAuthAxios.get<null, BaseResponseType, PostsType>(
       apiRoutes.posts.withParams(params)
     )
     return handleApiResponse<any>(response)
@@ -33,7 +33,7 @@ const createFormData = (data: PostsType) => {
 
 export const createPosts = async (data: PostsType) => {
   try {
-    const response = await useAxios.postFormData<
+    const response = await useAuthAxios.postFormData<
       null,
       BaseResponseType,
       FormData
@@ -46,7 +46,7 @@ export const createPosts = async (data: PostsType) => {
 
 export const updatePosts = async (data: PostsType) => {
   try {
-    const response = await useAxios.putFormData<
+    const response = await useAuthAxios.putFormData<
       null,
       BaseResponseType,
       FormData
@@ -59,7 +59,7 @@ export const updatePosts = async (data: PostsType) => {
 
 export const deletePosts = async (id: number) => {
   try {
-    const response = await useAxios.delete<null, BaseResponseType, null>(
+    const response = await useAuthAxios.delete<null, BaseResponseType, null>(
       apiRoutes.posts.withId(id)
     )
     return handleApiResponse<any>(response)

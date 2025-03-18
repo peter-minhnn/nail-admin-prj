@@ -13,363 +13,456 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
-import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
-import { Route as authSignInImport } from './routes/(auth)/sign-in'
-import { Route as auth500Import } from './routes/(auth)/500'
+import { Route as GuestRouteImport } from './routes/_guest/route'
+import { Route as GuestIndexImport } from './routes/_guest/index'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin/route'
+import { Route as AuthenticatedAdminIndexImport } from './routes/_authenticated/admin/index'
+import { Route as AdminauthSignInImport } from './routes/admin/(auth)/sign-in'
+import { Route as Adminauth500Import } from './routes/admin/(auth)/500'
 
 // Create Virtual Routes
 
-const errors503LazyImport = createFileRoute('/(errors)/503')()
-const errors500LazyImport = createFileRoute('/(errors)/500')()
-const errors404LazyImport = createFileRoute('/(errors)/404')()
-const errors403LazyImport = createFileRoute('/(errors)/403')()
-const errors401LazyImport = createFileRoute('/(errors)/401')()
-const AuthenticatedPostsIndexLazyImport = createFileRoute(
-  '/_authenticated/posts/',
+const GuestVeChungToiIndexLazyImport = createFileRoute(
+  '/_guest/ve-chung-toi/',
 )()
-const AuthenticatedContactsIndexLazyImport = createFileRoute(
-  '/_authenticated/contacts/',
+const Adminerrors503LazyImport = createFileRoute('/admin/(errors)/503')()
+const Adminerrors500LazyImport = createFileRoute('/admin/(errors)/500')()
+const Adminerrors404LazyImport = createFileRoute('/admin/(errors)/404')()
+const Adminerrors403LazyImport = createFileRoute('/admin/(errors)/403')()
+const Adminerrors401LazyImport = createFileRoute('/admin/(errors)/401')()
+const AuthenticatedAdminPostsIndexLazyImport = createFileRoute(
+  '/_authenticated/admin/posts/',
 )()
-const AuthenticatedBannersIndexLazyImport = createFileRoute(
-  '/_authenticated/banners/',
+const AuthenticatedAdminContactsIndexLazyImport = createFileRoute(
+  '/_authenticated/admin/contacts/',
 )()
-const AuthenticatedAlbumsIndexLazyImport = createFileRoute(
-  '/_authenticated/albums/',
+const AuthenticatedAdminBannersIndexLazyImport = createFileRoute(
+  '/_authenticated/admin/banners/',
+)()
+const AuthenticatedAdminAlbumsIndexLazyImport = createFileRoute(
+  '/_authenticated/admin/albums/',
 )()
 
 // Create/Update Routes
 
-const AuthenticatedRouteRoute = AuthenticatedRouteImport.update({
-  id: '/_authenticated',
+const GuestRouteRoute = GuestRouteImport.update({
+  id: '/_guest',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
+const GuestIndexRoute = GuestIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => GuestRouteRoute,
 } as any)
 
-const errors503LazyRoute = errors503LazyImport
-  .update({
-    id: '/(errors)/503',
-    path: '/503',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(errors)/503.lazy').then((d) => d.Route))
-
-const errors500LazyRoute = errors500LazyImport
-  .update({
-    id: '/(errors)/500',
-    path: '/500',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(errors)/500.lazy').then((d) => d.Route))
-
-const errors404LazyRoute = errors404LazyImport
-  .update({
-    id: '/(errors)/404',
-    path: '/404',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(errors)/404.lazy').then((d) => d.Route))
-
-const errors403LazyRoute = errors403LazyImport
-  .update({
-    id: '/(errors)/403',
-    path: '/403',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(errors)/403.lazy').then((d) => d.Route))
-
-const errors401LazyRoute = errors401LazyImport
-  .update({
-    id: '/(errors)/401',
-    path: '/401',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(errors)/401.lazy').then((d) => d.Route))
-
-const authSignInRoute = authSignInImport.update({
-  id: '/(auth)/sign-in',
-  path: '/sign-in',
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteImport.update({
+  id: '/_authenticated/admin',
+  path: '/admin',
   getParentRoute: () => rootRoute,
 } as any)
 
-const auth500Route = auth500Import.update({
-  id: '/(auth)/500',
-  path: '/500',
+const GuestVeChungToiIndexLazyRoute = GuestVeChungToiIndexLazyImport.update({
+  id: '/ve-chung-toi/',
+  path: '/ve-chung-toi/',
+  getParentRoute: () => GuestRouteRoute,
+} as any).lazy(() =>
+  import('./routes/_guest/ve-chung-toi/index.lazy').then((d) => d.Route),
+)
+
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+
+const Adminerrors503LazyRoute = Adminerrors503LazyImport.update({
+  id: '/admin/(errors)/503',
+  path: '/admin/503',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/admin/(errors)/503.lazy').then((d) => d.Route),
+)
+
+const Adminerrors500LazyRoute = Adminerrors500LazyImport.update({
+  id: '/admin/(errors)/500',
+  path: '/admin/500',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/admin/(errors)/500.lazy').then((d) => d.Route),
+)
+
+const Adminerrors404LazyRoute = Adminerrors404LazyImport.update({
+  id: '/admin/(errors)/404',
+  path: '/admin/404',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/admin/(errors)/404.lazy').then((d) => d.Route),
+)
+
+const Adminerrors403LazyRoute = Adminerrors403LazyImport.update({
+  id: '/admin/(errors)/403',
+  path: '/admin/403',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/admin/(errors)/403.lazy').then((d) => d.Route),
+)
+
+const Adminerrors401LazyRoute = Adminerrors401LazyImport.update({
+  id: '/admin/(errors)/401',
+  path: '/admin/401',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/admin/(errors)/401.lazy').then((d) => d.Route),
+)
+
+const AdminauthSignInRoute = AdminauthSignInImport.update({
+  id: '/admin/(auth)/sign-in',
+  path: '/admin/sign-in',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthenticatedPostsIndexLazyRoute =
-  AuthenticatedPostsIndexLazyImport.update({
+const Adminauth500Route = Adminauth500Import.update({
+  id: '/admin/(auth)/500',
+  path: '/admin/500',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthenticatedAdminPostsIndexLazyRoute =
+  AuthenticatedAdminPostsIndexLazyImport.update({
     id: '/posts/',
     path: '/posts/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/posts/index.lazy').then((d) => d.Route),
+    import('./routes/_authenticated/admin/posts/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedContactsIndexLazyRoute =
-  AuthenticatedContactsIndexLazyImport.update({
+const AuthenticatedAdminContactsIndexLazyRoute =
+  AuthenticatedAdminContactsIndexLazyImport.update({
     id: '/contacts/',
     path: '/contacts/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/contacts/index.lazy').then((d) => d.Route),
+    import('./routes/_authenticated/admin/contacts/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedBannersIndexLazyRoute =
-  AuthenticatedBannersIndexLazyImport.update({
+const AuthenticatedAdminBannersIndexLazyRoute =
+  AuthenticatedAdminBannersIndexLazyImport.update({
     id: '/banners/',
     path: '/banners/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/banners/index.lazy').then((d) => d.Route),
+    import('./routes/_authenticated/admin/banners/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedAlbumsIndexLazyRoute =
-  AuthenticatedAlbumsIndexLazyImport.update({
+const AuthenticatedAdminAlbumsIndexLazyRoute =
+  AuthenticatedAdminAlbumsIndexLazyImport.update({
     id: '/albums/',
     path: '/albums/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/albums/index.lazy').then((d) => d.Route),
+    import('./routes/_authenticated/admin/albums/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_authenticated': {
-      id: '/_authenticated'
+    '/_guest': {
+      id: '/_guest'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof AuthenticatedRouteImport
+      preLoaderRoute: typeof GuestRouteImport
       parentRoute: typeof rootRoute
     }
-    '/(auth)/500': {
-      id: '/(auth)/500'
-      path: '/500'
-      fullPath: '/500'
-      preLoaderRoute: typeof auth500Import
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof rootRoute
     }
-    '/(auth)/sign-in': {
-      id: '/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof authSignInImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/401': {
-      id: '/(errors)/401'
-      path: '/401'
-      fullPath: '/401'
-      preLoaderRoute: typeof errors401LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/403': {
-      id: '/(errors)/403'
-      path: '/403'
-      fullPath: '/403'
-      preLoaderRoute: typeof errors403LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/404': {
-      id: '/(errors)/404'
-      path: '/404'
-      fullPath: '/404'
-      preLoaderRoute: typeof errors404LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/500': {
-      id: '/(errors)/500'
-      path: '/500'
-      fullPath: '/500'
-      preLoaderRoute: typeof errors500LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/503': {
-      id: '/(errors)/503'
-      path: '/503'
-      fullPath: '/503'
-      preLoaderRoute: typeof errors503LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/_authenticated/': {
-      id: '/_authenticated/'
+    '/_guest/': {
+      id: '/_guest/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
+      preLoaderRoute: typeof GuestIndexImport
+      parentRoute: typeof GuestRouteImport
     }
-    '/_authenticated/albums/': {
-      id: '/_authenticated/albums/'
+    '/admin/(auth)/500': {
+      id: '/admin/(auth)/500'
+      path: '/admin/500'
+      fullPath: '/admin/500'
+      preLoaderRoute: typeof Adminauth500Import
+      parentRoute: typeof rootRoute
+    }
+    '/admin/(auth)/sign-in': {
+      id: '/admin/(auth)/sign-in'
+      path: '/admin/sign-in'
+      fullPath: '/admin/sign-in'
+      preLoaderRoute: typeof AdminauthSignInImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/(errors)/401': {
+      id: '/admin/(errors)/401'
+      path: '/admin/401'
+      fullPath: '/admin/401'
+      preLoaderRoute: typeof Adminerrors401LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/(errors)/403': {
+      id: '/admin/(errors)/403'
+      path: '/admin/403'
+      fullPath: '/admin/403'
+      preLoaderRoute: typeof Adminerrors403LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/(errors)/404': {
+      id: '/admin/(errors)/404'
+      path: '/admin/404'
+      fullPath: '/admin/404'
+      preLoaderRoute: typeof Adminerrors404LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/(errors)/500': {
+      id: '/admin/(errors)/500'
+      path: '/admin/500'
+      fullPath: '/admin/500'
+      preLoaderRoute: typeof Adminerrors500LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/(errors)/503': {
+      id: '/admin/(errors)/503'
+      path: '/admin/503'
+      fullPath: '/admin/503'
+      preLoaderRoute: typeof Adminerrors503LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexImport
+      parentRoute: typeof AuthenticatedAdminRouteImport
+    }
+    '/_guest/ve-chung-toi/': {
+      id: '/_guest/ve-chung-toi/'
+      path: '/ve-chung-toi'
+      fullPath: '/ve-chung-toi'
+      preLoaderRoute: typeof GuestVeChungToiIndexLazyImport
+      parentRoute: typeof GuestRouteImport
+    }
+    '/_authenticated/admin/albums/': {
+      id: '/_authenticated/admin/albums/'
       path: '/albums'
-      fullPath: '/albums'
-      preLoaderRoute: typeof AuthenticatedAlbumsIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
+      fullPath: '/admin/albums'
+      preLoaderRoute: typeof AuthenticatedAdminAlbumsIndexLazyImport
+      parentRoute: typeof AuthenticatedAdminRouteImport
     }
-    '/_authenticated/banners/': {
-      id: '/_authenticated/banners/'
+    '/_authenticated/admin/banners/': {
+      id: '/_authenticated/admin/banners/'
       path: '/banners'
-      fullPath: '/banners'
-      preLoaderRoute: typeof AuthenticatedBannersIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
+      fullPath: '/admin/banners'
+      preLoaderRoute: typeof AuthenticatedAdminBannersIndexLazyImport
+      parentRoute: typeof AuthenticatedAdminRouteImport
     }
-    '/_authenticated/contacts/': {
-      id: '/_authenticated/contacts/'
+    '/_authenticated/admin/contacts/': {
+      id: '/_authenticated/admin/contacts/'
       path: '/contacts'
-      fullPath: '/contacts'
-      preLoaderRoute: typeof AuthenticatedContactsIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
+      fullPath: '/admin/contacts'
+      preLoaderRoute: typeof AuthenticatedAdminContactsIndexLazyImport
+      parentRoute: typeof AuthenticatedAdminRouteImport
     }
-    '/_authenticated/posts/': {
-      id: '/_authenticated/posts/'
+    '/_authenticated/admin/posts/': {
+      id: '/_authenticated/admin/posts/'
       path: '/posts'
-      fullPath: '/posts'
-      preLoaderRoute: typeof AuthenticatedPostsIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
+      fullPath: '/admin/posts'
+      preLoaderRoute: typeof AuthenticatedAdminPostsIndexLazyImport
+      parentRoute: typeof AuthenticatedAdminRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedAlbumsIndexLazyRoute: typeof AuthenticatedAlbumsIndexLazyRoute
-  AuthenticatedBannersIndexLazyRoute: typeof AuthenticatedBannersIndexLazyRoute
-  AuthenticatedContactsIndexLazyRoute: typeof AuthenticatedContactsIndexLazyRoute
-  AuthenticatedPostsIndexLazyRoute: typeof AuthenticatedPostsIndexLazyRoute
+interface GuestRouteRouteChildren {
+  GuestIndexRoute: typeof GuestIndexRoute
+  GuestVeChungToiIndexLazyRoute: typeof GuestVeChungToiIndexLazyRoute
 }
 
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedAlbumsIndexLazyRoute: AuthenticatedAlbumsIndexLazyRoute,
-  AuthenticatedBannersIndexLazyRoute: AuthenticatedBannersIndexLazyRoute,
-  AuthenticatedContactsIndexLazyRoute: AuthenticatedContactsIndexLazyRoute,
-  AuthenticatedPostsIndexLazyRoute: AuthenticatedPostsIndexLazyRoute,
+const GuestRouteRouteChildren: GuestRouteRouteChildren = {
+  GuestIndexRoute: GuestIndexRoute,
+  GuestVeChungToiIndexLazyRoute: GuestVeChungToiIndexLazyRoute,
 }
 
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+const GuestRouteRouteWithChildren = GuestRouteRoute._addFileChildren(
+  GuestRouteRouteChildren,
+)
+
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminAlbumsIndexLazyRoute: typeof AuthenticatedAdminAlbumsIndexLazyRoute
+  AuthenticatedAdminBannersIndexLazyRoute: typeof AuthenticatedAdminBannersIndexLazyRoute
+  AuthenticatedAdminContactsIndexLazyRoute: typeof AuthenticatedAdminContactsIndexLazyRoute
+  AuthenticatedAdminPostsIndexLazyRoute: typeof AuthenticatedAdminPostsIndexLazyRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+    AuthenticatedAdminAlbumsIndexLazyRoute:
+      AuthenticatedAdminAlbumsIndexLazyRoute,
+    AuthenticatedAdminBannersIndexLazyRoute:
+      AuthenticatedAdminBannersIndexLazyRoute,
+    AuthenticatedAdminContactsIndexLazyRoute:
+      AuthenticatedAdminContactsIndexLazyRoute,
+    AuthenticatedAdminPostsIndexLazyRoute:
+      AuthenticatedAdminPostsIndexLazyRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
 
 export interface FileRoutesByFullPath {
-  '': typeof AuthenticatedRouteRouteWithChildren
-  '/500': typeof errors500LazyRoute
-  '/sign-in': typeof authSignInRoute
-  '/401': typeof errors401LazyRoute
-  '/403': typeof errors403LazyRoute
-  '/404': typeof errors404LazyRoute
-  '/503': typeof errors503LazyRoute
-  '/': typeof AuthenticatedIndexRoute
-  '/albums': typeof AuthenticatedAlbumsIndexLazyRoute
-  '/banners': typeof AuthenticatedBannersIndexLazyRoute
-  '/contacts': typeof AuthenticatedContactsIndexLazyRoute
-  '/posts': typeof AuthenticatedPostsIndexLazyRoute
+  '': typeof GuestRouteRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/': typeof GuestIndexRoute
+  '/admin/500': typeof Adminerrors500LazyRoute
+  '/admin/sign-in': typeof AdminauthSignInRoute
+  '/admin/401': typeof Adminerrors401LazyRoute
+  '/admin/403': typeof Adminerrors403LazyRoute
+  '/admin/404': typeof Adminerrors404LazyRoute
+  '/admin/503': typeof Adminerrors503LazyRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/ve-chung-toi': typeof GuestVeChungToiIndexLazyRoute
+  '/admin/albums': typeof AuthenticatedAdminAlbumsIndexLazyRoute
+  '/admin/banners': typeof AuthenticatedAdminBannersIndexLazyRoute
+  '/admin/contacts': typeof AuthenticatedAdminContactsIndexLazyRoute
+  '/admin/posts': typeof AuthenticatedAdminPostsIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
-  '/500': typeof errors500LazyRoute
-  '/sign-in': typeof authSignInRoute
-  '/401': typeof errors401LazyRoute
-  '/403': typeof errors403LazyRoute
-  '/404': typeof errors404LazyRoute
-  '/503': typeof errors503LazyRoute
-  '/': typeof AuthenticatedIndexRoute
-  '/albums': typeof AuthenticatedAlbumsIndexLazyRoute
-  '/banners': typeof AuthenticatedBannersIndexLazyRoute
-  '/contacts': typeof AuthenticatedContactsIndexLazyRoute
-  '/posts': typeof AuthenticatedPostsIndexLazyRoute
+  '/': typeof GuestIndexRoute
+  '/admin/500': typeof Adminerrors500LazyRoute
+  '/admin/sign-in': typeof AdminauthSignInRoute
+  '/admin/401': typeof Adminerrors401LazyRoute
+  '/admin/403': typeof Adminerrors403LazyRoute
+  '/admin/404': typeof Adminerrors404LazyRoute
+  '/admin/503': typeof Adminerrors503LazyRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/ve-chung-toi': typeof GuestVeChungToiIndexLazyRoute
+  '/admin/albums': typeof AuthenticatedAdminAlbumsIndexLazyRoute
+  '/admin/banners': typeof AuthenticatedAdminBannersIndexLazyRoute
+  '/admin/contacts': typeof AuthenticatedAdminContactsIndexLazyRoute
+  '/admin/posts': typeof AuthenticatedAdminPostsIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/(auth)/500': typeof auth500Route
-  '/(auth)/sign-in': typeof authSignInRoute
-  '/(errors)/401': typeof errors401LazyRoute
-  '/(errors)/403': typeof errors403LazyRoute
-  '/(errors)/404': typeof errors404LazyRoute
-  '/(errors)/500': typeof errors500LazyRoute
-  '/(errors)/503': typeof errors503LazyRoute
-  '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/albums/': typeof AuthenticatedAlbumsIndexLazyRoute
-  '/_authenticated/banners/': typeof AuthenticatedBannersIndexLazyRoute
-  '/_authenticated/contacts/': typeof AuthenticatedContactsIndexLazyRoute
-  '/_authenticated/posts/': typeof AuthenticatedPostsIndexLazyRoute
+  '/_guest': typeof GuestRouteRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/_guest/': typeof GuestIndexRoute
+  '/admin/(auth)/500': typeof Adminauth500Route
+  '/admin/(auth)/sign-in': typeof AdminauthSignInRoute
+  '/admin/(errors)/401': typeof Adminerrors401LazyRoute
+  '/admin/(errors)/403': typeof Adminerrors403LazyRoute
+  '/admin/(errors)/404': typeof Adminerrors404LazyRoute
+  '/admin/(errors)/500': typeof Adminerrors500LazyRoute
+  '/admin/(errors)/503': typeof Adminerrors503LazyRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_guest/ve-chung-toi/': typeof GuestVeChungToiIndexLazyRoute
+  '/_authenticated/admin/albums/': typeof AuthenticatedAdminAlbumsIndexLazyRoute
+  '/_authenticated/admin/banners/': typeof AuthenticatedAdminBannersIndexLazyRoute
+  '/_authenticated/admin/contacts/': typeof AuthenticatedAdminContactsIndexLazyRoute
+  '/_authenticated/admin/posts/': typeof AuthenticatedAdminPostsIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
-    | '/500'
-    | '/sign-in'
-    | '/401'
-    | '/403'
-    | '/404'
-    | '/503'
+    | '/admin'
     | '/'
-    | '/albums'
-    | '/banners'
-    | '/contacts'
-    | '/posts'
+    | '/admin/500'
+    | '/admin/sign-in'
+    | '/admin/401'
+    | '/admin/403'
+    | '/admin/404'
+    | '/admin/503'
+    | '/admin/'
+    | '/ve-chung-toi'
+    | '/admin/albums'
+    | '/admin/banners'
+    | '/admin/contacts'
+    | '/admin/posts'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/500'
-    | '/sign-in'
-    | '/401'
-    | '/403'
-    | '/404'
-    | '/503'
     | '/'
-    | '/albums'
-    | '/banners'
-    | '/contacts'
-    | '/posts'
+    | '/admin/500'
+    | '/admin/sign-in'
+    | '/admin/401'
+    | '/admin/403'
+    | '/admin/404'
+    | '/admin/503'
+    | '/admin'
+    | '/ve-chung-toi'
+    | '/admin/albums'
+    | '/admin/banners'
+    | '/admin/contacts'
+    | '/admin/posts'
   id:
     | '__root__'
-    | '/_authenticated'
-    | '/(auth)/500'
-    | '/(auth)/sign-in'
-    | '/(errors)/401'
-    | '/(errors)/403'
-    | '/(errors)/404'
-    | '/(errors)/500'
-    | '/(errors)/503'
-    | '/_authenticated/'
-    | '/_authenticated/albums/'
-    | '/_authenticated/banners/'
-    | '/_authenticated/contacts/'
-    | '/_authenticated/posts/'
+    | '/_guest'
+    | '/_authenticated/admin'
+    | '/_guest/'
+    | '/admin/(auth)/500'
+    | '/admin/(auth)/sign-in'
+    | '/admin/(errors)/401'
+    | '/admin/(errors)/403'
+    | '/admin/(errors)/404'
+    | '/admin/(errors)/500'
+    | '/admin/(errors)/503'
+    | '/_authenticated/admin/'
+    | '/_guest/ve-chung-toi/'
+    | '/_authenticated/admin/albums/'
+    | '/_authenticated/admin/banners/'
+    | '/_authenticated/admin/contacts/'
+    | '/_authenticated/admin/posts/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  auth500Route: typeof auth500Route
-  authSignInRoute: typeof authSignInRoute
-  errors401LazyRoute: typeof errors401LazyRoute
-  errors403LazyRoute: typeof errors403LazyRoute
-  errors404LazyRoute: typeof errors404LazyRoute
-  errors500LazyRoute: typeof errors500LazyRoute
-  errors503LazyRoute: typeof errors503LazyRoute
+  GuestRouteRoute: typeof GuestRouteRouteWithChildren
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
+  Adminauth500Route: typeof Adminauth500Route
+  AdminauthSignInRoute: typeof AdminauthSignInRoute
+  Adminerrors401LazyRoute: typeof Adminerrors401LazyRoute
+  Adminerrors403LazyRoute: typeof Adminerrors403LazyRoute
+  Adminerrors404LazyRoute: typeof Adminerrors404LazyRoute
+  Adminerrors500LazyRoute: typeof Adminerrors500LazyRoute
+  Adminerrors503LazyRoute: typeof Adminerrors503LazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  auth500Route: auth500Route,
-  authSignInRoute: authSignInRoute,
-  errors401LazyRoute: errors401LazyRoute,
-  errors403LazyRoute: errors403LazyRoute,
-  errors404LazyRoute: errors404LazyRoute,
-  errors500LazyRoute: errors500LazyRoute,
-  errors503LazyRoute: errors503LazyRoute,
+  GuestRouteRoute: GuestRouteRouteWithChildren,
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
+  Adminauth500Route: Adminauth500Route,
+  AdminauthSignInRoute: AdminauthSignInRoute,
+  Adminerrors401LazyRoute: Adminerrors401LazyRoute,
+  Adminerrors403LazyRoute: Adminerrors403LazyRoute,
+  Adminerrors404LazyRoute: Adminerrors404LazyRoute,
+  Adminerrors500LazyRoute: Adminerrors500LazyRoute,
+  Adminerrors503LazyRoute: Adminerrors503LazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -382,66 +475,82 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_authenticated",
-        "/(auth)/500",
-        "/(auth)/sign-in",
-        "/(errors)/401",
-        "/(errors)/403",
-        "/(errors)/404",
-        "/(errors)/500",
-        "/(errors)/503"
+        "/_guest",
+        "/_authenticated/admin",
+        "/admin/(auth)/500",
+        "/admin/(auth)/sign-in",
+        "/admin/(errors)/401",
+        "/admin/(errors)/403",
+        "/admin/(errors)/404",
+        "/admin/(errors)/500",
+        "/admin/(errors)/503"
       ]
     },
-    "/_authenticated": {
-      "filePath": "_authenticated/route.tsx",
+    "/_guest": {
+      "filePath": "_guest/route.tsx",
       "children": [
-        "/_authenticated/",
-        "/_authenticated/albums/",
-        "/_authenticated/banners/",
-        "/_authenticated/contacts/",
-        "/_authenticated/posts/"
+        "/_guest/",
+        "/_guest/ve-chung-toi/"
       ]
     },
-    "/(auth)/500": {
-      "filePath": "(auth)/500.tsx"
+    "/_authenticated/admin": {
+      "filePath": "_authenticated/admin/route.tsx",
+      "children": [
+        "/_authenticated/admin/",
+        "/_authenticated/admin/albums/",
+        "/_authenticated/admin/banners/",
+        "/_authenticated/admin/contacts/",
+        "/_authenticated/admin/posts/"
+      ]
     },
-    "/(auth)/sign-in": {
-      "filePath": "(auth)/sign-in.tsx"
+    "/_guest/": {
+      "filePath": "_guest/index.tsx",
+      "parent": "/_guest"
     },
-    "/(errors)/401": {
-      "filePath": "(errors)/401.lazy.tsx"
+    "/admin/(auth)/500": {
+      "filePath": "admin/(auth)/500.tsx"
     },
-    "/(errors)/403": {
-      "filePath": "(errors)/403.lazy.tsx"
+    "/admin/(auth)/sign-in": {
+      "filePath": "admin/(auth)/sign-in.tsx"
     },
-    "/(errors)/404": {
-      "filePath": "(errors)/404.lazy.tsx"
+    "/admin/(errors)/401": {
+      "filePath": "admin/(errors)/401.lazy.tsx"
     },
-    "/(errors)/500": {
-      "filePath": "(errors)/500.lazy.tsx"
+    "/admin/(errors)/403": {
+      "filePath": "admin/(errors)/403.lazy.tsx"
     },
-    "/(errors)/503": {
-      "filePath": "(errors)/503.lazy.tsx"
+    "/admin/(errors)/404": {
+      "filePath": "admin/(errors)/404.lazy.tsx"
     },
-    "/_authenticated/": {
-      "filePath": "_authenticated/index.tsx",
-      "parent": "/_authenticated"
+    "/admin/(errors)/500": {
+      "filePath": "admin/(errors)/500.lazy.tsx"
     },
-    "/_authenticated/albums/": {
-      "filePath": "_authenticated/albums/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/admin/(errors)/503": {
+      "filePath": "admin/(errors)/503.lazy.tsx"
     },
-    "/_authenticated/banners/": {
-      "filePath": "_authenticated/banners/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/_authenticated/admin/": {
+      "filePath": "_authenticated/admin/index.tsx",
+      "parent": "/_authenticated/admin"
     },
-    "/_authenticated/contacts/": {
-      "filePath": "_authenticated/contacts/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/_guest/ve-chung-toi/": {
+      "filePath": "_guest/ve-chung-toi/index.lazy.tsx",
+      "parent": "/_guest"
     },
-    "/_authenticated/posts/": {
-      "filePath": "_authenticated/posts/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/_authenticated/admin/albums/": {
+      "filePath": "_authenticated/admin/albums/index.lazy.tsx",
+      "parent": "/_authenticated/admin"
+    },
+    "/_authenticated/admin/banners/": {
+      "filePath": "_authenticated/admin/banners/index.lazy.tsx",
+      "parent": "/_authenticated/admin"
+    },
+    "/_authenticated/admin/contacts/": {
+      "filePath": "_authenticated/admin/contacts/index.lazy.tsx",
+      "parent": "/_authenticated/admin"
+    },
+    "/_authenticated/admin/posts/": {
+      "filePath": "_authenticated/admin/posts/index.lazy.tsx",
+      "parent": "/_authenticated/admin"
     }
   }
 }

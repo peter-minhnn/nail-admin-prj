@@ -2,12 +2,39 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import { visualizer } from 'rollup-plugin-visualizer'
+import compression from 'vite-plugin-compression'
 import mkcert from 'vite-plugin-mkcert'
+import vitePluginSitemap from 'vite-plugin-sitemap'
 import vercel from 'vite-plugin-vercel'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), TanStackRouterVite(), vercel(), mkcert()],
+  plugins: [
+    react(),
+    TanStackRouterVite(),
+    vercel(),
+    mkcert(),
+    visualizer(),
+    vitePluginSitemap({
+      hostname: 'https://dejavunailspa.net',
+      exclude: ['/auth/*', '/admin/*', '/_error'],
+      robots: [
+        {
+          userAgent: '*',
+          disallow: ['/auth/*', '/admin/*'],
+        },
+      ],
+      i18n: {
+        languages: ['en', 'vi'],
+        defaultLanguage: 'vi',
+      },
+      generateRobotsTxt: true,
+      readable: true, // Makes the XML more readable
+    }),
+    compression({ algorithm: 'brotliCompress' }), // Use Brotli
+    compression({ algorithm: 'gzip' }), // Use Gzip
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
