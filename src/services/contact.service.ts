@@ -1,5 +1,5 @@
 import { apiRoutes } from '@/config/api.route.ts'
-import authAxiosInstance from '@/config/axios.config.ts'
+import { authAxiosInstance } from '@/config/axios.config.ts'
 import {
   handleApiCatchResponse,
   handleApiResponse,

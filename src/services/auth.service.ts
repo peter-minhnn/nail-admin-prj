@@ -1,5 +1,5 @@
 import { apiRoutes } from '@/config/api.route.ts'
-import axiosConfig from '@/config/axios.config.ts'
+import { authAxiosInstance } from '@/config/axios.config.ts'
 import { StatusCodes } from '@/config/base.enum.ts'
 import {
   handleApiCatchResponse,
@@ -24,7 +24,7 @@ export const login = async (data: UserLoginRequestType) => {
 
 export const authProtected = async (): Promise<boolean> => {
   try {
-    const response = await axiosConfig.post(apiRoutes.protected)
+    const response = await authAxiosInstance.post(apiRoutes.protected)
     return response.status === StatusCodes.CREATED
   } catch (e) {
     return false
@@ -33,7 +33,7 @@ export const authProtected = async (): Promise<boolean> => {
 
 export const logout = async (): Promise<boolean> => {
   try {
-    const response = await axiosConfig.post(apiRoutes.logout)
+    const response = await authAxiosInstance.post(apiRoutes.logout)
     return response.status === StatusCodes.CREATED
   } catch (e) {
     return false

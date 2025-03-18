@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils.ts'
 import { HTMLAttributes } from 'react'
+import { cn } from '@/lib/utils.ts'
 
 function Skeleton({
   className,
