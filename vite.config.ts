@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import { visualizer } from 'rollup-plugin-visualizer'
 import compression from 'vite-plugin-compression'
+import mkcert from 'vite-plugin-mkcert'
 import vitePluginSitemap from 'vite-plugin-sitemap'
 import vercel from 'vite-plugin-vercel'
 
@@ -13,6 +14,7 @@ export default defineConfig({
     react(),
     TanStackRouterVite(),
     vercel(),
+    mkcert(),
     visualizer(),
     vitePluginSitemap({
       hostname: 'https://dejavunailspa.net',

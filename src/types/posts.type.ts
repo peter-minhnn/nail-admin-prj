@@ -20,7 +20,7 @@ export type PostsFilterParams = {
   order?: 'ASC' | 'DESC'
 }
 
-export type PostType = 'news' | 'activity' | 'service'
+export type PostType = 'news' | 'activity' | 'service' | 'training' | 'product'
 
 export type SortDataType = {
   isDragEnd: boolean

@@ -30,7 +30,7 @@ export const useLogin = () => {
       if (userInfo) {
         Cookie.set(CookieStorageKeys.USER_INFO, JSON.stringify(userInfo))
       }
-      navigate({ to: '/' }).finally()
+      navigate({ to: '/admin' }).finally()
     },
     onError: () => toast.error('Login failed. Please try again!'),
   })

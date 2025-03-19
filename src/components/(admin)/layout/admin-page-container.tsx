@@ -5,7 +5,10 @@ type PageContainerProps = Readonly<{
   children: ReactNode
 }>
 
-export function PageContainer({ title, children }: PageContainerProps) {
+export default function AdminPageContainer({
+  title,
+  children,
+}: PageContainerProps) {
   return (
     <>
       <title>{title}</title>

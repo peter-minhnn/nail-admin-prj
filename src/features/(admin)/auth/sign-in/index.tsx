@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useLangStore } from '@/stores/lang-store.ts'
-import { PageContainer } from '@/components/(admin)/layout/page-container.tsx'
+import AdminPageContainer from '@/components/(admin)/layout/admin-page-container.tsx'
 import { Card } from '@/components/(admin)/ui'
 import AuthLayout from '../auth-layout.tsx'
 import { UserAuthForm } from './components/user-auth-form.tsx'
@@ -15,7 +15,7 @@ export default function SignIn() {
   useEffect(() => setLangKey('auth'), [])
 
   return (
-    <PageContainer title={intl.formatMessage({ id: 'signIn.title' })}>
+    <AdminPageContainer title={intl.formatMessage({ id: 'signIn.title' })}>
       <AuthLayout>
         <Card className='p-6'>
           <div className='flex flex-col space-y-2 text-left'>
@@ -32,6 +32,6 @@ export default function SignIn() {
           <UserAuthForm />
         </Card>
       </AuthLayout>
-    </PageContainer>
+    </AdminPageContainer>
   )
 }

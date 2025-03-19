@@ -15,13 +15,21 @@ export default function Home() {
       <Banner path='/images/bg-home.png'>
         <Navbar />
         <div className='absolute left-8 top-1/3 h-auto w-auto'>
-          <p className={`text-8xl font-normal text-white philosopher-regular`}>NAIL CARE</p>
+          <p className={`philosopher-regular text-8xl font-normal text-white`}>
+            NAIL CARE
+          </p>
         </div>
-        <div className='absolute left-[32rem] top-80 h-auto w-auto xl:top-74'>
-          <p className={`text-9xl font-normal text-[#FEDE59] philosopher-regular`}>is</p>
+        <div className='xl:top-74 absolute left-[32rem] top-72 h-auto w-auto'>
+          <p
+            className={`philosopher-regular text-9xl font-normal text-[#FEDE59]`}
+          >
+            is
+          </p>
         </div>
         <div className='absolute left-8 top-[60%] h-auto w-auto md:left-60 xl:top-[52%]'>
-          <p className={`text-8xl font-normal text-white philosopher-regular`}>SELF CARE</p>
+          <p className={`philosopher-regular text-8xl font-normal text-white`}>
+            SELF CARE
+          </p>
         </div>
       </Banner>
       <Container>

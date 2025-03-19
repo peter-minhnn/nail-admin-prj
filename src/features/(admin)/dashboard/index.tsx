@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { toast } from 'sonner'
 import { useLangStore } from '@/stores/lang-store.ts'
+import AdminPageContainer from '@/components/(admin)/layout/admin-page-container.tsx'
 import { Header } from '@/components/(admin)/layout/header.tsx'
 import { Main } from '@/components/(admin)/layout/main.tsx'
 import { ProfileDropdown } from '@/components/(admin)/profile-dropdown.tsx'
@@ -16,7 +17,7 @@ export default function Dashboard() {
   useEffect(() => setLangKey('dashboard'), [])
 
   return (
-    <>
+    <AdminPageContainer title='Dashboard'>
       {/* ===== Top Heading ===== */}
       <Header>
         <div className='ml-auto flex items-center space-x-4'>
@@ -41,6 +42,6 @@ export default function Dashboard() {
           </Button>
         </div>
       </Main>
-    </>
+    </AdminPageContainer>
   )
 }

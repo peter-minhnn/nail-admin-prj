@@ -98,7 +98,10 @@ export function NavUser() {
               onClick={async () => {
                 const isLogout = await logout()
                 if (isLogout) {
-                  navigate({ to: '/sign-in', search: location.href }).finally()
+                  navigate({
+                    to: '/admin/sign-in',
+                    search: location.href,
+                  }).finally()
                 }
               }}
             >
