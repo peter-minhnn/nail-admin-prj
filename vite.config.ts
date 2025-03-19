@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react-swc'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import { visualizer } from 'rollup-plugin-visualizer'
 import compression from 'vite-plugin-compression'
-import mkcert from 'vite-plugin-mkcert'
 import vitePluginSitemap from 'vite-plugin-sitemap'
 import vercel from 'vite-plugin-vercel'
 
@@ -14,7 +13,6 @@ export default defineConfig({
     react(),
     TanStackRouterVite(),
     vercel(),
-    mkcert(),
     visualizer(),
     vitePluginSitemap({
       hostname: 'https://dejavunailspa.net',
@@ -66,7 +64,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/auth': {
-        target: 'https://dejavu.api.langgao.net',
+        target: 'https://api.dejavunailspa.net',
         changeOrigin: true,
         secure: true, // Ignore SSL issues in dev
       },
