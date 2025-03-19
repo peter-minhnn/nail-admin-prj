@@ -6,7 +6,7 @@ export const Route = createFileRoute('/_guest')({
 
 function RouteComponent() {
   return (
-    <main className='roboto-regular bg-[#F2F1ED]'>
+    <main className='bg-[#F2F1ED]'>
       <Outlet />
     </main>
   )
