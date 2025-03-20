@@ -9,5 +9,5 @@ export const pageComponents = {
   'dich-vu': <ServicesComponent />,
   'dao-tao': <TrainingComponent />,
   'san-pham': <ProductsComponent />,
-  'lien-he': <ContactComponent />
+  'lien-he': <ContactComponent />,
 }
