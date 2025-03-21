@@ -8,5 +8,6 @@ export type BannersListType = {
 
 export type BannersRequestType = {
   title: string
+  type: number
   file: File
 }

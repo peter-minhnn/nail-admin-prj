@@ -13,7 +13,10 @@ import {
   useColumns,
   BannersDialog,
 } from '@/features/(admin)/banners/components'
-import { BannersType } from '@/features/(admin)/banners/data/schema.ts'
+import {
+  bannersListSchema,
+  BannersType,
+} from '@/features/(admin)/banners/data/schema.ts'
 import {
   useDeleteBanners,
   useGetBanners,
@@ -52,7 +55,7 @@ export default function BannersComponent() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    setDataSource(data)
+    setDataSource(bannersListSchema.parse(data))
   }, [status, isRefetching])
 
   return (

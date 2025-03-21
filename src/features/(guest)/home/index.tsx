@@ -14,20 +14,24 @@ export default function Home() {
     >
       <Banner path='/images/bg-home.png'>
         <Navbar />
-        <div className='absolute left-10 md:left-8 top-1/3 h-auto w-auto'>
-          <p className={`philosopher-regular text-7xl lg:text-8xl font-normal text-white`}>
+        <div className='absolute left-10 top-1/3 h-auto w-auto md:left-8'>
+          <p
+            className={`philosopher-regular text-7xl font-normal text-white lg:text-8xl`}
+          >
             NAIL CARE
           </p>
         </div>
-        <div className='xl:top-74 absolute left-[12rem] sm:left-[24rem] lg:left-[32rem] top-[19rem] sm:top-[16.5rem] lg:top-[18rem] h-auto w-auto'>
+        <div className='xl:top-74 absolute left-[12rem] top-[19rem] h-auto w-auto sm:left-[24rem] sm:top-[16.5rem] lg:left-[32rem] lg:top-[18rem]'>
           <p
-            className={`philosopher-regular text-8xl lg:text-9xl font-normal text-[#FEDE59]`}
+            className={`philosopher-regular text-8xl font-normal text-[#FEDE59] lg:text-9xl`}
           >
             is
           </p>
         </div>
-        <div className='absolute left-10 md:left-52 top-[24rem] md:top-[22rem] lg:top-[25rem] xl:top-[52%] h-auto w-auto '>
-          <p className={`philosopher-regular text-7xl lg:text-8xl font-normal text-white`}>
+        <div className='absolute left-10 top-[24rem] h-auto w-auto md:left-52 md:top-[22rem] lg:top-[25rem] xl:top-[52%]'>
+          <p
+            className={`philosopher-regular text-7xl font-normal text-white lg:text-8xl`}
+          >
             SELF CARE
           </p>
         </div>
