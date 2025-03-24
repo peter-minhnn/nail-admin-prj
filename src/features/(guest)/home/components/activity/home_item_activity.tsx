@@ -1,30 +1,21 @@
-import Activity from '@/entities/(guest)/activity';
-// import { Roboto } from 'next/font/google';
-
-// const roboto = Roboto({
-//   weight: '700',
-//   subsets: ['latin'],
-// });
-// const robotoDescription = Roboto({
-//   weight: '300',
-//   subsets: ['latin'],
-// });
+import { PostDataType } from "@/entities/(guest)/post";
 
 interface ActivitiesProps {
-  item: Activity;
+  item: PostDataType;
   imgHeight?: string;
 }
 export default function HomeItemActivity(data: Readonly<ActivitiesProps>) {
   return (
-    <div className="flex flex-col items-start justify-start ">
+    <div className="flex flex-col items-start justify-start  ">
       <img
         className={`w-full ${data.imgHeight} object-cover transition-transform duration-300 hover:scale-110 rounded-sm`}
         src={data.item.thumbnail}
       ></img>
-      <h2 className={`roboto-bold mt-7 text-start`}>{data.item.title}</h2>
-      <h3 className={`roboto-light mt-3 text-start`}>
-        {data.item.description}
-      </h3>
+      <div className=" flex-1 h-fit  mt-3">
+        <h2 className={`roboto-bold text-start line-clamp-1`}>{data.item.title}</h2>
+        <h3 className={`roboto-light  text-start line-clamp-2`}>
+          {data.item.content}
+        </h3></div>
     </div>
   );
 }

@@ -5,8 +5,8 @@ import { Navbar } from '@/components/(guest)/layout/nav-bar.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import ServicesSlider from './components/services/home_services_slider'
 import HomeActivities from './components/activity/home_activities'
-import Collects from './components/collects/collects'
-
+import Collects from './components/collects/home_collects'
+import HomeCollects from './components/collects/home_collects'
 export default function Home() {
   return (
     <PageContainer
@@ -42,66 +42,17 @@ export default function Home() {
       <Container>
         <div className='grid min-h-screen items-center justify-items-center '>
           <section className='w-screen h-screen text-center justify-center'>
-            <ServicesSlider items={[
-              {
-                thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
-                title: 'EYELASH',
-                description:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-              },
-              {
-                thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
-                title: 'NAIL',
-                description:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-              },
-              {
-                thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
-                title: 'MAKEUP',
-                description:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-              },
-              {
-                thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
-                title: 'LOREM IPSUM DOLOR',
-                description:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-              },
-            ]} />
-
+            <ServicesSlider />
           </section>
 
           {/* Section 2 */}
-          <section className='w-full text-center w-full  h-screen'>
-            <HomeActivities items={[{
-              thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
-              title: 'EYELASH',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-            },
-            {
-              thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
-              title: 'NAIL',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-            },
-            {
-              thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
-              title: 'MAKEUP',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-            },
-            {
-              thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
-              title: 'LOREM IPSUM DOLOR',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-            },]} />
+          <section className='w-full text-center h-screen'>
+            <HomeActivities />
           </section>
 
           {/* Section 3 */}
           <section className='w-full text-center'>
-            <Collects items={["https://images.unsplash.com/photo-1464375117522-1311d6a5b81f", "https://images.unsplash.com/photo-1464375117522-1311d6a5b81f"]} />
+            <HomeCollects />
           </section>
         </div>
       </Container>
