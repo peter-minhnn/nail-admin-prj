@@ -135,7 +135,14 @@ export function PostsDataTableFilters<TData, TValue>({
                 <CommandSeparator />
                 <CommandGroup>
                   <CommandItem
-                    onSelect={() => column?.setFilterValue(undefined)}
+                    onSelect={() => {
+                      column?.setFilterValue(undefined)
+                      setFilterParams((prev) => ({
+                        ...prev,
+                        postType: undefined,
+                        content: '',
+                      }))
+                    }}
                     className='justify-center text-center'
                   >
                     <FormattedMessage id='common.clearFilters' />
