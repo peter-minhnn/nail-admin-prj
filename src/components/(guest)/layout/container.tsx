@@ -22,7 +22,7 @@ export function Container(props: Readonly<ContainerProps>) {
   return (
     <>
       {memoizedHeader}
-      <div className={cn('container mx-auto block p-8', props.className)}>
+      <div className={""}>
         {children}
         <Footer />
       </div>

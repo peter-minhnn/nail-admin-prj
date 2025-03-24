@@ -3,6 +3,8 @@ import Banner from '@/components/(guest)/layout/banner.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import { Navbar } from '@/components/(guest)/layout/nav-bar.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
+import ServicesSlider from './components/services/home_services_slider'
+import HomeActivities from './components/activity/home_activities'
 
 export default function Home() {
   return (
@@ -28,23 +30,39 @@ export default function Home() {
         <div className='grid min-h-screen items-center justify-items-center gap-16 p-8 pb-20 sm:p-20'>
           {/*  CONTENT HERE  */}
           {/* Section 1 */}
-          <section className='w-full text-center'>
-            <h2 className='text-4xl font-bold text-indigo-500'>Nail Health</h2>
-            <p className='mt-4 text-lg text-gray-700'>
-              Keeping your nails healthy is essential for overall well-being.
-              Regular trimming, moisturizing, and avoiding harsh chemicals can
-              help maintain strong and beautiful nails.
-            </p>
+          <section className='w-full  h-screen text-center'>
+            <ServicesSlider items={[
+              {
+                thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
+                title: 'EYELASH',
+                description:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+              },
+              {
+                thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
+                title: 'NAIL',
+                description:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+              },
+              {
+                thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
+                title: 'MAKEUP',
+                description:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+              },
+              {
+                thumbnail: 'https://images.unsplash.com/photo-1464375117522-1311d6a5b81f',
+                title: 'LOREM IPSUM DOLOR',
+                description:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+              },
+            ]} />
+
           </section>
 
           {/* Section 2 */}
-          <section className='w-full text-center'>
-            <h2 className='text-4xl font-bold text-indigo-500'>Nail Art</h2>
-            <p className='mt-4 text-lg text-gray-700'>
-              Nail art is a creative way to express yourself. From simple
-              designs to intricate patterns, there are endless possibilities to
-              decorate your nails and showcase your personality.
-            </p>
+          <section className='w-full text-center w-full  h-screen'>
+            <HomeActivities />
           </section>
 
           {/* Section 3 */}
