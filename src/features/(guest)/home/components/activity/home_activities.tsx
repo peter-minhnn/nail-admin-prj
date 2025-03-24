@@ -5,19 +5,15 @@ import HomeItemActivity from './home_item_activity';
 import Button from '@/components/(guest)/layout/button';
 import { useIntl } from 'react-intl'
 
-// const philospher = Philosopher({
-//   weight: '400',
-//   subsets: ['latin'],
-// });
 
 interface HomeActivitiesProps {
   items?: Array<Activity>;
 }
 export default function HomeActivities(props: Readonly<HomeActivitiesProps>) {
-  // const intl = useIntl()
-
+  const intl = useIntl()
+  if ((props.items ?? []).length == 0) return <div />
   return (
-    <div className="h-screen w-full grid-cols-2 bg-[#F2F1ED]">
+    <div className="h-screen w-screen grid-cols-2 bg-[#F2F1ED]">
       <div className="mx-16 grid h-screen grid-cols-2 grid-rows-2 gap-8 pb-32 pt-16">
         <div className="flex flex-col items-start justify-start pb-[130px]">
           <h3
@@ -26,9 +22,9 @@ export default function HomeActivities(props: Readonly<HomeActivitiesProps>) {
             Hoạt động
           </h3>
           <div className="flex h-full w-full items-end justify-start">
-            {/* <Button title={intl.formatMessage({
+            <Button title={intl.formatMessage({
               id: 'homeGuest.more',
-            })} /> */}
+            })} />
           </div>
         </div>
         {renderAtIndex(0)}

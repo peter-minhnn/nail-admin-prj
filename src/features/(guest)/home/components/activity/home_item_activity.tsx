@@ -16,13 +16,13 @@ interface ActivitiesProps {
 }
 export default function HomeItemActivity(data: Readonly<ActivitiesProps>) {
   return (
-    <div className="flex flex-col items-start justify-start transition-transform duration-300 hover:scale-110">
+    <div className="flex flex-col items-start justify-start ">
       <img
-        className={`w-full ${data.imgHeight} object-cover`}
-        srcSet={data.item.thumbnail}
+        className={`w-full ${data.imgHeight} object-cover transition-transform duration-300 hover:scale-110 rounded-sm`}
+        src={data.item.thumbnail}
       ></img>
-      <h2 className={` mt-7`}>{data.item.title}</h2>
-      <h3 className={` mt-3`}>
+      <h2 className={`roboto-bold mt-7 text-start`}>{data.item.title}</h2>
+      <h3 className={`roboto-light mt-3 text-start`}>
         {data.item.description}
       </h3>
     </div>

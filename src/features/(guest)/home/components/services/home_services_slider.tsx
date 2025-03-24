@@ -8,6 +8,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Button from '@/components/(guest)/layout/button';
 import { useIntl } from 'react-intl'
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 
 interface ServiceSliderProps {
   items?: Array<Service>;
@@ -15,11 +19,6 @@ interface ServiceSliderProps {
   title?: string;
   description?: string;
 }
-
-// const philosopher = Philosopher({
-//   weight: '400',
-//   subsets: ['latin'],
-// });
 
 export default function ServicesSlider(props: Readonly<ServiceSliderProps>) {
   const intl = useIntl()
@@ -33,17 +32,17 @@ export default function ServicesSlider(props: Readonly<ServiceSliderProps>) {
   return (props.items ?? []).length == 0 ? (
     <div></div>
   ) : (
-    <div className="h-screen w-full flex-col bg-[#F2F1ED] pl-16">
+    <div className="h-screen w-full flex-col my-16">
       <div>
-        <p className={`mb-16 flex text-7xl`}>
+        <p className={`philosopher-regular mb-16 flex text-7xl pl-16`}>
           {intl.formatMessage({
             id: 'homeGuest.service',
           })}
         </p>
       </div>
       <div className="relative h-full w-full flex-1">
-        <div className="absolute right-0 top-0 z-10 h-24 w-3/4 items-end justify-end px-16">
-          <div className="ml-18 flex justify-between gap-3">
+        <div className="absolute right-0 top-0 z-10 h-24 w-3/4 items-end justify-end px-16 ">
+          <div className="ml-18 flex justify-between gap-3 pl-16">
             <div className="flex w-full items-start gap-8">
               <img
                 onClick={goPrev}
@@ -56,14 +55,14 @@ export default function ServicesSlider(props: Readonly<ServiceSliderProps>) {
                 className="h-[40px] w-[40px]"
               />
             </div>
-            <div className="flex w-full items-end justify-end">
+            <div className="roboto-regular flex w-full items-end justify-end">
               <Button title={intl.formatMessage({
                 id: 'homeGuest.more',
               })} />
             </div>
           </div>
         </div>
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="relative h-full w-screen overflow-hidden">
           <Swiper
             ref={swiperRef}
             direction={'horizontal'}
@@ -77,7 +76,7 @@ export default function ServicesSlider(props: Readonly<ServiceSliderProps>) {
             spaceBetween={32}
             modules={[Navigation, Pagination]}
             loop={false}
-            className="relative flex h-[624px] w-full"
+            className="relative flex h-[624px] w-full pl-16"
           >
             {(props.items ?? []).map((item, index) => {
               const itemHeight: string =
@@ -86,7 +85,7 @@ export default function ServicesSlider(props: Readonly<ServiceSliderProps>) {
                 index == activeIndex ? 'h-[624px]' : 'h-[528px]';
               return (
                 <SwiperSlide key={index}>
-                  <div className="flex h-full w-full items-end">
+                  <div className={`flex h-full w-full items-end `}>
                     <HomeItemService
                       item={item}
                       height={height}
