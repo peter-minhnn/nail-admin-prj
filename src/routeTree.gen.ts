@@ -22,9 +22,7 @@ import { Route as Adminauth500Import } from './routes/admin/(auth)/500'
 
 // Create Virtual Routes
 
-const GuestVeChungToiIndexLazyImport = createFileRoute(
-  '/_guest/ve-chung-toi/',
-)()
+const GuestPageIdIndexLazyImport = createFileRoute('/_guest/$pageId/')()
 const Adminerrors503LazyImport = createFileRoute('/admin/(errors)/503')()
 const Adminerrors500LazyImport = createFileRoute('/admin/(errors)/500')()
 const Adminerrors404LazyImport = createFileRoute('/admin/(errors)/404')()
@@ -62,12 +60,12 @@ const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const GuestVeChungToiIndexLazyRoute = GuestVeChungToiIndexLazyImport.update({
-  id: '/ve-chung-toi/',
-  path: '/ve-chung-toi/',
+const GuestPageIdIndexLazyRoute = GuestPageIdIndexLazyImport.update({
+  id: '/$pageId/',
+  path: '/$pageId/',
   getParentRoute: () => GuestRouteRoute,
 } as any).lazy(() =>
-  import('./routes/_guest/ve-chung-toi/index.lazy').then((d) => d.Route),
+  import('./routes/_guest/$pageId/index.lazy').then((d) => d.Route),
 )
 
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexImport.update({
@@ -253,11 +251,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexImport
       parentRoute: typeof AuthenticatedAdminRouteImport
     }
-    '/_guest/ve-chung-toi/': {
-      id: '/_guest/ve-chung-toi/'
-      path: '/ve-chung-toi'
-      fullPath: '/ve-chung-toi'
-      preLoaderRoute: typeof GuestVeChungToiIndexLazyImport
+    '/_guest/$pageId/': {
+      id: '/_guest/$pageId/'
+      path: '/$pageId'
+      fullPath: '/$pageId'
+      preLoaderRoute: typeof GuestPageIdIndexLazyImport
       parentRoute: typeof GuestRouteImport
     }
     '/_authenticated/admin/albums/': {
@@ -295,12 +293,12 @@ declare module '@tanstack/react-router' {
 
 interface GuestRouteRouteChildren {
   GuestIndexRoute: typeof GuestIndexRoute
-  GuestVeChungToiIndexLazyRoute: typeof GuestVeChungToiIndexLazyRoute
+  GuestPageIdIndexLazyRoute: typeof GuestPageIdIndexLazyRoute
 }
 
 const GuestRouteRouteChildren: GuestRouteRouteChildren = {
   GuestIndexRoute: GuestIndexRoute,
-  GuestVeChungToiIndexLazyRoute: GuestVeChungToiIndexLazyRoute,
+  GuestPageIdIndexLazyRoute: GuestPageIdIndexLazyRoute,
 }
 
 const GuestRouteRouteWithChildren = GuestRouteRoute._addFileChildren(
@@ -344,7 +342,7 @@ export interface FileRoutesByFullPath {
   '/admin/404': typeof Adminerrors404LazyRoute
   '/admin/503': typeof Adminerrors503LazyRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
-  '/ve-chung-toi': typeof GuestVeChungToiIndexLazyRoute
+  '/$pageId': typeof GuestPageIdIndexLazyRoute
   '/admin/albums': typeof AuthenticatedAdminAlbumsIndexLazyRoute
   '/admin/banners': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/admin/contacts': typeof AuthenticatedAdminContactsIndexLazyRoute
@@ -360,7 +358,7 @@ export interface FileRoutesByTo {
   '/admin/404': typeof Adminerrors404LazyRoute
   '/admin/503': typeof Adminerrors503LazyRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
-  '/ve-chung-toi': typeof GuestVeChungToiIndexLazyRoute
+  '/$pageId': typeof GuestPageIdIndexLazyRoute
   '/admin/albums': typeof AuthenticatedAdminAlbumsIndexLazyRoute
   '/admin/banners': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/admin/contacts': typeof AuthenticatedAdminContactsIndexLazyRoute
@@ -380,7 +378,7 @@ export interface FileRoutesById {
   '/admin/(errors)/500': typeof Adminerrors500LazyRoute
   '/admin/(errors)/503': typeof Adminerrors503LazyRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
-  '/_guest/ve-chung-toi/': typeof GuestVeChungToiIndexLazyRoute
+  '/_guest/$pageId/': typeof GuestPageIdIndexLazyRoute
   '/_authenticated/admin/albums/': typeof AuthenticatedAdminAlbumsIndexLazyRoute
   '/_authenticated/admin/banners/': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/_authenticated/admin/contacts/': typeof AuthenticatedAdminContactsIndexLazyRoute
@@ -400,7 +398,7 @@ export interface FileRouteTypes {
     | '/admin/404'
     | '/admin/503'
     | '/admin/'
-    | '/ve-chung-toi'
+    | '/$pageId'
     | '/admin/albums'
     | '/admin/banners'
     | '/admin/contacts'
@@ -415,7 +413,7 @@ export interface FileRouteTypes {
     | '/admin/404'
     | '/admin/503'
     | '/admin'
-    | '/ve-chung-toi'
+    | '/$pageId'
     | '/admin/albums'
     | '/admin/banners'
     | '/admin/contacts'
@@ -433,7 +431,7 @@ export interface FileRouteTypes {
     | '/admin/(errors)/500'
     | '/admin/(errors)/503'
     | '/_authenticated/admin/'
-    | '/_guest/ve-chung-toi/'
+    | '/_guest/$pageId/'
     | '/_authenticated/admin/albums/'
     | '/_authenticated/admin/banners/'
     | '/_authenticated/admin/contacts/'
@@ -490,7 +488,7 @@ export const routeTree = rootRoute
       "filePath": "_guest/route.tsx",
       "children": [
         "/_guest/",
-        "/_guest/ve-chung-toi/"
+        "/_guest/$pageId/"
       ]
     },
     "/_authenticated/admin": {
@@ -532,8 +530,8 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/admin/index.tsx",
       "parent": "/_authenticated/admin"
     },
-    "/_guest/ve-chung-toi/": {
-      "filePath": "_guest/ve-chung-toi/index.lazy.tsx",
+    "/_guest/$pageId/": {
+      "filePath": "_guest/$pageId/index.lazy.tsx",
       "parent": "/_guest"
     },
     "/_authenticated/admin/albums/": {

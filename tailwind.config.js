@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        inter: ['Inter', ...fontFamily.sans],
-        manrope: ['Manrope', ...fontFamily.sans],
+        roboto: ['Roboto', ...fontFamily.sans],
+        philosopher: ['Philosopher', ...fontFamily.sans],
       },
       borderRadius: {
         lg: 'var(--radius)',

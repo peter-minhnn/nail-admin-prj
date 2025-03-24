@@ -6,6 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { toast } from 'sonner'
 import { v4 as uuid } from 'uuid'
 import { ConfirmDialog } from '@/components/(admin)/confirm-dialog.tsx'
+import AdminPageContainer from '@/components/(admin)/layout/admin-page-container.tsx'
 import { Main } from '@/components/(admin)/layout/main.tsx'
 import { DataTable } from '@/components/(admin)/tables'
 import {
@@ -66,85 +67,89 @@ export default function AlbumsComponent() {
 
   return (
     <Main>
-      <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
-        <div>
-          <h2 className='text-2xl font-bold tracking-tight'>
-            <FormattedMessage id='albums.headerTitle' />
-          </h2>
-          <p className='text-muted-foreground'>
-            <FormattedMessage id='albums.description' />
-          </p>
+      <AdminPageContainer
+        title={intl.formatMessage({ id: 'albums.headerTitle' })}
+      >
+        <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
+          <div>
+            <h2 className='text-2xl font-bold tracking-tight'>
+              <FormattedMessage id='albums.headerTitle' />
+            </h2>
+            <p className='text-muted-foreground'>
+              <FormattedMessage id='albums.description' />
+            </p>
+          </div>
+          <AlbumsButtons onRefresh={onRefresh} onAdd={onAdd} />
         </div>
-        <AlbumsButtons onRefresh={onRefresh} onAdd={onAdd} />
-      </div>
-      <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
-        <DataTable
-          columns={columns}
-          data={dataSource}
-          languagePrefix='albums'
-          loading={status === 'pending' || isRefetching}
-        />
-      </div>
-      {open === 'create' && (
-        <AlbumDetailDialog
-          title='albums.dialogAddTitle'
-          type='create'
-          open={open === 'create'}
-          setOpen={setOpen}
-          description='albums.dialogAddDescription'
-          intl={intl}
-        />
-      )}
-      {open === 'update' && (
-        <AlbumDetailDialog
-          title='albums.dialogEditTitle'
-          type='update'
-          open={open === 'update'}
-          setOpen={setOpen}
-          description='albums.dialogEditDescription'
-          currentRow={currentRow}
-          intl={intl}
-        />
-      )}
-      {open === 'carousel' && (
-        <AlbumsGalleryDialog
-          title='albums.dialogGalleryTitle'
-          open={open === 'carousel'}
-          setOpen={setOpen}
-          description='albums.dialogGalleryDescription'
-          images={images}
-        />
-      )}
-      {open === 'delete' && currentRow && (
-        <ConfirmDialog
-          destructive
-          open={open === 'delete'}
-          onOpenChange={() => {
-            setOpen('')
-            setCurrentRow(null)
-          }}
-          handleConfirm={async () => {
-            await mutateAsync(currentRow.id!)
-          }}
-          className='max-w-md'
-          title={
-            <FormattedMessage
-              id='common.messages.deleteConfirmSelected'
-              values={{ deleteCount: 1 }}
-            />
-          }
-          desc={
-            <FormattedMessage
-              id='albums.messages.deleteDescription'
-              values={{
-                deleteId: <strong key={uuid()}>{currentRow.id!}</strong>,
-                br: <br key={uuid()} />,
-              }}
-            />
-          }
-          confirmText='Delete'
-        />
-      )}
+        <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
+          <DataTable
+            columns={columns}
+            data={dataSource}
+            languagePrefix='albums'
+            loading={status === 'pending' || isRefetching}
+          />
+        </div>
+        {open === 'create' && (
+          <AlbumDetailDialog
+            title='albums.dialogAddTitle'
+            type='create'
+            open={open === 'create'}
+            setOpen={setOpen}
+            description='albums.dialogAddDescription'
+            intl={intl}
+          />
+        )}
+        {open === 'update' && (
+          <AlbumDetailDialog
+            title='albums.dialogEditTitle'
+            type='update'
+            open={open === 'update'}
+            setOpen={setOpen}
+            description='albums.dialogEditDescription'
+            currentRow={currentRow}
+            intl={intl}
+          />
+        )}
+        {open === 'carousel' && (
+          <AlbumsGalleryDialog
+            title='albums.dialogGalleryTitle'
+            open={open === 'carousel'}
+            setOpen={setOpen}
+            description='albums.dialogGalleryDescription'
+            images={images}
+          />
+        )}
+        {open === 'delete' && currentRow && (
+          <ConfirmDialog
+            destructive
+            open={open === 'delete'}
+            onOpenChange={() => {
+              setOpen('')
+              setCurrentRow(null)
+            }}
+            handleConfirm={async () => {
+              await mutateAsync(currentRow.id!)
+            }}
+            className='max-w-md'
+            title={
+              <FormattedMessage
+                id='common.messages.deleteConfirmSelected'
+                values={{ deleteCount: 1 }}
+              />
+            }
+            desc={
+              <FormattedMessage
+                id='albums.messages.deleteDescription'
+                values={{
+                  deleteId: <strong key={uuid()}>{currentRow.id!}</strong>,
+                  br: <br key={uuid()} />,
+                }}
+              />
+            }
+            confirmText='Delete'
+          />
+        )}
+      </AdminPageContainer>
     </Main>
   )
 }

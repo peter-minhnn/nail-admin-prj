@@ -66,7 +66,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/auth': {
-        target: 'https://dejavu.api.langgao.net',
+        target: 'https://api.dejavunailspa.net',
         changeOrigin: true,
         secure: true, // Ignore SSL issues in dev
       },

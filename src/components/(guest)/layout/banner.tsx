@@ -8,7 +8,7 @@ type BannerProps = {
 export default function Banner(props: Readonly<BannerProps>) {
   return (
     <div
-      className={`relative z-[9999] h-screen w-full bg-cover bg-center`}
+      className={`relative z-[9999] h-[80vh] w-full bg-cover bg-center sm:h-screen`}
       style={{ backgroundImage: `url(${props.path})` }}
     >
       {props.children}

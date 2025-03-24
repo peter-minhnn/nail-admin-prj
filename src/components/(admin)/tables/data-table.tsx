@@ -135,8 +135,8 @@ export function DataTable<TData, TValue>({
 
     return Array.from({ length: 5 }).map((_: any) => (
       <TableRow key={uuid()} className='h-16'>
-        {columns.map((column) => (
-          <TableCell key={column.id}>
+        {columns.map(() => (
+          <TableCell key={uuid()}>
             <Skeleton className='h-5' />
           </TableCell>
         ))}

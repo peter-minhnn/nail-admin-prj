@@ -12,5 +12,10 @@
   "banners.errors.titleRequired": "Tiêu đề không được để trống",
   "banners.errors.filePathRequired": "Hình ảnh không được để trống",
   "banners.id": "ID",
-  "banners.messages.deleteDescription": "Bạn sắp xóa một hàng có ID {deleteId}. {br} Không thể hoàn tác hành động này."
+  "banners.messages.deleteDescription": "Bạn sắp xóa một hàng có ID {deleteId}. {br} Không thể hoàn tác hành động này.",
+  "banners.filePath": "Hình ảnh",
+  "banners.type": "Loại",
+  "banners.typePlaceholder": "Chọn loại...",
+  "banners.other": "Một",
+  "banners.slide": "Nhóm"
 }

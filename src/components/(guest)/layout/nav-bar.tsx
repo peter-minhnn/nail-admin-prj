@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from '@tanstack/react-router'
-import { navigation } from '@/entities/(guest)/navbar-data'
+import { navigation } from '@/entities/(guest)'
 import { cn } from '@/lib/utils'
 
 type NavbarProps = {

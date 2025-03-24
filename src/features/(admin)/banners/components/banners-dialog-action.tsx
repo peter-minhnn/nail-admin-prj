@@ -7,6 +7,7 @@ import { DialogType, ResultType } from '@/types/base.type.ts'
 import { handleServerResponse } from '@/utils'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { toast } from 'sonner'
+import { SelectDropdown } from '@/components/(admin)/select-dropdown.tsx'
 import {
   Button,
   Dialog,
@@ -25,6 +26,7 @@ import {
   ScrollArea,
 } from '@/components/(admin)/ui'
 import FileUpload from '@/components/(admin)/upload.tsx'
+import { BannersTypes } from '@/features/(admin)/banners/data/data.ts'
 import {
   bannersSchema,
   BannersType,
@@ -62,7 +64,7 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
 
   const form = useForm<BannersType>({
     resolver: zodResolver(bannersSchema),
-    defaultValues: defaultValues,
+    defaultValues: { ...defaultValues, type: 0 },
   })
 
   const intl = useIntl()
@@ -87,6 +89,7 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
     }
     await mutateAsync({
       title: data.title,
+      type: data.type,
       file: files[0],
     })
   }
@@ -108,7 +111,7 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
             {props.description && <FormattedMessage id={props.description} />}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className='-mr-4 h-[20.25rem] w-full py-1 pr-4'>
+        <ScrollArea className='-mr-4 h-[22.25rem] w-full py-1 pr-4'>
           <Form {...form}>
             <form
               id='banners-form'
@@ -120,7 +123,7 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
                 name='title'
                 render={({ field }) => (
                   <FormItem className='flex w-full flex-col'>
-                    <FormLabel>
+                    <FormLabel required>
                       <FormattedMessage id='banners.title' />
                     </FormLabel>
                     <FormControl>
@@ -134,6 +137,26 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='type'
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormLabel required>
+                      <FormattedMessage id='banners.type' />
+                    </FormLabel>
+                    <SelectDropdown
+                      defaultValue={String(field.value ?? '')}
+                      items={BannersTypes.map((v) => ({
+                        value: String(v.value),
+                        label: v.label,
+                      }))}
+                      onValueChange={(value) => field.onChange(Number(value))}
+                    />
                     <FormMessage />
                   </FormItem>
                 )}

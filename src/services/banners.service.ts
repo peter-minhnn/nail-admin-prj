@@ -23,6 +23,7 @@ export const getBanners = async () => {
 export const saveChanges = async (data: BannersRequestType) => {
   const formData = new FormData()
   formData.append('title', data.title)
+  formData.append('type', String(data.type || 0))
   formData.append('file', data.file)
 
   try {

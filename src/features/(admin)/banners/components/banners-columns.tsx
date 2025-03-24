@@ -1,10 +1,16 @@
 import { Dispatch, SetStateAction } from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import { DialogType } from '@/types/base.type.ts'
+import { FormattedMessage } from 'react-intl'
+import { cn } from '@/lib/utils.ts'
 import LongText from '@/components/(admin)/long-text.tsx'
 import { DataTableColumnHeader } from '@/components/(admin)/tables/data-table-column-header.tsx'
 import { DataTableRowActions } from '@/components/(admin)/tables/data-table-row-actions.tsx'
-import { Button } from '@/components/(admin)/ui'
+import { Badge, Button } from '@/components/(admin)/ui'
+import {
+  bannersCallTypes,
+  BannersTypes,
+} from '@/features/(admin)/banners/data/data.ts'
 import type { BannersType } from '../data/schema.ts'
 import { bannersSchema } from '../data/schema.ts'
 
@@ -58,6 +64,37 @@ export const useColumns = ({
           </Button>
         )
       },
+    },
+    {
+      accessorKey: 'type',
+      header: ({ column }) => (
+        <DataTableColumnHeader
+          column={column}
+          title='banners.type'
+          className='w-max min-w-fit'
+        />
+      ),
+      cell: ({ row }) => {
+        const { type } = row.original
+        const badgeColor = bannersCallTypes.get(type)
+        const name =
+          BannersTypes.find((item) => item.value === row.getValue('type'))
+            ?.label ?? ''
+        return (
+          <div className='flex justify-center space-x-2'>
+            {name && (
+              <Badge
+                variant='outline'
+                className={cn('w-max capitalize', badgeColor)}
+              >
+                <FormattedMessage id={name} />
+              </Badge>
+            )}
+          </div>
+        )
+      },
+      enableHiding: false,
+      enableSorting: false,
     },
     {
       id: 'actions',

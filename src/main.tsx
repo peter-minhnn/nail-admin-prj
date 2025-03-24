@@ -14,8 +14,15 @@ import { SeoProvider } from '@/context/seo-provider.tsx'
 import { toast } from '@/hooks/use-toast'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
+
 //Css
+import "swiper/css"
+import "swiper/css/pagination"
+import "swiper/css/navigation"
+import "swiper/css/autoplay"
+import "swiper/css/effect-fade"
 import './index.css'
+
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 

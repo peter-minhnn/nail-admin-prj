@@ -17,7 +17,7 @@ const Seo = memo(
     schemaMarkup,
   }: Readonly<SeoProps>) => (
     <>
-      <title>{title}</title>
+      <title>{`${title ? title + ' - ' : ''}DEJAVU NAIL SPA`}</title>
       <meta name='description' content={description} />
       <link
         rel='canonical'
