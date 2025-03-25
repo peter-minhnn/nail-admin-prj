@@ -27,24 +27,23 @@ import {
   usePutPosts,
 } from '@/features/(admin)/posts/hooks/use-queries.ts'
 
+const defaultPagination = {
+  page: 1,
+  take: 50,
+}
+
 export default function PostsComponent() {
   const intl = useIntl()
   const [open, setOpen] = useState<DialogType>('')
   const [dataSource, setDataSource] = useState<ListResponseType<PostsDataType>>(
     {
       data: [],
-      meta: {
-        page: 1,
-        take: 50,
-      },
+      meta: defaultPagination,
     }
   )
   const [currentRow, setCurrentRow] = useState<PostsDataType | null>(null)
-  const [filterParams, setFilterParams] = useState<PostsFilterParams>({
-    page: 1,
-    take: 50,
-  })
-
+  const [filterParams, setFilterParams] =
+    useState<PostsFilterParams>(defaultPagination)
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 50,
