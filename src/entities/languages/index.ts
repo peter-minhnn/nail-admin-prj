@@ -9,7 +9,9 @@ const languages = [
   'albums',
   'posts',
   'contacts',
-  'guest_home'
+  'guest_home',
+  'about_us',
+  'training'
 ]
 
 enum LocalStorageKeys {

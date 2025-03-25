@@ -1,4 +1,5 @@
 import AboutUsComponent from '@/features/(guest)/about'
+import ActivitiesComponent from '@/features/(guest)/activity'
 import ContactComponent from '@/features/(guest)/contact'
 import ProductsComponent from '@/features/(guest)/products'
 import ServicesComponent from '@/features/(guest)/services'
@@ -10,4 +11,5 @@ export const pageComponents = {
   'dao-tao': <TrainingComponent />,
   'san-pham': <ProductsComponent />,
   'lien-he': <ContactComponent />,
+  'hoat-dong': <ActivitiesComponent />
 }

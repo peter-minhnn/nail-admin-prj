@@ -1,10 +1,10 @@
 
 import { useGetPosts } from '@/features/(admin)/posts/hooks/use-guest-queries'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { ListResponseType, PostsFilterParams } from '@/types'
-import { PostDataType, postsListSchema } from '@/entities/(guest)/post'
+import { GuestPostDataType, GuestPostsListSchema } from '@/entities/(guest)/post'
 import get from 'lodash/get'
-import HomeItemActivity from './home_item_activity';
+import HomeItemActivity from './home-item-activity';
 import Button from '@/components/(guest)/layout/button';
 import { useIntl } from 'react-intl'
 
@@ -15,7 +15,7 @@ export default function HomeActivities() {
     take: 10,
   })
 
-  const [dataSource, setDataSource] = useState<ListResponseType<PostDataType>>(
+  const [dataSource, setDataSource] = useState<ListResponseType<GuestPostDataType>>(
     {
       data: [],
       meta: {
@@ -33,7 +33,7 @@ export default function HomeActivities() {
       page: 1,
       take: 10,
     })
-    setDataSource({ data: postsListSchema.parse(list), meta })
+    setDataSource({ data: GuestPostsListSchema.parse(list), meta })
   }, [data, status, isRefetching])
 
 
@@ -41,7 +41,7 @@ export default function HomeActivities() {
   const intl = useIntl()
   if ((dataSource.data ?? []).length == 0) return <div />
   return (
-    <div className="h-screen w-screen grid-cols-2 bg-[#F2F1ED] my-10">
+    <div className="h-screen w-screen grid-cols-2  my-10">
       <div className="mx-16 grid h-screen grid-cols-2 grid-rows-2 gap-8 pb-32 pt-16">
         <div className="flex flex-col items-start justify-start pb-[130px]">
           <h3

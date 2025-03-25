@@ -3,19 +3,38 @@ import Banner from '@/components/(guest)/layout/banner.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import { Navbar } from '@/components/(guest)/layout/nav-bar.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
-import ServicesSlider from './components/services/home_services_slider'
-import HomeActivities from './components/activity/home_activities'
-import Collects from './components/collects/home_collects'
-import HomeCollects from './components/collects/home_collects'
+import ServicesSlider from './components/services/home-services-slider'
+import HomeActivities from './components/activity/home-activities'
+import HomeCollects from './components/collects/home-collects'
+import { useEffect, useState } from 'react'
+import { BannerFilterParams } from '@/types/banners.type'
+import { BannerDataType, bannersListSchema } from '@/entities/(guest)/banner'
+import { useGetBanners } from '@/features/(admin)/posts/hooks/use-guest-queries'
+import get from 'lodash/get'
 export default function Home() {
+  const [filterParams] = useState<BannerFilterParams>({
+    type: 0,
+  })
+
+  const [banner, setBanner] = useState<BannerDataType | null>(null)
+  const { data, status, isRefetching } = useGetBanners(filterParams)
+
+  useEffect(() => {
+    if (status === 'pending' || isRefetching) return
+    const list = get(data, ['data'], [])
+    const bannersData = bannersListSchema.parse(list);
+    if (bannersData.length > 0) {
+      setBanner(bannersData[0]);
+    }
+  }, [data, status, isRefetching])
   return (
     <PageContainer
       title='Trang chủ'
       description='Nail care is essential for maintaining healthy and beautiful nails. Learn how to care for your nails with our tips and advice.'
       canonical={menuRoutes.home}
-      image={'/images/bg-home.png'}
+      image={banner?.url ?? ""}
     >
-      <Banner path='/images/bg-home.png'>
+      <Banner path={banner?.url ?? ""}>
         <Navbar />
         <div className='absolute left-10 top-1/3 h-auto w-auto md:left-8'>
           <p
@@ -40,7 +59,7 @@ export default function Home() {
         </div>
       </Banner>
       <Container>
-        <div className='grid min-h-screen items-center justify-items-center '>
+        <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED] '>
           <section className='w-screen h-screen text-center justify-center'>
             <ServicesSlider />
           </section>

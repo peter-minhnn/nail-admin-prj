@@ -1,7 +1,7 @@
-import { PostDataType } from "@/entities/(guest)/post";
+import { GuestPostDataType } from "@/entities/(guest)/post";
 
 interface ActivitiesProps {
-  item: PostDataType;
+  item: GuestPostDataType;
   imgHeight?: string;
 }
 export default function HomeItemActivity(data: Readonly<ActivitiesProps>) {
@@ -13,9 +13,8 @@ export default function HomeItemActivity(data: Readonly<ActivitiesProps>) {
       ></img>
       <div className=" flex-1 h-fit  mt-3">
         <h2 className={`roboto-bold text-start line-clamp-1`}>{data.item.title}</h2>
-        <h3 className={`roboto-light  text-start line-clamp-2`}>
-          {data.item.content}
-        </h3></div>
+        <div className={`roboto-light  text-start  line-clamp-2 bg-transparent`} dangerouslySetInnerHTML={{ __html: data.item.content.replace("background-color", "") }} />
+      </div>
     </div>
   );
 }

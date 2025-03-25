@@ -2,10 +2,10 @@
 import { useGetPosts } from '@/features/(admin)/posts/hooks/use-guest-queries'
 import { useEffect, useState, useRef } from 'react'
 import { ListResponseType, PostsFilterParams } from '@/types'
-import { PostDataType, postsListSchema } from '@/entities/(guest)/post'
+import { GuestPostDataType, GuestPostsListSchema } from '@/entities/(guest)/post'
 import get from 'lodash/get'
 
-import HomeItemService from './home_item_service';
+import HomeItemService from './home-item-service';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Button from '@/components/(guest)/layout/button';
@@ -32,7 +32,7 @@ export default function ServicesSlider() {
     take: 10,
   })
 
-  const [dataSource, setDataSource] = useState<ListResponseType<PostDataType>>(
+  const [dataSource, setDataSource] = useState<ListResponseType<GuestPostDataType>>(
     {
       data: [],
       meta: {
@@ -50,7 +50,7 @@ export default function ServicesSlider() {
       page: 1,
       take: 10,
     })
-    setDataSource({ data: postsListSchema.parse(list), meta })
+    setDataSource({ data: GuestPostsListSchema.parse(list), meta })
   }, [data, status, isRefetching])
 
 

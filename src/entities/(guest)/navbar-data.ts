@@ -23,6 +23,10 @@ export const navigation: NavbarType[] = [
     href: menuRoutes.products,
   },
   {
+    name: 'Hoạt động',
+    href: menuRoutes.activity,
+  },
+  {
     name: 'Liên hệ',
     href: menuRoutes.contact,
   },

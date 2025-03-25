@@ -4,5 +4,6 @@ export const menuRoutes = {
   services: '/dich-vu',
   training: '/dao-tao',
   products: '/san-pham',
+  activity: '/hoat-dong',
   contact: '/lien-he',
 }

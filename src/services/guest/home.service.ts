@@ -3,14 +3,26 @@ import {
   handleApiCatchResponse,
   handleApiResponse,
 } from '@/services/api.service.ts'
-import { BaseResponseType, PostsFilterParams, PostsType } from '@/types'
+import { BaseResponseType, PostsFilterParams } from '@/types'
 import { useGlobalAxios } from '@/hooks/use-axios.ts'
-import PostType from '@/entities/(guest)/post'
+import { GuestPostDataType } from '@/entities/(guest)/post'
+import { BannerFilterParams } from '@/types/banners.type'
 
 export const getPosts = async (params: PostsFilterParams) => {
   try {
-    const response = await useGlobalAxios.get<null, BaseResponseType, PostType>(
+    const response = await useGlobalAxios.get<null, BaseResponseType, GuestPostDataType>(
       apiGuestRoutes.posts.withParams(params)
+    )
+    return handleApiResponse<any>(response)
+  } catch (e) {
+    return handleApiCatchResponse<any>(e)
+  }
+}
+
+export const getBanners = async (params: BannerFilterParams) => {
+  try {
+    const response = await useGlobalAxios.get<null, BaseResponseType, GuestPostDataType>(
+      apiGuestRoutes.banners.withParams(params)
     )
     return handleApiResponse<any>(response)
   } catch (e) {

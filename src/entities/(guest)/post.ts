@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
-const postsPublishStatusSchema = z.union([z.literal(true), z.literal(false)])
+const GuestPostsPublishStatusSchema = z.union([z.literal(true), z.literal(false)])
 
-const postsTypeSchema = z.union([
+const GuestPostsTypeSchema = z.union([
   z.literal('news'),
   z.literal('activity'),
   z.literal('service'),
@@ -10,22 +10,22 @@ const postsTypeSchema = z.union([
   z.literal('product'),
 ])
 
-const postsSchema = z.object({
+const GuestPostsSchema = z.object({
   id: z.number().int().optional(),
-  title: z.string().min(1, { message: 'posts.errors.titleViRequired' }),
-  content: z.string().min(1, { message: 'posts.errors.contentViRequired' }),
+  title: z.string().min(1, { message: 'GuestPosts.errors.titleViRequired' }),
+  content: z.string().min(1, { message: 'GuestPosts.errors.contentViRequired' }),
   thumbnail: z.any().optional(),
-  postType: postsTypeSchema,
-  isPublish: postsPublishStatusSchema,
+  postType: GuestPostsTypeSchema,
+  isPublish: GuestPostsPublishStatusSchema,
   sortOrder: z.number().optional(),
 })
 
-const postsListSchema = z.array(postsSchema)
+const GuestPostsListSchema = z.array(GuestPostsSchema)
 
-type PostDataType = z.infer<typeof postsSchema>
-type PostsPublishType = z.infer<typeof postsPublishStatusSchema>
-type PostsStatusType = z.infer<typeof postsTypeSchema>
+type GuestPostDataType = z.infer<typeof GuestPostsSchema>
+type GuestPostsPublishType = z.infer<typeof GuestPostsPublishStatusSchema>
+type GuestPostsStatusType = z.infer<typeof GuestPostsTypeSchema>
 
-export type { PostDataType, PostsStatusType, PostsPublishType }
+export type { GuestPostDataType, GuestPostsStatusType, GuestPostsPublishType }
 
-export { postsSchema, postsListSchema }
+export { GuestPostsSchema, GuestPostsListSchema }

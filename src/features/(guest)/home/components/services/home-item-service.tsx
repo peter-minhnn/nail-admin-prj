@@ -1,7 +1,7 @@
-import { PostDataType } from '@/entities/(guest)/post';
+import { GuestPostDataType } from '@/entities/(guest)/post';
 
 interface ServiceProps {
-  item: PostDataType;
+  item: GuestPostDataType;
   height?: string;
   imgheight?: string;
 }
@@ -20,9 +20,7 @@ export default function HomeItemService(props: Readonly<ServiceProps>) {
       <p className={`roboto-regular mb-3 text-start mt-7 text-xl line-clamp-1`}>
         {props.item.title}
       </p>
-      <p className={`roboto-light text-base text-start line-clamp-2`}>
-        {props.item.content}
-      </p>
+      <div className={`roboto-light text-base text-start line-clamp-2 bg-transparent`} dangerouslySetInnerHTML={{ __html: props.item.content.replace("background-color", "") }} />
     </div>
   );
 }
