@@ -9,20 +9,18 @@ import {
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { LocalizationWrapper } from '@/i18n/localization-wrapper.tsx'
 import { handleServerError } from '@/utils'
+//Css
+import 'swiper/css'
+import 'swiper/css/autoplay'
+import 'swiper/css/effect-fade'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 import { useAuthStore } from '@/stores/auth-store.ts'
 import { SeoProvider } from '@/context/seo-provider.tsx'
 import { toast } from '@/hooks/use-toast'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
-
-//Css
-import "swiper/css"
-import "swiper/css/pagination"
-import "swiper/css/navigation"
-import "swiper/css/autoplay"
-import "swiper/css/effect-fade"
 import './index.css'
-
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 

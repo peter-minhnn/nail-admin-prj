@@ -1,3 +1,4 @@
+import { PaginationState } from '@tanstack/react-table'
 import { ContactFilterParams, PostsFilterParams } from '@/types'
 import { ContactExportParams } from '@/types/contact.type.ts'
 import { createQueryParams } from '@/utils'
@@ -8,6 +9,8 @@ export const apiRoutes = {
   logout: '/auth/logout',
   banners: {
     general: '/banners',
+    withParams: (params: PaginationState) =>
+      `/banners${createQueryParams({ page: params.pageIndex + 1, take: params.pageSize, order: 'DESC' })}`,
     delete: (id: number) => `/banners/${id}`,
   },
   upload: {

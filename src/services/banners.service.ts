@@ -1,3 +1,4 @@
+import { PaginationState } from '@tanstack/react-table'
 import { apiRoutes } from '@/config/api.route.ts'
 import {
   handleApiCatchResponse,
@@ -7,13 +8,13 @@ import { BaseResponseType, BannersRequestType, BannersListType } from '@/types'
 import { useAuthAxios } from '@/hooks/use-axios.ts'
 import { BannersType } from '@/features/(admin)/banners/data/schema.ts'
 
-export const getBanners = async () => {
+export const getBanners = async (pagination: PaginationState) => {
   try {
     const response = await useAuthAxios.get<
       null,
       BaseResponseType,
       BannersListType
-    >(apiRoutes.banners.general)
+    >(apiRoutes.banners.withParams(pagination))
     return handleApiResponse<any>(response)
   } catch (e) {
     return handleApiCatchResponse<any>(e)

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import { DialogType, ResultType } from '@/types/base.type.ts'
+import { PaginationState } from '@tanstack/react-table'
+import { DialogType, ListResponseType, ResultType } from '@/types/base.type.ts'
 import { handleServerResponse } from '@/utils'
+import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { toast } from 'sonner'
 import { v4 as uuid } from 'uuid'
@@ -25,10 +27,20 @@ import {
 export default function BannersComponent() {
   const intl = useIntl()
   const [open, setOpen] = useState<DialogType>('')
-  const [dataSource, setDataSource] = useState<BannersType[]>([])
   const [currentRow, setCurrentRow] = useState<BannersType | null>(null)
+  const [dataSource, setDataSource] = useState<ListResponseType<BannersType>>({
+    data: [],
+    meta: {
+      page: 1,
+      take: 50,
+    },
+  })
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 50,
+  })
 
-  const { data, refetch, status, isRefetching } = useGetBanners()
+  const { data, refetch, status, isRefetching } = useGetBanners(pagination)
 
   const onRefresh = () => {
     refetch().finally()
@@ -55,12 +67,19 @@ export default function BannersComponent() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    setDataSource(bannersListSchema.parse(data))
+    const list = get(data, ['list'], [])
+    const meta = get(data, ['meta'], {
+      page: 1,
+      take: 10,
+    })
+    setDataSource({ data: bannersListSchema.parse(list), meta })
   }, [status, isRefetching])
 
   return (
     <Main>
-      <AdminPageContainer title={intl.formatMessage({ id: 'banners.title' })}>
+      <AdminPageContainer
+        title={intl.formatMessage({ id: 'banners.headerTitle' })}
+      >
         <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
           <div>
             <h2 className='text-2xl font-bold tracking-tight'>
@@ -75,7 +94,10 @@ export default function BannersComponent() {
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
           <DataTable
             columns={columns}
-            data={dataSource}
+            data={dataSource.data}
+            pagination={pagination}
+            rowCount={dataSource.meta.itemCount ?? 0}
+            onPaginationChange={setPagination}
             languagePrefix='banners'
             loading={status === 'pending' || isRefetching}
           />

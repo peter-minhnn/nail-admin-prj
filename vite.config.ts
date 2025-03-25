@@ -74,6 +74,6 @@ export default defineConfig({
   },
   envDir: './env',
   css: {
-    devSourcemap: false
-  }
+    devSourcemap: false,
+  },
 })

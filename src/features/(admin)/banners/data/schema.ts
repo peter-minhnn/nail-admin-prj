@@ -1,6 +1,14 @@
 import { z } from 'zod'
 
-const bannersTypeSchema = z.union([z.literal(0), z.literal(1)])
+const bannersTypeSchema = z.union([
+  z.literal(0),
+  z.literal(1),
+  z.literal(2),
+  z.literal(3),
+  z.literal(4),
+  z.literal(5),
+  z.literal(6),
+])
 
 const bannersSchema = z.object({
   id: z.number().int().optional(),

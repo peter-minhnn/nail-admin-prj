@@ -11,3 +11,8 @@ export type BannersRequestType = {
   type: number
   file: File
 }
+
+export type BannersFilterParams = {
+  page: number
+  take: number
+}

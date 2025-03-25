@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { PaginationState } from '@tanstack/react-table'
 import {
   deleteBanners,
   getBanners,
@@ -12,10 +13,10 @@ type BannersQueryType = {
   onError?: (error: Error) => void
 }
 
-export const useGetBanners = () => {
+export const useGetBanners = (pagination: PaginationState) => {
   return useQuery({
     queryKey: ['banners'],
-    queryFn: async () => await getBanners(),
+    queryFn: async () => await getBanners(pagination),
     select: (response) => get(response, ['result', 'data'], []),
     refetchOnWindowFocus: false,
   })
