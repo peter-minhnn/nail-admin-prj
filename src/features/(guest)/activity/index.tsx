@@ -4,16 +4,15 @@ import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useEffect, useState } from 'react'
 import { BannerDataType, bannersListSchema } from '@/entities/(guest)/banner'
 import get from 'lodash/get'
-import { useGetBanners } from '@/features/(admin)/posts/hooks/use-guest-queries'
+import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import { BannerFilterParams } from '@/types/banners.type'
 import Banner from '@/components/(guest)/layout/banner'
 import { Navbar } from '@/components/(guest)/layout/nav-bar'
-import ActivitesGrid from './components/activity-grid'
 import ActivitiesSlider from './components/activities_slider'
 
 export default function ActivitiesComponent() {
   const [filterParams] = useState<BannerFilterParams>({
-    type: 4,
+    type: 5,
   })
   const [banner, setBanner] = useState<BannerDataType | null>(null)
   const { data, status, isRefetching } = useGetBanners(filterParams)

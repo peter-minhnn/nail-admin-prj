@@ -1,7 +1,7 @@
 
 import { useIntl } from 'react-intl';
 import { useEffect, useState } from "react";
-import { useGetAlbums } from "@/features/(admin)/posts/hooks/use-guest-queries";
+import { useGetAlbums } from "@/features/(guest)/hook/use-guest-queries";
 import get from "lodash/get";
 import { GuestAlbumDataType, GuestAlbumListSchema } from "@/entities/(guest)/album";
 

@@ -1,5 +1,5 @@
 
-import { useGetPosts } from '@/features/(admin)/posts/hooks/use-guest-queries'
+import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import { useEffect, useState } from 'react'
 import { ListResponseType, PostsFilterParams } from '@/types'
 import { GuestPostDataType, GuestPostsListSchema } from '@/entities/(guest)/post'

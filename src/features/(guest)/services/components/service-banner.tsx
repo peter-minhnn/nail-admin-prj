@@ -1,5 +1,5 @@
 import { BannerDataType, bannersListSchema } from '@/entities/(guest)/banner';
-import { useGetBanners } from '@/features/(admin)/posts/hooks/use-guest-queries';
+import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries';
 import { BannerFilterParams } from '@/types/banners.type';
 import get from 'lodash/get';
 import { useEffect, useState } from 'react';
@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 export default function ServiceBanner() {
 
   const [filterParams] = useState<BannerFilterParams>({
-    type: 3,
+    type: 2,
   })
 
   const [banners, setBanners] = useState<Array<BannerDataType>>([])

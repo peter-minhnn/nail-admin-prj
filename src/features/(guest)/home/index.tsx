@@ -9,7 +9,7 @@ import HomeCollects from './components/collects/home-collects'
 import { useEffect, useState } from 'react'
 import { BannerFilterParams } from '@/types/banners.type'
 import { BannerDataType, bannersListSchema } from '@/entities/(guest)/banner'
-import { useGetBanners } from '@/features/(admin)/posts/hooks/use-guest-queries'
+import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import get from 'lodash/get'
 export default function Home() {
   const [filterParams] = useState<BannerFilterParams>({

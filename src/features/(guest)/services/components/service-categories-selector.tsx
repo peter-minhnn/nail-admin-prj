@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ItemCatetory from "./item-category";
-import { useGetAlbums } from "@/features/(admin)/posts/hooks/use-guest-queries";
+import { useGetAlbums } from "@/features/(guest)/hook/use-guest-queries";
 import get from "lodash/get";
 import { GuestAlbumDataType, GuestAlbumListSchema } from "@/entities/(guest)/album";
 
