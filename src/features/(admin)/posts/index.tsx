@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import { PaginationState } from '@tanstack/react-table'
-import { DialogType, ListResponseType, PostsFilterParams } from '@/types'
-import { SortDataType } from '@/types/posts.type.ts'
+import {
+  DialogType,
+  ListResponseType,
+  PostsFilterParams,
+  SortDataType,
+} from '@/types'
 import { handleServerResponse } from '@/utils'
 import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -49,7 +53,7 @@ export default function PostsComponent() {
     pageSize: 50,
   })
   const [contentLocale, setContentLocale] = useState<'vi' | 'en'>('vi')
-  const [sortData, setSortData] = useState<SortDataType>({
+  const [sortData, setSortData] = useState<SortDataType<PostsDataType>>({
     isDragEnd: false,
     newRows: [],
   })

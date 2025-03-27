@@ -1,10 +1,13 @@
 {
-  "menu.group.general": "General",
-  "menu.group.homepage": "Homepage",
-  "menu.dashboard": "Dashboard",
-  "menu.banners": "Banners",
-  "menu.users": "Users",
-  "menu.albums": "Albums",
-  "menu.posts": "Posts",
-  "menu.contacts": "Contacts"
+  "menu.group.general": "Phổ biến",
+  "menu.group.homepage": "Trang người dùng",
+  "menu.dashboard": "Bảng điều khiển",
+  "menu.banners": "Quản Lý Biểu Ngữ",
+  "menu.users": "Khách hàng",
+  "menu.albums": "Quản Lý Bộ Sưu Tập",
+  "menu.posts": "Quản Lý Bài Viết",
+  "menu.contacts": "Quản Lý Liên Hệ",
+  "menu.products": "Quản Lý Sản Phẩm",
+  "menu.productList": "Danh sách sản phẩm",
+  "menu.productTypes": "Loại sản phẩm"
 }

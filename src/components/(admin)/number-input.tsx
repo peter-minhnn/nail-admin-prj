@@ -16,7 +16,6 @@ type TextInputProps = {
   name: string
   label: string
   placeholder: string
-  namespace: string
   maxLength?: number
   reset?: boolean
   editInline?: boolean

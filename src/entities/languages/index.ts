@@ -9,6 +9,7 @@ const languages = [
   'albums',
   'posts',
   'contacts',
+  'products',
 ]
 
 enum LocalStorageKeys {

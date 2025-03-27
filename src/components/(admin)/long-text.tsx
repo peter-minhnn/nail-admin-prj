@@ -52,7 +52,7 @@ export default function LongText({
                 {children}
               </div>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className='break-words'>
               <p className={contentClassName}>{children}</p>
             </TooltipContent>
           </Tooltip>
@@ -65,7 +65,7 @@ export default function LongText({
               {children}
             </div>
           </PopoverTrigger>
-          <PopoverContent className={cn('w-fit', contentClassName)}>
+          <PopoverContent className={cn('w-fit break-words', contentClassName)}>
             <p>{children}</p>
           </PopoverContent>
         </Popover>

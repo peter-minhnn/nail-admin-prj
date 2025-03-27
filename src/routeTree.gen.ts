@@ -28,6 +28,9 @@ const Adminerrors500LazyImport = createFileRoute('/admin/(errors)/500')()
 const Adminerrors404LazyImport = createFileRoute('/admin/(errors)/404')()
 const Adminerrors403LazyImport = createFileRoute('/admin/(errors)/403')()
 const Adminerrors401LazyImport = createFileRoute('/admin/(errors)/401')()
+const AuthenticatedAdminProductsIndexLazyImport = createFileRoute(
+  '/_authenticated/admin/products/',
+)()
 const AuthenticatedAdminPostsIndexLazyImport = createFileRoute(
   '/_authenticated/admin/posts/',
 )()
@@ -125,6 +128,17 @@ const Adminauth500Route = Adminauth500Import.update({
   path: '/admin/500',
   getParentRoute: () => rootRoute,
 } as any)
+
+const AuthenticatedAdminProductsIndexLazyRoute =
+  AuthenticatedAdminProductsIndexLazyImport.update({
+    id: '/products/',
+    path: '/products/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/admin/products/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 const AuthenticatedAdminPostsIndexLazyRoute =
   AuthenticatedAdminPostsIndexLazyImport.update({
@@ -286,6 +300,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPostsIndexLazyImport
       parentRoute: typeof AuthenticatedAdminRouteImport
     }
+    '/_authenticated/admin/products/': {
+      id: '/_authenticated/admin/products/'
+      path: '/products'
+      fullPath: '/admin/products'
+      preLoaderRoute: typeof AuthenticatedAdminProductsIndexLazyImport
+      parentRoute: typeof AuthenticatedAdminRouteImport
+    }
   }
 }
 
@@ -311,6 +332,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBannersIndexLazyRoute: typeof AuthenticatedAdminBannersIndexLazyRoute
   AuthenticatedAdminContactsIndexLazyRoute: typeof AuthenticatedAdminContactsIndexLazyRoute
   AuthenticatedAdminPostsIndexLazyRoute: typeof AuthenticatedAdminPostsIndexLazyRoute
+  AuthenticatedAdminProductsIndexLazyRoute: typeof AuthenticatedAdminProductsIndexLazyRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
@@ -324,6 +346,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminContactsIndexLazyRoute,
     AuthenticatedAdminPostsIndexLazyRoute:
       AuthenticatedAdminPostsIndexLazyRoute,
+    AuthenticatedAdminProductsIndexLazyRoute:
+      AuthenticatedAdminProductsIndexLazyRoute,
   }
 
 const AuthenticatedAdminRouteRouteWithChildren =
@@ -347,6 +371,7 @@ export interface FileRoutesByFullPath {
   '/admin/banners': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/admin/contacts': typeof AuthenticatedAdminContactsIndexLazyRoute
   '/admin/posts': typeof AuthenticatedAdminPostsIndexLazyRoute
+  '/admin/products': typeof AuthenticatedAdminProductsIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -363,6 +388,7 @@ export interface FileRoutesByTo {
   '/admin/banners': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/admin/contacts': typeof AuthenticatedAdminContactsIndexLazyRoute
   '/admin/posts': typeof AuthenticatedAdminPostsIndexLazyRoute
+  '/admin/products': typeof AuthenticatedAdminProductsIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -383,6 +409,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/banners/': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/_authenticated/admin/contacts/': typeof AuthenticatedAdminContactsIndexLazyRoute
   '/_authenticated/admin/posts/': typeof AuthenticatedAdminPostsIndexLazyRoute
+  '/_authenticated/admin/products/': typeof AuthenticatedAdminProductsIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -403,6 +430,7 @@ export interface FileRouteTypes {
     | '/admin/banners'
     | '/admin/contacts'
     | '/admin/posts'
+    | '/admin/products'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -418,6 +446,7 @@ export interface FileRouteTypes {
     | '/admin/banners'
     | '/admin/contacts'
     | '/admin/posts'
+    | '/admin/products'
   id:
     | '__root__'
     | '/_guest'
@@ -436,6 +465,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/banners/'
     | '/_authenticated/admin/contacts/'
     | '/_authenticated/admin/posts/'
+    | '/_authenticated/admin/products/'
   fileRoutesById: FileRoutesById
 }
 
@@ -498,7 +528,8 @@ export const routeTree = rootRoute
         "/_authenticated/admin/albums/",
         "/_authenticated/admin/banners/",
         "/_authenticated/admin/contacts/",
-        "/_authenticated/admin/posts/"
+        "/_authenticated/admin/posts/",
+        "/_authenticated/admin/products/"
       ]
     },
     "/_guest/": {
@@ -548,6 +579,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/admin/posts/": {
       "filePath": "_authenticated/admin/posts/index.lazy.tsx",
+      "parent": "/_authenticated/admin"
+    },
+    "/_authenticated/admin/products/": {
+      "filePath": "_authenticated/admin/products/index.lazy.tsx",
       "parent": "/_authenticated/admin"
     }
   }

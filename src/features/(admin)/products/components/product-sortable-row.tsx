@@ -3,14 +3,14 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { v4 as uuid } from 'uuid'
 import { TableCell, TableRow } from '@/components/(admin)/ui'
-import { PostsDataType } from '@/features/(admin)/posts/data/schema.ts'
+import { ProductData } from '@/features/(admin)/products/data/schema.ts'
 
 // Sortable Row Component
-export const PostsSortableRow = ({
+export const ProductSortableRow = ({
   row,
   isOver,
 }: {
-  row: Row<PostsDataType>
+  row: Row<ProductData>
   isOver: boolean
 }) => {
   const {

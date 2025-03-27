@@ -25,7 +25,7 @@ import {
   Updater,
   PaginationState,
 } from '@tanstack/react-table'
-import { PostsFilterParams, SortDataType } from '@/types'
+import { ProductFilterParams, SortDataType } from '@/types'
 import {
   closestCenter,
   DndContext,
@@ -52,15 +52,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/(admin)/ui/table.tsx'
-import {
-  PostsDataTableToolbar,
-  PostsSortableRow,
-} from '@/features/(admin)/posts/components/index.ts'
-import { PostsDataType } from '@/features/(admin)/posts/data/schema.ts'
+import { ProductDataTableToolbar } from '@/features/(admin)/products/components/product-data-table-toolbar.tsx'
+import { ProductSortableRow } from '@/features/(admin)/products/components/product-sortable-row.tsx'
+import { ProductData } from '@/features/(admin)/products/data/schema.ts'
 
 interface DataTableProps {
-  columns: ColumnDef<PostsDataType>[]
-  data: PostsDataType[]
+  columns: ColumnDef<ProductData>[]
+  data: ProductData[]
   toolBarChildren?: ReactNode
   languagePrefix: string
   loading?: boolean
@@ -72,11 +70,12 @@ interface DataTableProps {
   pagination?: PaginationState
   rowCount?: number
   onPaginationChange?: (pagination: Updater<PaginationState>) => void
-  setFilterParams: Dispatch<SetStateAction<PostsFilterParams>>
-  setSortData: Dispatch<SetStateAction<SortDataType<PostsDataType>>>
+  setFilterParams: Dispatch<SetStateAction<ProductFilterParams>>
+  setSortData: Dispatch<SetStateAction<SortDataType<ProductData>>>
+  productTypeOptions: { label: string; value: string }[]
 }
 
-export function PostsDataTable({
+export function ProductDataTable({
   columns,
   data,
   languagePrefix,
@@ -91,6 +90,7 @@ export function PostsDataTable({
   onPaginationChange,
   setFilterParams,
   setSortData,
+  productTypeOptions,
 }: Readonly<DataTableProps>) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -99,7 +99,7 @@ export function PostsDataTable({
   const [tableLoading, setTableLoading] = useState<boolean>(true)
   const [overId, setOverId] = useState(null)
 
-  const table = useReactTable<PostsDataType>({
+  const table = useReactTable<ProductData>({
     data,
     columns,
     state: {
@@ -132,7 +132,7 @@ export function PostsDataTable({
     ...(expandedRow
       ? {
           getExpandedRowModel: getExpandedRowModel(),
-          getSubRows: (row) => row[expandedKey as keyof PostsDataType],
+          getSubRows: (row) => row[expandedKey as keyof ProductData],
           onExpandedChange: setExpanded,
         }
       : {}),
@@ -221,10 +221,11 @@ export function PostsDataTable({
     >
       <div className='space-y-4'>
         {!suppressShowToolbar && (
-          <PostsDataTableToolbar
+          <ProductDataTableToolbar
             table={table}
             languagePrefix={languagePrefix}
             setFilterParams={setFilterParams}
+            productTypeOptions={productTypeOptions}
           />
         )}
         <div className='rounded-md border'>
@@ -257,7 +258,7 @@ export function PostsDataTable({
                   ? table
                       .getRowModel()
                       .rows.map((row) => (
-                        <PostsSortableRow
+                        <ProductSortableRow
                           key={row.id}
                           row={row}
                           isOver={overId === row.id}
