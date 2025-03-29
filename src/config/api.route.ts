@@ -1,4 +1,9 @@
-import { ContactFilterParams, PostsFilterParams } from '@/types'
+import { PaginationState } from '@tanstack/react-table'
+import {
+  ContactFilterParams,
+  PostsFilterParams,
+  ProductFilterParams,
+} from '@/types'
 import { ContactExportParams } from '@/types/contact.type.ts'
 import { createQueryParams } from '@/utils'
 
@@ -8,6 +13,8 @@ export const apiRoutes = {
   logout: '/auth/logout',
   banners: {
     general: '/banners',
+    withParams: (params: PaginationState) =>
+      `/banners${createQueryParams({ page: params.pageIndex + 1, take: params.pageSize, order: 'DESC' })}`,
     delete: (id: number) => `/banners/${id}`,
   },
   upload: {
@@ -30,5 +37,17 @@ export const apiRoutes = {
       `/contacts/export${createQueryParams(params)}`,
     withParams: (params: ContactFilterParams) =>
       `/contacts${createQueryParams({ ...params, order: 'DESC' })}`,
+  },
+  product: {
+    general: '/products',
+    withParams: (params: ProductFilterParams) =>
+      `/products/admin${createQueryParams({ ...params, order: 'DESC' })}`,
+    withId: (id: number) => `/products/${id}`,
+    productType: {
+      general: '/productTypes',
+      withParams: (params: PaginationState) =>
+        `/productTypes${createQueryParams({ page: params.pageIndex + 1, take: params.pageSize, order: 'DESC' })}`,
+      withId: (id: number) => `/productTypes/${id}`,
+    },
   },
 }

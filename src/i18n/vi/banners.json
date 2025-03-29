@@ -17,5 +17,12 @@
   "banners.type": "Loại",
   "banners.typePlaceholder": "Chọn loại...",
   "banners.other": "Một",
-  "banners.slide": "Nhóm"
+  "banners.slide": "Nhóm",
+  "banners.home": "Trang chủ",
+  "banners.about": "Giới thiệu",
+  "banners.contact": "Liên hệ",
+  "banners.services": "Dịch vụ",
+  "banners.training": "Đào tạo",
+  "banners.products": "Sản phẩm",
+  "banners.activities": "Hoạt động"
 }

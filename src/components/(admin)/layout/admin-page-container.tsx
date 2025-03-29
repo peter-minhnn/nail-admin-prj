@@ -11,7 +11,7 @@ export default function AdminPageContainer({
 }: PageContainerProps) {
   return (
     <>
-      <title>{title}</title>
+      <title>{`${title ? title + ' -' : ''} DEJAVU NAIL SPA ADMIN`}</title>
       {children}
     </>
   )

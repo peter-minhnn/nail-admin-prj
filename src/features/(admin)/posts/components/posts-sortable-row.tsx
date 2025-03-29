@@ -31,7 +31,7 @@ export const PostsSortableRow = ({
     }),
     transition: isDragging ? 'all 0.2s ease' : transition,
     boxShadow: isDragging ? '0 4px 12px rgba(0,0,0,0.2)' : 'none',
-    backgroundColor: isOver && !isDragging ? '#f0f9ff' : 'white', // Highlight drop target
+    backgroundColor: 'transparent', // Highlight drop target
     border: isOver && !isDragging ? '2px dashed #3b82f6' : '',
     opacity: isDragging ? 0.9 : 1,
     zIndex: isDragging ? 1 : 0,

@@ -25,8 +25,7 @@ import {
   Updater,
   PaginationState,
 } from '@tanstack/react-table'
-import { PostsFilterParams } from '@/types'
-import { SortDataType } from '@/types/posts.type.ts'
+import { PostsFilterParams, SortDataType } from '@/types'
 import {
   closestCenter,
   DndContext,
@@ -74,7 +73,7 @@ interface DataTableProps {
   rowCount?: number
   onPaginationChange?: (pagination: Updater<PaginationState>) => void
   setFilterParams: Dispatch<SetStateAction<PostsFilterParams>>
-  setSortData: Dispatch<SetStateAction<SortDataType>>
+  setSortData: Dispatch<SetStateAction<SortDataType<PostsDataType>>>
 }
 
 export function PostsDataTable({

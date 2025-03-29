@@ -76,3 +76,13 @@ export type QueryType = {
   onSuccess?: (response: ResultType) => Promise<void>
   onError?: (error: Error) => void
 }
+
+export type SortDataType<T> = {
+  isDragEnd: boolean
+  newRows: T[]
+}
+
+export type CommonSelectType = {
+  label: string
+  value: string | number
+}

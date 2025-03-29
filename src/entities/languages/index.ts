@@ -13,7 +13,8 @@ const languages = [
   'about_us',
   'training',
   'guest_common',
-  'guest_contact'
+  'guest_contact',
+  'products',
 ]
 
 enum LocalStorageKeys {

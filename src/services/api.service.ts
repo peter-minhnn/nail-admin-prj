@@ -57,16 +57,16 @@ export async function handleApiCatchResponse<T>(e: any): Promise<ResultType> {
 async function redirectPageErrors(e: any) {
   switch (e?.status) {
     case StatusCodes.NOT_FOUND:
-      window.location.href = '/404'
+      window.location.href = '/admin/404'
       break
     case StatusCodes.UNAUTHORIZED:
       await logout()
       break
     case StatusCodes.SERVICE_UNAVAILABLE:
-      window.location.href = '/maintenance'
+      window.location.href = '/admin/503'
       break
     case StatusCodes.INTERNAL_SERVER_ERROR:
-      window.location.href = '/500'
+      window.location.href = '/admin/500'
       break
     default:
       break

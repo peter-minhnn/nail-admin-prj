@@ -1,6 +1,5 @@
-import { BannerDataType, bannersListSchema } from "@/entities/(guest)/banner";
+import { BannerDataType, bannersListSchema, BannerFilterParams } from "@/entities/(guest)/banner";
 import { useGetBanners } from "@/features/(guest)/hook/use-guest-queries";
-import { BannerFilterParams } from "@/types/banners.type";
 import get from "lodash/get";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
@@ -9,6 +8,8 @@ export default function TrainingBanner() {
 
   const [filterParams] = useState<BannerFilterParams>({
     type: 3,
+    take: 10,
+    page: 1
   })
 
   const [banners, setBanners] = useState<Array<BannerDataType>>([])

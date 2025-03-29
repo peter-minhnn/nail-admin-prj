@@ -7,13 +7,14 @@ import ServicesSlider from './components/services/home-services-slider'
 import HomeActivities from './components/activity/home-activities'
 import HomeCollects from './components/collects/home-collects'
 import { useEffect, useState } from 'react'
-import { BannerFilterParams } from '@/types/banners.type'
-import { BannerDataType, bannersListSchema } from '@/entities/(guest)/banner'
+import { BannerDataType, BannerFilterParams, bannersListSchema } from '@/entities/(guest)/banner'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import get from 'lodash/get'
 export default function Home() {
   const [filterParams] = useState<BannerFilterParams>({
     type: 0,
+    take: 10,
+    page: 1
   })
 
   const [banner, setBanner] = useState<BannerDataType | null>(null)

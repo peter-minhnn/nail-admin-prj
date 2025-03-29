@@ -2,10 +2,9 @@ import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useEffect, useState } from 'react'
-import { BannerDataType, bannersListSchema } from '@/entities/(guest)/banner'
+import { BannerDataType, BannerFilterParams, bannersListSchema } from '@/entities/(guest)/banner'
 import get from 'lodash/get'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
-import { BannerFilterParams } from '@/types/banners.type'
 import Banner from '@/components/(guest)/layout/banner'
 import { Navbar } from '@/components/(guest)/layout/nav-bar'
 import ActivitiesSlider from './components/activities-slider'
@@ -15,7 +14,7 @@ export default function ActivitiesComponent() {
   const intl = useIntl()
 
   const [filterParams] = useState<BannerFilterParams>({
-    type: 5,
+    type: 5, take: 10, page: 1
   })
   const [banner, setBanner] = useState<BannerDataType | null>(null)
   const { data, status, isRefetching } = useGetBanners(filterParams)

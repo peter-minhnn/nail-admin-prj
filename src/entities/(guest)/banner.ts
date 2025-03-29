@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
-export enum BannerPosition{
-  HOME =0,
+export enum BannerPosition {
+  HOME = 0,
   ABOUT = 1,
   SERVICE = 2,
   TRAINING = 3,
@@ -35,6 +35,13 @@ type BannerDataType = z.infer<typeof bannerSchema>
 type BannerPublishType = z.infer<typeof bannerPublishStatusSchema>
 type BannerStatusType = z.infer<typeof bannerTypeSchema>
 
-export type { BannerDataType, BannerPublishType, BannerStatusType }
+type BannerFilterParams = {
+  type?: number
+  page: number
+  take: number
+}
+
+
+export type { BannerDataType, BannerPublishType, BannerStatusType, BannerFilterParams }
 
 export { bannerSchema, bannersListSchema }

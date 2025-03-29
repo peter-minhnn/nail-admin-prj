@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import { PaginationState } from '@tanstack/react-table'
-import { DialogType, ListResponseType, PostsFilterParams } from '@/types'
-import { SortDataType } from '@/types/posts.type.ts'
+import {
+  DialogType,
+  ListResponseType,
+  PostsFilterParams,
+  SortDataType,
+} from '@/types'
 import { handleServerResponse } from '@/utils'
 import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -27,30 +31,29 @@ import {
   usePutPosts,
 } from '@/features/(admin)/posts/hooks/use-queries.ts'
 
+const defaultPagination = {
+  page: 1,
+  take: 50,
+}
+
 export default function PostsComponent() {
   const intl = useIntl()
   const [open, setOpen] = useState<DialogType>('')
   const [dataSource, setDataSource] = useState<ListResponseType<PostsDataType>>(
     {
       data: [],
-      meta: {
-        page: 1,
-        take: 50,
-      },
+      meta: defaultPagination,
     }
   )
   const [currentRow, setCurrentRow] = useState<PostsDataType | null>(null)
-  const [filterParams, setFilterParams] = useState<PostsFilterParams>({
-    page: 1,
-    take: 50,
-  })
-
+  const [filterParams, setFilterParams] =
+    useState<PostsFilterParams>(defaultPagination)
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 50,
   })
   const [contentLocale, setContentLocale] = useState<'vi' | 'en'>('vi')
-  const [sortData, setSortData] = useState<SortDataType>({
+  const [sortData, setSortData] = useState<SortDataType<PostsDataType>>({
     isDragEnd: false,
     newRows: [],
   })

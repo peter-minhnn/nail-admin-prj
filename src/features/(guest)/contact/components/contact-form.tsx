@@ -50,7 +50,6 @@ export default function ContactForm() {
             <div className="w-full flex flex-col items-center ">
                 <input
                     value=""
-                    onChange={(e) => { }}
                     type="text"
                     placeholder={placeholder}
                     className="w-full  p-2 bg-transparent border-b-2 border-gray-300 outline-none focus:border-orange-500"
