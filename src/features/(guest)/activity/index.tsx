@@ -8,9 +8,12 @@ import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import { BannerFilterParams } from '@/types/banners.type'
 import Banner from '@/components/(guest)/layout/banner'
 import { Navbar } from '@/components/(guest)/layout/nav-bar'
-import ActivitiesSlider from './components/activities_slider'
+import ActivitiesSlider from './components/activities-slider'
+import { useIntl } from 'react-intl'
 
 export default function ActivitiesComponent() {
+  const intl = useIntl()
+
   const [filterParams] = useState<BannerFilterParams>({
     type: 5,
   })
@@ -28,24 +31,24 @@ export default function ActivitiesComponent() {
 
   return (
     <PageContainer
-      title='Hoat Dong'
-      description='Hoat Dong'
+      title={intl.formatMessage({ id: "guest.common.activity" })}
+      description={intl.formatMessage({ id: "guest.common.activity" })}
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
       <Banner path={banner?.url}>
         <Navbar />
-        <div className="absolute h-screen w-screen top-16 ">
+        <div className="absolute h-screen w-screen p-20 top-20  ">
           <p
-            className={` w-full h-full flex text-center p-20 items-end justify-center text-8xl font-normal  text-white philosopher-regular `}
+            className={` w-full h-full pb-20 flex md:text-end text-center md:items-end items-center justify-center text-8xl font-normal  text-white philosopher-regular `}
           >
-            Hoat Dong
+            {intl.formatMessage({ id: "guest.common.activity" })}
           </p>
         </div>
       </Banner>
       <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]  '>
         <Container fixedHeader>
-          <div className='grid min-h-screen items-center justify-items-center gap-16 p-8 pb-20 sm:p-20'>
+          <div className='grid min-h-screen items-center justify-items-center md:m-20 m-10'>
             <ActivitiesSlider />
           </div>
         </Container>

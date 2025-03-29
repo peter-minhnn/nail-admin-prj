@@ -7,6 +7,7 @@ import get from 'lodash/get'
 import HomeItemActivity from './home-item-activity';
 import Button from '@/components/(guest)/layout/button';
 import { useIntl } from 'react-intl'
+import { menuRoutes } from '@/entities/(guest)'
 
 export default function HomeActivities() {
   const [filterParams] = useState<PostsFilterParams>({
@@ -41,26 +42,26 @@ export default function HomeActivities() {
   const intl = useIntl()
   if ((dataSource.data ?? []).length == 0) return <div />
   return (
-    <div className="h-screen w-screen grid-cols-2  my-10">
-      <div className="mx-16 grid h-screen grid-cols-2 grid-rows-2 gap-8 pb-32 pt-16">
-        <div className="flex flex-col items-start justify-start pb-[130px]">
-          <h3
-            className={` pb-[68px] text-[72px] font-normal`}
-          >
-            Hoạt động
-          </h3>
-          <div className="flex h-full w-full items-end justify-start">
+    <div className="md:mx-16 mx-8 grid h-fit  grid-cols-1 md:grid-cols-2 grid-rows-2 gap-8 pb-32 pt-16">
+      <div className="flex flex-col items-start justify-start pb-[130px]">
+        <h3
+          className={` pb-[68px] text-[72px] font-normal`}
+        >
+          {intl.formatMessage({ id: "guest.common.activity" })}
+        </h3>
+        <div className="flex h-full w-full items-end justify-start">
+          <a href={menuRoutes.activity}>
             <Button title={intl.formatMessage({
-              id: 'homeGuest.more',
+              id: 'guest.common.more',
             })} />
-          </div>
+          </a>
         </div>
-        {renderAtIndex(0)}
-        {renderAtIndex(1)}
-        <div className="flex h-full w-full gap-4">
-          {renderAtIndex(2)}
-          {renderAtIndex(3)}
-        </div>
+      </div>
+      {renderAtIndex(0)}
+      {renderAtIndex(1)}
+      <div className="flex h-full w-full gap-4">
+        {renderAtIndex(2)}
+        {renderAtIndex(3)}
       </div>
     </div>
   );
@@ -68,6 +69,6 @@ export default function HomeActivities() {
   function renderAtIndex(index: number) {
     var item = (dataSource.data ?? [])[index];
     if (item == null) return <div />;
-    return <HomeItemActivity item={item} imgHeight="h-[240px]" />;
+    return <HomeItemActivity item={item} imgHeight=" flex h-[240px]" />;
   }
 }

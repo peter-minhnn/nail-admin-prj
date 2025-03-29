@@ -51,7 +51,7 @@ export default function TrainingBanner() {
           <div className="flex h-[288px] w-[192px]">{renderBanner(0)}</div>
         </div>
       </div>
-      <div className="h-full w-full flex-col">{renderBanner(1)}</div>
+      <div className="hidden lg:block h-full w-full flex-col">{renderBanner(1)}</div>
     </div>
   );
 
@@ -63,6 +63,7 @@ export default function TrainingBanner() {
       <img
         src={banners[index].url ?? ""}
         className="h-full w-full object-cover"
+        alt=""
       />
     );
   }

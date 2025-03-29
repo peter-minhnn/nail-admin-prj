@@ -1,0 +1,15 @@
+{
+    "guest.contact.pageTitle": "CONTACT",
+    "guest.contact.contactUs": "CONTACT US",
+    "guest.contact.email": "EMAIL",
+    "guest.contact.phone": "PHONE NUMBER",
+    "guest.contact.address": "ADDRESS",
+    "guest.contact.social": "SOCIAL",
+    "guest.contact.placeholderName": "Name",
+    "guest.contact.placeholderPhone": "Phone number",
+    "guest.contact.placeholderEmail": "E-mail",
+    "guest.contact.placeholderAddress": "Adress",
+    "guest.contact.placeholderTopic": "Topic",
+    "guest.contact.submitRequest": "SEND NOW",
+    "guest.contact.placeholderContent": "Content"
+}

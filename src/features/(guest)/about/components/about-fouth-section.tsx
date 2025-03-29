@@ -4,14 +4,15 @@ interface AboutFouthProps {
 
 export default function AboutFouthSection(props: Readonly<AboutFouthProps>) {
   return (
-    <div className="flex h-screen w-screen gap-[32px] bg-[#F2F1ED] px-16 pb-20 pt-32">
+    <div className="grid md:grid-cols-3 grid-cols-1 min-h-screen w-screen gap-[32px] bg-[#F2F1ED] px-16 pb-20 pt-32 item-">
       {props.items.map((item) => {
         return (
-          <div className="flex h-full w-full">
+          <div className="flex-1 aspect-square">
             <img
+              alt=""
               src={item}
-              className="h-[460px] w-full rounded-sm object-cover"
-            ></img>
+              className="h-full w-full rounded-sm object-cover"
+            />
           </div>
         );
       })}

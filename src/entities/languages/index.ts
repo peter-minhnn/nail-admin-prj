@@ -11,7 +11,9 @@ const languages = [
   'contacts',
   'guest_home',
   'about_us',
-  'training'
+  'training',
+  'guest_common',
+  'guest_contact'
 ]
 
 enum LocalStorageKeys {

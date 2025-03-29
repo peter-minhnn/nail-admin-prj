@@ -8,10 +8,14 @@ import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import { BannerFilterParams } from '@/types/banners.type'
 import Banner from '@/components/(guest)/layout/banner'
 import { Navbar } from '@/components/(guest)/layout/nav-bar'
+import ProductSection from './components/product-section'
+import { useIntl } from 'react-intl'
 
 export default function ProductsComponent() {
+  const intl = useIntl()
+
   const [filterParams] = useState<BannerFilterParams>({
-    type: 0,
+    type: 4,
   })
   const [banner, setBanner] = useState<BannerDataType | null>(null)
   const { data, status, isRefetching } = useGetBanners(filterParams)
@@ -25,10 +29,12 @@ export default function ProductsComponent() {
     }
   }, [data, status, isRefetching])
 
+
+
   return (
     <PageContainer
-      title='Sản phẩm'
-      description='Sản phẩm'
+      title={intl.formatMessage({ id: "guest.common.product" })}
+      description={intl.formatMessage({ id: "guest.common.product" })}
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
@@ -38,15 +44,13 @@ export default function ProductsComponent() {
           <p
             className={`text-center text-8xl font-normal  text-white philosopher-regular `}
           >
-            Sản phẩm
+            {intl.formatMessage({ id: "guest.common.product" })}
           </p>
         </div>
       </Banner>
       <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]  '>
-        <Container fixedHeader>
-          <div className='grid min-h-screen items-center justify-items-center gap-16 p-8 pb-20 sm:p-20'>
-            Sản phẩm
-          </div>
+        <Container>
+          <ProductSection />
         </Container>
       </div>
     </PageContainer>

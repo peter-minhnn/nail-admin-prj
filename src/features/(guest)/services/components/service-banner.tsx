@@ -3,10 +3,11 @@ import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries';
 import { BannerFilterParams } from '@/types/banners.type';
 import get from 'lodash/get';
 import { useEffect, useState } from 'react';
+import { useIntl } from 'react-intl';
 
 
 export default function ServiceBanner() {
-
+  const intl = useIntl();
   const [filterParams] = useState<BannerFilterParams>({
     type: 2,
   })
@@ -22,21 +23,22 @@ export default function ServiceBanner() {
     setBanners(bannersData);
   }, [data, status, isRefetching])
   return (
-    <div className='h-screen w-screen items-center justify-center pt-20'>
-      <div className=" absolute flex w-full h-full gap-64 items-center  ">
-        <div className="mx-16 flex h-full w-[192px] items-end pb-32">
+    <div className='w-screen items-center justify-center pt-20'>
+      <div className="absolute flex min-w-full h-full  items-center ">
+        <div className=" flex lg:mx-16 h-full  w-full lg:w-[192px] items-end md:py-32">
           {itemBanner(0)}
         </div>
-        <div className="mt-24 flex h-fit w-fit flex-1 justify-center pb-32">
-          {itemBanner(1)}
-        </div>
-        <div className="mr-16 mt-16 flex h-full w-[192px]">
+        <div className="hidden lg:block mt-24  h-fit w-fit flex-1 pb-32 mx-16 ">
+          <div className='flex w-full h-full items-center justify-center'>
+            {itemBanner(1)}
+          </div></div>
+        <div className="hidden lg:block mx-16 my-16 h-full w-[192px]">
           {itemBanner(2)}
         </div>
       </div>
       <div className="absolute flex w-screen flex-col items-center justify-center">
         <p className={`text-8xl text-[#000000] philosopher-regular`}>
-          Dich Vu
+          {intl.formatMessage({ id: 'guest.common.service' })}
         </p>
         <p className={`text-8xl text-[#E48E43] philosopher-regular `}>
           DEJÀ VU NAL & SPA
@@ -48,12 +50,13 @@ export default function ServiceBanner() {
   function itemBanner(index: number) {
     var item = banners[index];
     if (item == null) return <div />
-    var itemSize = "h-[288px] w-full";
+    var itemSize = "h-full lg:h-[288px] w-full";
     if (index == 1) {
       itemSize = "h-[584px] w-[416px]"
     }
     return <img
       src={item.url}
+      alt=''
       className={`object-cover rounded ${itemSize}`}
     />; screenLeft
   }

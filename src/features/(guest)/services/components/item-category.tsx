@@ -14,6 +14,7 @@ export default function ItemCatetory(props: Readonly<CategoryProps>) {
             <img
               src={props.data?.thumbnail}
               className="h-full w-full object-cover rounded "
+              alt=""
             />
           </div>
           <div className="absolute inset-0 bg-black bg-opacity-20"></div>
@@ -21,7 +22,7 @@ export default function ItemCatetory(props: Readonly<CategoryProps>) {
             {props.data.name}
           </div>
           <div className="absolute inset-0 bottom-6 right-6 flex items-end justify-end">
-            <img srcSet="images/svg/ic-arrow-right-white.svg"></img>
+            <img srcSet="images/svg/ic-arrow-right-white.svg" alt="" />
           </div>
         </div>
       </div>

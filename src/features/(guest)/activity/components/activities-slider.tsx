@@ -38,9 +38,8 @@ export default function ActivitiesSlider() {
         return result;
     }
 
-
     return (
-        <div className='w-screen h-fit'>
+        <div className='w-full h-fit'>
             <Swiper
                 spaceBetween={30}
                 pagination={{

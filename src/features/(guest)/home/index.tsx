@@ -60,17 +60,17 @@ export default function Home() {
       </Banner>
       <Container>
         <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED] '>
-          <section className='w-screen h-screen text-center justify-center'>
+          <section className='w-screen max-h-screen text-center justify-center'>
             <ServicesSlider />
           </section>
 
           {/* Section 2 */}
-          <section className='w-full text-center h-screen'>
+          <section className='w-full  min-h-screen text-center '>
             <HomeActivities />
           </section>
 
           {/* Section 3 */}
-          <section className='w-full text-center'>
+          <section className='w-full min-h-screen text-center'>
             <HomeCollects />
           </section>
         </div>

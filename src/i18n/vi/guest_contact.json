@@ -1,0 +1,15 @@
+{
+    "guest.contact.pageTitle": "LIÊN HỆ",
+    "guest.contact.contactUs": "LIÊN HỆ VỚI CHÚNG TÔI",
+    "guest.contact.email": "EMAIL",
+    "guest.contact.phone": "ĐIỆN THOẠI",
+    "guest.contact.address": "ĐỊA CHỈ",
+    "guest.contact.social": "SOCIAL",
+    "guest.contact.placeholderName": "Tên",
+    "guest.contact.placeholderPhone": "Số điện thoại",
+    "guest.contact.placeholderEmail": "E-mail",
+    "guest.contact.placeholderAddress": "Địa chỉ",
+    "guest.contact.placeholderTopic": "Chủ đề",
+    "guest.contact.submitRequest": "LIÊN HỆ NGAY",
+    "guest.contact.placeholderContent": "Nội dung"
+}

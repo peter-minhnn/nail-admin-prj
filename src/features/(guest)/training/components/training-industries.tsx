@@ -22,12 +22,11 @@ export default function TrainingIndustries() {
 
   if (albums.length == 0) return <div />;
   const intl = useIntl()
-
   return (
-    <div className="h-fit w-screen">
+    <div className="h-fit w-screen mb-64">
       <div className="h-[591px] w-full items-center justify-center">
-        <div className="absolute mt-[200px] flex h-full w-full flex-col items-center px-72">
-          <p className={`mb-7 text-7xl philosopher-regular`}>
+        <div className="absolute mt-[200px] flex h-full w-full flex-col items-center lg:px-72 px-20">
+          <p className={`mb-7 text-7xl text-center philosopher-regular`}>
             {intl.formatMessage({ id: "training.industry" })}
           </p>
           <p className={`roboto-regular text-center text-base`}>
@@ -37,22 +36,23 @@ export default function TrainingIndustries() {
         <img
           srcSet="/images/training_eclipse_orange.png"
           className="h-full w-full object-contain"
+          alt=''
         />
       </div>
 
-      <div className="mx-44 flex h-[872px] gap-8">
-        <div className="flex max-h-[872px] w-1/3 flex-col gap-8">
-          {itemView(3, 'flex-1')}
-          {itemView(4, 'flex-1')}
+      <div className="lg:px-44 px-20 grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-2 h-[872px] gap-8">
+        <div className="grid grid-rows-2 max-h-[872px]  flex-col gap-8">
+          {itemView(0)}
+          {itemView(1)}
         </div>
-        {itemView(2, 'flex-1')}
+        {itemView(2)}
       </div>
 
-      <div className="mt-8 flex h-[350px] w-screen gap-8 px-44">
+      <div className="mt-8 grid lg:grid-cols-2 grid-cols-1 h-[350px] w-screen gap-8 lg:px-44 px-20">
         {itemView(3, 'flex-1')}
         {itemView(4, 'flex-1')}
       </div>
-      <div className="mb- mt-8 h-[416px] w-full px-44">{itemView(5)}</div>
+      <div className=" mt-8 h-[416px] w-full lg:px-44 px-20">{itemView(5)}</div>
     </div>
   );
 

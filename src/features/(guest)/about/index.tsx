@@ -51,29 +51,34 @@ export default function AboutUsComponent() {
             title={intl.formatMessage({ id: "aboutUs.section2Title" })}
             description={intl.formatMessage({ id: "aboutUs.section2Description" })}
           />
-          <AboutThirdSection
-            items={[
-              {
-                title: intl.formatMessage({ id: "aboutUs.section3Item1Title" }),
-                desctiption: intl.formatMessage({ id: "aboutUs.section3Item1Description" })
-              },
-              {
-                title: intl.formatMessage({ id: "aboutUs.section3Item2Title" }),
-                desctiption: intl.formatMessage({ id: "aboutUs.section3Item2Description" })
-              },
-              {
-                title: intl.formatMessage({ id: "aboutUs.section3Item3Title" }),
-                desctiption: intl.formatMessage({ id: "aboutUs.section3Item3Description" })
-              },
-            ]}
-          />
-          <AboutFouthSection
-            items={[
-              '/images/aboutus_section4_1.png',
-              '/images/aboutus_section4_2.png',
-              '/images/aboutus_section4_3.png',
-            ]}
-          />
+          <section className='w-screen h-fit'>
+            <AboutThirdSection
+              items={[
+                {
+                  title: intl.formatMessage({ id: "aboutUs.section3Item1Title" }),
+                  desctiption: intl.formatMessage({ id: "aboutUs.section3Item1Description" })
+                },
+                {
+                  title: intl.formatMessage({ id: "aboutUs.section3Item2Title" }),
+                  desctiption: intl.formatMessage({ id: "aboutUs.section3Item2Description" })
+                },
+                {
+                  title: intl.formatMessage({ id: "aboutUs.section3Item3Title" }),
+                  desctiption: intl.formatMessage({ id: "aboutUs.section3Item3Description" })
+                },
+              ]}
+            />
+          </section>
+
+          <section className='w-screen min-h-screen '>
+            <AboutFouthSection
+              items={[
+                '/images/aboutus_section4_1.png',
+                '/images/aboutus_section4_2.png',
+                '/images/aboutus_section4_3.png',
+              ]}
+            />
+          </section>
         </div>
       </Container>
     </PageContainer>

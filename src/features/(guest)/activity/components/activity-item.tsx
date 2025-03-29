@@ -5,12 +5,12 @@ interface ActivityItemProps {
 }
 export default function ActivityItem(props: Readonly<ActivityItemProps>) {
     return (<div className="w-full h-full ">
-        <img src={props.item.thumbnail} className="h-[460px] w-full object-cover rounded" />
+        <img src={props.item.thumbnail} alt='' className="h-[460px] w-full object-cover rounded transition-transform duration-300 hover:scale-110" />
         <p className="roboto-bold mt-7 mb-3 text-xl">{props.item.title}</p>
         <p className=" flex-1 mb-3 roboto-light text-base line-clamp-3" dangerouslySetInnerHTML={{ __html: props.item.content.replace("background-color", "") }} />
         <div className="flex w-full items-center justify-between">
             <p className="roboto-regular text-xl">Xem them </p>
-            <img srcSet="/images/svg/arrow_right.svg" />
+            <img srcSet="/images/svg/arrow_right.svg" alt="" />
         </div>
     </div>)
 }
