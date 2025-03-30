@@ -1,8 +1,12 @@
+import { BannerFilterParams } from '@/entities/(guest)/banner'
 import { PostsFilterParams } from '@/types'
-import { BannerFilterParams } from '@/types/banners.type'
 import { createQueryParams } from '@/utils'
 
 export const apiGuestRoutes = {
+  post: {
+    general: '/post/published',
+    withId: (id: number) => `/posts/published/${id}`
+  },
   posts: {
     general: '/posts/published',
     withParams: (params: PostsFilterParams) =>
@@ -27,5 +31,9 @@ export const apiGuestRoutes = {
     general: '/products/published',
     withParams: (params: PostsFilterParams) =>
       `/products/published${createQueryParams({ ...params, order: 'ASC' })}`
+  },
+  product: {
+    general: '/products/published',
+    withId: (id: number) => `/products/published/${id}`
   },
 }

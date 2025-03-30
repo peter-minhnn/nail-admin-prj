@@ -1,14 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
 import {
   getBanners,
+  getPostDetail,
   getPosts,
 } from '@/services/guest/home.service'
 import { PostsFilterParams } from '@/types'
 import get from 'lodash/get'
-import { BannerFilterParams } from '@/types/banners.type'
 import { getAlbums } from '@/services/guest/guest.album.service'
-import { getProducts, getProductTypes } from '@/services/guest/guest.product.service'
+import { getProductDetail, getProducts, getProductTypes } from '@/services/guest/guest.product.service'
 import { ProductFilterParams } from '@/entities/(guest)/product'
+import { BannerFilterParams } from '@/entities/(guest)/banner'
 
 export const useGetPosts = (params: PostsFilterParams) => {
   return useQuery({
@@ -23,6 +24,14 @@ export const useGetPosts = (params: PostsFilterParams) => {
         },
       }),
     refetchOnWindowFocus: false,
+  })
+}
+export const useGetPostDetail = (id: number) => {
+  return useQuery({
+    queryKey: ['post', id],
+    queryFn: async () => await getPostDetail(id),
+    select: (response) =>
+      get(response, ['result']), refetchOnWindowFocus: false,
   })
 }
 export const useGetBanners = (params: BannerFilterParams) => {
@@ -74,6 +83,15 @@ export const useGetProducts = (params: ProductFilterParams) => {
         },
       }),
     refetchOnWindowFocus: false,
+  })
+}
+
+export const useGetProductDetail = (id: number) => {
+  return useQuery({
+    queryKey: ['product', id],
+    queryFn: async () => await getProductDetail(id),
+    select: (response) =>
+      get(response, ['result']), refetchOnWindowFocus: false,
   })
 }
 

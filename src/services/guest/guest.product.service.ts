@@ -27,3 +27,14 @@ export const getProducts = async (params: ProductFilterParams) => {
     return handleApiCatchResponse<any>(e)
   }
 }
+
+export const getProductDetail = async (id: number) => {
+  try {
+    const response = await useGlobalAxios.get<null, BaseResponseType, GuestProductDetailType>(
+      apiGuestRoutes.product.withId(id)
+    )
+    return handleApiResponse<any>(response)
+  } catch (e) {
+    return handleApiCatchResponse<any>(e)
+  }
+}
