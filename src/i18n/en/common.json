@@ -38,5 +38,6 @@
   "common.exportExcelBtn": "Xuất Excel",
   "common.messages.exportExcelError": "Xuất Excel thất bại",
   "common.messages.exportExcelSuccess": "Xuất Excel thành công",
-  "common.commandMenuSearchPlaceholder": "Nhập hoặc tìm kiếm"
+  "common.commandMenuSearchPlaceholder": "Nhập hoặc tìm kiếm",
+  "common.pageNotFound": "Không tìm thấy trang"
 }
