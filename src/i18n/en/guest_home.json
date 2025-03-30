@@ -1,11 +1,11 @@
 {
-    "homeGuest.refreshBtn": "Refresh",
-    "homeGuest.success": "Success",
-    "homeGuest.id": "ID",
-    "homeGuest.title": "Title",
-    "homeGuest.completed": "Completed",
-    "homeGuest.service": "Service",
-    "homeGuest.activity": "Activity",
-    "homeGuest.collection": "Collection",
-    "homeGuest.more": "See more"
+  "homeGuest.refreshBtn": "Refresh",
+  "homeGuest.success": "Success",
+  "homeGuest.id": "ID",
+  "homeGuest.title": "Title",
+  "homeGuest.completed": "Completed",
+  "homeGuest.service": "Service",
+  "homeGuest.activity": "Activity",
+  "homeGuest.collection": "Collection",
+  "homeGuest.more": "See more"
 }

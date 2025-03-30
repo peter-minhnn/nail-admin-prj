@@ -16,13 +16,14 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as GuestRouteImport } from './routes/_guest/route'
 import { Route as GuestIndexImport } from './routes/_guest/index'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin/route'
+import { Route as GuestPageIdIndexImport } from './routes/_guest/$pageId/index'
 import { Route as AuthenticatedAdminIndexImport } from './routes/_authenticated/admin/index'
 import { Route as AdminauthSignInImport } from './routes/admin/(auth)/sign-in'
 import { Route as Adminauth500Import } from './routes/admin/(auth)/500'
+import { Route as GuestPageIdIdIndexImport } from './routes/_guest/$pageId/$id/index'
 
 // Create Virtual Routes
 
-const GuestPageIdIndexLazyImport = createFileRoute('/_guest/$pageId/')()
 const Adminerrors503LazyImport = createFileRoute('/admin/(errors)/503')()
 const Adminerrors500LazyImport = createFileRoute('/admin/(errors)/500')()
 const Adminerrors404LazyImport = createFileRoute('/admin/(errors)/404')()
@@ -63,13 +64,11 @@ const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const GuestPageIdIndexLazyRoute = GuestPageIdIndexLazyImport.update({
+const GuestPageIdIndexRoute = GuestPageIdIndexImport.update({
   id: '/$pageId/',
   path: '/$pageId/',
   getParentRoute: () => GuestRouteRoute,
-} as any).lazy(() =>
-  import('./routes/_guest/$pageId/index.lazy').then((d) => d.Route),
-)
+} as any)
 
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexImport.update({
   id: '/',
@@ -184,6 +183,12 @@ const AuthenticatedAdminAlbumsIndexLazyRoute =
     ),
   )
 
+const GuestPageIdIdIndexRoute = GuestPageIdIdIndexImport.update({
+  id: '/$pageId/$id/',
+  path: '/$pageId/$id/',
+  getParentRoute: () => GuestRouteRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -269,7 +274,14 @@ declare module '@tanstack/react-router' {
       id: '/_guest/$pageId/'
       path: '/$pageId'
       fullPath: '/$pageId'
-      preLoaderRoute: typeof GuestPageIdIndexLazyImport
+      preLoaderRoute: typeof GuestPageIdIndexImport
+      parentRoute: typeof GuestRouteImport
+    }
+    '/_guest/$pageId/$id/': {
+      id: '/_guest/$pageId/$id/'
+      path: '/$pageId/$id'
+      fullPath: '/$pageId/$id'
+      preLoaderRoute: typeof GuestPageIdIdIndexImport
       parentRoute: typeof GuestRouteImport
     }
     '/_authenticated/admin/albums/': {
@@ -314,12 +326,14 @@ declare module '@tanstack/react-router' {
 
 interface GuestRouteRouteChildren {
   GuestIndexRoute: typeof GuestIndexRoute
-  GuestPageIdIndexLazyRoute: typeof GuestPageIdIndexLazyRoute
+  GuestPageIdIndexRoute: typeof GuestPageIdIndexRoute
+  GuestPageIdIdIndexRoute: typeof GuestPageIdIdIndexRoute
 }
 
 const GuestRouteRouteChildren: GuestRouteRouteChildren = {
   GuestIndexRoute: GuestIndexRoute,
-  GuestPageIdIndexLazyRoute: GuestPageIdIndexLazyRoute,
+  GuestPageIdIndexRoute: GuestPageIdIndexRoute,
+  GuestPageIdIdIndexRoute: GuestPageIdIdIndexRoute,
 }
 
 const GuestRouteRouteWithChildren = GuestRouteRoute._addFileChildren(
@@ -366,7 +380,8 @@ export interface FileRoutesByFullPath {
   '/admin/404': typeof Adminerrors404LazyRoute
   '/admin/503': typeof Adminerrors503LazyRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
-  '/$pageId': typeof GuestPageIdIndexLazyRoute
+  '/$pageId': typeof GuestPageIdIndexRoute
+  '/$pageId/$id': typeof GuestPageIdIdIndexRoute
   '/admin/albums': typeof AuthenticatedAdminAlbumsIndexLazyRoute
   '/admin/banners': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/admin/contacts': typeof AuthenticatedAdminContactsIndexLazyRoute
@@ -383,7 +398,8 @@ export interface FileRoutesByTo {
   '/admin/404': typeof Adminerrors404LazyRoute
   '/admin/503': typeof Adminerrors503LazyRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
-  '/$pageId': typeof GuestPageIdIndexLazyRoute
+  '/$pageId': typeof GuestPageIdIndexRoute
+  '/$pageId/$id': typeof GuestPageIdIdIndexRoute
   '/admin/albums': typeof AuthenticatedAdminAlbumsIndexLazyRoute
   '/admin/banners': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/admin/contacts': typeof AuthenticatedAdminContactsIndexLazyRoute
@@ -404,7 +420,8 @@ export interface FileRoutesById {
   '/admin/(errors)/500': typeof Adminerrors500LazyRoute
   '/admin/(errors)/503': typeof Adminerrors503LazyRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
-  '/_guest/$pageId/': typeof GuestPageIdIndexLazyRoute
+  '/_guest/$pageId/': typeof GuestPageIdIndexRoute
+  '/_guest/$pageId/$id/': typeof GuestPageIdIdIndexRoute
   '/_authenticated/admin/albums/': typeof AuthenticatedAdminAlbumsIndexLazyRoute
   '/_authenticated/admin/banners/': typeof AuthenticatedAdminBannersIndexLazyRoute
   '/_authenticated/admin/contacts/': typeof AuthenticatedAdminContactsIndexLazyRoute
@@ -426,6 +443,7 @@ export interface FileRouteTypes {
     | '/admin/503'
     | '/admin/'
     | '/$pageId'
+    | '/$pageId/$id'
     | '/admin/albums'
     | '/admin/banners'
     | '/admin/contacts'
@@ -442,6 +460,7 @@ export interface FileRouteTypes {
     | '/admin/503'
     | '/admin'
     | '/$pageId'
+    | '/$pageId/$id'
     | '/admin/albums'
     | '/admin/banners'
     | '/admin/contacts'
@@ -461,6 +480,7 @@ export interface FileRouteTypes {
     | '/admin/(errors)/503'
     | '/_authenticated/admin/'
     | '/_guest/$pageId/'
+    | '/_guest/$pageId/$id/'
     | '/_authenticated/admin/albums/'
     | '/_authenticated/admin/banners/'
     | '/_authenticated/admin/contacts/'
@@ -518,7 +538,8 @@ export const routeTree = rootRoute
       "filePath": "_guest/route.tsx",
       "children": [
         "/_guest/",
-        "/_guest/$pageId/"
+        "/_guest/$pageId/",
+        "/_guest/$pageId/$id/"
       ]
     },
     "/_authenticated/admin": {
@@ -562,7 +583,11 @@ export const routeTree = rootRoute
       "parent": "/_authenticated/admin"
     },
     "/_guest/$pageId/": {
-      "filePath": "_guest/$pageId/index.lazy.tsx",
+      "filePath": "_guest/$pageId/index.tsx",
+      "parent": "/_guest"
+    },
+    "/_guest/$pageId/$id/": {
+      "filePath": "_guest/$pageId/$id/index.tsx",
       "parent": "/_guest"
     },
     "/_authenticated/admin/albums/": {

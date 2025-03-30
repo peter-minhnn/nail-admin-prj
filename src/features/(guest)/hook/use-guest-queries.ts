@@ -1,4 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
+import { BannerFilterParams } from '@/entities/(guest)/banner'
+import { ProductFilterParams } from '@/entities/(guest)/product'
+import { getAlbums } from '@/services/guest/guest.album.service'
+import {
+  getProductDetail,
+  getProducts,
+  getProductTypes,
+} from '@/services/guest/guest.product.service'
 import {
   getBanners,
   getPostDetail,
@@ -6,10 +14,6 @@ import {
 } from '@/services/guest/home.service'
 import { PostsFilterParams } from '@/types'
 import get from 'lodash/get'
-import { getAlbums } from '@/services/guest/guest.album.service'
-import { getProductDetail, getProducts, getProductTypes } from '@/services/guest/guest.product.service'
-import { ProductFilterParams } from '@/entities/(guest)/product'
-import { BannerFilterParams } from '@/entities/(guest)/banner'
 
 export const useGetPosts = (params: PostsFilterParams) => {
   return useQuery({
@@ -30,8 +34,8 @@ export const useGetPostDetail = (id: number) => {
   return useQuery({
     queryKey: ['post', id],
     queryFn: async () => await getPostDetail(id),
-    select: (response) =>
-      get(response, ['result']), refetchOnWindowFocus: false,
+    select: (response) => get(response, ['result']),
+    refetchOnWindowFocus: false,
   })
 }
 export const useGetBanners = (params: BannerFilterParams) => {
@@ -48,7 +52,7 @@ export const useGetBanners = (params: BannerFilterParams) => {
 
 export const useGetAlbums = () => {
   return useQuery({
-    queryKey: ['album',],
+    queryKey: ['album'],
     queryFn: async () => await getAlbums(),
     select: (response) =>
       get(response, ['result'], {
@@ -60,7 +64,7 @@ export const useGetAlbums = () => {
 
 export const useGetProductTypes = () => {
   return useQuery({
-    queryKey: ['productTypes',],
+    queryKey: ['productTypes'],
     queryFn: async () => await getProductTypes(),
     select: (response) =>
       get(response, ['result'], {
@@ -90,8 +94,7 @@ export const useGetProductDetail = (id: number) => {
   return useQuery({
     queryKey: ['product', id],
     queryFn: async () => await getProductDetail(id),
-    select: (response) =>
-      get(response, ['result']), refetchOnWindowFocus: false,
+    select: (response) => get(response, ['result']),
+    refetchOnWindowFocus: false,
   })
 }
-

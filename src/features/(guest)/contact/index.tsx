@@ -1,13 +1,17 @@
-import { menuRoutes } from '@/entities/(guest)/routes.ts'
-import { Container } from '@/components/(guest)/layout/container.tsx'
-import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useEffect, useState } from 'react'
-import { BannerDataType, bannersListSchema, BannerFilterParams } from '@/entities/(guest)/banner'
+import {
+  BannerDataType,
+  bannersListSchema,
+  BannerFilterParams,
+} from '@/entities/(guest)/banner'
+import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import get from 'lodash/get'
-import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
-import Banner from '@/components/(guest)/layout/banner'
-import { Navbar } from '@/components/(guest)/layout/nav-bar'
 import { useIntl } from 'react-intl'
+import Banner from '@/components/(guest)/layout/banner'
+import { Container } from '@/components/(guest)/layout/container.tsx'
+import { Navbar } from '@/components/(guest)/layout/nav-bar'
+import PageContainer from '@/components/(guest)/layout/page-container.tsx'
+import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import ContactForm from './components/contact-form'
 
 export default function ProductsComponent() {
@@ -16,7 +20,7 @@ export default function ProductsComponent() {
   const [filterParams] = useState<BannerFilterParams>({
     type: 6,
     take: 10,
-    page: 1
+    page: 1,
   })
   const [banner, setBanner] = useState<BannerDataType | null>(null)
   const { data, status, isRefetching } = useGetBanners(filterParams)
@@ -24,33 +28,31 @@ export default function ProductsComponent() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const bannersData = bannersListSchema.parse(list);
+    const bannersData = bannersListSchema.parse(list)
     if (bannersData.length > 0) {
-      setBanner(bannersData[0]);
+      setBanner(bannersData[0])
     }
   }, [data, status, isRefetching])
 
-
-
   return (
     <PageContainer
-      title={intl.formatMessage({ id: "guest.contact.pageTitle" })}
-      description={intl.formatMessage({ id: "guest.contact.pageTitle" })}
+      title={intl.formatMessage({ id: 'guest.contact.pageTitle' })}
+      description={intl.formatMessage({ id: 'guest.contact.pageTitle' })}
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
       <Banner path={banner?.url}>
         <Navbar />
-        <div className="absolute top-1/2 h-screen w-screen items-center justify-center">
+        <div className='absolute top-1/2 h-screen w-screen items-center justify-center'>
           <p
-            className={`text-center text-8xl font-normal  text-white philosopher-regular `}
+            className={`philosopher-regular text-center text-8xl font-normal text-white`}
           >
-            {intl.formatMessage({ id: "guest.contact.pageTitle" })}
+            {intl.formatMessage({ id: 'guest.contact.pageTitle' })}
           </p>
         </div>
       </Banner>
       <Container>
-        <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED] my-32  '>
+        <div className='my-32 grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
           <ContactForm />
         </div>
       </Container>

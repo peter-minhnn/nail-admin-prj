@@ -5,12 +5,12 @@ import { createQueryParams } from '@/utils'
 export const apiGuestRoutes = {
   post: {
     general: '/post/published',
-    withId: (id: number) => `/posts/published/${id}`
+    withId: (id: number) => `/posts/published/${id}`,
   },
   posts: {
     general: '/posts/published',
     withParams: (params: PostsFilterParams) =>
-      `/posts/published${createQueryParams({ ...params, order: 'DESC' })}`
+      `/posts/published${createQueryParams({ ...params, order: 'DESC' })}`,
   },
   banners: {
     general: '/banners/published',
@@ -19,21 +19,19 @@ export const apiGuestRoutes = {
   },
   albums: {
     general: '/albums/published',
-    withParams: () =>
-      `/albums/published`
+    withParams: () => `/albums/published`,
   },
   productTypes: {
     general: '/productTypes/published',
-    withParams: () =>
-      `/productTypes/published`
+    withParams: () => `/productTypes/published`,
   },
   products: {
     general: '/products/published',
     withParams: (params: PostsFilterParams) =>
-      `/products/published${createQueryParams({ ...params, order: 'ASC' })}`
+      `/products/published${createQueryParams({ ...params, order: 'ASC' })}`,
   },
   product: {
     general: '/products/published',
-    withId: (id: number) => `/products/published/${id}`
+    withId: (id: number) => `/products/published/${id}`,
   },
 }

@@ -1,19 +1,25 @@
 import AboutUsComponent from '@/features/(guest)/about'
 import ActivitiesComponent from '@/features/(guest)/activity'
 import ContactComponent from '@/features/(guest)/contact'
+import GuestNotFound from '@/features/(guest)/errors/not-found'
+import PostDetailComponent from '@/features/(guest)/post-detail'
+import ProductDetailComponent from '@/features/(guest)/product-detail'
 import ProductsComponent from '@/features/(guest)/products'
 import ServicesComponent from '@/features/(guest)/services'
 import TrainingComponent from '@/features/(guest)/training'
-import PostDetailComponent from '@/features/(guest)/post-detail'
-import ProductDetailComponent from '@/features/(guest)/product-detail'
 
-export const pageComponents = {
-  've-chung-toi': <AboutUsComponent />,
-  'dich-vu': <ServicesComponent />,
-  'dao-tao': <TrainingComponent />,
-  'san-pham': <ProductsComponent />,
-  'lien-he': <ContactComponent />,
-  'hoat-dong': <ActivitiesComponent />,
-  'post': <PostDetailComponent />,
-  'product': <ProductDetailComponent />
-}
+export const pageComponents = (pageId: string) =>
+  ({
+    've-chung-toi': <AboutUsComponent />,
+    'dich-vu': <ServicesComponent />,
+    'dao-tao': <TrainingComponent />,
+    'san-pham': <ProductsComponent />,
+    'lien-he': <ContactComponent />,
+    'hoat-dong': <ActivitiesComponent />,
+  })[pageId] ?? <GuestNotFound />
+
+export const pageDetailComponents = (pageId: string, id: string) =>
+  ({
+    'san-pham': <ProductDetailComponent id={Number(id)} />,
+    'bai-viet': <PostDetailComponent id={Number(id)} />,
+  })[pageId] ?? <GuestNotFound />

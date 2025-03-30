@@ -1,13 +1,11 @@
 import { z } from 'zod'
 
-
 export type ProductFilterParams = {
-  productType: number,
+  productType: number
   page: number
   take: number
   order?: 'ASC' | 'DESC'
 }
-
 
 const GuestProductTypeSchema = z.object({
   id: z.number().int().optional(),
@@ -15,11 +13,9 @@ const GuestProductTypeSchema = z.object({
   desc: z.string().optional(),
 })
 
-
 const GuestProductTypeListSchema = z.array(GuestProductTypeSchema)
 
 type GuestProductTypeType = z.infer<typeof GuestProductTypeSchema>
-
 
 const GuestProductDetailTypeSchema = z.object({
   productName: z.string(),
@@ -36,11 +32,14 @@ const GuestProductDetailTypeSchema = z.object({
   thumbnail: z.string().url(),
 })
 
-
 const GuestProductDetailListSchema = z.array(GuestProductDetailTypeSchema)
 type GuestProductDetailType = z.infer<typeof GuestProductDetailTypeSchema>
 
-
 export type { GuestProductTypeType, GuestProductDetailType }
 
-export { GuestProductTypeSchema, GuestProductTypeListSchema, GuestProductDetailListSchema, GuestProductDetailTypeSchema }
+export {
+  GuestProductTypeSchema,
+  GuestProductTypeListSchema,
+  GuestProductDetailListSchema,
+  GuestProductDetailTypeSchema,
+}

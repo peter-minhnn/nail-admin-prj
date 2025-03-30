@@ -1,11 +1,11 @@
 {
-    "homeGuest.refreshBtn": "Làm mới",
-    "homeGuest.success": "Thành công",
-    "homeGuest.id": "ID",
-    "homeGuest.title": "Tiêu đề",
-    "homeGuest.completed": "Hoàn thành",
-    "homeGuest.service": "DỊCH VỤ",
-    "homeGuest.activity": "HOẠT ĐỘNG",
-    "homeGuest.collection": "BỘ SƯU TẬP",
-    "homeGuest.more": "Xem thêm"
+  "homeGuest.refreshBtn": "Làm mới",
+  "homeGuest.success": "Thành công",
+  "homeGuest.id": "ID",
+  "homeGuest.title": "Tiêu đề",
+  "homeGuest.completed": "Hoàn thành",
+  "homeGuest.service": "DỊCH VỤ",
+  "homeGuest.activity": "HOẠT ĐỘNG",
+  "homeGuest.collection": "BỘ SƯU TẬP",
+  "homeGuest.more": "Xem thêm"
 }

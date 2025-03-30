@@ -1,6 +1,9 @@
 import { z } from 'zod'
 
-const GuestPostsPublishStatusSchema = z.union([z.literal(true), z.literal(false)])
+const GuestPostsPublishStatusSchema = z.union([
+  z.literal(true),
+  z.literal(false),
+])
 
 const GuestPostsTypeSchema = z.union([
   z.literal('news'),
@@ -13,7 +16,9 @@ const GuestPostsTypeSchema = z.union([
 const GuestPostsSchema = z.object({
   id: z.number().int().optional(),
   title: z.string().min(1, { message: 'GuestPosts.errors.titleViRequired' }),
-  content: z.string().min(1, { message: 'GuestPosts.errors.contentViRequired' }),
+  content: z
+    .string()
+    .min(1, { message: 'GuestPosts.errors.contentViRequired' }),
   thumbnail: z.any().optional(),
   postType: GuestPostsTypeSchema,
   isPublish: GuestPostsPublishStatusSchema,

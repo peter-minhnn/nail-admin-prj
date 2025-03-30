@@ -41,7 +41,11 @@ type BannerFilterParams = {
   take: number
 }
 
-
-export type { BannerDataType, BannerPublishType, BannerStatusType, BannerFilterParams }
+export type {
+  BannerDataType,
+  BannerPublishType,
+  BannerStatusType,
+  BannerFilterParams,
+}
 
 export { bannerSchema, bannersListSchema }

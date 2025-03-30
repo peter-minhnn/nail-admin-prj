@@ -1,29 +1,30 @@
-import { GuestProductTypeType, GuestProductTypeListSchema } from "@/entities/(guest)/product"
-import { useEffect, useState } from "react"
-import { useGetProductTypes } from "../../hook/use-guest-queries"
-import get from "lodash/get";
-import ProductSlider from "./product-slider";
+import { useEffect, useState } from 'react'
+import {
+  GuestProductTypeType,
+  GuestProductTypeListSchema,
+} from '@/entities/(guest)/product'
+import get from 'lodash/get'
+import { useGetProductTypes } from '../../hook/use-guest-queries'
+import ProductSlider from './product-slider'
 
-export default function () {
+export default function ProductSection() {
+  const [productTypes, setProductTypes] = useState<GuestProductTypeType[]>([])
 
-    const [productTypes, setProductTypes] = useState<GuestProductTypeType[]>([])
+  const { data, status, isRefetching } = useGetProductTypes()
 
-    const { data, status, isRefetching } = useGetProductTypes();
+  useEffect(() => {
+    if (status === 'pending' || isRefetching) return
+    const list = get(data, ['data'], [])
+    const productTypes = GuestProductTypeListSchema.parse(list)
+    setProductTypes(productTypes)
+  }, [data, status, isRefetching])
 
-    useEffect(() => {
-        if (status === 'pending' || isRefetching) return
-        const list = get(data, ['data'], [])
-        const productTypes = GuestProductTypeListSchema.parse(list);
-        setProductTypes(productTypes);
-    }, [data, status, isRefetching])
-
-    return (<div>
-        {((productTypes ?? []).map((item, index) => {
-            const isRightSide = index % 2 == 0;
-            return (<ProductSlider
-                leftSide={!isRightSide}
-                item={item}
-            />)
-        }))}
-    </div>);
+  return (
+    <>
+      {(productTypes ?? []).map((item, index) => {
+        const isRightSide = index % 2 == 0
+        return <ProductSlider leftSide={!isRightSide} item={item} />
+      })}
+    </>
+  )
 }

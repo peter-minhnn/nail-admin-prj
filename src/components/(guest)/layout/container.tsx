@@ -21,7 +21,7 @@ export function Container(props: Readonly<ContainerProps>) {
   return (
     <>
       {memoizedHeader}
-      <div className={""}>
+      <div className={''}>
         {children}
         <Footer />
       </div>

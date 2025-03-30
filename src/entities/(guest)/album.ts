@@ -34,6 +34,10 @@ type GuestAlbumDataType = z.infer<typeof GuestAlbumSchema>
 type GuestAlbumDetailDataType = z.infer<typeof GuestAlbumDetailSchema>
 type GuestAlbumStatusType = z.infer<typeof GuestAlbumStatusSchema>
 
-export type { GuestAlbumDataType, GuestAlbumDetailDataType, GuestAlbumStatusType }
+export type {
+  GuestAlbumDataType,
+  GuestAlbumDetailDataType,
+  GuestAlbumStatusType,
+}
 
 export { GuestAlbumSchema, GuestAlbumDetailSchema, GuestAlbumListSchema }
