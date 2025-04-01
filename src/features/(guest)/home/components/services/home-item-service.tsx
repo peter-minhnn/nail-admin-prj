@@ -1,15 +1,16 @@
-import { GuestPostDataType } from '@/entities/(guest)/post'
+import { PostPublicType } from '@/entities/(guest)/post'
+import { pagePublicRouters } from '@/entities/(guest)/routes'
 
 interface ServiceProps {
-  item: GuestPostDataType
+  item: PostPublicType
   height?: string
   imgheight?: string
 }
 
 export default function HomeItemService(props: Readonly<ServiceProps>) {
   return (
-    <a href={`/dich-vus`}>
-      <div className={`flex flex-col ${props.height} w-full`}>
+    <a href={`${pagePublicRouters.postDetail}/${props.item.id}`}>
+      <div className={`flex flex-col ${props.height} w-[416px]`}>
         <div className='items-start text-start'>
           <img
             alt=''
@@ -20,7 +21,7 @@ export default function HomeItemService(props: Readonly<ServiceProps>) {
         <p
           className={`roboto-regular mb-3 mt-7 line-clamp-1 text-start text-xl`}
         >
-          {props.item.title}
+          {props.item.id}
         </p>
         <div
           className={`roboto-light line-clamp-2 bg-transparent text-start text-base`}

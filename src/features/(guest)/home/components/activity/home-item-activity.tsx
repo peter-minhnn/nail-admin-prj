@@ -1,28 +1,33 @@
-import { GuestPostDataType } from '@/entities/(guest)/post'
+import { PostPublicType } from '@/entities/(guest)/post'
+import { pagePublicRouters } from '@/entities/(guest)/routes'
+import { cn } from '@/lib/utils'
 
 interface ActivitiesProps {
-  item: GuestPostDataType
-  imgHeight?: string
+  item?: PostPublicType
+  className?: string
 }
-export default function HomeItemActivity(data: Readonly<ActivitiesProps>) {
+export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
+  if (props.item == null) return <div />;
   return (
-    <div className='w-full flex-col items-start justify-start'>
-      <img
-        className={`w-full ${data.imgHeight} rounded-sm object-cover transition-transform duration-300 hover:scale-110`}
-        src={data.item.thumbnail}
-        alt=''
-      />
-      <div className='mt-3 h-fit flex-1'>
-        <h2 className={`roboto-bold line-clamp-1 text-start`}>
-          {data.item.title}
-        </h2>
-        <div
-          className={`roboto-light line-clamp-2 bg-transparent text-start`}
-          dangerouslySetInnerHTML={{
-            __html: data.item.content.replace('background-color', ''),
-          }}
+    <a href={`${pagePublicRouters.postDetail}/${props.item.id}`} className='w-full'>
+      <div className='items-start justify-start'>
+        <img className={cn("w-full h-full rounded-sm object-cover transition-transform duration-300 hover:scale-110", props.className)}
+          src={props.item.thumbnail}
+          alt=''
         />
+        <div className='mt-3 h-fit flex-1'>
+          <h2 className={`roboto-bold line-clamp-1 text-start`}>
+            {props.item.title}
+          </h2>
+          <div
+            className={`roboto-light line-clamp-2 bg-transparent text-start`}
+            dangerouslySetInnerHTML={{
+              __html: props.item.content.replace('background-color', ''),
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </a>
+
   )
 }

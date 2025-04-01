@@ -24,7 +24,7 @@ export default function AboutUsComponent() {
           <Navbar />
           <div className='absolute top-1/2 h-screen w-screen items-center justify-center'>
             <p
-              className={`philosopher-regular text-center text-8xl font-normal text-white`}
+              className={`philosopher-regular text-center text-8xl font-normal text-white px-6`}
             >
               {intl.formatMessage({ id: 'aboutUs.pageTitle' })}
             </p>

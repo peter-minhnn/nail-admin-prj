@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import { BannerFilterParams } from '@/entities/(guest)/banner'
 import { ProductFilterParams } from '@/entities/(guest)/product'
 import { getAlbums } from '@/services/guest/guest.album.service'
 import {
@@ -14,6 +13,7 @@ import {
 } from '@/services/guest/home.service'
 import { PostsFilterParams } from '@/types'
 import get from 'lodash/get'
+import { BannerPublicFilterParams } from '@/entities/(guest)/banner'
 
 export const useGetPosts = (params: PostsFilterParams) => {
   return useQuery({
@@ -38,7 +38,7 @@ export const useGetPostDetail = (id: number) => {
     refetchOnWindowFocus: false,
   })
 }
-export const useGetBanners = (params: BannerFilterParams) => {
+export const useGetBanners = (params: BannerPublicFilterParams) => {
   return useQuery({
     queryKey: ['banner', params],
     queryFn: async () => await getBanners(params),

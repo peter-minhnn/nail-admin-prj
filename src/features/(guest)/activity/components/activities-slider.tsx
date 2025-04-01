@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  GuestPostDataType,
-  GuestPostsListSchema,
-} from '@/entities/(guest)/post'
+import { PostPublicType } from '@/entities/(guest)/post'
 import { PostsFilterParams } from '@/types'
 import get from 'lodash/get'
 // Import Swiper styles
@@ -20,7 +17,7 @@ export default function ActivitiesSlider() {
     take: 40,
   })
 
-  const [activitiesGroup, setActivitiesGroup] = useState<GuestPostDataType[][]>(
+  const [activitiesGroup, setActivitiesGroup] = useState<PostPublicType[][]>(
     []
   )
   const { data, status, isRefetching } = useGetPosts(filterParams)
@@ -28,8 +25,8 @@ export default function ActivitiesSlider() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['list'], [])
-    setActivitiesGroup(splitList(GuestPostsListSchema.parse(list)))
-  }, [data, status, isRefetching, activitiesGroup])
+    setActivitiesGroup(splitList(list))
+  }, [data, status, isRefetching])
 
   function splitList<T>(list: T[]): T[][] {
     let result: T[][] = []
@@ -51,8 +48,8 @@ export default function ActivitiesSlider() {
         modules={[Pagination]}
         className='mb-11 bg-transparent'
       >
-        {activitiesGroup.map((item) => {
-          return <ActivitesGrid items={item} />
+        {activitiesGroup.map((item, index) => {
+          return <ActivitesGrid key={index} items={item} />
         })}
       </Swiper>
     </div>

@@ -2,10 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { menuRoutes } from '@/entities/(guest)'
-import {
-  GuestPostDataType,
-  GuestPostsListSchema,
-} from '@/entities/(guest)/post'
+import { PostPublicType } from '@/entities/(guest)/post'
 import { ListResponseType, PostsFilterParams } from '@/types'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
@@ -34,7 +31,7 @@ export default function ServicesSlider() {
   })
 
   const [dataSource, setDataSource] = useState<
-    ListResponseType<GuestPostDataType>
+    ListResponseType<PostPublicType>
   >({
     data: [],
     meta: {
@@ -51,7 +48,7 @@ export default function ServicesSlider() {
       page: 1,
       take: 10,
     })
-    setDataSource({ data: GuestPostsListSchema.parse(list), meta })
+    setDataSource({ data: list, meta })
   }, [data, status, isRefetching])
 
   return (dataSource.data ?? []).length == 0 ? (
@@ -106,22 +103,18 @@ export default function ServicesSlider() {
             }}
             spaceBetween={32}
             modules={[Navigation, Pagination]}
-            breakpoints={{
-              480: { slidesPerView: 1 },
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3.2 },
-            }}
+            slidesPerView={"auto"}
             loop={false}
             className='relative flex h-[624px] w-full pl-16'
           >
             {(dataSource.data ?? []).map((item, index) => {
               const itemHeight: string =
-                index == activeIndex ? 'sm:h-[512px] h-[416px]' : 'h-[416px] '
+                index == activeIndex ? 'md:h-[512px] h-[416px] w-[416px]' : 'h-[416px] w-[416px]'
               const height: string =
-                index == activeIndex ? 'sm:h-[624px] h-[528px]' : 'h-[528px] '
+                index == activeIndex ? 'md:h-[624px] h-[528px] w-[416px]' : 'h-[528px] w-[416px]'
               return (
-                <SwiperSlide key={index}>
-                  <div className={`flex h-full items-end`}>
+                <SwiperSlide key={index} className='!w-[416px]'>
+                  <div className={`flex h-full w-[416px] items-end`}>
                     <HomeItemService
                       item={item}
                       height={height}

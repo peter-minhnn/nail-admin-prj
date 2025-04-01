@@ -3,7 +3,7 @@ import { Container } from '@/components/(guest)/layout/container.tsx'
 import { Navbar } from '@/components/(guest)/layout/nav-bar'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import TrainingBanner from './components/training-banner'
-import TrainingIndustries from './components/training-industries'
+import TrainingPostsSection from './components/training-posts-section'
 
 export default function TrainingComponent() {
   return (
@@ -18,8 +18,8 @@ export default function TrainingComponent() {
           <Navbar />
           <TrainingBanner />
         </div>
-        <div className='grid min-h-screen items-center justify-items-center'>
-          <TrainingIndustries />
+        <div className='grid items-center justify-items-center'>
+          <TrainingPostsSection />
         </div>
       </Container>
     </PageContainer>

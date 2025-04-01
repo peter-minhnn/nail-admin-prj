@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
-  BannerDataType,
-  bannersListSchema,
-  BannerFilterParams,
+  BannerPublicDataType,
+  BannerPublicFilterParams
 } from '@/entities/(guest)/banner'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import get from 'lodash/get'
@@ -17,18 +16,18 @@ import ContactForm from './components/contact-form'
 export default function ProductsComponent() {
   const intl = useIntl()
 
-  const [filterParams] = useState<BannerFilterParams>({
+  const [filterParams] = useState<BannerPublicFilterParams>({
     type: 6,
     take: 10,
     page: 1,
   })
-  const [banner, setBanner] = useState<BannerDataType | null>(null)
+  const [banner, setBanner] = useState<BannerPublicDataType | null>(null)
   const { data, status, isRefetching } = useGetBanners(filterParams)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const bannersData = bannersListSchema.parse(list)
+    const bannersData: BannerPublicDataType[] = list;
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }
@@ -41,7 +40,7 @@ export default function ProductsComponent() {
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
-      <Banner path={banner?.url}>
+      <Banner path={banner?.url ?? ""}>
         <Navbar />
         <div className='absolute top-1/2 h-screen w-screen items-center justify-center'>
           <p

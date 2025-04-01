@@ -1,5 +1,3 @@
-import { z } from 'zod'
-
 export type ProductFilterParams = {
   productType: number
   page: number
@@ -7,39 +5,25 @@ export type ProductFilterParams = {
   order?: 'ASC' | 'DESC'
 }
 
-const GuestProductTypeSchema = z.object({
-  id: z.number().int().optional(),
-  name: z.string().optional(),
-  desc: z.string().optional(),
-})
+type GuestProductTypeType = {
+  id: number,
+  name: string,
+  desc: string,
+}
 
-const GuestProductTypeListSchema = z.array(GuestProductTypeSchema)
-
-type GuestProductTypeType = z.infer<typeof GuestProductTypeSchema>
-
-const GuestProductDetailTypeSchema = z.object({
-  productName: z.string(),
-  description: z.string(),
-  id: z.number(),
-  productType: z.number(),
-  sortOrder: z.number(),
-  isActive: z.boolean(),
-  isDeleted: z.boolean(),
-  createdAt: z.string().datetime(),
-  createdBy: z.string(),
-  updatedAt: z.string().datetime(),
-  updatedBy: z.string(),
-  thumbnail: z.string().url(),
-})
-
-const GuestProductDetailListSchema = z.array(GuestProductDetailTypeSchema)
-type GuestProductDetailType = z.infer<typeof GuestProductDetailTypeSchema>
+type GuestProductDetailType = {
+  productName: string,
+  description: string,
+  id: number,
+  productType: number,
+  sortOrder: number,
+  isActive: boolean,
+  isDeleted: boolean,
+  createdAt: string,
+  createdBy: string,
+  updatedAt: string,
+  updatedBy: string,
+  thumbnail: string,
+}
 
 export type { GuestProductTypeType, GuestProductDetailType }
-
-export {
-  GuestProductTypeSchema,
-  GuestProductTypeListSchema,
-  GuestProductDetailListSchema,
-  GuestProductDetailTypeSchema,
-}

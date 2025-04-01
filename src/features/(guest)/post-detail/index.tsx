@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { GuestPostDataType } from '@/entities/(guest)/post'
+import { PostPublicType } from '@/entities/(guest)/post'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import { Container } from '@/components/(guest)/layout/container.tsx'
@@ -15,8 +15,8 @@ export default function PostDetailComponent({
   id,
 }: Readonly<PostDetailComponentProps>) {
   const intl = useIntl()
-  const [postDetail, setPostDetail] = useState<GuestPostDataType>()
-  const { data, status, isRefetching } = useGetPostDetail(id) ///hard post id
+  const [postDetail, setPostDetail] = useState<PostPublicType>()
+  const { data, status, isRefetching } = useGetPostDetail(id)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return

@@ -1,4 +1,6 @@
-interface AboutThirdItem {
+import AboutThirdItemView from "./about-third-item"
+
+export interface AboutThirdItem {
   title?: string
   desctiption: string
 }
@@ -29,9 +31,9 @@ export default function AboutThirdSection(
             <img srcSet='/images/dejavu-hidden.png' className='w-full' />
           </div>
           <div className='absolute flex flex-1 items-center justify-center'>
-            <div className='w-full px-20 lg:w-1/2 lg:px-0'>
+            <div className='w-full md:px-20 px-6 lg:!w-1/2 lg:px-0'>
               {props.items.map((item) => {
-                return itemVIew(item)
+                return <AboutThirdItemView item={item} />
               })}
             </div>
           </div>
@@ -39,20 +41,5 @@ export default function AboutThirdSection(
       </div>
     </div>
   )
-
-  function itemVIew(item: AboutThirdItem) {
-    return (
-      <div className='flex py-4'>
-        <p className={`roboto-regular w-1/5 text-xl`}>{item.title}</p>
-        <hr className='border-t-1 mx-8 w-1/5 border-[#A1A1AA]' />
-        <div className='w-2/5 flex-1'>
-          <p
-            className={`roboto-light sm:line-clamp-8 line-clamp-6 text-base font-light`}
-          >
-            {item.desctiption}
-          </p>
-        </div>
-      </div>
-    )
-  }
 }
+

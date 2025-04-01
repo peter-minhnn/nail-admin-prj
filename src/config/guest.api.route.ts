@@ -1,4 +1,4 @@
-import { BannerFilterParams } from '@/entities/(guest)/banner'
+import { BannerPublicFilterParams } from '@/entities/(guest)/banner'
 import { PostsFilterParams } from '@/types'
 import { createQueryParams } from '@/utils'
 
@@ -14,7 +14,7 @@ export const apiGuestRoutes = {
   },
   banners: {
     general: '/banners/published',
-    withParams: (params: BannerFilterParams) =>
+    withParams: (params: BannerPublicFilterParams) =>
       `/banners/published${createQueryParams({ ...params })}`,
   },
   albums: {

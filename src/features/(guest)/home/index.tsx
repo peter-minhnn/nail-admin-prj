@@ -1,9 +1,4 @@
 import { useEffect, useState } from 'react'
-import {
-  BannerDataType,
-  BannerFilterParams,
-  bannersListSchema,
-} from '@/entities/(guest)/banner'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import get from 'lodash/get'
 import Banner from '@/components/(guest)/layout/banner.tsx'
@@ -14,21 +9,22 @@ import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import HomeActivities from './components/activity/home-activities'
 import HomeCollects from './components/collects/home-collects'
 import ServicesSlider from './components/services/home-services-slider'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/entities/(guest)/banner'
 
 export default function Home() {
-  const [filterParams] = useState<BannerFilterParams>({
+  const [filterParams] = useState<BannerPublicFilterParams>({
     type: 0,
     take: 10,
     page: 1,
   })
 
-  const [banner, setBanner] = useState<BannerDataType | null>(null)
+  const [banner, setBanner] = useState<BannerPublicDataType | null>(null)
   const { data, status, isRefetching } = useGetBanners(filterParams)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const bannersData = bannersListSchema.parse(list)
+    const bannersData = list;
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }

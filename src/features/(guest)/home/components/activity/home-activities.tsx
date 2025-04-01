@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { menuRoutes } from '@/entities/(guest)'
-import {
-  GuestPostDataType,
-  GuestPostsListSchema,
-} from '@/entities/(guest)/post'
+import { PostPublicType } from '@/entities/(guest)/post'
 import { ListResponseType, PostsFilterParams } from '@/types'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
@@ -19,7 +16,7 @@ export default function HomeActivities() {
   })
 
   const [dataSource, setDataSource] = useState<
-    ListResponseType<GuestPostDataType>
+    ListResponseType<PostPublicType>
   >({
     data: [],
     meta: {
@@ -36,7 +33,7 @@ export default function HomeActivities() {
       page: 1,
       take: 10,
     })
-    setDataSource({ data: GuestPostsListSchema.parse(list), meta })
+    setDataSource({ data: list, meta })
   }, [data, status, isRefetching])
 
   const intl = useIntl()
@@ -57,18 +54,12 @@ export default function HomeActivities() {
           </a>
         </div>
       </div>
-      {renderAtIndex(0)}
-      {renderAtIndex(1)}
-      <div className='flex h-full w-full gap-4'>
-        {renderAtIndex(2)}
-        {renderAtIndex(3)}
+      <HomeItemActivity item={dataSource.data[0]} className='w-full h-[240px]' />
+      <HomeItemActivity item={dataSource.data[1]} className='w-full h-[240px]' />
+      <div className='flex-row flex h-full gap-4'>
+        <HomeItemActivity item={dataSource.data[2]} className=' w-full h-[240px]' />
+        <HomeItemActivity item={dataSource.data[3]} className=' w-full h-[240px]' />
       </div>
     </div>
   )
-
-  function renderAtIndex(index: number) {
-    var item = (dataSource.data ?? [])[index]
-    if (item == null) return <div />
-    return <HomeItemActivity item={item} imgHeight=' flex h-[240px]' />
-  }
 }

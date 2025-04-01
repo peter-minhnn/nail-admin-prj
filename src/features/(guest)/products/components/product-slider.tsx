@@ -2,7 +2,6 @@
 
 import { ReactElement, useEffect, useMemo, useRef, useState } from 'react'
 import {
-  GuestProductDetailListSchema,
   GuestProductDetailType,
   GuestProductTypeType,
   ProductFilterParams,
@@ -15,6 +14,7 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { SwiperClass, SwiperRef } from 'swiper/react'
 import { useGetProducts } from '../../hook/use-guest-queries'
+import { pagePublicRouters } from '@/entities/(guest)'
 
 interface ProductsSliderProps {
   item: GuestProductTypeType
@@ -26,7 +26,7 @@ const ControllButton = ({
   goPrev,
   goNext,
 }: {
-  products: GuestProductTypeType[]
+  products: GuestProductDetailType[]
   goPrev: () => void
   goNext: () => void
 }) => {
@@ -60,7 +60,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   const [filterParams] = useState<ProductFilterParams>({
     productType: props.item.id ?? 0,
     page: 1,
-    take: 10,
+    take: 20,
   })
 
   const [products, setProducts] = useState<GuestProductDetailType[]>([])
@@ -96,7 +96,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['list'], [])
-    const items = GuestProductDetailListSchema.parse(list)
+    const items: GuestProductDetailType[] = list;
 
     setProducts(items)
   }, [data, status, isRefetching])
@@ -106,39 +106,38 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   return (
     <div className='my-16 h-screen w-screen flex-col gap-16'>
       {memoizedHeader}
-      <div className='mt-16 h-[575px] w-full flex-1 items-end justify-end px-16'>
+      <div className='mt-16 h-[575px] w-full flex-1 items-end justify-end sm:pl-16 pl-4'>
         <Swiper
           ref={swiperRef}
           direction={'horizontal'}
           spaceBetween={32}
-          breakpoints={{
-            480: { slidesPerView: 1 },
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
+          slidesPerView={"auto"}
           modules={[Navigation, Pagination]}
           loop={false}
           className='flex h-[575px] w-full flex-col items-center justify-end object-contain'
         >
           {products.map((item) => (
-            <SwiperSlide key={item.id}>
-              <div className='flex h-full w-full flex-col items-center justify-end border-b-2 border-[#E48E43] bg-[#DFDAD4] px-16 pb-9 pt-16'>
-                <img
-                  src={item.thumbnail}
-                  alt=''
-                  className='h-[294px] w-2/3 rounded object-cover pb-14 transition-transform duration-300 hover:scale-110 lg:w-1/2'
-                />
-                <p
-                  className={`roboto-regular mb-3 text-center text-xl font-bold`}
-                >
-                  {item.productName}
-                </p>
-                <p
-                  className={`roboro-light line-clamp-2 text-center text-xl font-extralight`}
-                >
-                  {item.description}
-                </p>
-              </div>
+            <SwiperSlide key={item.id} className='w-[416px]'>
+              <a href={`${pagePublicRouters.productDetail}/${item.id}`} className='w-full' >
+                <div className='flex h-full w-full flex-col items-center justify-end border-b-2 border-[#E48E43] bg-[#DFDAD4] px-16 pb-9 pt-16'>
+                  <img
+                    src={item.thumbnail}
+                    alt=''
+                    className='h-[294px] w-2/3 rounded object-cover pb-14 transition-transform duration-300 hover:scale-110 lg:w-1/2'
+                  />
+                  <p
+                    className={`roboto-regular mb-3 text-center text-xl font-bold`}
+                  >
+                    {item.productName}
+                  </p>
+                  <p
+                    className={`roboro-light line-clamp-2 text-center text-xl font-extralight`}
+                  >
+                    {item.description}
+                  </p>
+                </div>
+              </a>
+
             </SwiperSlide>
           ))}
         </Swiper>

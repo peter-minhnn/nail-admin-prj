@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  BannerDataType,
-  BannerFilterParams,
-  bannersListSchema,
-} from '@/entities/(guest)/banner'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/entities/(guest)/banner'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
@@ -17,18 +13,18 @@ import ActivitiesSlider from './components/activities-slider'
 export default function ActivitiesComponent() {
   const intl = useIntl()
 
-  const [filterParams] = useState<BannerFilterParams>({
+  const [filterParams] = useState<BannerPublicFilterParams>({
     type: 5,
     take: 10,
     page: 1,
   })
-  const [banner, setBanner] = useState<BannerDataType | null>(null)
+  const [banner, setBanner] = useState<BannerPublicDataType | null>(null)
   const { data, status, isRefetching } = useGetBanners(filterParams)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const bannersData = bannersListSchema.parse(list)
+    const bannersData: BannerPublicDataType[] = list;
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }
@@ -41,7 +37,7 @@ export default function ActivitiesComponent() {
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
-      <Banner path={banner?.url}>
+      <Banner path={banner?.url ?? ""}>
         <Navbar />
         <div className='absolute top-20 h-screen w-screen p-20'>
           <p

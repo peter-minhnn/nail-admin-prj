@@ -1,5 +1,5 @@
 import { apiGuestRoutes } from '@/config/guest.api.route.ts'
-import { BannerFilterParams } from '@/entities/(guest)/banner'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/entities/(guest)/banner'
 import { GuestPostDataType } from '@/entities/(guest)/post'
 import {
   handleApiCatchResponse,
@@ -32,12 +32,12 @@ export const getPostDetail = async (id: number) => {
     return handleApiCatchResponse<any>(e)
   }
 }
-export const getBanners = async (params: BannerFilterParams) => {
+export const getBanners = async (params: BannerPublicFilterParams) => {
   try {
     const response = await useGlobalAxios.get<
       null,
       BaseResponseType,
-      GuestPostDataType
+      BannerPublicDataType
     >(apiGuestRoutes.banners.withParams(params))
     return handleApiResponse<any>(response)
   } catch (e) {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
   GuestProductTypeType,
-  GuestProductTypeListSchema,
 } from '@/entities/(guest)/product'
 import get from 'lodash/get'
 import { useGetProductTypes } from '../../hook/use-guest-queries'
@@ -15,7 +14,7 @@ export default function ProductSection() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const productTypes = GuestProductTypeListSchema.parse(list)
+    const productTypes: GuestProductTypeType[] = list;
     setProductTypes(productTypes)
   }, [data, status, isRefetching])
 

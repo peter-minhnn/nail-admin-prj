@@ -1,28 +1,27 @@
 import { useEffect, useState } from 'react'
 import {
-  BannerDataType,
-  bannersListSchema,
-  BannerFilterParams,
+  BannerPublicDataType,
+  BannerPublicFilterParams,
 } from '@/entities/(guest)/banner'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 
 export default function TrainingBanner() {
-  const [filterParams] = useState<BannerFilterParams>({
+  const [filterParams] = useState<BannerPublicFilterParams>({
     type: 3,
     take: 10,
     page: 1,
   })
 
-  const [banners, setBanners] = useState<Array<BannerDataType>>([])
+  const [banners, setBanners] = useState<Array<BannerPublicDataType>>([])
 
   const { data, status, isRefetching } = useGetBanners(filterParams)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const bannersData = bannersListSchema.parse(list)
+    const bannersData: BannerPublicDataType[] = list;
     setBanners(bannersData)
   }, [data, status, isRefetching])
 
@@ -46,29 +45,24 @@ export default function TrainingBanner() {
             <p className={`philosopher-regular py-2 text-5xl text-[#E48E43]`}>
               DEJÀ VU NAIL & SPA
             </p>
-            <p className={`roboto-regular text-base`}>
+            <p className={`roboto-regular text-base text-justify break-all`}>
               {intl.formatMessage({ id: 'training.now' })}
             </p>
           </div>
-          <div className='flex h-[288px] w-[192px]'>{renderBanner(0)}</div>
+          <div className='flex h-[288px] w-[192px]'> <img
+            src={banners[0]?.url ?? ''}
+            className='h-full w-full object-cover'
+            alt=''
+          /></div>
         </div>
       </div>
       <div className='hidden h-full w-full flex-col lg:block'>
-        {renderBanner(1)}
+        <img
+          src={banners[1]?.url ?? ''}
+          className='h-full w-full object-cover'
+          alt=''
+        />
       </div>
     </div>
   )
-
-  function renderBanner(index: number) {
-    if (banners.length == 0) return <div />
-    var item = banners[index]
-    if (item == null) return <div />
-    return (
-      <img
-        src={banners[index].url ?? ''}
-        className='h-full w-full object-cover'
-        alt=''
-      />
-    )
-  }
 }

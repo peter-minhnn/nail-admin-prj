@@ -7,3 +7,8 @@ export const menuRoutes = {
   activity: '/hoat-dong',
   contact: '/lien-he',
 }
+
+export const pagePublicRouters = {
+  productDetail: "/san-pham",
+  postDetail: "/bai-viet"
+}

@@ -1,5 +1,5 @@
 import { apiGuestRoutes } from '@/config/guest.api.route.ts'
-import { GuestAlbumDataType } from '@/entities/(guest)/album'
+import { AlbumPublicType } from '@/entities/(guest)/album'
 import {
   handleApiCatchResponse,
   handleApiResponse,
@@ -12,7 +12,7 @@ export const getAlbums = async () => {
     const response = await useGlobalAxios.get<
       null,
       BaseResponseType,
-      GuestAlbumDataType
+      AlbumPublicType
     >(apiGuestRoutes.albums.withParams())
     return handleApiResponse<any>(response)
   } catch (e) {
