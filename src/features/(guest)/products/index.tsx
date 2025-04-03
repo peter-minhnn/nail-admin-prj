@@ -42,7 +42,7 @@ export default function ProductsComponent() {
     >
       <Banner path={banner?.url ?? ""}>
         <Navbar />
-        <div className='absolute top-1/2 h-screen w-screen items-center justify-center'>
+        <div className='absolute  top-1/2  w-screen items-center justify-center'>
           <p
             className={`philosopher-regular text-center text-8xl font-normal text-white`}
           >
@@ -51,7 +51,8 @@ export default function ProductsComponent() {
         </div>
       </Banner>
       <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
-        <Container>
+        <Container className=' min-h-screen pt-6'>
+          <div className=''></div>
           <ProductSection />
         </Container>
       </div>

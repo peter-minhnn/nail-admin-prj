@@ -71,13 +71,13 @@ export default function ServicesSlider() {
               <img
                 onClick={goPrev}
                 srcSet='/images/svg/arrow_left.svg'
-                className='h-[40px] w-[40px]'
+                className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
                 alt=''
               />
               <img
                 onClick={goNext}
                 srcSet='/images/svg/arrow_right.svg'
-                className='h-[40px] w-[40px]'
+                className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
                 alt=''
               />
             </div>
@@ -113,8 +113,8 @@ export default function ServicesSlider() {
               const height: string =
                 index == activeIndex ? 'md:h-[624px] h-[528px] w-[416px]' : 'h-[528px] w-[416px]'
               return (
-                <SwiperSlide key={index} className='!w-[416px]'>
-                  <div className={`flex h-full w-[416px] items-end`}>
+                <SwiperSlide key={index} className='!w-[416px] '>
+                  <div className={`flex h-[624px] w-[416px] items-end`}>
                     <HomeItemService
                       item={item}
                       height={height}

@@ -1,5 +1,6 @@
 import AboutUsComponent from '@/features/(guest)/about'
 import ActivitiesComponent from '@/features/(guest)/activity'
+import AlbumComponent from '@/features/(guest)/albums'
 import ContactComponent from '@/features/(guest)/contact'
 import GuestNotFound from '@/features/(guest)/errors/not-found'
 import PostDetailComponent from '@/features/(guest)/post-detail'
@@ -16,6 +17,8 @@ export const pageComponents = (pageId: string) =>
     'san-pham': <ProductsComponent />,
     'lien-he': <ContactComponent />,
     'hoat-dong': <ActivitiesComponent />,
+    'bo-suu-tap': <AlbumComponent />,
+
   })[pageId] ?? <GuestNotFound />
 
 export const pageDetailComponents = (pageId: string, id: string) =>

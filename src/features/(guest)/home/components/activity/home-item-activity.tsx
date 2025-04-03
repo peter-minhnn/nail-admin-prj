@@ -10,11 +10,13 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
   if (props.item == null) return <div />;
   return (
     <a href={`${pagePublicRouters.postDetail}/${props.item.id}`} className='w-full'>
-      <div className='items-start justify-start'>
-        <img className={cn("w-full h-full rounded-sm object-cover transition-transform duration-300 hover:scale-110", props.className)}
-          src={props.item.thumbnail}
-          alt=''
-        />
+      <div className='items-start h-full w-full justify-start '>
+        <div className={cn('w-full h-full overflow-hidden', props.className)}>
+          <img className={"w-full h-full rounded-sm object-cover transition-transform duration-300 hover:scale-110"}
+            src={props.item.thumbnail}
+            alt=''
+          />
+        </div>
         <div className='mt-3 h-fit flex-1'>
           <h2 className={`roboto-bold line-clamp-1 text-start`}>
             {props.item.title}

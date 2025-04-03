@@ -6,6 +6,7 @@ export const menuRoutes = {
   products: '/san-pham',
   activity: '/hoat-dong',
   contact: '/lien-he',
+  album: '/bo-suu-tap',
 }
 
 export const pagePublicRouters = {

@@ -15,48 +15,18 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import type { SwiperClass, SwiperRef } from 'swiper/react'
 import { useGetProducts } from '../../hook/use-guest-queries'
 import { pagePublicRouters } from '@/entities/(guest)'
+import ProductSectionHeader from './product-section-header'
 
 interface ProductsSliderProps {
   item: GuestProductTypeType
   leftSide?: boolean
 }
 
-const ControllButton = ({
-  products,
-  goPrev,
-  goNext,
-}: {
-  products: GuestProductDetailType[]
-  goPrev: () => void
-  goNext: () => void
-}) => {
-  return (
-    <div
-      className={`mx-4 w-fit items-end gap-8 ${products.length > 3 ? 'flex' : products.length > 1 ? 'flex md:hidden lg:hidden' : 'hidden'}`}
-    >
-      <img
-        onClick={goPrev}
-        alt=''
-        srcSet='/images/svg/arrow_left.svg'
-        className='h-[40px] w-[40px]'
-      />
-      <img
-        alt=''
-        onClick={goNext}
-        srcSet='/images/svg/arrow_right.svg'
-        className='h-[40px] w-[40px]'
-      />
-    </div>
-  )
-}
 
 export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   const swiperRef = useRef<SwiperRef | null>(null)
-  const goNext = () =>
-    (swiperRef.current as unknown as SwiperClass)?.slideNext()
-  const goPrev = () =>
-    (swiperRef.current as unknown as SwiperClass)?.slidePrev()
-
+  const goNext = () => swiperRef.current?.swiper.slideNext()
+  const goPrev = () => swiperRef.current?.swiper.slidePrev()
   const [filterParams] = useState<ProductFilterParams>({
     productType: props.item.id ?? 0,
     page: 1,
@@ -66,32 +36,6 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   const [products, setProducts] = useState<GuestProductDetailType[]>([])
 
   const { data, status, isRefetching } = useGetProducts(filterParams)
-
-  const memoizedHeader: ReactElement = useMemo(() => {
-    return (props.leftSide ?? true) ? (
-      <div className='h-fit w-screen flex-col px-4 md:px-20 lg:px-44'>
-        <p className={`philosopher-regular text-7xl`}>{props.item.name}</p>
-        <div className='flex flex-1 justify-end gap-3'>
-          <p className={`roboto-regular w-full flex-1 *:text-base`}>
-            {props.item.desc}
-          </p>
-          <ControllButton products={products} goNext={goNext} goPrev={goPrev} />
-        </div>
-      </div>
-    ) : (
-      <div className='flex h-fit w-full flex-1 flex-col items-end justify-end px-4 md:px-20 lg:px-44'>
-        <p className={`philosopher-regular w-fit text-7xl`}>
-          {props.item.name}
-        </p>
-        <div className='flex w-full flex-1 justify-between gap-3'>
-          <ControllButton products={products} goNext={goNext} goPrev={goPrev} />
-          <p className={`roboto-regular w-fit text-end text-base`}>
-            {props.item.desc}
-          </p>
-        </div>
-      </div>
-    )
-  }, [products, props.item, props.leftSide])
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
@@ -104,14 +48,18 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   if (products.length == 0) return <div />
 
   return (
-    <div className='my-16 h-screen w-screen flex-col gap-16'>
-      {memoizedHeader}
+    <div className='my-16 h-fit w-screen flex-col gap-16'>
+      <ProductSectionHeader onNextClick={goNext} onPreviousClick={goPrev} title={props.item.name} description={props.item.desc} />
       <div className='mt-16 h-[575px] w-full flex-1 items-end justify-end sm:pl-16 pl-4'>
         <Swiper
           ref={swiperRef}
           direction={'horizontal'}
           spaceBetween={32}
-          slidesPerView={"auto"}
+          breakpoints={{
+            480: { slidesPerView: 1 },
+            640: { slidesPerView: "auto" },
+          }}
+
           modules={[Navigation, Pagination]}
           loop={false}
           className='flex h-[575px] w-full flex-col items-center justify-end object-contain'
@@ -142,6 +90,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
           ))}
         </Swiper>
       </div>
+
     </div>
   )
 }

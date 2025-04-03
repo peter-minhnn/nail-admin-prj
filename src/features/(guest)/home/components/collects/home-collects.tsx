@@ -21,7 +21,7 @@ export default function HomeCollects() {
           srcSet='/images/hompage_footer_2.png'
           alt=''
         />
-        <a href={menuRoutes.products}>
+        <a href={menuRoutes.album}>
           <Button
             title={intl.formatMessage({
               id: 'guest.common.more',

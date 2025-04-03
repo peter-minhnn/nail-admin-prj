@@ -53,8 +53,8 @@ export default function TrainingPostsSection() {
         />
       </div>
       <div className='flex-col flex gap-8'>
-        {posts.map((items) => {
-          return <TrainingPostTemplate items={items} />
+        {posts.map((items, index) => {
+          return <TrainingPostTemplate key={index} items={items} />
         })}
       </div>
     </div>

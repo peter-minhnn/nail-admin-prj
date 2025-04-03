@@ -20,7 +20,7 @@ export default function AboutFirstImageItem(props: Readonly<AboutFirstItemProps>
     }
 
     return (
-        <div className={`flex h-[281px] w-full bg-red-500 ${mt}`}>
+        <div className={`flex h-[281px] w-full ${mt}`}>
             <img
                 className="h-full w-full rounded-sm object-cover "
                 src={props.image}

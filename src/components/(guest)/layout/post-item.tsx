@@ -9,9 +9,9 @@ interface PostPublicItemProps {
 export default function PostPublicItemView(props: Readonly<PostPublicItemProps>) {
   if (props.data == null) return null;
   return (
-    <div className={`${props.className}`}>
-      <a href={`${pagePublicRouters.postDetail}/${props.data?.id}`}>
-        <div className='relative h-full w-full transition-transform duration-300 hover:scale-110'>
+    <div className={`${props.className} w-full h-full`}>
+      <a href={`${pagePublicRouters.postDetail}/${props.data?.id}`} className='w-full h-full'>
+        <div className='relative h-full w-full group'>
           <div className={`rounded-sm bg-cover bg-center `}>
             <div className='absolute h-full w-full'>
               <img
@@ -21,10 +21,10 @@ export default function PostPublicItemView(props: Readonly<PostPublicItemProps>)
               />
             </div>
             <div className='absolute inset-0 bg-black bg-opacity-20'></div>
-            <div className='absolute inset-0 left-6 top-6 flex items-start justify-start text-2xl font-bold text-white'>
-              {props.data.title}
+            <div className="relative inset-0 w-full h-full top-6 left-6 flex items-start justify-start overflow-hidden ">
+              <p className=' text-2xl font-bold text-white transition-all duration-300 group-hover:translate-x-4 group-hover:translate-y-0'> {props.data.title}</p>
             </div>
-            <div className='absolute inset-0 bottom-6 right-6 flex items-end justify-end'>
+            <div className='absolute inset-0 bottom-6 right-6 flex items-end justify-end transition-transform duration-300 hover:scale-90'>
               <img srcSet='images/svg/ic-arrow-right-white.svg' alt='' />
             </div>
           </div>
@@ -33,3 +33,4 @@ export default function PostPublicItemView(props: Readonly<PostPublicItemProps>)
     </div>
   )
 }
+``

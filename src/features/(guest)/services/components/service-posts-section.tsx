@@ -20,12 +20,13 @@ export default function ServicePostsSection() {
     const list = get(data, ['list'], [])
     setPost(splitList(list))
   }, [data, status, isRefetching])
+
+
   function splitList<T>(list: T[]): T[][] {
     let result: T[][] = []
     for (let i = 0; i < list.length; i += 6) {
       result.push(list.slice(i, i + 6))
     }
-
     return result
   }
 
