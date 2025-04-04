@@ -11,5 +11,11 @@
   "guest.contact.placeholderAddress": "Địa chỉ",
   "guest.contact.placeholderTopic": "Chủ đề",
   "guest.contact.submitRequest": "LIÊN HỆ NGAY",
-  "guest.contact.placeholderContent": "Nội dung"
+  "guest.contact.placeholderContent": "Nội dung",
+  "guest.contatc.errors.name.empty": "Tên không được để trống",
+  "guest.contatc.errors.phone.inValid": "Liên hệ không đúng định dạng",
+  "guest.contatc.errors.email.inValid": "Email không đúng định dạng",
+  "guest.contatc.errors.content.empty": "Nội dung không được để trống",
+  "guest.contatc.errors.topic.empty": "Chủ đề không được để trống",
+  "guest.contatc.errors.address.empty": "Địa chỉ không được để trống"
 }

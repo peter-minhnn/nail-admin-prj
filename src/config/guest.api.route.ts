@@ -34,4 +34,7 @@ export const apiGuestRoutes = {
     general: '/products/published',
     withId: (id: number) => `/products/published/${id}`,
   },
+  contact: {
+    general: '/contacts'
+  }
 }

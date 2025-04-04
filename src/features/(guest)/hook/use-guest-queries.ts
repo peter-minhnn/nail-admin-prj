@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { ProductFilterParams } from '@/entities/(guest)/product'
 import { getAlbums } from '@/services/guest/guest.album.service'
 import {
@@ -11,9 +11,17 @@ import {
   getPostDetail,
   getPosts,
 } from '@/services/guest/home.service'
-import { PostsFilterParams } from '@/types'
+import { PostsFilterParams, ResultType } from '@/types'
 import get from 'lodash/get'
 import { BannerPublicFilterParams } from '@/entities/(guest)/banner'
+import { sendRequests } from '@/services/guest/contact.service'
+import { ContactDataType } from '@/entities/(guest)/contact'
+
+type ContatcsQueryType = {
+  onSuccess?: (response: ResultType) => Promise<void>
+  onError?: (error: Error) => void
+}
+
 
 export const useGetPosts = (params: PostsFilterParams) => {
   return useQuery({
@@ -96,5 +104,16 @@ export const useGetProductDetail = (id: number) => {
     queryFn: async () => await getProductDetail(id),
     select: (response) => get(response, ['result']),
     refetchOnWindowFocus: false,
+  })
+}
+
+export const useSendContact = ({
+  onSuccess,
+  onError,
+}: Readonly<ContatcsQueryType>) => {
+  return useMutation({
+    mutationFn: async (data: ContactDataType) => await sendRequests(data),
+    onSuccess: async (response) => await onSuccess?.(response as ResultType),
+    onError: (error) => onError?.(error),
   })
 }

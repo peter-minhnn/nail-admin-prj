@@ -5,6 +5,7 @@ type AlbumPublicType = {
   name: string,
   details: AlbumPublicDetailType[],
   thumbnail: string,
+  thumbnailTitle: string
 }
 
 type AlbumPublicDetailType = {

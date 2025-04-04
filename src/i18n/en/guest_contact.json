@@ -11,5 +11,11 @@
   "guest.contact.placeholderAddress": "Adress",
   "guest.contact.placeholderTopic": "Topic",
   "guest.contact.submitRequest": "SEND NOW",
-  "guest.contact.placeholderContent": "Content"
+  "guest.contact.placeholderContent": "Content",
+  "guest.contact.errors.name.empty": "Name cannot be empty",
+  "guest.contact.errors.phone.inValid": "Invalid phone number format",
+  "guest.contact.errors.email.inValid": "Invalid email format",
+  "guest.contact.errors.content.empty": "Content cannot be empty",
+  "guest.contact.errors.topic.empty": "Topic cannot be empty",
+  "guest.contact.errors.address.empty": "Address cannot be empty"
 }
