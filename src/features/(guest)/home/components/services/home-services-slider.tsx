@@ -1,14 +1,9 @@
-'use client'
-
 import { useEffect, useState, useRef } from 'react'
 import { menuRoutes } from '@/entities/(guest)'
 import { PostPublicType } from '@/entities/(guest)/post'
 import { ListResponseType, PostsFilterParams } from '@/types'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Button from '@/components/(guest)/layout/button'
@@ -68,18 +63,20 @@ export default function ServicesSlider() {
             <div
               className={`w-full items-start gap-8 ${(dataSource.data ?? []).length > 3 ? 'flex' : (dataSource.data ?? []).length > 2 ? 'flex lg:hidden' : ''}`}
             >
-              <img
-                onClick={goPrev}
-                srcSet='/images/svg/arrow_left.svg'
-                className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
-                alt=''
-              />
-              <img
-                onClick={goNext}
-                srcSet='/images/svg/arrow_right.svg'
-                className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
-                alt=''
-              />
+              <button onClick={goPrev} type='button'>
+                <img
+                  srcSet='/images/svg/arrow_left.svg'
+                  className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
+                  alt=''
+                />
+              </button>
+              <button onClick={goNext} type='button'>
+                <img
+                  srcSet='/images/svg/arrow_right.svg'
+                  className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
+                  alt=''
+                />
+              </button>
             </div>
             <div className='roboto-regular flex w-full items-end justify-end'>
               <a href={menuRoutes.services}>
@@ -103,17 +100,21 @@ export default function ServicesSlider() {
             }}
             spaceBetween={32}
             modules={[Navigation, Pagination]}
-            slidesPerView={"auto"}
+            slidesPerView={'auto'}
             loop={false}
             className='relative flex h-[624px] w-full pl-16'
           >
             {(dataSource.data ?? []).map((item, index) => {
               const itemHeight: string =
-                index == activeIndex ? 'md:h-[512px] h-[416px] w-[416px]' : 'h-[416px] w-[416px]'
+                index == activeIndex
+                  ? 'md:h-[512px] h-[416px] w-[416px]'
+                  : 'h-[416px] w-[416px]'
               const height: string =
-                index == activeIndex ? 'md:h-[624px] h-[528px] w-[416px]' : 'h-[528px] w-[416px]'
+                index == activeIndex
+                  ? 'md:h-[624px] h-[528px] w-[416px]'
+                  : 'h-[528px] w-[416px]'
               return (
-                <SwiperSlide key={index} className='!w-[416px] '>
+                <SwiperSlide key={item.id} className='!w-[416px]'>
                   <div className={`flex h-[624px] w-[416px] items-end`}>
                     <HomeItemService
                       item={item}

@@ -1,8 +1,8 @@
 type BannerPublicDataType = {
-  id: number,
-  title: string,
-  content: string,
-  url: string,
+  id: number
+  title: string
+  content: string
+  url: string
 }
 type BannerPublicFilterParams = {
   type?: number
@@ -10,7 +10,4 @@ type BannerPublicFilterParams = {
   take: number
 }
 
-export type {
-  BannerPublicDataType,
-  BannerPublicFilterParams
-}
+export type { BannerPublicDataType, BannerPublicFilterParams }

@@ -1,4 +1,4 @@
-import AboutThirdItemView from "./about-third-item"
+import AboutThirdItemView from './about-third-item'
 
 export interface AboutThirdItem {
   title?: string
@@ -16,7 +16,11 @@ export default function AboutThirdSection(
       <div className='my-32 h-fit w-fit flex-col'>
         <div className='flex h-[228px] w-screen'>
           <div className='flex w-screen justify-center'>
-            <img srcSet='/images/about_us_5.png' className='h-full w-[416px]' />
+            <img
+              srcSet='/images/about_us_5.png'
+              className='h-full w-[416px]'
+              alt=''
+            />
           </div>
           <div className='absolute flex h-[228px] w-screen items-center truncate'>
             <p className={`philosopher-regular text-8xl`}>
@@ -28,12 +32,12 @@ export default function AboutThirdSection(
 
         <div className='w-full flex-1 items-center justify-center py-32'>
           <div className='absolute w-full flex-1'>
-            <img srcSet='/images/dejavu-hidden.png' className='w-full' />
+            <img srcSet='/images/dejavu-hidden.png' className='w-full' alt='' />
           </div>
           <div className='absolute flex flex-1 items-center justify-center'>
-            <div className='w-full md:px-20 px-6 lg:!w-1/2 lg:px-0'>
+            <div className='w-full px-6 md:px-20 lg:!w-1/2 lg:px-0'>
               {props.items.map((item) => {
-                return <AboutThirdItemView item={item} />
+                return <AboutThirdItemView item={item} key={item.title} />
               })}
             </div>
           </div>
@@ -42,4 +46,3 @@ export default function AboutThirdSection(
     </div>
   )
 }
-

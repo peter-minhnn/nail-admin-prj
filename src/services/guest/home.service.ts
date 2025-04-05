@@ -1,5 +1,8 @@
 import { apiGuestRoutes } from '@/config/guest.api.route.ts'
-import { BannerPublicDataType, BannerPublicFilterParams } from '@/entities/(guest)/banner'
+import {
+  BannerPublicDataType,
+  BannerPublicFilterParams,
+} from '@/entities/(guest)/banner'
 import { GuestPostDataType } from '@/entities/(guest)/post'
 import {
   handleApiCatchResponse,

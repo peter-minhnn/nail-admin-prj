@@ -20,8 +20,7 @@ export default function TrainingBanner() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const list = get(data, ['data'], [])
-    const bannersData: BannerPublicDataType[] = list;
+    const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
     setBanners(bannersData)
   }, [data, status, isRefetching])
 
@@ -45,15 +44,18 @@ export default function TrainingBanner() {
             <p className={`philosopher-regular py-2 text-5xl text-[#E48E43]`}>
               DEJÀ VU NAIL & SPA
             </p>
-            <p className={`roboto-regular text-base text-justify break-all`}>
+            <p className={`roboto-regular break-all text-justify text-base`}>
               {intl.formatMessage({ id: 'training.now' })}
             </p>
           </div>
-          <div className='flex h-[288px] w-[192px]'> <img
-            src={banners[0]?.url ?? ''}
-            className='h-full w-full object-cover'
-            alt=''
-          /></div>
+          <div className='flex h-[288px] w-[192px]'>
+            {' '}
+            <img
+              src={banners[0]?.url ?? ''}
+              className='h-full w-full object-cover'
+              alt=''
+            />
+          </div>
         </div>
       </div>
       <div className='hidden h-full w-full flex-col lg:block'>

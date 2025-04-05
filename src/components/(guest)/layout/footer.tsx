@@ -6,7 +6,7 @@ export function Footer() {
   const navigation = ['Product', 'Features', 'Pricing', 'Company', 'Blog']
   const legal = ['Terms', 'Privacy', 'Legal']
   return (
-    <div className='bg-footer relative rounded-3xl px-6 pb-2'>
+    <div className='bg-footer relative w-full rounded-3xl px-6 pb-2'>
       <div className='mx-auto mt-5 grid max-w-screen-xl grid-cols-1 gap-10 pt-10 lg:grid-cols-5'>
         <div className='lg:col-span-2'>
           <div>

@@ -27,7 +27,7 @@ export default function ProductsComponent() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const bannersData: BannerPublicDataType[] = list;
+    const bannersData: BannerPublicDataType[] = list
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }
@@ -40,9 +40,9 @@ export default function ProductsComponent() {
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
-      <Banner path={banner?.url ?? ""}>
+      <Banner path={banner?.url ?? ''}>
         <Navbar />
-        <div className='absolute  top-1/2  w-screen items-center justify-center'>
+        <div className='absolute top-1/2 w-screen items-center justify-center'>
           <p
             className={`philosopher-regular text-center text-8xl font-normal text-white`}
           >
@@ -51,7 +51,7 @@ export default function ProductsComponent() {
         </div>
       </Banner>
       <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
-        <Container className=' min-h-screen pt-6'>
+        <Container className='min-h-screen pt-6'>
           <div className=''></div>
           <ProductSection />
         </Container>

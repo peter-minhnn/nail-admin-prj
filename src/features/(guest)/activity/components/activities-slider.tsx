@@ -3,12 +3,11 @@ import { PostPublicType } from '@/entities/(guest)/post'
 import { PostsFilterParams } from '@/types'
 import get from 'lodash/get'
 // Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/pagination'
 import { Pagination } from 'swiper/modules'
 import { Swiper } from 'swiper/react'
+import { v4 as uuid } from 'uuid'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
-import ActivitesGrid from './activity-grid'
+import ActivitiesGrid from './activity-grid'
 
 export default function ActivitiesSlider() {
   const [filterParams] = useState<PostsFilterParams>({
@@ -17,9 +16,7 @@ export default function ActivitiesSlider() {
     take: 40,
   })
 
-  const [activitiesGroup, setActivitiesGroup] = useState<PostPublicType[][]>(
-    []
-  )
+  const [activitiesGroup, setActivitiesGroup] = useState<PostPublicType[][]>([])
   const { data, status, isRefetching } = useGetPosts(filterParams)
 
   useEffect(() => {
@@ -48,8 +45,8 @@ export default function ActivitiesSlider() {
         modules={[Pagination]}
         className='mb-11 bg-transparent'
       >
-        {activitiesGroup.map((item, index) => {
-          return <ActivitesGrid key={index} items={item} />
+        {activitiesGroup.map((item) => {
+          return <ActivitiesGrid key={uuid()} items={item} />
         })}
       </Swiper>
     </div>

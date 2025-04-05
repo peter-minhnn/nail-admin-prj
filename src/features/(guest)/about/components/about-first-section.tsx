@@ -1,29 +1,33 @@
-import AboutFirstImageItem from "./about-first-image-item";
+import AboutFirstImageItem from './about-first-image-item'
 
 interface AboutFirstSectionProps {
-  images: Array<string>;
-  title?: string;
-  description?: string;
+  images: Array<string>
+  title?: string
+  description?: string
 }
 
 export default function AboutFirstSection(
   props: Readonly<AboutFirstSectionProps>
 ) {
   return (
-    <div className="h-fit w-screen px-8 bg-[#F2F1ED] py-32">
-      <div className="flex h-[428px] flex-1 justify-center gap-36 ">
-        <div className="flex lg:gap-x-36 md:gap-x-10 gap-x-5 justify-center ">
+    <div className='h-fit w-screen bg-[#F2F1ED] px-8 py-32'>
+      <div className='flex h-[428px] flex-1 justify-center gap-36'>
+        <div className='flex justify-center gap-x-5 md:gap-x-10 lg:gap-x-36'>
           {props.images.map((_, index) => {
-            return <AboutFirstImageItem index={index} image={props.images[index]} />;
+            return (
+              <AboutFirstImageItem
+                index={index}
+                image={props.images[index]}
+                key={_}
+              />
+            )
           })}
         </div>
       </div>
-      <div className="flex min-h-[250px] w-full flex-col items-center justify-center ">
-        <div className="flex h-fit md:w-1/2 w-full flex-col items-center justify-center">
-          <p className={`text-7xl philosopher-regular mb-5`}>
-            {props.title}
-          </p>
-          <p className={`text-base philosopher-regular font-light`}>
+      <div className='flex min-h-[250px] w-full flex-col items-center justify-center'>
+        <div className='flex h-fit w-full flex-col items-center justify-center md:w-1/2'>
+          <p className={`philosopher-regular mb-5 text-7xl`}>{props.title}</p>
+          <p className={`philosopher-regular text-base font-light`}>
             {props.description}
           </p>
         </div>

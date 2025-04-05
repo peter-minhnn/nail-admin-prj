@@ -35,6 +35,6 @@ export const apiGuestRoutes = {
     withId: (id: number) => `/products/published/${id}`,
   },
   contact: {
-    general: '/contacts'
-  }
+    general: '/contacts',
+  },
 }

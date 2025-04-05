@@ -7,12 +7,18 @@ interface ActivitiesProps {
   className?: string
 }
 export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
-  if (props.item == null) return <div />;
+  if (props.item == null) return <div />
   return (
-    <a href={`${pagePublicRouters.postDetail}/${props.item.id}`} className='w-full'>
-      <div className='items-start h-full w-full justify-start '>
-        <div className={cn('w-full h-full overflow-hidden', props.className)}>
-          <img className={"w-full h-full rounded-sm object-cover transition-transform duration-300 hover:scale-110"}
+    <a
+      href={`${pagePublicRouters.postDetail}/${props.item.id}`}
+      className='w-full'
+    >
+      <div className='h-full w-full items-start justify-start'>
+        <div className={cn('h-full w-full overflow-hidden', props.className)}>
+          <img
+            className={
+              'h-full w-full rounded-sm object-cover transition-transform duration-300 hover:scale-110'
+            }
             src={props.item.thumbnail}
             alt=''
           />
@@ -30,6 +36,5 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
         </div>
       </div>
     </a>
-
   )
 }

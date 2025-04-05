@@ -4,9 +4,10 @@ import { pageDetailComponents } from '@/entities/(guest)'
 export const Route = createFileRoute('/_guest/$pageId/$id/')({
   beforeLoad: async ({ params }) => {
     const { pageId, id } = params
-    if (!id) {
+    if (!id || ['undefined', 'null'].includes(id)) {
       throw redirect({
-        to: '/_guest/' + pageId,
+        to: pageId,
+        replace: true,
       })
     }
   },

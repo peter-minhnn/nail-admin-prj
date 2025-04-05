@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { GuestProductDetailType } from '@/entities/(guest)/product'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
+import ReactQuill from 'react-quill-new'
 import { Container } from '@/components/(guest)/layout/container.tsx'
-import { Navbar } from '@/components/(guest)/layout/nav-bar'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetProductDetail } from '../hook/use-guest-queries'
 
@@ -32,14 +32,8 @@ export default function ProductDetailComponent({
       image={''}
     >
       <Container fixedHeader>
-        <div className='relative z-[9999] h-[100px] w-full bg-[#EFE5D2] bg-cover bg-center'>
-          <Navbar />
-        </div>
-        <div className='min-h-[100px]items-center grid justify-items-center bg-[#F2F1ED]'>
-          <div
-            className='min-h-screen w-screen'
-            dangerouslySetInnerHTML={{ __html: postDetail?.description ?? '' }}
-          />
+        <div className='grid items-center justify-items-center bg-[#F2F1ED]'>
+          <ReactQuill value={postDetail?.description ?? ''} readOnly />
         </div>
       </Container>
     </PageContainer>

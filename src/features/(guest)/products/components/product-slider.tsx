@@ -1,6 +1,5 @@
-'use client'
-
-import { ReactElement, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { pagePublicRouters } from '@/entities/(guest)'
 import {
   GuestProductDetailType,
   GuestProductTypeType,
@@ -11,17 +10,15 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
+import type { SwiperRef } from 'swiper/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import type { SwiperClass, SwiperRef } from 'swiper/react'
 import { useGetProducts } from '../../hook/use-guest-queries'
-import { pagePublicRouters } from '@/entities/(guest)'
 import ProductSectionHeader from './product-section-header'
 
 interface ProductsSliderProps {
   item: GuestProductTypeType
   leftSide?: boolean
 }
-
 
 export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   const swiperRef = useRef<SwiperRef | null>(null)
@@ -39,9 +36,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const list = get(data, ['list'], [])
-    const items: GuestProductDetailType[] = list;
-
+    const items: GuestProductDetailType[] = get(data, ['list'], [])
     setProducts(items)
   }, [data, status, isRefetching])
 
@@ -49,24 +44,31 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
 
   return (
     <div className='my-16 h-fit w-screen flex-col gap-16'>
-      <ProductSectionHeader onNextClick={goNext} onPreviousClick={goPrev} title={props.item.name} description={props.item.desc} />
-      <div className='mt-16 h-[575px] w-full flex-1 items-end justify-end sm:pl-16 pl-4'>
+      <ProductSectionHeader
+        onNextClick={goNext}
+        onPreviousClick={goPrev}
+        title={props.item.name}
+        description={props.item.desc}
+      />
+      <div className='mt-16 h-[575px] w-full flex-1 items-end justify-end pl-4 sm:pl-16'>
         <Swiper
           ref={swiperRef}
           direction={'horizontal'}
           spaceBetween={32}
           breakpoints={{
             480: { slidesPerView: 1 },
-            640: { slidesPerView: "auto" },
+            640: { slidesPerView: 'auto' },
           }}
-
           modules={[Navigation, Pagination]}
           loop={false}
           className='flex h-[575px] w-full flex-col items-center justify-end object-contain'
         >
           {products.map((item) => (
             <SwiperSlide key={item.id} className='w-[416px]'>
-              <a href={`${pagePublicRouters.productDetail}/${item.id}`} className='w-full' >
+              <a
+                href={`${pagePublicRouters.productDetail}/${item.id}`}
+                className='w-full'
+              >
                 <div className='flex h-full w-full flex-col items-center justify-end border-b-2 border-[#E48E43] bg-[#DFDAD4] px-16 pb-9 pt-16'>
                   <img
                     src={item.thumbnail}
@@ -85,12 +87,10 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
                   </p>
                 </div>
               </a>
-
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-
     </div>
   )
 }

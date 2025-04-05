@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
-import { BannerPublicDataType, BannerPublicFilterParams } from '@/entities/(guest)/banner'
+import {
+  BannerPublicDataType,
+  BannerPublicFilterParams,
+} from '@/entities/(guest)/banner'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
@@ -24,7 +27,7 @@ export default function ActivitiesComponent() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const bannersData: BannerPublicDataType[] = list;
+    const bannersData: BannerPublicDataType[] = list
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }
@@ -37,7 +40,7 @@ export default function ActivitiesComponent() {
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
-      <Banner path={banner?.url ?? ""}>
+      <Banner path={banner?.url ?? ''}>
         <Navbar />
         <div className='absolute top-20 h-screen w-screen p-20'>
           <p

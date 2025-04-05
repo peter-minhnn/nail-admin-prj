@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
   BannerPublicDataType,
-  BannerPublicFilterParams
+  BannerPublicFilterParams,
 } from '@/entities/(guest)/banner'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import get from 'lodash/get'
@@ -12,9 +12,9 @@ import { Navbar } from '@/components/(guest)/layout/nav-bar'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import ContactForm from './components/contact-form'
-import ContactTextInfo from './components/contact-text-info'
-import ContactSocialView from './components/contact-social-view'
 import ContactMap from './components/contact-map'
+import ContactSocialView from './components/contact-social-view'
+import ContactTextInfo from './components/contact-text-info'
 
 export default function ProductsComponent() {
   const intl = useIntl()
@@ -30,7 +30,7 @@ export default function ProductsComponent() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['data'], [])
-    const bannersData: BannerPublicDataType[] = list;
+    const bannersData: BannerPublicDataType[] = list
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }
@@ -43,7 +43,7 @@ export default function ProductsComponent() {
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
-      <Banner path={banner?.url ?? ""}>
+      <Banner path={banner?.url ?? ''}>
         <Navbar />
         <div className='absolute top-1/2 w-screen items-center justify-center'>
           <p
@@ -61,9 +61,20 @@ export default function ProductsComponent() {
             </p>
             <div className='grid h-fit w-screen grid-cols-1 grid-rows-2 px-10 py-16 md:grid-cols-3 md:grid-rows-1 md:px-44'>
               <div className='col-span-1 flex h-full w-full flex-col gap-9'>
-                <ContactTextInfo label={intl.formatMessage({ id: 'guest.contact.email' })} value={'LinhVu@dejavunailspa.net'} />
-                <ContactTextInfo label={intl.formatMessage({ id: 'guest.contact.phone' })} value={'+84 98 982 10 42'} />
-                <ContactTextInfo label={intl.formatMessage({ id: 'guest.contact.address' })} value={'839/3 Lê Hồng Phong Phường 12, Quận 10 TP. Hồ Chí Minh'} />
+                <ContactTextInfo
+                  label={intl.formatMessage({ id: 'guest.contact.email' })}
+                  value={'LinhVu@dejavunailspa.net'}
+                />
+                <ContactTextInfo
+                  label={intl.formatMessage({ id: 'guest.contact.phone' })}
+                  value={'+84 98 982 10 42'}
+                />
+                <ContactTextInfo
+                  label={intl.formatMessage({ id: 'guest.contact.address' })}
+                  value={
+                    '839/3 Lê Hồng Phong Phường 12, Quận 10 TP. Hồ Chí Minh'
+                  }
+                />
                 <ContactSocialView />
               </div>
               <div className='col-span-2 flex h-full w-full flex-col items-start gap-7 px-0 md:px-32'>

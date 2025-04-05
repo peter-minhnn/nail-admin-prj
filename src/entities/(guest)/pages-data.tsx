@@ -18,7 +18,6 @@ export const pageComponents = (pageId: string) =>
     'lien-he': <ContactComponent />,
     'hoat-dong': <ActivitiesComponent />,
     'bo-suu-tap': <AlbumComponent />,
-
   })[pageId] ?? <GuestNotFound />
 
 export const pageDetailComponents = (pageId: string, id: string) =>

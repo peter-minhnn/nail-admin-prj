@@ -1,15 +1,19 @@
-import { BannerPublicDataType } from "@/entities/(guest)/banner";
+import { BannerPublicDataType } from '@/entities/(guest)/banner'
 
 interface ServiceBannerItemProps {
-    className?: string,
-    item?: BannerPublicDataType,
+  className?: string
+  item?: BannerPublicDataType
 }
 
-export default function ServiceBannerItem(props: Readonly<ServiceBannerItemProps>) {
-    if (props.item == null) return <div />
-    return <img
-        src={props.item.url}
-        alt=''
-        className={`object-cover rounded ${props.className ?? "w-full h-full"}`}
-    />;
+export default function ServiceBannerItem(
+  props: Readonly<ServiceBannerItemProps>
+) {
+  if (props.item == null) return <div />
+  return (
+    <img
+      src={props.item.url}
+      alt=''
+      className={`rounded object-cover ${props.className ?? 'h-full w-full'}`}
+    />
+  )
 }

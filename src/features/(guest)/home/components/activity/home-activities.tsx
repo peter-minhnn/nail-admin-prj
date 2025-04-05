@@ -54,11 +54,23 @@ export default function HomeActivities() {
           </a>
         </div>
       </div>
-      <HomeItemActivity item={dataSource.data[0]} className='w-full h-[240px]' />
-      <HomeItemActivity item={dataSource.data[1]} className='w-full h-[240px]' />
-      <div className='flex-row flex h-full gap-4'>
-        <HomeItemActivity item={dataSource.data[2]} className=' w-full h-[240px]' />
-        <HomeItemActivity item={dataSource.data[3]} className=' w-full h-[240px]' />
+      <HomeItemActivity
+        item={dataSource.data[0]}
+        className='h-[240px] w-full'
+      />
+      <HomeItemActivity
+        item={dataSource.data[1]}
+        className='h-[240px] w-full'
+      />
+      <div className='flex h-full flex-row gap-4'>
+        <HomeItemActivity
+          item={dataSource.data[2]}
+          className='h-[240px] w-full'
+        />
+        <HomeItemActivity
+          item={dataSource.data[3]}
+          className='h-[240px] w-full'
+        />
       </div>
     </div>
   )

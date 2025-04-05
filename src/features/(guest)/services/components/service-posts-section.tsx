@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react'
+import { PostPublicType } from '@/entities/(guest)/post'
+import { PostsFilterParams } from '@/types/posts.type'
 import get from 'lodash/get'
+import { v4 as uuid } from 'uuid'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import ServicePostsTemplate from './service-posts-template'
-import { PostsFilterParams } from '@/types/posts.type'
-import { PostPublicType } from '@/entities/(guest)/post'
 
 export default function ServicePostsSection() {
-
   const [filterParams] = useState<PostsFilterParams>({
     postType: 'service',
     page: 1,
     take: 50,
   })
-  const [posts, setPost] = useState<PostPublicType[][]>([])
+  const [posts, setPosts] = useState<PostPublicType[][]>([])
   const { data, status, isRefetching } = useGetPosts(filterParams)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['list'], [])
-    setPost(splitList(list))
+    setPosts(splitList(list))
   }, [data, status, isRefetching])
-
 
   function splitList<T>(list: T[]): T[][] {
     let result: T[][] = []
@@ -31,10 +30,12 @@ export default function ServicePostsSection() {
   }
 
   return (
-    <div className='h-fit w-full flex flex-col gap-8'>
+    <div className='flex h-fit w-full flex-col gap-8'>
       {posts.map((e, index) => {
-        return <ServicePostsTemplate items={e} hasLaber={index == 0} />
+        return (
+          <ServicePostsTemplate items={e} hasLabel={index == 0} key={uuid()} />
+        )
       })}
     </div>
-  );
+  )
 }

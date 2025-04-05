@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import get from 'lodash/get'
-import { useIntl } from 'react-intl'
-import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import { PostPublicType } from '@/entities/(guest)/post'
 import { PostsFilterParams } from '@/types'
+import get from 'lodash/get'
+import { useIntl } from 'react-intl'
+import { v4 as uuid } from 'uuid'
+import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import TrainingPostTemplate from './training-post-template'
 
 export default function TrainingPostsSection() {
-
   const [filterParams] = useState<PostsFilterParams>({
     postType: 'training',
     page: 1,
@@ -20,9 +20,8 @@ export default function TrainingPostsSection() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const list = get(data, ['list'], [])
-    setPosts(splitList(list));
+    setPosts(splitList(list))
   }, [data, status, isRefetching])
-
 
   function splitList<T>(list: T[]): T[][] {
     let result: T[][] = []
@@ -32,17 +31,16 @@ export default function TrainingPostsSection() {
     return result
   }
 
-
   const intl = useIntl()
-  if (posts.length == 0) return null;
+  if (posts.length == 0) return null
   return (
-    <div className='md:mb-64 mb-6 h-fit w-screen'>
+    <div className='mb-6 h-fit w-screen md:mb-64'>
       <div className='h-[591px] w-full items-center justify-center'>
-        <div className='absolute mt-[200px] flex h-full w-full flex-col items-center md:px-20 px-6 lg:px-72'>
+        <div className='absolute mt-[200px] flex h-full w-full flex-col items-center px-6 md:px-20 lg:px-72'>
           <p className={`philosopher-regular mb-7 text-center text-7xl`}>
             {intl.formatMessage({ id: 'training.industry' })}
           </p>
-          <p className={`roboto-regular text-center text-base break-all`}>
+          <p className={`roboto-regular break-all text-center text-base`}>
             {intl.formatMessage({ id: 'training.industryDescription' })}
           </p>
         </div>
@@ -52,9 +50,9 @@ export default function TrainingPostsSection() {
           alt=''
         />
       </div>
-      <div className='flex-col flex gap-8'>
-        {posts.map((items, index) => {
-          return <TrainingPostTemplate key={index} items={items} />
+      <div className='flex flex-col gap-8'>
+        {posts.map((items) => {
+          return <TrainingPostTemplate key={uuid()} items={items} />
         })}
       </div>
     </div>

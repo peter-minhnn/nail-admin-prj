@@ -11,7 +11,7 @@ export default function HomeItemService(props: Readonly<ServiceProps>) {
   return (
     <a href={`${pagePublicRouters.postDetail}/${props.item.id}`}>
       <div className={`flex flex-col ${props.height} w-[416px]`}>
-        <div className='items-start text-start w-full  overflow-hidden'>
+        <div className='w-full items-start overflow-hidden text-start'>
           <img
             alt=''
             src={props.item.thumbnail}

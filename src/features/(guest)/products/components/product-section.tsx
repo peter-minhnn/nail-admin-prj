@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  GuestProductTypeType,
-} from '@/entities/(guest)/product'
+import { GuestProductTypeType } from '@/entities/(guest)/product'
 import get from 'lodash/get'
 import { useGetProductTypes } from '../../hook/use-guest-queries'
 import ProductSlider from './product-slider'
@@ -13,8 +11,7 @@ export default function ProductSection() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const list = get(data, ['data'], [])
-    const productTypes: GuestProductTypeType[] = list;
+    const productTypes: GuestProductTypeType[] = get(data, ['data'], [])
     setProductTypes(productTypes)
   }, [data, status, isRefetching])
 
@@ -22,7 +19,9 @@ export default function ProductSection() {
     <>
       {(productTypes ?? []).map((item, index) => {
         const isRightSide = index % 2 == 0
-        return <ProductSlider leftSide={!isRightSide} item={item} />
+        return (
+          <ProductSlider leftSide={!isRightSide} item={item} key={item.id} />
+        )
       })}
     </>
   )

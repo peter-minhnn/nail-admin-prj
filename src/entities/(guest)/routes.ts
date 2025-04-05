@@ -10,6 +10,6 @@ export const menuRoutes = {
 }
 
 export const pagePublicRouters = {
-  productDetail: "/san-pham",
-  postDetail: "/bai-viet"
+  productDetail: '/san-pham',
+  postDetail: '/bai-viet',
 }
