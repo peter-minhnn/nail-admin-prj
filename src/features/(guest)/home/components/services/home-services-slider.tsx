@@ -3,10 +3,11 @@ import { menuRoutes } from '@/entities/(guest)'
 import { PostPublicType } from '@/entities/(guest)/post'
 import { ListResponseType, PostsFilterParams } from '@/types'
 import get from 'lodash/get'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import Button from '@/components/(guest)/layout/button'
+import { useIsMobile } from '@/hooks/use-mobile.tsx'
+import { Button } from '@/components/(admin)/ui'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import HomeItemService from './home-item-service'
 
@@ -14,6 +15,7 @@ export default function ServicesSlider() {
   const intl = useIntl()
 
   const swiperRef = useRef<any>(null)
+  const isMobile = useIsMobile()
   const [activeIndex, setActiveIndex] = useState<number>(0)
 
   const goNext = () => swiperRef.current?.swiper.slideNext()
@@ -51,15 +53,15 @@ export default function ServicesSlider() {
   ) : (
     <div className='my-10 w-full flex-col'>
       <div>
-        <p className={`philosopher-regular mb-16 flex pl-16 text-7xl`}>
+        <p className={`philosopher-regular mb-16 flex text-7xl`}>
           {intl.formatMessage({
             id: 'homeGuest.service',
           })}
         </p>
       </div>
       <div className='relative h-full w-full flex-1'>
-        <div className='lg:4/6 absolute right-0 top-0 z-10 h-24 w-full items-end justify-end pl-16 sm:w-1/2 sm:pl-0 lg:w-4/6'>
-          <div className='flex justify-between gap-3 sm:ml-10 md:mx-8'>
+        <div className='absolute right-0 top-0 z-10 h-24 w-full items-end justify-end pl-16 sm:w-1/2 sm:pl-0 lg:w-4/6'>
+          <div className='flex justify-between gap-3 sm:ml-10'>
             <div
               className={`w-full items-start gap-8 ${(dataSource.data ?? []).length > 3 ? 'flex' : (dataSource.data ?? []).length > 2 ? 'flex lg:hidden' : ''}`}
             >
@@ -84,12 +86,15 @@ export default function ServicesSlider() {
                   title={intl.formatMessage({
                     id: 'guest.common.more',
                   })}
-                />
+                  className='h-[48px] w-[192px] rounded bg-[#E48E43] px-4 py-2 text-base font-bold text-white hover:bg-[#E48E43]/80'
+                >
+                  <FormattedMessage id='guest.common.more' />
+                </Button>
               </a>
             </div>
           </div>
         </div>
-        <div className='relative w-screen overflow-hidden'>
+        <div className='relative overflow-hidden'>
           <Swiper
             ref={swiperRef}
             direction={'horizontal'}
@@ -98,24 +103,24 @@ export default function ServicesSlider() {
                 setActiveIndex(swiper.activeIndex)
               }
             }}
-            spaceBetween={32}
+            spaceBetween={isMobile ? 0 : 44}
             modules={[Navigation, Pagination]}
             slidesPerView={'auto'}
+            breakpoints={{
+              480: { slidesPerView: 1 },
+              640: { slidesPerView: 'auto' },
+            }}
             loop={false}
-            className='relative flex h-[624px] w-full pl-16'
+            className='relative flex h-[624px] w-full'
           >
             {(dataSource.data ?? []).map((item, index) => {
               const itemHeight: string =
-                index == activeIndex
-                  ? 'md:h-[512px] h-[416px] w-[416px]'
-                  : 'h-[416px] w-[416px]'
+                index == activeIndex ? 'md:h-[512px] h-[416px]' : 'h-[416px]'
               const height: string =
-                index == activeIndex
-                  ? 'md:h-[624px] h-[528px] w-[416px]'
-                  : 'h-[528px] w-[416px]'
+                index == activeIndex ? 'md:h-[624px] h-[528px]' : 'h-[528px]'
               return (
-                <SwiperSlide key={item.id} className='!w-[416px]'>
-                  <div className={`flex h-[624px] w-[416px] items-end`}>
+                <SwiperSlide key={item.id} className='w-auto md:w-[416px]'>
+                  <div className={`flex h-[624px] w-full items-end`}>
                     <HomeItemService
                       item={item}
                       height={height}

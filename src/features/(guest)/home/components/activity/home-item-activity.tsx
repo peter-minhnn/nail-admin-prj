@@ -13,7 +13,7 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
       href={`${pagePublicRouters.postDetail}/${props.item.id}`}
       className='w-full'
     >
-      <div className='h-full w-full items-start justify-start'>
+      <div className='w-full items-start justify-start'>
         <div className={cn('h-full w-full overflow-hidden', props.className)}>
           <img
             className={

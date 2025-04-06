@@ -6,9 +6,6 @@ import {
   ProductFilterParams,
 } from '@/entities/(guest)/product'
 import get from 'lodash/get'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 import type { SwiperRef } from 'swiper/react'
 import { Swiper, SwiperSlide } from 'swiper/react'

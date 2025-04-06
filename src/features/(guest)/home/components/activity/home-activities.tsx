@@ -3,8 +3,8 @@ import { menuRoutes } from '@/entities/(guest)'
 import { PostPublicType } from '@/entities/(guest)/post'
 import { ListResponseType, PostsFilterParams } from '@/types'
 import get from 'lodash/get'
-import { useIntl } from 'react-intl'
-import Button from '@/components/(guest)/layout/button'
+import { FormattedMessage, useIntl } from 'react-intl'
+import { Button } from '@/components/(admin)/ui'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import HomeItemActivity from './home-item-activity'
 
@@ -39,8 +39,8 @@ export default function HomeActivities() {
   const intl = useIntl()
   if ((dataSource.data ?? []).length == 0) return <div />
   return (
-    <div className='mx-8 grid h-fit grid-cols-1 grid-rows-2 gap-8 pb-32 pt-16 md:mx-16 md:grid-cols-2'>
-      <div className='flex flex-col items-start justify-start pb-[130px]'>
+    <div className='grid h-fit grid-cols-1 grid-rows-2 gap-8 py-32 md:grid-cols-2'>
+      <div className='flex flex-col items-start justify-start pb-5 md:pb-[130px]'>
         <h3 className={`pb-[68px] text-[72px] font-normal`}>
           {intl.formatMessage({ id: 'guest.common.activity' })}
         </h3>
@@ -50,7 +50,10 @@ export default function HomeActivities() {
               title={intl.formatMessage({
                 id: 'guest.common.more',
               })}
-            />
+              className='h-[48px] w-[192px] rounded bg-[#E48E43] px-4 py-2 text-base font-bold text-white hover:bg-[#E48E43]/80'
+            >
+              <FormattedMessage id='guest.common.more' />
+            </Button>
           </a>
         </div>
       </div>
@@ -62,7 +65,7 @@ export default function HomeActivities() {
         item={dataSource.data[1]}
         className='h-[240px] w-full'
       />
-      <div className='flex h-full flex-row gap-4'>
+      <div className='flex flex-col gap-4 md:flex-row'>
         <HomeItemActivity
           item={dataSource.data[2]}
           className='h-[240px] w-full'

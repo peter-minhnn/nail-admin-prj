@@ -13,11 +13,13 @@ export default function HomeCollects() {
           alt=''
         />
       </div>
-      <div className='flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#EFE5D2]'>
-        <p className='philosopher-regular text-7xl'>BỘ SƯU TẬP</p>
-        <p className='philosopher-regular text-7xl text-[#E48E43]'>DEJÀ VU</p>
+      <div className='flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#EFE5D2] py-10'>
+        <p className='philosopher-regular text-5xl md:text-7xl'>BỘ SƯU TẬP</p>
+        <p className='philosopher-regular text-5xl text-[#E48E43] md:text-7xl'>
+          DEJÀ VU
+        </p>
         <img
-          className='my-7 h-1/2 w-1/2 object-contain'
+          className='my-7 object-contain md:h-1/2 md:w-1/2'
           srcSet='/images/hompage_footer_2.png'
           alt=''
         />

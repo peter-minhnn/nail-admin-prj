@@ -7,6 +7,7 @@ import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import get from 'lodash/get'
 import Banner from '@/components/(guest)/layout/banner.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
+import { Footer } from '@/components/(guest)/layout/footer.tsx'
 import { Navbar } from '@/components/(guest)/layout/nav-bar.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
@@ -26,12 +27,12 @@ export default function Home() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const list = get(data, ['data'], [])
-    const bannersData = list
+    const bannersData = get(data, ['data'], [])
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }
   }, [data, status, isRefetching])
+
   return (
     <PageContainer
       title='Trang chủ'
@@ -63,23 +64,23 @@ export default function Home() {
           </p>
         </div>
       </Banner>
-      <Container>
-        <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
-          <section className='max-h-screen w-screen justify-center text-center'>
+      <Container footer={false}>
+        <div className='items-center justify-items-center bg-[#F2F1ED]'>
+          <section className='max-w-full justify-center text-center'>
             <ServicesSlider />
           </section>
 
           {/* Section 2 */}
-          <section className='min-h-screen w-full text-center'>
+          <section className='w-full max-w-full text-center'>
             <HomeActivities />
-          </section>
-
-          {/* Section 3 */}
-          <section className='min-h-screen w-full text-center'>
-            <HomeCollects />
           </section>
         </div>
       </Container>
+      {/* Section 3 */}
+      <section className='w-screen text-center'>
+        <HomeCollects />
+      </section>
+      <Footer />
     </PageContainer>
   )
 }
