@@ -53,10 +53,10 @@ export const Navbar = ({ fixedHeader }: Readonly<NavbarProps>) => {
         {/* Menu */}
         <div className='flex items-center space-x-1 md:order-2 md:space-x-0 lg:hidden rtl:space-x-reverse'>
           <button
-            data-collapse-toggle='navbar-language'
+            data-collapse-toggle='mobile-menu'
             type='button'
             className='inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
-            aria-controls='navbar-language'
+            aria-controls='mobile-menu'
             aria-expanded='false'
           >
             <span className='sr-only'>Open main menu</span>

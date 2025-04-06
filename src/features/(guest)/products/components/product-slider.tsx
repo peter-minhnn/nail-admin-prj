@@ -40,14 +40,14 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   if (products.length == 0) return <div />
 
   return (
-    <div className='my-16 h-fit w-screen flex-col gap-16'>
+    <div className='my-16 h-fit flex-col gap-16'>
       <ProductSectionHeader
         onNextClick={goNext}
         onPreviousClick={goPrev}
         title={props.item.name}
         description={props.item.desc}
       />
-      <div className='mt-16 h-[575px] w-full flex-1 items-end justify-end pl-4 sm:pl-16'>
+      <div className='mt-16 h-[575px] w-full flex-1 items-end justify-end pl-4'>
         <Swiper
           ref={swiperRef}
           direction={'horizontal'}

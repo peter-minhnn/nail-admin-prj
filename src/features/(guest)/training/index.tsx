@@ -16,7 +16,7 @@ export default function TrainingComponent() {
         <TrainingBanner />
       </div>
       <Container>
-        <div className='grid items-center justify-items-center'>
+        <div className='flex items-center justify-items-center'>
           <TrainingPostsSection />
         </div>
       </Container>

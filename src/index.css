@@ -168,6 +168,10 @@
   .active-menu {
     @apply !text-[var(--main-button-color)];
   }
+
+  .home-btn {
+    @apply flex h-[48px] w-[192px] cursor-pointer items-center justify-center rounded bg-[#E48E43] px-4 py-2 text-base font-bold text-white hover:bg-[#E48E43]/80;
+  }
 }
 
 @media print {

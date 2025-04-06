@@ -37,7 +37,7 @@ export default function ProductSectionHeader(
   }
 
   return (props.leftSide ?? true) ? (
-    <div className='h-fit w-screen flex-col px-4 md:px-20 lg:px-44'>
+    <div className='h-fit flex-col px-4 md:px-20 lg:px-44'>
       <p className={`philosopher-regular text-7xl`}>{props.title}</p>
       <div className='flex flex-1 justify-end gap-3'>
         <p className={`roboto-regular w-full flex-1 *:text-base`}>

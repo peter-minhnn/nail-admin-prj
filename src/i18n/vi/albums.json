@@ -29,5 +29,6 @@
   "albums.thumbnail": "Ảnh đại diện",
   "albums.noImageLink": "Đường dẫn ảnh không hợp lệ",
   "albums.image": "Hình Ảnh",
-  "albums.imageList": "Danh sách hình ảnh"
+  "albums.imageList": "Danh sách hình ảnh",
+  "albums.listAlbums": "Danh sách bộ sưu tập"
 }

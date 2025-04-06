@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { Link } from '@tanstack/react-router'
 import { menuRoutes } from '@/entities/(guest)'
 import { PostPublicType } from '@/entities/(guest)/post'
 import { ListResponseType, PostsFilterParams } from '@/types'
@@ -7,7 +8,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useIsMobile } from '@/hooks/use-mobile.tsx'
-import { Button } from '@/components/(admin)/ui'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import HomeItemService from './home-item-service'
 
@@ -81,16 +81,9 @@ export default function ServicesSlider() {
               </button>
             </div>
             <div className='roboto-regular flex w-full items-end justify-end'>
-              <a href={menuRoutes.services}>
-                <Button
-                  title={intl.formatMessage({
-                    id: 'guest.common.more',
-                  })}
-                  className='h-[48px] w-[192px] rounded bg-[#E48E43] px-4 py-2 text-base font-bold text-white hover:bg-[#E48E43]/80'
-                >
-                  <FormattedMessage id='guest.common.more' />
-                </Button>
-              </a>
+              <Link to={menuRoutes.services} className='home-btn'>
+                <FormattedMessage id='guest.common.more' />
+              </Link>
             </div>
           </div>
         </div>

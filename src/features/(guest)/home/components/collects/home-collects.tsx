@@ -1,9 +1,8 @@
+import { Link } from '@tanstack/react-router'
 import { menuRoutes } from '@/entities/(guest)'
-import { useIntl } from 'react-intl'
-import Button from '@/components/(guest)/layout/button'
+import { FormattedMessage } from 'react-intl'
 
 export default function HomeCollects() {
-  const intl = useIntl()
   return (
     <div className='mb-20 mt-10 grid w-full sm:h-screen md:grid-cols-2'>
       <div className='flex h-full w-full overflow-hidden bg-cover'>
@@ -23,13 +22,9 @@ export default function HomeCollects() {
           srcSet='/images/hompage_footer_2.png'
           alt=''
         />
-        <a href={menuRoutes.album}>
-          <Button
-            title={intl.formatMessage({
-              id: 'guest.common.more',
-            })}
-          />
-        </a>
+        <Link to={menuRoutes.album} className='home-btn'>
+          <FormattedMessage id='guest.common.more' />
+        </Link>
       </div>
     </div>
   )
