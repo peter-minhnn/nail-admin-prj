@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  BannerPublicDataType,
-  BannerPublicFilterParams,
-} from '@/entities/(guest)/banner'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'

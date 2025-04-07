@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
-import {
-  BannerPublicDataType,
-  BannerPublicFilterParams,
-} from '@/entities/(guest)/banner'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import Banner from '@/components/(guest)/layout/banner'
@@ -26,8 +23,7 @@ export default function ProductsComponent() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const list = get(data, ['data'], [])
-    const bannersData: BannerPublicDataType[] = list
+    const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }
@@ -40,8 +36,8 @@ export default function ProductsComponent() {
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
+      <Navbar />
       <Banner path={banner?.url ?? ''}>
-        <Navbar />
         <div className='absolute top-1/2 w-screen items-center justify-center'>
           <p
             className={`philosopher-regular text-center text-8xl font-normal text-white`}

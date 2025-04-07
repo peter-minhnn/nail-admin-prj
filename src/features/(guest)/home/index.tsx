@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
-import {
-  BannerPublicDataType,
-  BannerPublicFilterParams,
-} from '@/entities/(guest)/banner'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
 import Banner from '@/components/(guest)/layout/banner.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
@@ -40,8 +37,8 @@ export default function Home() {
       canonical={menuRoutes.home}
       image={banner?.url ?? ''}
     >
+      <Navbar />
       <Banner path={banner?.url ?? ''}>
-        <Navbar />
         <div className='absolute left-10 top-1/3 h-auto w-auto md:left-8'>
           <p
             className={`philosopher-regular text-7xl font-normal text-white lg:text-8xl`}

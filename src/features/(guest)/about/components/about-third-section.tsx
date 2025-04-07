@@ -1,9 +1,11 @@
+import { v4 as uuid } from 'uuid'
 import AboutThirdItemView from './about-third-item'
 
 export interface AboutThirdItem {
   title?: string
-  desctiption: string
+  description: string
 }
+
 interface AboutThirdSectionProps {
   items: Array<AboutThirdItem>
 }
@@ -37,7 +39,7 @@ export default function AboutThirdSection(
           <div className='absolute flex flex-1 items-center justify-center'>
             <div className='w-full px-6 md:px-20 lg:!w-1/2 lg:px-0'>
               {props.items.map((item) => {
-                return <AboutThirdItemView item={item} key={item.title} />
+                return <AboutThirdItemView item={item} key={uuid()} />
               })}
             </div>
           </div>

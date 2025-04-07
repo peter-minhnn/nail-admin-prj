@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { PostPublicType } from '@/entities/(guest)/post'
+import { PostPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import ReactQuill from 'react-quill-new'

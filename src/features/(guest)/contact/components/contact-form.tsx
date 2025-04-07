@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ContactDataType, contactsSchema } from '@/entities/(guest)/contact'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { toast, Toaster } from 'sonner'
 import { Button } from '@/components/(admin)/ui/button'
@@ -11,6 +10,10 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/(admin)/ui/form'
+import {
+  ContactDataType,
+  contactsSchema,
+} from '@/features/(guest)/contact/data/shema.ts'
 import { useSendContact } from '../../hook/use-guest-queries'
 import { ContactInputView } from './contact-input-view'
 

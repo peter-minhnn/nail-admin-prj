@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { AlbumPublicType } from '@/entities/(guest)/album'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
+import { AlbumPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { cn } from '@/lib/utils.ts'
@@ -36,8 +36,8 @@ export default function AlbumComponent() {
       image={'/images/bg-home.png'}
     >
       <div className={`overflow-hidden ${open ? 'fixed' : ''}`}>
+        <Navbar />
         <Banner path={''}>
-          <Navbar />
           <div className='flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#EFE5D2] pt-20'>
             <p className='philosopher-regular text-7xl uppercase'>
               <FormattedMessage id='albums.headerTitle' />

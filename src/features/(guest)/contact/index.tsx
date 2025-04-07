@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
-import {
-  BannerPublicDataType,
-  BannerPublicFilterParams,
-} from '@/entities/(guest)/banner'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import Banner from '@/components/(guest)/layout/banner'
@@ -29,8 +26,7 @@ export default function ProductsComponent() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const list = get(data, ['data'], [])
-    const bannersData: BannerPublicDataType[] = list
+    const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
     if (bannersData.length > 0) {
       setBanner(bannersData[0])
     }
@@ -43,8 +39,8 @@ export default function ProductsComponent() {
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
+      <Navbar />
       <Banner path={banner?.url ?? ''}>
-        <Navbar />
         <div className='absolute top-1/2 w-screen items-center justify-center'>
           <p
             className={`philosopher-regular text-center text-8xl font-normal text-white`}
@@ -55,11 +51,11 @@ export default function ProductsComponent() {
       </Banner>
       <Container>
         <div className='my-32 grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
-          <div className='h-fit w-screen'>
+          <div className='h-fit'>
             <p className='text-center font-philosopher text-7xl'>
               {intl.formatMessage({ id: 'guest.contact.contactUs' })}
             </p>
-            <div className='grid h-fit w-screen grid-cols-1 grid-rows-2 px-10 py-16 md:grid-cols-3 md:grid-rows-1 md:px-44'>
+            <div className='grid h-fit grid-cols-1 grid-rows-2 px-10 py-16 md:grid-cols-3 md:grid-rows-1 md:px-44'>
               <div className='col-span-1 flex h-full w-full flex-col gap-9'>
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.email' })}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { GuestProductDetailType } from '@/entities/(guest)/product'
+import { GuestProductDetailType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import ReactQuill from 'react-quill-new'
