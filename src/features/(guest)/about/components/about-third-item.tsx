@@ -8,7 +8,7 @@ export default function AboutThirdItemView(
   props: Readonly<AboutThirdItemProps>
 ) {
   return (
-    <div className='flex flex-col py-4 sm:flex-row'>
+    <div className='flex flex-col py-4 md:flex-row'>
       <p className={`roboto-regular w-full text-xl md:w-2/5`}>
         {props.item.title}
       </p>
@@ -17,7 +17,7 @@ export default function AboutThirdItemView(
         <p
           className={`roboto-light sm:line-clamp-8 line-clamp-6 text-base font-light`}
         >
-          {props.item.desctiption}
+          {props.item.description}
         </p>
       </div>
     </div>

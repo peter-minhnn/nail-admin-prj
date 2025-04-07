@@ -58,42 +58,39 @@ export default function AboutUsComponent() {
           </p>
         </div>
       </Banner>
+      <Container header={false} footer={false}>
+        <AboutFirstSection
+          images={[
+            '/images/aboutus_section1_1.png',
+            '/images/aboutus_section1_2.png',
+            '/images/aboutus_section1_3.png',
+            '/images/aboutus_section1_4.png',
+          ]}
+          title={intl.formatMessage({ id: 'aboutUs.section1Title' })}
+          description={intl.formatMessage({
+            id: 'aboutUs.section1Description',
+          })}
+        />
+      </Container>
+      <AboutSecondsSection
+        mainImage={'/images/aboutus_section2_1.png'}
+        subImage={'/images/aboutus_section2_2.png'}
+        title={intl.formatMessage({ id: 'aboutUs.section2Title' })}
+        description={intl.formatMessage({
+          id: 'aboutUs.section2Description',
+        })}
+      />
+      <section className='h-fit'>
+        <AboutThirdSection items={aboutThirdData(intl)} />
+      </section>
       <Container header={false}>
-        <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
-          <AboutFirstSection
-            images={[
-              '/images/aboutus_section1_1.png',
-              '/images/aboutus_section1_2.png',
-              '/images/aboutus_section1_3.png',
-              '/images/aboutus_section1_4.png',
-            ]}
-            title={intl.formatMessage({ id: 'aboutUs.section1Title' })}
-            description={intl.formatMessage({
-              id: 'aboutUs.section1Description',
-            })}
-          />
-          <AboutSecondsSection
-            mainImage={'/images/aboutus_section2_1.png'}
-            subImage={'/images/aboutus_section2_2.png'}
-            title={intl.formatMessage({ id: 'aboutUs.section2Title' })}
-            description={intl.formatMessage({
-              id: 'aboutUs.section2Description',
-            })}
-          />
-          <section className='h-fit w-screen'>
-            <AboutThirdSection items={aboutThirdData(intl)} />
-          </section>
-
-          <section className='min-h-screen w-screen'>
-            <AboutFouthSection
-              items={[
-                '/images/aboutus_section4_1.png',
-                '/images/aboutus_section4_2.png',
-                '/images/aboutus_section4_3.png',
-              ]}
-            />
-          </section>
-        </div>
+        <AboutFouthSection
+          items={[
+            '/images/aboutus_section4_1.png',
+            '/images/aboutus_section4_2.png',
+            '/images/aboutus_section4_3.png',
+          ]}
+        />
       </Container>
     </PageContainer>
   )
