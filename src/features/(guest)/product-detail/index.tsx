@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { pagePublicRouters } from '@/entities/(guest)'
 import { GuestProductDetailType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
@@ -6,7 +7,6 @@ import ReactQuill from 'react-quill-new'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetProductDetail } from '../hook/use-guest-queries'
-import { pagePublicRouters } from '@/entities/(guest)'
 
 type ProductDetailComponentProps = {
   id: number
