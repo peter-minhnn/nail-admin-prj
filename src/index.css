@@ -196,6 +196,10 @@
   display: none;
 }
 
+.custom-quill .ql-container.ql-snow {
+  border: none;
+}
+
 .ql-container.ql-snow {
   min-height: auto;
 }
