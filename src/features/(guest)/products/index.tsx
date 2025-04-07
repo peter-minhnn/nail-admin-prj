@@ -46,7 +46,7 @@ export default function ProductsComponent() {
           </p>
         </div>
       </Banner>
-      <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
+      <div className='min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
         <Container className='pt-6'>
           <ProductSection />
         </Container>

@@ -50,9 +50,9 @@ export default function ProductsComponent() {
         </div>
       </Banner>
       <Container>
-        <div className='m-32 grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
+        <div className='min-h-screen items-center justify-items-center bg-[#F2F1ED] md:m-32'>
           <div className='h-fit w-full'>
-            <p className='text-center font-philosopher text-7xl'>
+            <p className='text-center font-philosopher text-4xl md:text-7xl'>
               {intl.formatMessage({ id: 'guest.contact.contactUs' })}
             </p>
             <div className='flex w-full flex-col justify-between gap-10 py-10 md:flex-row'>

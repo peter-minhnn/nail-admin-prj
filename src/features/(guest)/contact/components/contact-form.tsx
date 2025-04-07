@@ -189,13 +189,13 @@ export default function ContactForm() {
           <div className='flex w-full items-end justify-end'>
             <Button
               type='submit'
-              className='w-fit'
+              className='h-12 w-full md:w-[192px]'
               form='contacts-form'
               variant='save'
               disabled={status === 'pending'}
               loading={status === 'pending'}
             >
-              <FormattedMessage id='common.btnSaveChanges' />
+              <FormattedMessage id='guest.contact.submitRequest' />
             </Button>
           </div>
         </form>

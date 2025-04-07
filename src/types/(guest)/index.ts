@@ -7,4 +7,5 @@ export type { PostPublicType } from './post.type'
 export type {
   GuestProductTypeType,
   GuestProductDetailType,
+  ProductFilterParams,
 } from './product.type'
