@@ -187,6 +187,15 @@
   margin-right: auto;
 }
 
+.custom-quill .quill {
+  width: 100%;
+  border: none;
+}
+
+.custom-quill .ql-toolbar.ql-snow {
+  display: none;
+}
+
 .ql-container.ql-snow {
   min-height: auto;
 }

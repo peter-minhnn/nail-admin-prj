@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill-new'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetPostDetail } from '../hook/use-guest-queries'
+import { pagePublicRouters } from '@/entities/(guest)'
 
 type PostDetailComponentProps = {
   id: number
@@ -28,11 +29,11 @@ export default function PostDetailComponent({
     <PageContainer
       title={intl.formatMessage({ id: 'guest.common.service' })}
       description={intl.formatMessage({ id: 'guest.common.service' })}
-      canonical='/'
+      canonical={`${pagePublicRouters.postDetail}/${id}`}
       image={''}
     >
       <Container fixedHeader>
-        <div className='grid items-center justify-items-center bg-[#F2F1ED]'>
+        <div className='custom-quill min-h-screen w-full bg-[#F2F1ED]'>
           <ReactQuill value={postDetail?.content ?? ''} readOnly />
         </div>
       </Container>
