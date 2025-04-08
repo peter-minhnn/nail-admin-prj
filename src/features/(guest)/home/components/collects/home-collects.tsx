@@ -22,7 +22,11 @@ export default function HomeCollects() {
           srcSet='/images/hompage_footer_2.png'
           alt=''
         />
-        <Link to={menuRoutes.album} onClick={() => window.scrollTo(0, 0)} className='home-btn'>
+        <Link
+          to={menuRoutes.album}
+          onClick={() => window.scrollTo(0, 0)}
+          className='home-btn'
+        >
           <FormattedMessage id='guest.common.more' />
         </Link>
       </div>

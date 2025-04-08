@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { PostsFilterParams } from '@/types'
+import { PostPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
 // Import Swiper styles
 import { Pagination } from 'swiper/modules'
@@ -7,7 +8,6 @@ import { Swiper } from 'swiper/react'
 import { v4 as uuid } from 'uuid'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import ActivitiesGrid from './activity-grid'
-import { PostPublicType } from '@/types/(guest)'
 
 export default function ActivitiesSlider() {
   const [filterParams] = useState<PostsFilterParams>({

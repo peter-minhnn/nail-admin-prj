@@ -30,17 +30,17 @@ export default function AlbumComponent() {
 
   useEffect(() => {
     if (open) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
+      const scrollY = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
     } else {
-      const scrollY = Math.abs(parseInt(document.body.style.top || "0"));
-      document.body.style.position = "";
-      document.body.style.top = "";
-      window.scrollTo(0, scrollY);
+      const scrollY = Math.abs(parseInt(document.body.style.top || '0'))
+      document.body.style.position = ''
+      document.body.style.top = ''
+      window.scrollTo(0, scrollY)
     }
-  }, [open]);
+  }, [open])
   return (
     <PageContainer
       title={intl.formatMessage({ id: 'guest.common.product' })}
@@ -105,13 +105,11 @@ export default function AlbumComponent() {
         </Container>
       </div>
       {open && (
-        <div className='z-[9999] fixed ' >
-          <Lightbox
-            images={currentAlbum?.details.map((v) => v.url) ?? []}
-            initialIndex={0}
-            onClose={() => setOpen(false)}
-          />
-        </div>
+        <Lightbox
+          images={currentAlbum?.details.map((v) => v.url) ?? []}
+          initialIndex={0}
+          onClose={() => setOpen(false)}
+        />
       )}
     </PageContainer>
   )

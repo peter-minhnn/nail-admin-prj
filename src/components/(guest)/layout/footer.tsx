@@ -5,7 +5,7 @@ import TiktokIcon from './tiktok'
 
 export function Footer() {
   return (
-    <div className='bg-footer relative w-full px-6 pb-2 items-center flex flex-col'>
+    <div className='bg-footer relative flex w-full flex-col items-center px-6 pb-2'>
       <div className='mx-auto mt-5 grid max-w-screen-xl grid-cols-1 gap-10 pt-10 lg:grid-cols-5'>
         <div className='lg:col-span-2'>
           <div>
@@ -30,20 +30,20 @@ export function Footer() {
           </div>
         </div>
 
-        <div className='w-full flex flex-1 col-span-2'>
-
-          <div className='grid md:grid-cols-2 grid-cols-1 w-full'>
+        <div className='col-span-2 flex w-full flex-1'>
+          <div className='grid w-full grid-cols-1 md:grid-cols-2'>
             {navigation.map((item) => {
-              return <a
-                key={item.name}
-                href={item.href}
-                className=' dark:focus:bg-trueGray-700 w-full rounded-md lg:px-4  py-2 text-black hover:text-orange-500 focus:bg-orange-50 focus:text-orange-500 focus:outline-none dark:text-gray-300'
-              >
-                {item.name}
-              </a>
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className='dark:focus:bg-trueGray-700 w-full rounded-md py-2 text-black hover:text-orange-500 focus:bg-orange-50 focus:text-orange-500 focus:outline-none dark:text-gray-300 lg:px-4'
+                >
+                  {item.name}
+                </a>
+              )
             })}
           </div>
-
         </div>
         <div className=''>
           <div className='py-2'>Follow us</div>

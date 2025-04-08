@@ -204,7 +204,7 @@ export default function Lightbox({
     <button
       type='button'
       ref={lightboxRef}
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/90 transition-all duration-300 ${
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 transition-all duration-300 ${
         isOpen ? 'opacity-100' : 'opacity-0'
       }`}
       onClick={handleClose}
@@ -296,7 +296,7 @@ export default function Lightbox({
 
         {/* Bottom toolbar */}
         <div
-          className={`absolute left-1/2 top-6 z-[100] -translate-x-1/2 rounded-full bg-black/30 px-6 py-3 backdrop-blur-md transition-all duration-300 ${
+          className={`absolute left-1/2 top-12 z-[100] -translate-x-1/2 rounded-full bg-black/30 px-2 py-1 backdrop-blur-md transition-all duration-300 md:top-8 ${
             showControls
               ? 'translate-y-0 opacity-100'
               : 'translate-y-10 opacity-0'

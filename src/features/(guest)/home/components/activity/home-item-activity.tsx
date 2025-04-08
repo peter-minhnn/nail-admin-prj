@@ -1,6 +1,6 @@
 import { pagePublicRouters } from '@/entities/(guest)/routes'
-import { cn } from '@/lib/utils'
 import { PostPublicType } from '@/types/(guest)'
+import { cn } from '@/lib/utils'
 
 interface ActivitiesProps {
   item?: PostPublicType
