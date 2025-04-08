@@ -4,7 +4,7 @@ import {
   GuestProductDetailType,
   GuestProductTypeType,
   ProductFilterParams,
-} from '@/entities/(guest)/product'
+} from '@/types/(guest)'
 import get from 'lodash/get'
 import { Navigation, Pagination } from 'swiper/modules'
 import type { SwiperRef } from 'swiper/react'
@@ -47,7 +47,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
         title={props.item.name}
         description={props.item.desc}
       />
-      <div className='mt-16 h-[575px] w-full flex-1 items-end justify-end pl-4'>
+      <div className='mt-5 h-[575px] w-full flex-1 items-end justify-end pl-4 md:mt-16'>
         <Swiper
           ref={swiperRef}
           direction={'horizontal'}

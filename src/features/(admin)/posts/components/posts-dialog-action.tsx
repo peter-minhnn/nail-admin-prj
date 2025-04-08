@@ -8,6 +8,7 @@ import { handleServerResponse } from '@/utils'
 import { FormattedMessage, IntlShape } from 'react-intl'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils.ts'
+import { updateSpanBackgrounds } from '@/utils/common.ts'
 import { NumberInput } from '@/components/(admin)/number-input.tsx'
 import QuillEditor from '@/components/(admin)/quill-editor.tsx'
 import { SelectDropdown } from '@/components/(admin)/select-dropdown.tsx'
@@ -131,11 +132,18 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
   const onSubmit = async (data: PostsDataType) => {
     if (!validate()) return
     if (!isEdit) {
-      await mutateAsync({ ...data, thumbnail: thumbnailFiles[0] })
+      await mutateAsync({
+        ...data,
+        thumbnail: thumbnailFiles[0],
+        contentVi: updateSpanBackgrounds(data.contentVi),
+        contentEn: updateSpanBackgrounds(data.contentEn),
+      })
     } else {
       await updateMutateAsync({
         ...data,
         thumbnail: thumbnailFiles.length ? thumbnailFiles[0] : data.thumbnail,
+        contentVi: updateSpanBackgrounds(data.contentVi),
+        contentEn: updateSpanBackgrounds(data.contentEn),
       })
     }
   }
@@ -231,7 +239,6 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
                     form={form}
                     name='sortOrder'
                     label={props.intl.formatMessage({ id: 'posts.sortOrder' })}
-                    namespace='ProductMessages'
                     placeholder={props.intl.formatMessage({
                       id: 'posts.sortOrderPlaceholder',
                     })}

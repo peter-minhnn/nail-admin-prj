@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { GuestProductTypeType } from '@/entities/(guest)/product'
+import { GuestProductTypeType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useGetProductTypes } from '../../hook/use-guest-queries'
 import ProductSlider from './product-slider'

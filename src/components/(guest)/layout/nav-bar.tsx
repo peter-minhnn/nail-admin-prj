@@ -61,7 +61,7 @@ export const Navbar = ({ fixedHeader }: Readonly<NavbarProps>) => {
           <button
             data-collapse-toggle='mobile-menu'
             type='button'
-            className='inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+            className='inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#F2F1ED] p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
             aria-controls='mobile-menu'
             aria-expanded={isOpen}
             onClick={toggleMenu}

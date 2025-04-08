@@ -27,7 +27,7 @@ export default function ProductsComponent() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
-    if (bannersData.length > 0) {
+    if (bannersData?.length) {
       setBanner(bannersData[0])
     }
   }, [data, status, isRefetching])
@@ -50,12 +50,12 @@ export default function ProductsComponent() {
         </div>
       </Banner>
       <Container>
-        <div className='my-32 grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
-          <div className='h-fit'>
-            <p className='text-center font-philosopher text-7xl'>
+        <div className='min-h-screen items-center justify-items-center bg-[#F2F1ED] md:m-32'>
+          <div className='h-fit w-full'>
+            <p className='text-center font-philosopher text-4xl md:text-7xl'>
               {intl.formatMessage({ id: 'guest.contact.contactUs' })}
             </p>
-            <div className='grid h-fit grid-cols-1 grid-rows-2 px-10 py-16 md:grid-cols-3 md:grid-rows-1 md:px-44'>
+            <div className='flex w-full flex-col justify-between gap-10 py-10 md:flex-row'>
               <div className='col-span-1 flex h-full w-full flex-col gap-9'>
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.email' })}
@@ -73,7 +73,7 @@ export default function ProductsComponent() {
                 />
                 <ContactSocialView />
               </div>
-              <div className='col-span-2 flex h-full w-full flex-col items-start gap-7 px-0 md:px-32'>
+              <div className='flex h-full w-full flex-col items-start gap-7'>
                 <ContactForm />
               </div>
             </div>

@@ -1,4 +1,4 @@
-export type ProductFilterParams = {
+type ProductFilterParams = {
   productType: number
   page: number
   take: number
@@ -26,4 +26,8 @@ type GuestProductDetailType = {
   thumbnail: string
 }
 
-export type { GuestProductTypeType, GuestProductDetailType }
+export type {
+  ProductFilterParams,
+  GuestProductTypeType,
+  GuestProductDetailType,
+}

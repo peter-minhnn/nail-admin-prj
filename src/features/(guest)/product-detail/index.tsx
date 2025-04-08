@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { pagePublicRouters } from '@/entities/(guest)'
 import { GuestProductDetailType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
@@ -28,11 +29,11 @@ export default function ProductDetailComponent({
     <PageContainer
       title={intl.formatMessage({ id: 'guest.common.service' })}
       description={intl.formatMessage({ id: 'guest.common.service' })}
-      canonical='/'
+      canonical={`${pagePublicRouters.productDetail}/${id}`}
       image={''}
     >
       <Container fixedHeader>
-        <div className='grid items-center justify-items-center bg-[#F2F1ED]'>
+        <div className='custom-quill grid min-h-screen bg-[#F2F1ED]'>
           <ReactQuill value={postDetail?.description ?? ''} readOnly />
         </div>
       </Container>

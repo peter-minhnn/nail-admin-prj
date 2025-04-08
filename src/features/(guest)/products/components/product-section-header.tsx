@@ -39,7 +39,7 @@ export default function ProductSectionHeader(
   return (props.leftSide ?? true) ? (
     <div className='h-fit flex-col px-4 md:px-20 lg:px-44'>
       <p className={`philosopher-regular text-7xl`}>{props.title}</p>
-      <div className='flex flex-1 justify-end gap-3'>
+      <div className='flex flex-1 flex-col justify-end gap-3 md:flex-row'>
         <p className={`roboto-regular w-full flex-1 *:text-base`}>
           {props.description}
         </p>
@@ -54,7 +54,7 @@ export default function ProductSectionHeader(
   ) : (
     <div className='flex h-fit w-full flex-1 flex-col items-end justify-end px-4 md:px-20 lg:px-44'>
       <p className={`philosopher-regular w-fit text-7xl`}>{props.title}</p>
-      <div className='flex w-full flex-1 justify-between gap-3'>
+      <div className='flex w-full flex-1 flex-col justify-between gap-3 md:flex-row'>
         <ControlButton
           goNext={props.onNextClick}
           goPrev={props.onPreviousClick}

@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import {
-  BannerPublicDataType,
-  BannerPublicFilterParams,
-} from '@/entities/(guest)/banner'
+
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import ServiceBannerItem from './service-banner-item'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
 
 export default function ServiceBanner() {
   const intl = useIntl()
@@ -27,9 +25,9 @@ export default function ServiceBanner() {
     setBanners(bannersData)
   }, [data, status, isRefetching])
   return (
-    <div className='absolute h-[80vh] w-screen items-center justify-center bg-cover bg-center sm:h-screen'>
-      <div className='absolute flex h-full min-w-full items-center'>
-        <div className='flex h-full w-full items-end lg:mx-16 lg:w-[192px] lg:py-32'>
+    <div className='absolute h-[80vh] w-screen items-center justify-center bg-cover bg-center sm:h-screen '>
+      <div className='absolute flex h-full min-w-full items-center '>
+        <div className='flex h-full w-full items-end lg:mx-16 lg:w-[192px] lg:py-32 '>
           <ServiceBannerItem
             className='h-full w-full lg:h-[288px]'
             item={banners[0]}
