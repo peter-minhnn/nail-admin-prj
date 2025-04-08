@@ -8,6 +8,7 @@ import { handleServerResponse } from '@/utils'
 import { FormattedMessage, IntlShape } from 'react-intl'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils.ts'
+import { updateSpanBackgrounds } from '@/utils/common.ts'
 import { NumberInput } from '@/components/(admin)/number-input.tsx'
 import QuillEditor from '@/components/(admin)/quill-editor.tsx'
 import { SelectDropdown } from '@/components/(admin)/select-dropdown.tsx'
@@ -141,12 +142,16 @@ export const ProductDetailDialog: FC<ProductDialogsProps> = (props) => {
         ...data,
         thumbnail: thumbnailFiles[0],
         price: Number(data.price),
+        contentVi: updateSpanBackgrounds(data.contentVi),
+        contentEn: updateSpanBackgrounds(data.contentEn),
       })
     } else {
       await updateMutateAsync({
         ...data,
         thumbnail: thumbnailFiles.length ? thumbnailFiles[0] : data.thumbnail,
         price: Number(data.price),
+        contentVi: updateSpanBackgrounds(data.contentVi),
+        contentEn: updateSpanBackgrounds(data.contentEn),
       })
     }
   }

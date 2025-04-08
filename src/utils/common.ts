@@ -73,3 +73,25 @@ export const sliceArray = (arr: any[], size: number): any[][] => {
   }
   return result
 }
+
+export const updateSpanBackgrounds = (htmlContent: string) => {
+  if (!htmlContent) {
+    return htmlContent
+  }
+  const themeBackgroundColor = '#F2F1ED'
+  // Regex to match span tags with white background
+  const spanRegex =
+    /<span([^>]*style=["'][^"']*background-color:\s*(#ffffff|white|rgb\(255,\s*255,\s*255\))[^"']*["'][^>]*)>/gi
+  let hasChanges = false
+
+  const updatedContent = htmlContent.replace(spanRegex, (match) => {
+    hasChanges = true
+    // Replace the white background with theme background
+    return match.replace(
+      /background-color:\s*(#ffffff|white|rgb\(255,\s*255,\s*255\))/i,
+      `background-color: ${themeBackgroundColor}`
+    )
+  })
+
+  return hasChanges ? updatedContent : htmlContent
+}

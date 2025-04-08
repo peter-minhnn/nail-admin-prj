@@ -200,6 +200,10 @@
   border: none;
 }
 
+.custom-quill .ql-editor .ql-align-center {
+  text-align: center;
+}
+
 .ql-container.ql-snow {
   min-height: auto;
 }
