@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { PostPublicType } from '@/entities/(guest)/post'
 import { PostsFilterParams } from '@/types'
 import get from 'lodash/get'
 // Import Swiper styles
@@ -8,6 +7,7 @@ import { Swiper } from 'swiper/react'
 import { v4 as uuid } from 'uuid'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import ActivitiesGrid from './activity-grid'
+import { PostPublicType } from '@/types/(guest)'
 
 export default function ActivitiesSlider() {
   const [filterParams] = useState<PostsFilterParams>({
@@ -26,7 +26,7 @@ export default function ActivitiesSlider() {
   }, [data, status, isRefetching])
 
   function splitList<T>(list: T[]): T[][] {
-    let result: T[][] = []
+    const result: T[][] = []
 
     for (let i = 0; i < list.length; i += 6) {
       result.push(list.slice(i, i + 6))

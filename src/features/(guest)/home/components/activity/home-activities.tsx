@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { menuRoutes } from '@/entities/(guest)'
-import { PostPublicType } from '@/entities/(guest)/post'
 import { ListResponseType, PostsFilterParams } from '@/types'
 import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import HomeItemActivity from './home-item-activity'
+import { PostPublicType } from '@/types/(guest)'
 
 export default function HomeActivities() {
   const [filterParams] = useState<PostsFilterParams>({
@@ -45,7 +45,7 @@ export default function HomeActivities() {
           {intl.formatMessage({ id: 'guest.common.activity' })}
         </h3>
         <div className='flex h-full w-full items-end justify-start'>
-          <Link to={menuRoutes.activity} className='home-btn'>
+          <Link to={menuRoutes.activity} onClick={() => window.scrollTo(0, 0)} className='home-btn'>
             <FormattedMessage id='guest.common.more' />
           </Link>
         </div>

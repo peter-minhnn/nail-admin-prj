@@ -1,4 +1,4 @@
-import { PostPublicType } from '@/entities/(guest)/post'
+import { PostPublicType } from '@/types/(guest)'
 import { useIntl } from 'react-intl'
 import AlbumPublicItemView from '@/components/(guest)/layout/post-item'
 

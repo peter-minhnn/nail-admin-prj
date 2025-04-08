@@ -1,5 +1,5 @@
-import { PostPublicType } from '@/entities/(guest)/post'
 import { pagePublicRouters } from '@/entities/(guest)/routes'
+import { PostPublicType } from '@/types/(guest)'
 
 interface ServiceProps {
   item: PostPublicType

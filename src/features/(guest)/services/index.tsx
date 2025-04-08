@@ -14,7 +14,7 @@ export default function ServicesComponent() {
       canonical={menuRoutes.products}
       image={''}
     >
-      <div className='relative min-h-screen w-full bg-[#EFE5D2] bg-cover bg-center pt-4 sm:h-screen'>
+      <div className='relative min-h-screen w-full bg-[#EFE5D2] bg-cover bg-center sm:h-screen'>
         <ServiceBanner />
       </div>
       <Container>

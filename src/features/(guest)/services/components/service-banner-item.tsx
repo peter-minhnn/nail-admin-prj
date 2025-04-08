@@ -1,4 +1,4 @@
-import { BannerPublicDataType } from '@/entities/(guest)/banner'
+import { BannerPublicDataType } from '@/types/(guest)'
 
 interface ServiceBannerItemProps {
   className?: string

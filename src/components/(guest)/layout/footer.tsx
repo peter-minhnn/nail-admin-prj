@@ -1,12 +1,11 @@
+import { navigation } from '@/entities/(guest)'
 import FacebookIcon from './facebook'
 import InstagramIcon from './instagram'
 import TiktokIcon from './tiktok'
 
 export function Footer() {
-  const navigation = ['Product', 'Features', 'Pricing', 'Company', 'Blog']
-  const legal = ['Terms', 'Privacy', 'Legal']
   return (
-    <div className='bg-footer relative w-full rounded-3xl px-6 pb-2'>
+    <div className='bg-footer relative w-full px-6 pb-2 items-center flex flex-col'>
       <div className='mx-auto mt-5 grid max-w-screen-xl grid-cols-1 gap-10 pt-10 lg:grid-cols-5'>
         <div className='lg:col-span-2'>
           <div>
@@ -31,34 +30,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div>
-          <div className='-ml-3 -mt-2 flex w-full flex-wrap lg:ml-0'>
-            {navigation.map((item) => (
-              <a
-                key={item}
-                href='/'
-                className='dark:focus:bg-trueGray-700 w-full rounded-md px-4 py-2 text-black hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300'
+        <div className='w-full flex flex-1 col-span-2'>
+
+          <div className='grid md:grid-cols-2 grid-cols-1 w-full'>
+            {navigation.map((item) => {
+              return <a
+                key={item.name}
+                href={item.href}
+                className=' dark:focus:bg-trueGray-700 w-full rounded-md lg:px-4  py-2 text-black hover:text-orange-500 focus:bg-orange-50 focus:text-orange-500 focus:outline-none dark:text-gray-300'
               >
-                {item}
+                {item.name}
               </a>
-            ))}
+            })}
           </div>
-        </div>
-        <div>
-          <div className='-ml-3 -mt-2 flex w-full flex-wrap lg:ml-0'>
-            {legal.map((item) => (
-              <a
-                key={item}
-                href='/'
-                className='dark:focus:bg-trueGray-700 w-full rounded-md px-4 py-2 text-black hover:text-indigo-500 focus:bg-indigo-100 focus:text-indigo-500 focus:outline-none dark:text-gray-300'
-              >
-                {item}
-              </a>
-            ))}
-          </div>
+
         </div>
         <div className=''>
-          <div>Follow us</div>
+          <div className='py-2'>Follow us</div>
           <div className='mt-5 flex space-x-5 text-black'>
             <a href='https://facebook.com' target='_blank' rel='noopener'>
               <span className='sr-only'>Facebook</span>

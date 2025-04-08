@@ -28,6 +28,19 @@ export default function AlbumComponent() {
     setAlbums(list)
   }, [data, status, isRefetching])
 
+  useEffect(() => {
+    if (open) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      const scrollY = Math.abs(parseInt(document.body.style.top || "0"));
+      document.body.style.position = "";
+      document.body.style.top = "";
+      window.scrollTo(0, scrollY);
+    }
+  }, [open]);
   return (
     <PageContainer
       title={intl.formatMessage({ id: 'guest.common.product' })}
@@ -35,7 +48,7 @@ export default function AlbumComponent() {
       canonical={menuRoutes.album}
       image={'/images/bg-home.png'}
     >
-      <div className={`overflow-hidden ${open ? 'fixed' : ''}`}>
+      <div className={``}>
         <Navbar />
         <Banner path={''}>
           <div className='flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#EFE5D2] pt-20'>
@@ -92,11 +105,13 @@ export default function AlbumComponent() {
         </Container>
       </div>
       {open && (
-        <Lightbox
-          images={currentAlbum?.details.map((v) => v.url) ?? []}
-          initialIndex={0}
-          onClose={() => setOpen(false)}
-        />
+        <div className='z-[9999] fixed ' >
+          <Lightbox
+            images={currentAlbum?.details.map((v) => v.url) ?? []}
+            initialIndex={0}
+            onClose={() => setOpen(false)}
+          />
+        </div>
       )}
     </PageContainer>
   )

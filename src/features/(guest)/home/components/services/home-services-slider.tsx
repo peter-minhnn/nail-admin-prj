@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { Link } from '@tanstack/react-router'
 import { menuRoutes } from '@/entities/(guest)'
-import { PostPublicType } from '@/entities/(guest)/post'
 import { ListResponseType, PostsFilterParams } from '@/types'
 import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -10,6 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { useIsMobile } from '@/hooks/use-mobile.tsx'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import HomeItemService from './home-item-service'
+import { PostPublicType } from '@/types/(guest)'
 
 export default function ServicesSlider() {
   const intl = useIntl()
@@ -81,7 +81,7 @@ export default function ServicesSlider() {
               </button>
             </div>
             <div className='roboto-regular flex w-full items-end justify-end'>
-              <Link to={menuRoutes.services} className='home-btn'>
+              <Link to={menuRoutes.services} onClick={() => window.scrollTo(0, 0)} className='home-btn'>
                 <FormattedMessage id='guest.common.more' />
               </Link>
             </div>
