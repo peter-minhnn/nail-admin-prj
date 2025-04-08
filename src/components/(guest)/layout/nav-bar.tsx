@@ -41,7 +41,7 @@ export const Navbar = ({ fixedHeader }: Readonly<NavbarProps>) => {
 
   return (
     <div
-      className={cn('sticky-header fixed top-0 z-[999] w-full', {
+      className={cn('sticky-header fixed top-0 z-[9999] w-full', {
         'show bg-transparent': showHeader,
         '!bg-[#F2F1ED] !bg-opacity-70 shadow-lg !backdrop-blur-md': fixedHeader,
         'bg-[#F2F1ED] !bg-opacity-70 shadow-lg !backdrop-blur-md':
