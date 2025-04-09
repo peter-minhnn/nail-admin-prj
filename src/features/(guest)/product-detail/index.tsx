@@ -34,7 +34,7 @@ export default function ProductDetailComponent({
     >
       <Container fixedHeader>
         <div className='custom-quill grid min-h-screen bg-[#F2F1ED]'>
-          <ReactQuill value={postDetail?.description ?? ''} readOnly />
+          <ReactQuill value={postDetail?.content ?? ''} readOnly />
         </div>
       </Container>
     </PageContainer>

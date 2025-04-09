@@ -46,6 +46,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
         onPreviousClick={goPrev}
         title={props.item.name}
         description={props.item.desc}
+        leftSide={props.leftSide}
       />
       <div className='mt-5 h-[575px] w-full flex-1 items-end justify-end pl-4 md:mt-16'>
         <Swiper
@@ -58,22 +59,22 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
           }}
           modules={[Navigation, Pagination]}
           loop={false}
-          className='flex h-[575px] w-full flex-col items-center justify-end object-contain'
+          className='flex h-[575px] w-full flex-col items-start justify-start object-contain'
         >
           {products.map((item) => (
             <SwiperSlide key={item.id} className='w-[416px]'>
               <a
                 href={`${pagePublicRouters.productDetail}/${item.id}`}
-                className='w-full'
+                className='w-full flex flex-col'
               >
-                <div className='flex h-full w-full flex-col items-center justify-end border-b-2 border-[#E48E43] bg-[#DFDAD4] px-16 pb-9 pt-16'>
+                <div className='flex h-[575px] w-full flex-col rounded-md shadow-md items-center justify-start border-b-2 border-[#E48E43] bg-[#DFDAD4] px-5 pb-9 pt-4'>
                   <img
                     src={item.thumbnail}
                     alt=''
-                    className='h-[294px] w-2/3 rounded object-cover pb-14 transition-transform duration-300 hover:scale-110 lg:w-1/2'
+                    className='h-[399px] w-full rounded-md object-cover mb-8 '
                   />
                   <p
-                    className={`roboto-regular mb-3 text-center text-xl font-bold`}
+                    className={`roboto-regular mb-3 text-center text-xl font-bold line-clamp-1`}
                   >
                     {item.productName}
                   </p>

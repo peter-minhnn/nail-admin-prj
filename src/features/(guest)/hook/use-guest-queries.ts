@@ -1,7 +1,4 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { BannerPublicFilterParams } from '@/entities/(guest)/banner'
-import { ContactDataType } from '@/entities/(guest)/contact'
-import { ProductFilterParams } from '@/entities/(guest)/product'
 import { sendRequests } from '@/services/guest/contact.service'
 import { getAlbums } from '@/services/guest/guest.album.service'
 import {
@@ -16,6 +13,8 @@ import {
 } from '@/services/guest/home.service'
 import { PostsFilterParams, ResultType } from '@/types'
 import get from 'lodash/get'
+import { BannerPublicFilterParams, ProductFilterParams, } from '@/types/(guest)'
+import { ContactDataType } from '../contact/data/shema'
 
 type ContatcsQueryType = {
   onSuccess?: (response: ResultType) => Promise<void>
