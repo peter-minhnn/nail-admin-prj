@@ -13,7 +13,8 @@ type GuestProductTypeType = {
 
 type GuestProductDetailType = {
   productName: string
-  description: string
+  description: string,
+  content: string,
   id: number
   productType: number
   sortOrder: number

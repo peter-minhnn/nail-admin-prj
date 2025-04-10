@@ -17,7 +17,7 @@ export default function ProductSectionHeader(
     goNext: () => void
   }) => {
     return (
-      <div className={`mx-4 flex w-fit items-end gap-8`}>
+      <div className={`mx-4 flex w-fit items-end gap-8 `}>
         <button onClick={goPrev} type='button'>
           <img
             alt=''
@@ -37,13 +37,13 @@ export default function ProductSectionHeader(
   }
 
   return (props.leftSide ?? true) ? (
-    <div className='h-fit flex-col px-4 md:px-20 lg:px-44'>
+    <div className='h-fit w-full flex-col px-4 md:pl-20 lg:pl-44 '>
       <p className={`philosopher-regular text-7xl`}>{props.title}</p>
-      <div className='flex flex-1 flex-col justify-end gap-3 md:flex-row'>
+      <div className='flex flex-1 flex-col w-full justify-between gap-9 md:flex-row'>
         <p className={`roboto-regular w-full flex-1 *:text-base`}>
           {props.description}
         </p>
-        <div className='w-fit'>
+        <div className='w-fit '>
           <ControlButton
             goNext={props.onNextClick}
             goPrev={props.onPreviousClick}
@@ -52,14 +52,16 @@ export default function ProductSectionHeader(
       </div>
     </div>
   ) : (
-    <div className='flex h-fit w-full flex-1 flex-col items-end justify-end px-4 md:px-20 lg:px-44'>
+    <div className='flex h-fit w-full flex-1 flex-col items-end justify-end px-4 '>
       <p className={`philosopher-regular w-fit text-7xl`}>{props.title}</p>
-      <div className='flex w-full flex-1 flex-col justify-between gap-3 md:flex-row'>
-        <ControlButton
-          goNext={props.onNextClick}
-          goPrev={props.onPreviousClick}
-        />
-        <p className={`roboto-regular w-fit text-end text-base`}>
+      <div className='flex w-full flex-col justify-between  md:flex-row gap-9 '>
+        <div className='w-fit '>
+          <ControlButton
+            goNext={props.onNextClick}
+            goPrev={props.onPreviousClick}
+          />
+        </div>
+        <p className={`flex-1 roboto-regular w-fit text-end text-base`}>
           {props.description}
         </p>
       </div>

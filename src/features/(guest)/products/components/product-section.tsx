@@ -20,7 +20,7 @@ export default function ProductSection() {
       {(productTypes ?? []).map((item, index) => {
         const isRightSide = index % 2 == 0
         return (
-          <ProductSlider leftSide={!isRightSide} item={item} key={item.id} />
+          <ProductSlider leftSide={isRightSide} item={item} key={item.id} />
         )
       })}
     </>
