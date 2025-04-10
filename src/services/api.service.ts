@@ -55,18 +55,20 @@ export async function handleApiCatchResponse<T>(e: any): Promise<ResultType> {
 }
 
 async function redirectPageErrors(e: any) {
+  const isAdminPage = window.location.pathname.includes('/admin')
+
   switch (e?.status) {
     case StatusCodes.NOT_FOUND:
-      window.location.href = '/admin/404'
+      if (isAdminPage) window.location.href = '/admin/404'
       break
     case StatusCodes.UNAUTHORIZED:
       await logout()
       break
     case StatusCodes.SERVICE_UNAVAILABLE:
-      window.location.href = '/admin/503'
+      if (isAdminPage) window.location.href = '/admin/503'
       break
     case StatusCodes.INTERNAL_SERVER_ERROR:
-      window.location.href = '/admin/500'
+      if (isAdminPage) window.location.href = '/admin/500'
       break
     default:
       break
