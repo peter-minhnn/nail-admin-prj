@@ -95,3 +95,15 @@ export const updateSpanBackgrounds = (htmlContent: string) => {
 
   return hasChanges ? updatedContent : htmlContent
 }
+
+export function stringToSlug(input: string): string {
+  return input
+    .toLowerCase() // Convert to lowercase
+    .normalize('NFD') // Normalize to decompose diacritics
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritical marks
+    .replace(/đ/g, 'd') // Replace Vietnamese 'đ' with 'd'
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+    .trim() // Remove leading and trailing spaces
+    .replace(/[\s-]+/g, '-') // Replace spaces and hyphens with a single hyphen
+    .replace(/^-+|-+$/g, '') // Remove leading and trailing hyphens
+}

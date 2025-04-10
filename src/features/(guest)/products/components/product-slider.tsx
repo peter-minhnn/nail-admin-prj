@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)'
 import {
   GuestProductDetailType,
@@ -9,6 +10,8 @@ import get from 'lodash/get'
 import { Navigation, Pagination } from 'swiper/modules'
 import type { SwiperRef } from 'swiper/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useProductStore } from '@/stores/product-store.ts'
+import { stringToSlug } from '@/utils/common.ts'
 import { useGetProducts } from '../../hook/use-guest-queries'
 import ProductSectionHeader from './product-section-header'
 
@@ -19,6 +22,7 @@ interface ProductsSliderProps {
 
 export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   const swiperRef = useRef<SwiperRef | null>(null)
+  const navigate = useNavigate()
   const goNext = () => swiperRef.current?.swiper.slideNext()
   const goPrev = () => swiperRef.current?.swiper.slidePrev()
   const [filterParams] = useState<ProductFilterParams>({
@@ -28,6 +32,8 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
   })
 
   const [products, setProducts] = useState<GuestProductDetailType[]>([])
+
+  const productStore = useProductStore()
 
   const { data, status, isRefetching } = useGetProducts(filterParams)
 
@@ -63,18 +69,26 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
         >
           {products.map((item) => (
             <SwiperSlide key={item.id} className='w-[416px]'>
-              <a
-                href={`${pagePublicRouters.productDetail}/${item.id}`}
-                className='w-full flex flex-col'
+              <button
+                onClick={() => {
+                  productStore.setProductItem({
+                    ...item,
+                    slugId: stringToSlug(item.productName),
+                  })
+                  navigate({
+                    href: `${pagePublicRouters.productDetail}/${stringToSlug(item.productName)}`,
+                  }).finally()
+                }}
+                className='flex w-full flex-col'
               >
-                <div className='flex h-[575px] w-full flex-col rounded-md shadow-md items-center justify-start border-b-2 border-[#E48E43] bg-[#DFDAD4] px-5 pb-9 pt-4'>
+                <div className='flex h-[575px] w-full flex-col items-center justify-start rounded-md border-b-2 border-[#E48E43] bg-[#DFDAD4] px-5 pb-9 pt-4 shadow-md'>
                   <img
                     src={item.thumbnail}
                     alt=''
-                    className='h-[399px] w-full rounded-md object-cover mb-8 '
+                    className='mb-8 h-[399px] w-full rounded-md object-cover'
                   />
                   <p
-                    className={`roboto-regular mb-3 text-center text-xl font-bold line-clamp-1`}
+                    className={`roboto-regular mb-3 line-clamp-1 text-center text-xl font-bold`}
                   >
                     {item.productName}
                   </p>
@@ -84,7 +98,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
                     {item.description}
                   </p>
                 </div>
-              </a>
+              </button>
             </SwiperSlide>
           ))}
         </Swiper>

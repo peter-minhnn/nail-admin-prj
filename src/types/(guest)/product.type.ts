@@ -13,8 +13,8 @@ type GuestProductTypeType = {
 
 type GuestProductDetailType = {
   productName: string
-  description: string,
-  content: string,
+  description: string
+  content: string
   id: number
   productType: number
   sortOrder: number
@@ -25,6 +25,7 @@ type GuestProductDetailType = {
   updatedAt: string
   updatedBy: string
   thumbnail: string
+  slugId?: string
 }
 
 export type {

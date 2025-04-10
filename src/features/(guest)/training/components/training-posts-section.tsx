@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { PostPublicType } from '@/entities/(guest)/post'
 import { PostsFilterParams } from '@/types'
+import { PostPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import { v4 as uuid } from 'uuid'

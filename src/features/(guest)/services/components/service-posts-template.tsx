@@ -1,6 +1,6 @@
 import { PostPublicType } from '@/types/(guest)'
 import { useIntl } from 'react-intl'
-import AlbumPublicItemView from '@/components/(guest)/layout/post-item'
+import AlbumPublicItemView from '@/components/(guest)/post-item.tsx'
 
 interface ServicePostsTemplate {
   hasLabel: boolean

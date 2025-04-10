@@ -12,8 +12,8 @@ import {
   getPosts,
 } from '@/services/guest/home.service'
 import { PostsFilterParams, ResultType } from '@/types'
+import { BannerPublicFilterParams, ProductFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
-import { BannerPublicFilterParams, ProductFilterParams, } from '@/types/(guest)'
 import { ContactDataType } from '../contact/data/shema'
 
 type ContatcsQueryType = {

@@ -1,5 +1,8 @@
+import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)'
-import { PostPublicType } from '@/entities/(guest)/post'
+import { PostPublicType } from '@/types/(guest)'
+import { usePostsStore } from '@/stores/posts-store.ts'
+import { stringToSlug } from '@/utils/common.ts'
 
 interface PostPublicItemProps {
   data?: PostPublicType
@@ -9,11 +12,20 @@ interface PostPublicItemProps {
 export default function PostPublicItemView(
   props: Readonly<PostPublicItemProps>
 ) {
+  const { setPostsItem } = usePostsStore()
+  const navigate = useNavigate()
+
   if (props.data == null) return null
   return (
     <div className={`${props.className} h-full w-full`}>
-      <a
-        href={`${pagePublicRouters.postDetail}/${props.data?.id}`}
+      <button
+        type='button'
+        onClick={() => {
+          setPostsItem(props.data! ?? null)
+          navigate({
+            href: `${pagePublicRouters.postDetail}/${stringToSlug(props.data?.title!)}`,
+          }).finally()
+        }}
         className='h-full w-full'
       >
         <div className='group relative h-full w-full'>
@@ -41,7 +53,7 @@ export default function PostPublicItemView(
             </div>
           </div>
         </div>
-      </a>
+      </button>
     </div>
   )
 }

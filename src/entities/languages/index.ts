@@ -19,6 +19,8 @@ const languages = [
 
 enum LocalStorageKeys {
   LOCALE = 'locale',
+  PRODUCT = 'product',
+  POST = 'post',
 }
 
 export { languages, LocalStorageKeys }

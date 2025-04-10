@@ -1,5 +1,6 @@
 export enum LocalStorageKey {
   LOCALE = 'locale',
+  PRODUCT = 'product',
 }
 
 export enum StatusCodes {

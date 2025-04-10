@@ -1,5 +1,5 @@
-import { PostPublicType } from '@/entities/(guest)/post'
-import PostPublicItemView from '@/components/(guest)/layout/post-item'
+import { PostPublicType } from '@/types/(guest)'
+import PostPublicItemView from '@/components/(guest)/post-item.tsx'
 
 interface TrainingPostTemplateProps {
   items: PostPublicType[]

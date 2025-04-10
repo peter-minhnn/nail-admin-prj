@@ -221,7 +221,9 @@ export const ProductDetailDialog: FC<ProductDialogsProps> = (props) => {
                         <SelectDropdown
                           defaultValue={String(field.value)}
                           items={props.productTypeOptions}
-                          onValueChange={(value) => field.onChange(Number(value))}
+                          onValueChange={(value) =>
+                            field.onChange(Number(value))
+                          }
                         />
                         <FormMessage />
                       </FormItem>

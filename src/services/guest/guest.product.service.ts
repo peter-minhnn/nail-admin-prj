@@ -1,12 +1,11 @@
 import { apiGuestRoutes } from '@/config/guest.api.route.ts'
-
 import {
   handleApiCatchResponse,
   handleApiResponse,
 } from '@/services/api.service.ts'
 import { BaseResponseType, ProductFilterParams } from '@/types'
-import { useGlobalAxios } from '@/hooks/use-axios'
 import { GuestProductDetailType, GuestProductTypeType } from '@/types/(guest)'
+import { useGlobalAxios } from '@/hooks/use-axios'
 
 export const getProductTypes = async () => {
   try {
