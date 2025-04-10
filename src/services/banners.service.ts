@@ -26,6 +26,7 @@ export const saveChanges = async (data: BannersRequestType) => {
   formData.append('title', data.title)
   formData.append('type', String(data.type || 0))
   formData.append('file', data.file)
+  formData.append('fileMobile', data.fileMobile ?? '')
 
   try {
     const response = await useAuthAxios.postFormData<

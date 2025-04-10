@@ -1,15 +1,30 @@
-import { PostPublicType } from '@/entities/(guest)/post'
+import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)/routes'
+import { PostPublicType } from '@/types/(guest)'
 import { useIntl } from 'react-intl'
+import { usePostsStore } from '@/stores/posts-store.ts'
+import { stringToSlug } from '@/utils/common.ts'
 
 interface ActivityItemProps {
   item: PostPublicType
 }
 export default function ActivityItem(props: Readonly<ActivityItemProps>) {
   const intl = useIntl()
+  const navigate = useNavigate()
+  const { setPostsItem } = usePostsStore()
+
+  const handleClick = () => {
+    const slutId = stringToSlug(props.item.title)
+    setPostsItem({ ...props.item, slugId: slutId })
+    navigate({
+      to: `${pagePublicRouters.postDetail}/${slutId}`,
+    }).finally()
+  }
+
   return (
-    <a
-      href={`${pagePublicRouters.postDetail}/${props.item.id}`}
+    <button
+      type='button'
+      onClick={handleClick}
       className='flex h-full w-full flex-col'
     >
       <div className='flex h-full w-full flex-col'>
@@ -34,6 +49,6 @@ export default function ActivityItem(props: Readonly<ActivityItemProps>) {
           <img srcSet='/images/svg/arrow_right.svg' alt='' />
         </div>
       </div>
-    </a>
+    </button>
   )
 }

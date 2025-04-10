@@ -2,7 +2,7 @@ import { Dispatch, FC, SetStateAction, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
-import { IconDeviceFloppy } from '@tabler/icons-react'
+import { IconDeviceFloppy, IconX } from '@tabler/icons-react'
 import { DialogType, ResultType } from '@/types/base.type.ts'
 import { handleServerResponse } from '@/utils'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -57,6 +57,10 @@ const defaultValues = {
   fileName: '',
   filePath: '',
   url: '',
+  fileMobile: '',
+  fileNameMobile: '',
+  filePathMobile: '',
+  urlMobile: '',
 }
 
 export const BannersDialog: FC<BannersDialogsProps> = (props) => {
@@ -69,6 +73,7 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
 
   const intl = useIntl()
   const [files, setFiles] = useState<File[]>([])
+  const [mobileFiles, setMobileFiles] = useState<File[]>([])
 
   const onSuccess = async (response: ResultType) => {
     handleServerResponse(response)
@@ -91,17 +96,17 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
       title: data.title,
       type: data.type,
       file: files[0],
+      fileMobile: mobileFiles?.length ? mobileFiles[0] : null,
     })
   }
 
+  const handleClose = () => {
+    props.setOpen('')
+    form.reset()
+  }
+
   return (
-    <Dialog
-      open={props.open}
-      onOpenChange={() => {
-        props.setOpen('')
-        form.reset()
-      }}
-    >
+    <Dialog open={props.open} onOpenChange={handleClose}>
       <DialogContent className='sm:max-w-lg'>
         <DialogHeader className='text-left'>
           <DialogTitle>
@@ -111,62 +116,65 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
             {props.description && <FormattedMessage id={props.description} />}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className='-mr-4 h-[22.25rem] w-full py-1 pr-4'>
+        <ScrollArea className='-mr-4 h-[32.25rem] w-full py-1 pr-4'>
           <Form {...form}>
             <form
               id='banners-form'
               onSubmit={form.handleSubmit(onSubmit)}
-              className='flex flex-col gap-3 space-y-4 p-0.5'
+              className='flex flex-col gap-2 space-y-4 p-0.5'
             >
-              <FormField
-                control={form.control}
-                name='title'
-                render={({ field }) => (
-                  <FormItem className='flex w-full flex-col'>
-                    <FormLabel required>
-                      <FormattedMessage id='banners.title' />
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={intl.formatMessage({
-                          id: 'banners.namePlaceholder',
-                        })}
-                        className='w-full'
-                        autoComplete='off'
-                        hasError={!!form.formState.errors?.title?.message}
-                        {...field}
+              <div className='flex h-24 w-full flex-col items-center gap-4 md:flex-row'>
+                <FormField
+                  control={form.control}
+                  name='title'
+                  render={({ field }) => (
+                    <FormItem className='h-full w-full'>
+                      <FormLabel required>
+                        <FormattedMessage id='banners.title' />
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={intl.formatMessage({
+                            id: 'banners.namePlaceholder',
+                          })}
+                          className='w-full'
+                          autoComplete='off'
+                          hasError={!!form.formState.errors?.title?.message}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name='type'
+                  render={({ field }) => (
+                    <FormItem className='h-full w-full'>
+                      <FormLabel required>
+                        <FormattedMessage id='banners.type' />
+                      </FormLabel>
+                      <SelectDropdown
+                        className='h-10'
+                        defaultValue={String(field.value ?? '')}
+                        items={BannersTypes.map((v) => ({
+                          value: String(v.value),
+                          label: v.label,
+                        }))}
+                        onValueChange={(value) => field.onChange(Number(value))}
                       />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='type'
-                render={({ field }) => (
-                  <FormItem className='w-full'>
-                    <FormLabel required>
-                      <FormattedMessage id='banners.type' />
-                    </FormLabel>
-                    <SelectDropdown
-                      defaultValue={String(field.value ?? '')}
-                      items={BannersTypes.map((v) => ({
-                        value: String(v.value),
-                        label: v.label,
-                      }))}
-                      onValueChange={(value) => field.onChange(Number(value))}
-                    />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 control={form.control}
                 name='filePath'
                 render={() => (
                   <FormItem className='w-full'>
-                    <FormLabel>
+                    <FormLabel required>
                       <FormattedMessage id='banners.filePath' />
                     </FormLabel>
                     <FileUpload
@@ -177,10 +185,37 @@ export const BannersDialog: FC<BannersDialogsProps> = (props) => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name='filePathMobile'
+                render={() => (
+                  <FormItem className='w-full'>
+                    <FormLabel>
+                      <FormattedMessage id='banners.mobileFile' />
+                    </FormLabel>
+                    <FileUpload
+                      files={mobileFiles}
+                      onValueChange={(files) => setMobileFiles(files ?? [])}
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </form>
           </Form>
         </ScrollArea>
         <DialogFooter>
+          <Button
+            type='button'
+            form='banners-form'
+            variant='outline'
+            disabled={status === 'pending'}
+            loading={status === 'pending'}
+            onClick={handleClose}
+          >
+            <IconX size={18} />
+            <FormattedMessage id='common.btnCancel' />
+          </Button>
           <Button
             type='submit'
             form='banners-form'

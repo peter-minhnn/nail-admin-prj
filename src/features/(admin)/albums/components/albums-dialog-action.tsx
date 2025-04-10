@@ -173,7 +173,7 @@ export const AlbumDetailDialog: FC<AlbumsDialogsProps> = (props) => {
             {props.description && <FormattedMessage id={props.description} />}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className='-mr-4 h-[40.25rem] w-full py-1 pr-4'>
+        <ScrollArea className='-mr-4 flex max-h-[35.25rem] w-full flex-col flex-wrap py-1 pr-4'>
           <Form {...form}>
             <form
               id='albums-form'

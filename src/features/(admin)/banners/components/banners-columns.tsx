@@ -38,10 +38,14 @@ export const useColumns = ({
       id: 'title',
       accessorKey: 'title',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='banners.title' />
+        <DataTableColumnHeader
+          column={column}
+          title='banners.title'
+          className='text-center'
+        />
       ),
       cell: ({ row }) => (
-        <LongText className='max-w-36'>{row.getValue('title')}</LongText>
+        <LongText className='w-max max-w-96'>{row.getValue('title')}</LongText>
       ),
       enableHiding: true,
     },
@@ -49,7 +53,11 @@ export const useColumns = ({
       id: 'originalName',
       accessorKey: 'originalName',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='banners.originalName' />
+        <DataTableColumnHeader
+          column={column}
+          title='banners.originalName'
+          className='text-center'
+        />
       ),
       cell: ({ row }) => {
         return (
@@ -66,12 +74,36 @@ export const useColumns = ({
       },
     },
     {
+      id: 'originalNameMobile',
+      accessorKey: 'originalNameMobile',
+      header: ({ column }) => (
+        <DataTableColumnHeader
+          column={column}
+          title='banners.originalNameMobile'
+          className='text-center'
+        />
+      ),
+      cell: ({ row }) => {
+        return (
+          <Button
+            type='button'
+            className='w-full cursor-pointer justify-start border-0 bg-transparent text-blue-500 shadow-none hover:bg-transparent hover:text-blue-400/90'
+            onClick={() => handleOpenImageLink(row.original.urlMobile)}
+          >
+            <LongText className='max-w-96'>
+              {row.getValue('originalNameMobile')}
+            </LongText>
+          </Button>
+        )
+      },
+    },
+    {
       accessorKey: 'type',
       header: ({ column }) => (
         <DataTableColumnHeader
           column={column}
           title='banners.type'
-          className='w-max min-w-fit'
+          className='text-center'
         />
       ),
       cell: ({ row }) => {

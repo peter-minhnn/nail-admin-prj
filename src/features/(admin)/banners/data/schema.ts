@@ -18,6 +18,10 @@ const bannersSchema = z.object({
   filePath: z.string().optional().default(''),
   type: bannersTypeSchema,
   url: z.string().optional().default(''),
+  originalNameMobile: z.string().optional().default(''),
+  fileNameMobile: z.string().optional().default(''),
+  filePathMobile: z.string().optional().default(''),
+  urlMobile: z.string().optional().default(''),
 })
 
 const bannersListSchema = z.array(bannersSchema)

@@ -10,6 +10,7 @@ export type BannersRequestType = {
   title: string
   type: number
   file: File
+  fileMobile: File | null
 }
 
 export type BannersFilterParams = {
