@@ -65,14 +65,14 @@ export default function ServicesSlider() {
             <div
               className={`w-full items-start gap-8 ${(dataSource.data ?? []).length > 3 ? 'flex' : (dataSource.data ?? []).length > 2 ? 'flex lg:hidden' : ''}`}
             >
-              <button onClick={goPrev} type='button'>
+              <button onClick={goPrev} type='button' name='Previous'>
                 <img
                   srcSet='/images/svg/arrow_left.svg'
                   className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
                   alt=''
                 />
               </button>
-              <button onClick={goNext} type='button'>
+              <button onClick={goNext} type='button' name='Next'>
                 <img
                   srcSet='/images/svg/arrow_right.svg'
                   className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
