@@ -28,7 +28,7 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
       type='button'
       onClick={handleClick}
       className='w-full'
-      name='Home Activities'
+      title='Home Activities'
     >
       <div className='w-full items-start justify-start'>
         <div className={cn('h-full w-full overflow-hidden', props.className)}>

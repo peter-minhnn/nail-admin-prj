@@ -65,7 +65,7 @@ export const Navbar = ({ fixedHeader }: Readonly<NavbarProps>) => {
             aria-controls='mobile-menu'
             aria-expanded={isOpen}
             onClick={toggleMenu}
-            name='Menu Mobile'
+            title='Menu Mobile'
           >
             <span className='sr-only'>Open main menu</span>
             {isOpen ? (

@@ -18,14 +18,14 @@ export default function ProductSectionHeader(
   }) => {
     return (
       <div className={`mx-4 flex w-fit items-end gap-8`}>
-        <button onClick={goPrev} type='button' name='Previous'>
+        <button onClick={goPrev} type='button' title='Previous'>
           <img
             alt=''
             srcSet='/images/svg/arrow_left.svg'
             className='h-[40px] w-[40px] transition-transform duration-300 hover:scale-110'
           />
         </button>
-        <button onClick={goNext} type='button' name='Next'>
+        <button onClick={goNext} type='button' title='Next'>
           <img
             alt=''
             srcSet='/images/svg/arrow_right.svg'

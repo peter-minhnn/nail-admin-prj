@@ -26,7 +26,7 @@ export default function ActivityItem(props: Readonly<ActivityItemProps>) {
       type='button'
       onClick={handleClick}
       className='flex h-full w-full flex-col'
-      name='Activity Item'
+      title='Activity Item'
     >
       <div className='flex h-full w-full flex-col'>
         <img

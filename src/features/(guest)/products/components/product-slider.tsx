@@ -80,7 +80,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
                   }).finally()
                 }}
                 className='flex w-full flex-col'
-                name='Product Detail'
+                title='Product Detail'
               >
                 <div className='flex h-[575px] w-full flex-col items-center justify-start rounded-md border-b-2 border-[#E48E43] bg-[#DFDAD4] px-5 pb-9 pt-4 shadow-md'>
                   <img

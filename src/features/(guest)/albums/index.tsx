@@ -89,6 +89,7 @@ export default function AlbumComponent() {
                       [`md:col-span-${4 / remainingItems}`]: isLastRow,
                     }
                   )}
+                  title='Albums'
                 >
                   <img
                     className='h-full w-full object-cover'

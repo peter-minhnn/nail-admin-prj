@@ -208,14 +208,14 @@ export default function Lightbox({
         isOpen ? 'opacity-100' : 'opacity-0'
       }`}
       onClick={handleClose}
-      name='Main'
+      title='Main'
     >
       {/* Main content container */}
       <button
         type='button'
         className='relative flex h-full w-full flex-col items-center justify-center'
         onClick={(e) => e.stopPropagation()}
-        name='Container'
+        title='Container'
       >
         {/* Top toolbar */}
         <div
@@ -233,7 +233,7 @@ export default function Lightbox({
 
           <div className='flex items-center gap-2'>
             <button
-              name='Toggle Thumbnail'
+              title='Toggle Thumbnail'
               onClick={toggleThumbnails}
               className='rounded-full p-2 text-white transition-colors hover:bg-white/20'
               aria-label={
@@ -248,7 +248,7 @@ export default function Lightbox({
             </button>
             <button
               onClick={toggleFullscreen}
-              name='Toggle Fullscreen'
+              title='Toggle Fullscreen'
               className='rounded-full p-2 text-white transition-colors hover:bg-white/20'
               aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
@@ -258,7 +258,7 @@ export default function Lightbox({
               onClick={handleClose}
               className='rounded-full p-2 text-white transition-colors hover:bg-white/20'
               aria-label='Close lightbox'
-              name='Close Lightbox'
+              title='Close Lightbox'
             >
               <X size={20} />
             </button>
@@ -270,7 +270,7 @@ export default function Lightbox({
           type='button'
           className='relative flex h-full w-full items-center justify-center px-16'
           onDoubleClick={toggleFullscreen}
-          name='Fullscreen'
+          title='Fullscreen'
         >
           <img
             src={images[currentIndex] || '/placeholder.svg'}
@@ -287,7 +287,7 @@ export default function Lightbox({
             showControls ? 'opacity-100' : 'opacity-0'
           }`}
           aria-label='Previous image'
-          name='Previous'
+          title='Previous'
         >
           <ChevronLeft size={24} />
         </button>
@@ -297,7 +297,7 @@ export default function Lightbox({
             showControls ? 'opacity-100' : 'opacity-0'
           }`}
           aria-label='Next image'
-          name='Next'
+          title='Next'
         >
           <ChevronRight size={24} />
         </button>
@@ -315,7 +315,7 @@ export default function Lightbox({
               onClick={handleZoomOut}
               className='rounded-full p-2 text-white transition-colors hover:bg-white/20'
               aria-label='Zoom out'
-              name='Zoom Out'
+              title='Zoom Out'
             >
               <ZoomOut size={20} onClick={handleZoomOut} />
             </button>
@@ -336,7 +336,7 @@ export default function Lightbox({
               onClick={handleZoomIn}
               className='rounded-full p-2 text-white transition-colors hover:bg-white/20'
               aria-label='Zoom in'
-              name='Zoom In'
+              title='Zoom In'
             >
               <ZoomIn size={20} onClick={handleZoomIn} />
             </button>
@@ -377,7 +377,7 @@ export default function Lightbox({
                         ? 'z-10 scale-110'
                         : 'scale-100 opacity-70 hover:opacity-100'
                     }`}
-                    name='Select Image'
+                    title='Select Image'
                   >
                     <div
                       className={`h-16 w-24 overflow-hidden rounded-lg border-2 transition-all ${

@@ -27,7 +27,7 @@ export default function PostPublicItemView(
           }).finally()
         }}
         className='h-full w-full'
-        name='Posts Detail'
+        title='Posts Detail'
       >
         <div className='group relative h-full w-full'>
           <div className={`rounded-sm bg-cover bg-center`}>
