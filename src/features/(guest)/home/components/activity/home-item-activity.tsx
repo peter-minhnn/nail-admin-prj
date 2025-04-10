@@ -1,18 +1,30 @@
+import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)/routes'
 import { PostPublicType } from '@/types/(guest)'
+import { usePostsStore } from '@/stores/posts-store.ts'
 import { cn } from '@/lib/utils'
+import { stringToSlug } from '@/utils/common.ts'
 
 interface ActivitiesProps {
   item?: PostPublicType
   className?: string
 }
 export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
+  const navigate = useNavigate()
+  const { setPostsItem } = usePostsStore()
+
+  const handleClick = () => {
+    if (props.item == null) return
+    const slugId = stringToSlug(props.item.title)
+    setPostsItem({ ...props.item, slugId })
+    navigate({
+      to: `${pagePublicRouters.postDetail}/${slugId}`,
+    }).finally()
+  }
+
   if (props.item == null) return <div />
   return (
-    <a
-      href={`${pagePublicRouters.postDetail}/${props.item.id}`}
-      className='w-full'
-    >
+    <button type='button' onClick={handleClick} className='w-full'>
       <div className='w-full items-start justify-start'>
         <div className={cn('h-full w-full overflow-hidden', props.className)}>
           <img
@@ -35,6 +47,6 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
           />
         </div>
       </div>
-    </a>
+    </button>
   )
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)'
 import { LocalStorageKeys } from '@/entities/languages'
 import { LocalStorageStateType } from '@/types'
@@ -19,8 +20,11 @@ export default function ProductDetailComponent({
   slugId,
 }: Readonly<ProductDetailComponentProps>) {
   const intl = useIntl()
-  const [postDetail, setPostDetail] = useState<GuestProductDetailType>()
+  const navigate = useNavigate()
   const { product, setProductItem } = useProductStore()
+
+  const [postDetail, setPostDetail] = useState<GuestProductDetailType>()
+
   const { data, status, isRefetching } = useGetProductDetail(product?.id!)
 
   useEffect(() => {
@@ -36,7 +40,10 @@ export default function ProductDetailComponent({
 
   useEffect(() => {
     const productItem = localStorage.getItem(LocalStorageKeys.PRODUCT)
-    if (!productItem) return
+    if (!productItem) {
+      navigate({ href: '/san-pham' }).finally()
+      return
+    }
 
     const data = JSON.parse(productItem) as LocalStorageStateType<{
       product: GuestProductDetailType

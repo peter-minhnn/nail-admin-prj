@@ -1,4 +1,4 @@
-import { PostPublicType } from '@/entities/(guest)/post'
+import { PostPublicType } from '@/types/(guest)'
 import ActivityItem from './activity-item'
 
 interface ActivitiesProps {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)'
 import { LocalStorageKeys } from '@/entities/languages'
 import { LocalStorageStateType } from '@/types'
@@ -19,8 +20,11 @@ export default function PostDetailComponent({
   slugId,
 }: Readonly<PostDetailComponentProps>) {
   const intl = useIntl()
-  const [postDetail, setPostDetail] = useState<PostPublicType>()
   const { postsItem, setPostsItem } = usePostsStore()
+  const navigate = useNavigate()
+
+  const [postDetail, setPostDetail] = useState<PostPublicType>()
+
   const { data, status, isRefetching } = useGetPostDetail(postsItem?.id!)
 
   useEffect(() => {
@@ -36,7 +40,10 @@ export default function PostDetailComponent({
 
   useEffect(() => {
     const item = localStorage.getItem(LocalStorageKeys.POST)
-    if (!item) return
+    if (!item) {
+      navigate({ href: '/' }).finally()
+      return
+    }
 
     const data = JSON.parse(item) as LocalStorageStateType<{
       postsItem: PostPublicType
