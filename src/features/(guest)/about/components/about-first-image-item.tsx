@@ -6,7 +6,7 @@ interface AboutFirstItemProps {
 export default function AboutFirstImageItem(
   props: Readonly<AboutFirstItemProps>
 ) {
-  var mt = ''
+  let mt = ''
   switch (props.index) {
     case 0:
       mt = 'mt-36'

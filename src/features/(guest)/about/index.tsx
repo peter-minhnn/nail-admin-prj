@@ -8,6 +8,10 @@ import AboutFirstSection from './components/about-first-section'
 import AboutFouthSection from './components/about-fouth-section'
 import AboutSecondsSection from './components/about-seconds-section'
 import AboutThirdSection from './components/about-third-section'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
+import { useEffect, useState } from 'react'
+import { useGetBanners } from '../hook/use-guest-queries'
+import get from 'lodash/get'
 
 const aboutThirdData = (intl: IntlShape) => {
   return [
@@ -41,6 +45,24 @@ const aboutThirdData = (intl: IntlShape) => {
 export default function AboutUsComponent() {
   const intl = useIntl()
 
+  const [filterParams] = useState<BannerPublicFilterParams>({
+    type: 1,
+    take: 10,
+    page: 1,
+  })
+
+  const [banner, setBanner] = useState<BannerPublicDataType | null>(null)
+  const { data, status, isRefetching } = useGetBanners(filterParams)
+
+  useEffect(() => {
+    if (status === 'pending' || isRefetching) return
+    const bannersData = get(data, ['data'], [])
+    if (bannersData.length > 0) {
+      setBanner(bannersData[0])
+    }
+  }, [data, status, isRefetching])
+
+
   return (
     <PageContainer
       title={intl.formatMessage({ id: 'aboutUs.pageTitle' })}
@@ -49,10 +71,10 @@ export default function AboutUsComponent() {
       image={'/images/aboutus_banner.png'}
     >
       <Navbar />
-      <Banner path={'/images/aboutus_banner.png'}>
-        <div className='absolute top-1/2 h-screen w-screen items-center justify-center'>
+      <Banner path={banner?.url} pathMobile={banner?.urlMobile} >
+        <div className='absolute flex left-0 top-0 right-0 bottom-0  items-center justify-center'>
           <p
-            className={`philosopher-regular px-6 text-center text-8xl font-normal text-white`}
+            className={`philosopher-regular px-6 text-center text-6xl md:text-7xl lg:text-8xl font-normal text-white`}
           >
             {intl.formatMessage({ id: 'aboutUs.pageTitle' })}
           </p>
@@ -80,9 +102,7 @@ export default function AboutUsComponent() {
           id: 'aboutUs.section2Description',
         })}
       />
-      <section className='h-fit'>
-        <AboutThirdSection items={aboutThirdData(intl)} />
-      </section>
+      <AboutThirdSection items={aboutThirdData(intl)} />
       <Container header={false}>
         <AboutFouthSection
           items={[

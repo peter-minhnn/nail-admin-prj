@@ -37,10 +37,10 @@ export default function ActivitiesComponent() {
       image={'/images/bg-home.png'}
     >
       <Navbar />
-      <Banner path={banner?.url ?? ''}>
-        <div className='absolute top-20 h-screen w-screen p-20'>
+      <Banner path={banner?.url ?? ''} pathMobile={banner?.urlMobile}>
+        <div className='absolute  left-0 right-0 bottom-20 items-center justify-center'>
           <p
-            className={`philosopher-regular flex h-full w-full items-center justify-center pb-20 text-center text-8xl font-normal text-white md:items-end md:text-end`}
+            className={`philosopher-regular flex h-full w-full items-center justify-center pb-20 text-center text-6xl md:text-7xl lg:text-8xl font-normal text-white md:items-end md:text-end`}
           >
             {intl.formatMessage({ id: 'guest.common.activity' })}
           </p>
@@ -48,7 +48,7 @@ export default function ActivitiesComponent() {
       </Banner>
       <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
         <Container>
-          <div className='m-10 grid min-h-screen items-center justify-items-center md:m-20'>
+          <div className='m-4 grid min-h-screen items-center justify-items-center md:m-20'>
             <ActivitiesSlider />
           </div>
         </Container>

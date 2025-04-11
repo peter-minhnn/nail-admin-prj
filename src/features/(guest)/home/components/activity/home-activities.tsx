@@ -39,9 +39,9 @@ export default function HomeActivities() {
   const intl = useIntl()
   if ((dataSource.data ?? []).length == 0) return <div />
   return (
-    <div className='grid h-fit grid-cols-1 grid-rows-2 gap-8 py-32 md:grid-cols-2'>
-      <div className='flex flex-col items-start justify-start pb-5 md:pb-[130px]'>
-        <h3 className={`pb-[68px] text-[72px] font-normal`}>
+    <div className='grid h-fit grid-cols-1 grid-rows-2 gap-8  pt-0 py-32 md:py-32 md:grid-cols-2 '>
+      <div className='flex flex-col items-start justify-start pb-5  pt-24 md:pt-0 md:pb-24'>
+        <h3 className={`font-philosopher pb-[68px] text-start text-7xl  font-normal`}>
           {intl.formatMessage({ id: 'guest.common.activity' })}
         </h3>
         <div className='flex h-full w-full items-end justify-start'>

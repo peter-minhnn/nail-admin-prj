@@ -38,25 +38,25 @@ export default function Home() {
       image={banner?.url ?? ''}
     >
       <Navbar />
-      <Banner path={banner?.url ?? ''}>
+      <Banner path={banner?.url ?? ''} pathMobile={banner?.urlMobile}>
         <div className='flex h-screen flex-col items-center justify-center'>
           <div className='flex h-auto w-full justify-center md:justify-start md:pl-20'>
             <p
-              className={`philosopher-regular text-7xl font-normal text-white lg:text-8xl`}
+              className={`philosopher-regular text-6xl md:text-7xl lg:text-8xl font-normal text-white `}
             >
               NAIL CARE
             </p>
           </div>
           <div className='flex h-auto w-full justify-center md:justify-start md:pl-[34rem]'>
             <p
-              className={`philosopher-regular text-8xl font-normal text-[#FEDE59] lg:text-9xl`}
+              className={`philosopher-regular text-7xl md:text-8xl lg:text-9xl  font-normal text-[#FEDE59] `}
             >
               is
             </p>
           </div>
           <div className='flex h-auto w-full justify-center md:justify-start md:pl-80'>
             <p
-              className={`philosopher-regular text-7xl font-normal text-white lg:text-8xl`}
+              className={`philosopher-regular  text-6xl md:text-7xl lg:text-8xl  font-normal text-white `}
             >
               SELF CARE
             </p>

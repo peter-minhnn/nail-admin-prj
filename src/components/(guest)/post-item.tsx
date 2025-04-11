@@ -17,13 +17,13 @@ export default function PostPublicItemView(
 
   if (props.data == null) return null
   return (
-    <div className={`${props.className} h-full w-full`}>
+    <div className={`${props.className}`}>
       <button
         type='button'
         onClick={() => {
           setPostsItem(props.data! ?? null)
           navigate({
-            href: `${pagePublicRouters.postDetail}/${stringToSlug(props.data?.title!)}`,
+            href: `${pagePublicRouters.postDetail}/${stringToSlug(props.data?.title ?? "")}`,
           }).finally()
         }}
         className='h-full w-full'

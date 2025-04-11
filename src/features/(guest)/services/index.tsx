@@ -18,7 +18,7 @@ export default function ServicesComponent() {
         <ServiceBanner />
       </div>
       <Container>
-        <div className='my-32 grid items-center justify-items-center bg-[#F2F1ED]'>
+        <div className=' mt-16 mb-32 grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
           <section className='w-full'>
             <ServicePostsSection />
           </section>
