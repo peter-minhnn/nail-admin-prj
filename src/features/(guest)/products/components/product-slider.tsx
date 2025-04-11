@@ -54,7 +54,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
         description={props.item.desc}
         leftSide={props.leftSide}
       />
-      <div className='mt-5 h-[575px] w-full flex-1 items-end justify-end pl-4 md:mt-16'>
+      <div className='mt-5 h-[575px] w-full flex-1 items-end justify-end md:mt-16'>
         <Swiper
           ref={swiperRef}
           direction={'horizontal'}

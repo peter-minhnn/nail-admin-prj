@@ -48,7 +48,7 @@ export default function ActivitiesComponent() {
       </Banner>
       <div className='grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
         <Container>
-          <div className='m-4 grid min-h-screen items-center justify-items-center md:m-20'>
+          <div className='grid min-h-screen items-center justify-items-center md:m-20'>
             <ActivitiesSlider />
           </div>
         </Container>

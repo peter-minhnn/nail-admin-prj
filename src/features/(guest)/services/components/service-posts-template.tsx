@@ -13,7 +13,7 @@ export default function ServicePostsTemplate(
   const intl = useIntl()
   return (
     <div className='h-fit gap-8'>
-      <div className='mx-6 flex flex-col sm:mx-16 '>
+      <div className=' flex flex-col sm:mx-16 '>
         <div
           className={`mb-8 flex flex-col md:flex-row w-full gap-8`}>
           <p
