@@ -1,5 +1,5 @@
-import { BannerPublicFilterParams } from '@/entities/(guest)/banner'
 import { PostsFilterParams } from '@/types'
+import { BannerPublicFilterParams } from '@/types/(guest)'
 import { createQueryParams } from '@/utils'
 
 export const apiGuestRoutes = {

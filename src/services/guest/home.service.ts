@@ -1,26 +1,24 @@
 import { apiGuestRoutes } from '@/config/guest.api.route.ts'
-import {
-  BannerPublicDataType,
-  BannerPublicFilterParams,
-} from '@/entities/(guest)/banner'
-import { GuestPostDataType } from '@/entities/(guest)/post'
+
 import {
   handleApiCatchResponse,
   handleApiResponse,
 } from '@/services/api.service.ts'
 import { BaseResponseType, PostsFilterParams } from '@/types'
 import { useGlobalAxios } from '@/hooks/use-axios.ts'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)/banner.type'
+import { PostPublicType } from '@/types/(guest)'
 
 export const getPosts = async (params: PostsFilterParams) => {
   try {
     const response = await useGlobalAxios.get<
       null,
       BaseResponseType,
-      GuestPostDataType
+      PostPublicType
     >(apiGuestRoutes.posts.withParams(params))
-    return handleApiResponse<any>(response)
+    return handleApiResponse<PostPublicType>(response)
   } catch (e) {
-    return handleApiCatchResponse<any>(e)
+    return handleApiCatchResponse<PostPublicType>(e)
   }
 }
 export const getPostDetail = async (id: number) => {
@@ -28,11 +26,11 @@ export const getPostDetail = async (id: number) => {
     const response = await useGlobalAxios.get<
       null,
       BaseResponseType,
-      GuestPostDataType
+      PostPublicType
     >(apiGuestRoutes.post.withId(id))
-    return handleApiResponse<any>(response)
+    return handleApiResponse<PostPublicType>(response)
   } catch (e) {
-    return handleApiCatchResponse<any>(e)
+    return handleApiCatchResponse<PostPublicType>(e)
   }
 }
 export const getBanners = async (params: BannerPublicFilterParams) => {
@@ -42,8 +40,8 @@ export const getBanners = async (params: BannerPublicFilterParams) => {
       BaseResponseType,
       BannerPublicDataType
     >(apiGuestRoutes.banners.withParams(params))
-    return handleApiResponse<any>(response)
+    return handleApiResponse<BannerPublicDataType>(response)
   } catch (e) {
-    return handleApiCatchResponse<any>(e)
+    return handleApiCatchResponse<BannerPublicDataType>(e)
   }
 }

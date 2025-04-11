@@ -24,8 +24,24 @@ export default function ServiceBanner() {
     setBanners(bannersData)
   }, [data, status, isRefetching])
   return (
-    <div className='absolute h-[80vh] w-screen items-center justify-center bg-cover bg-center sm:h-screen'>
-      <div className='absolute flex h-full min-w-full items-center'>
+    <div className='relative flex h-screen items-center justify-center md:items-start md:justify-center bg-cover bg-center sm:h-screen'>
+      <div className='absolute flex flex-1  flex-col justify-center py-20 px-5 md:items-center'>
+        <p className={`philosopher-regular text-6xl text-center md:text-7xl lg:text-8xl text-[#000000]`}>
+          {intl.formatMessage({ id: 'guest.common.service' })}
+        </p>
+        <div className='items-center w-full flex flex-col md:flex-row'>
+          <p className={`philosopher-regular text-6xl text-center md:text-7xl lg:text-8xl text-[#E48E43]`}>
+            DEJÀ VU NAL
+          </p>
+          <p className={`mx-6 philosopher-regular text-4xl md:text-7xl lg:text-8xl text-[#E48E43]`}>
+            &
+          </p>
+          <p className={`philosopher-regular text-6xl md:text-7xl lg:text-8xl text-[#E48E43]`}>
+            SPA
+          </p>
+        </div>
+      </div>
+      <div className=' flex h-full min-w-full items-center'>
         <div className='flex h-full w-full items-end lg:mx-16 lg:w-[192px] lg:py-32'>
           <ServiceBannerItem
             className='h-full w-full lg:h-[288px]'
@@ -46,14 +62,6 @@ export default function ServiceBanner() {
             item={banners[2]}
           />
         </div>
-      </div>
-      <div className='absolute flex w-screen flex-col justify-center pt-20 md:items-center'>
-        <p className={`philosopher-regular text-8xl text-[#000000]`}>
-          {intl.formatMessage({ id: 'guest.common.service' })}
-        </p>
-        <p className={`philosopher-regular text-8xl text-[#E48E43]`}>
-          DEJÀ VU NAL & SPA
-        </p>
       </div>
     </div>
   )

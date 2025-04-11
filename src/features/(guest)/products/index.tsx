@@ -37,10 +37,10 @@ export default function ProductsComponent() {
       image={'/images/bg-home.png'}
     >
       <Navbar />
-      <Banner path={banner?.url ?? ''}>
-        <div className='absolute top-1/2 w-screen items-center justify-center'>
+      <Banner path={banner?.url ?? ''} pathMobile={banner?.urlMobile ?? ""}>
+        <div className='absolute flex left-0 top-0 right-0 bottom-0  items-center justify-center '>
           <p
-            className={`philosopher-regular text-center text-8xl font-normal text-white`}
+            className={`philosopher-regular text-center text-6xl md:text-7xl lg:text-8xl font-normal text-white`}
           >
             {intl.formatMessage({ id: 'guest.common.product' })}
           </p>

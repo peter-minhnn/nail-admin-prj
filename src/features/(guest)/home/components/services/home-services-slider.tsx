@@ -51,7 +51,7 @@ export default function ServicesSlider() {
   return (dataSource.data ?? []).length == 0 ? (
     <div></div>
   ) : (
-    <div className='my-10 w-full flex-col'>
+    <div className=' w-full flex-col'>
       <div>
         <p className={`philosopher-regular mb-16 flex text-7xl`}>
           {intl.formatMessage({
@@ -60,7 +60,7 @@ export default function ServicesSlider() {
         </p>
       </div>
       <div className='relative h-full w-full flex-1'>
-        <div className='absolute right-0 top-0 z-10 h-24 w-full items-end justify-end pl-16 sm:w-1/2 sm:pl-0 lg:w-4/6'>
+        <div className='absolute right-0 top-0 z-10 h-24 w-full items-end justify-end  sm:w-1/2 sm:pl-0 lg:w-4/6'>
           <div className='flex justify-between gap-3 sm:ml-10'>
             <div
               className={`w-full items-start gap-8 ${(dataSource.data ?? []).length > 3 ? 'flex' : (dataSource.data ?? []).length > 2 ? 'flex lg:hidden' : ''}`}

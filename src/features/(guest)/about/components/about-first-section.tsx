@@ -10,7 +10,7 @@ export default function AboutFirstSection(
   props: Readonly<AboutFirstSectionProps>
 ) {
   return (
-    <div className='h-fit bg-[#F2F1ED] py-32'>
+    <div className='h-fit bg-[#F2F1ED] py-32 '>
       <div className='flex h-[428px] flex-1 justify-center gap-36'>
         <div className='flex justify-center gap-x-5 md:gap-x-10 lg:gap-x-36'>
           {props.images.map((_, index) => {
@@ -24,7 +24,7 @@ export default function AboutFirstSection(
           })}
         </div>
       </div>
-      <div className='flex min-h-[250px] w-full flex-col items-center justify-center'>
+      <div className='flex min-h-[250px] w-full flex-col items-center justify-center overflow-hidden'>
         <div className='flex h-fit w-full flex-col items-center justify-center md:w-9/12'>
           <p className={`philosopher-regular mb-5 text-5xl md:text-7xl`}>
             {props.title}
