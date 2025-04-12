@@ -27,10 +27,10 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
     <button
       type='button'
       onClick={handleClick}
-      className='w-full'
+      className='w-full mb-10 sm:mb-0'
       title='Home Activities'
     >
-      <div className='w-full items-start justify-start'>
+      <div className='w-full'>
         <div className={cn('h-full w-full overflow-hidden', props.className)}>
           <img
             className={
