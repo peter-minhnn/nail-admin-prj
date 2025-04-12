@@ -27,7 +27,7 @@ export default function Banner(props: Readonly<BannerProps>) {
       <img
         src={useImageSrc()}
         alt='Background'
-        className='pointer-events-none absolute inset-0 -z-10 h-full w-full select-none object-cover'
+        className='pointer-events-none absolute inset-0 -z-10 h-full w-full select-none sm:object-cover'
       />
       {props.children}
     </div>

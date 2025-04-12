@@ -6,7 +6,7 @@ import TiktokIcon from './tiktok'
 export function Footer() {
   return (
     <div className='bg-footer relative flex w-full flex-col items-center px-6 pb-2'>
-      <div className='mt-5 grid w-full max-w-screen-xl grid-cols-1 gap-10 pt-10 lg:grid-cols-5'>
+      <div className='mt-5 flex w-full max-w-screen-xl grid-cols-1 flex-col items-center justify-center gap-10 pt-10 sm:grid lg:grid-cols-5'>
         <div className='mx-auto w-full lg:col-span-2'>
           <div className='flex justify-center sm:justify-start'>
             {' '}
