@@ -44,12 +44,9 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
           <h2 className={`roboto-bold line-clamp-1 text-start`}>
             {props.item.title}
           </h2>
-          <div
-            className={`roboto-light line-clamp-2 bg-transparent text-start`}
-            dangerouslySetInnerHTML={{
-              __html: props.item.content.replace('background-color', ''),
-            }}
-          />
+          <p className={`roboto-light line-clamp-2 bg-transparent text-start`}>
+            {props.item.desc}
+          </p>
         </div>
       </div>
     </button>

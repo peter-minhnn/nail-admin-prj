@@ -106,6 +106,28 @@ export const useColumns = ({
       enableHiding: true,
     },
     {
+      id: 'descVi',
+      accessorKey: 'descVi',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title='posts.descVi' />
+      ),
+      cell: ({ row }) => (
+        <LongText className='max-w-96'>{row.getValue('descVi')}</LongText>
+      ),
+      enableHiding: true,
+    },
+    {
+      id: 'descEn',
+      accessorKey: 'descEn',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title='posts.descEn' />
+      ),
+      cell: ({ row }) => (
+        <LongText className='max-w-96'>{row.getValue('descEn')}</LongText>
+      ),
+      enableHiding: true,
+    },
+    {
       id: 'contentVi',
       accessorKey: 'contentVi',
       header: ({ column }) => (

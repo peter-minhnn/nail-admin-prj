@@ -21,9 +21,11 @@ export const getPosts = async (params: PostsFilterParams) => {
 const createFormData = (data: PostsType) => {
   const formData = new FormData()
   formData.append('titleVi', data.titleVi)
-  formData.append('titleEn', data.titleEn)
+  formData.append('titleEn', data.titleEn ?? '')
+  formData.append('descVi', data.descVi ?? '')
+  formData.append('descEn', data.descEn ?? '')
   formData.append('contentVi', data.contentVi)
-  formData.append('contentEn', data.contentEn)
+  formData.append('contentEn', data.contentEn ?? '')
   formData.append('postType', data.postType)
   formData.append('isPublish', String(data.isPublish))
   formData.append('sortOrder', String(data.sortOrder))

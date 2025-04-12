@@ -13,6 +13,8 @@ const postsSchema = z.object({
   id: z.number().int().optional(),
   titleVi: z.string().min(1, { message: 'posts.errors.titleViRequired' }),
   titleEn: z.string().optional().default(''),
+  descVi: z.string().optional(),
+  descEn: z.string().optional().default(''),
   contentVi: z.string().min(1, { message: 'posts.errors.contentViRequired' }),
   contentEn: z.string().optional().default(''),
   thumbnail: z.any().optional(),

@@ -67,6 +67,8 @@ const defaultValues: PostsDataType = {
   thumbnail: '',
   titleVi: '',
   titleEn: '',
+  descVi: '',
+  descEn: '',
   contentVi: '',
   contentEn: '',
   postType: 'service',
@@ -300,6 +302,34 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
                   />
                   <FormField
                     control={form.control}
+                    name='descVi'
+                    render={({ field }) => (
+                      <FormItem
+                        className={cn('flex flex-col', {
+                          'w-full': !showContentEn,
+                        })}
+                      >
+                        <FormLabel required>
+                          <FormattedMessage id='posts.descVi' />
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder={props.intl.formatMessage({
+                              id: 'posts.descViPlaceholder',
+                            })}
+                            className='w-full'
+                            autoComplete='off'
+                            hasError={!!form.formState.errors?.descVi?.message}
+                            autoFocus
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
                     name='contentVi'
                     render={({ field }) => (
                       <FormItem
@@ -347,6 +377,28 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
                           <Input
                             placeholder={props.intl.formatMessage({
                               id: 'posts.titleEnPlaceholder',
+                            })}
+                            className='w-full'
+                            autoComplete='off'
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name='descEn'
+                    render={({ field }) => (
+                      <FormItem className='flex w-full flex-col'>
+                        <FormLabel>
+                          <FormattedMessage id='posts.descEn' />
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder={props.intl.formatMessage({
+                              id: 'posts.descEnPlaceholder',
                             })}
                             className='w-full'
                             autoComplete='off'

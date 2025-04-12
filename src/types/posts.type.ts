@@ -2,6 +2,8 @@ export type PostsType = {
   id?: number
   titleEn: string
   titleVi: string
+  descVi?: string
+  descEn?: string
   contentEn: string
   contentVi: string
   thumbnail?: File | null
