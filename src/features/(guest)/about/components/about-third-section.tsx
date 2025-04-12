@@ -14,8 +14,8 @@ export default function AboutThirdSection(
   props: Readonly<AboutThirdSectionProps>
 ) {
   return (
-    <div className='min-h-screen '>
-      <div className='my-32  w-fit flex-col'>
+    <div className='min-h-screen'>
+      <div className='my-32 w-fit flex-col'>
         <div className='flex h-[228px] w-screen'>
           <div className='flex w-screen justify-center'>
             <img
@@ -25,22 +25,25 @@ export default function AboutThirdSection(
             />
           </div>
           <div className='absolute flex h-[228px] w-screen items-center truncate'>
-            <p className={`philosopher-regular md:text-7xl text-4xl lg:text-8xl`}>
+            <p
+              className={`philosopher-regular text-4xl md:text-7xl lg:text-8xl`}
+            >
               VU NAIL & SPA DEJÀ VU NAIL & SPA DEJÀ VU NAIL & SPA DEJÀ VU NAIL &
               SPA
             </p>
           </div>
         </div>
 
-        <div className='w-full flex-1 items-center justify-center pt-32 '>
-          <div className={`flex flex-1 items-center justify-center bg-cover bg-center bg-[url('/images/dejavu-hidden.png')]`}>
-            <div className='w-full px-6 md:px-20 lg:!w-1/2 lg:px-0'>
-              {props.items.map((item) => {
-                return <AboutThirdItemView item={item} key={uuid()} />
-              })}
+        <div className='w-full flex-1 items-center justify-center pt-32'>
+          <div
+            className={`flex flex-1 items-center justify-center bg-[url('/images/dejavu-hidden.png')] bg-cover bg-center`}
+          >
+            <div className='w-full max-w-screen-lg px-6 md:px-20 lg:px-0'>
+              {props.items.map((item) => (
+                <AboutThirdItemView item={item} key={uuid()} />
+              ))}
             </div>
           </div>
-
         </div>
       </div>
     </div>

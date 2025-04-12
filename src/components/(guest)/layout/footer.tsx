@@ -6,13 +6,13 @@ import TiktokIcon from './tiktok'
 export function Footer() {
   return (
     <div className='bg-footer relative flex w-full flex-col items-center px-6 pb-2'>
-      <div className='mx-auto mt-5 grid max-w-screen-xl grid-cols-1 gap-10 pt-10 lg:grid-cols-5'>
-        <div className='lg:col-span-2'>
-          <div>
+      <div className='mt-5 grid w-full max-w-screen-xl grid-cols-1 gap-10 pt-10 lg:grid-cols-5'>
+        <div className='mx-auto w-full lg:col-span-2'>
+          <div className='flex justify-center sm:justify-start'>
             {' '}
             <a
               href='/'
-              className='flex items-center space-x-2 text-2xl font-medium text-blue-500 dark:text-gray-100'
+              className='flex items-center space-x-2 text-2xl font-medium dark:text-gray-100'
             >
               <img
                 src='/images/svg/logo.svg'
@@ -21,23 +21,25 @@ export function Footer() {
                 height={40}
                 className='h-auto w-auto'
               />
-              <span className='text-4xl font-semibold uppercase'>DeJa Vu</span>
+              <span className='text-center text-2xl font-semibold uppercase text-black/80 sm:text-left sm:text-4xl'>
+                DeJaVu Nail spa
+              </span>
             </a>
           </div>
 
-          <div className='mt-4 max-w-md text-black dark:text-gray-400'>
+          <div className='mt-4 max-w-md text-center text-black dark:text-gray-400 sm:text-left'>
             DeJa Vu nail spa is a landing page
           </div>
         </div>
 
         <div className='col-span-2 flex w-full flex-1'>
-          <div className='grid w-full grid-cols-1 md:grid-cols-2'>
+          <div className='flex w-full flex-grow flex-row flex-wrap justify-center gap-4 sm:grid md:grid-cols-2'>
             {navigation.map((item) => {
               return (
                 <a
                   key={item.name}
                   href={item.href}
-                  className='dark:focus:bg-trueGray-700 w-full rounded-md py-2 text-black hover:text-orange-500 focus:bg-orange-50 focus:text-orange-500 focus:outline-none dark:text-gray-300 lg:px-4'
+                  className='dark:focus:bg-trueGray-700 w-fit max-w-max rounded-md py-2 text-black hover:text-orange-500 focus:bg-orange-50 focus:text-orange-500 focus:outline-none dark:text-gray-300 lg:px-4'
                 >
                   {item.name}
                 </a>
@@ -45,8 +47,8 @@ export function Footer() {
             })}
           </div>
         </div>
-        <div className=''>
-          <div className='py-2'>Follow us</div>
+        <div className='flex w-full flex-col items-center justify-center sm:justify-start'>
+          <div className='py-2'>Liên kết với chúng tôi</div>
           <div className='mt-5 flex space-x-5 text-black'>
             <a href='https://facebook.com' target='_blank' rel='noopener'>
               <span className='sr-only'>Facebook</span>

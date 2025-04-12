@@ -1,6 +1,7 @@
 {
-  "guest.common.more": "See more",
-  "guest.common.service": "Service",
-  "guest.common.activity": "Activity",
-  "guest.common.product": "Product"
+  "guest.common.more": "Xem thêm",
+  "guest.common.service": "Dịch Vụ",
+  "guest.common.activity": "Hoạt Động",
+  "guest.common.product": "Sản phẩm",
+  "guest.common.listActivity": "Hoạt động tiêu biểu"
 }

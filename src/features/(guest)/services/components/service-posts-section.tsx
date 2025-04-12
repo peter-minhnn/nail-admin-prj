@@ -31,11 +31,9 @@ export default function ServicePostsSection() {
 
   return (
     <div className='flex h-fit w-full flex-col gap-8'>
-      {posts.map((e, index) => {
-        return (
-          <ServicePostsTemplate items={e} hasLabel={index == 0} key={uuid()} />
-        )
-      })}
+      {posts.map((e, index) => (
+        <ServicePostsTemplate items={e} hasLabel={index == 0} key={uuid()} />
+      ))}
     </div>
   )
 }

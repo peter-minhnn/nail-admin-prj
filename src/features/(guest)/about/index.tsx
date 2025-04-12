@@ -1,17 +1,18 @@
+import { useEffect, useState } from 'react'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
+import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
+import get from 'lodash/get'
 import { IntlShape, useIntl } from 'react-intl'
+import { useIsMobile } from '@/hooks/use-mobile.tsx'
 import Banner from '@/components/(guest)/layout/banner'
 import { Container } from '@/components/(guest)/layout/container.tsx'
-import { Navbar } from '@/components/(guest)/layout/nav-bar'
+import { Navbar } from '@/components/(guest)/layout/nav-bar.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
+import { useGetBanners } from '../hook/use-guest-queries'
 import AboutFirstSection from './components/about-first-section'
 import AboutFouthSection from './components/about-fouth-section'
 import AboutSecondsSection from './components/about-seconds-section'
 import AboutThirdSection from './components/about-third-section'
-import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
-import { useEffect, useState } from 'react'
-import { useGetBanners } from '../hook/use-guest-queries'
-import get from 'lodash/get'
 
 const aboutThirdData = (intl: IntlShape) => {
   return [
@@ -44,6 +45,7 @@ const aboutThirdData = (intl: IntlShape) => {
 
 export default function AboutUsComponent() {
   const intl = useIntl()
+  const isMobile = useIsMobile()
 
   const [filterParams] = useState<BannerPublicFilterParams>({
     type: 1,
@@ -62,7 +64,6 @@ export default function AboutUsComponent() {
     }
   }, [data, status, isRefetching])
 
-
   return (
     <PageContainer
       title={intl.formatMessage({ id: 'aboutUs.pageTitle' })}
@@ -70,11 +71,11 @@ export default function AboutUsComponent() {
       canonical={menuRoutes.about}
       image={'/images/aboutus_banner.png'}
     >
-      <Navbar />
-      <Banner path={banner?.url} pathMobile={banner?.urlMobile} >
-        <div className='absolute flex left-0 top-0 right-0 bottom-0  items-center justify-center'>
+      <Navbar fixedHeader={isMobile} />
+      <Banner path={banner?.url} pathMobile={banner?.urlMobile}>
+        <div className='absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center'>
           <p
-            className={`philosopher-regular px-6 text-center text-6xl md:text-7xl lg:text-8xl font-normal text-white`}
+            className={`philosopher-regular px-6 text-center text-6xl font-normal text-white md:text-7xl lg:text-8xl`}
           >
             {intl.formatMessage({ id: 'aboutUs.pageTitle' })}
           </p>

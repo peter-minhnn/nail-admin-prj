@@ -6,7 +6,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { cn } from '@/lib/utils.ts'
 import Banner from '@/components/(guest)/layout/banner'
 import { Container } from '@/components/(guest)/layout/container.tsx'
-import { Navbar } from '@/components/(guest)/layout/nav-bar'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import Lightbox from '@/components/(guest)/lightbox.tsx'
 import { useGetAlbums } from '@/features/(guest)/hook/use-guest-queries'
@@ -49,7 +48,6 @@ export default function AlbumComponent() {
       image={'/images/bg-home.png'}
     >
       <div className={``}>
-        <Navbar />
         <Banner path={''}>
           <div className='flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#EFE5D2] pt-20'>
             <p className='philosopher-regular text-7xl uppercase'>

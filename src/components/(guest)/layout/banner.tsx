@@ -1,32 +1,34 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useMemo } from 'react'
+import { cn } from '@/lib/utils.ts'
+import { useIsMobile } from '@/hooks/use-mobile.tsx'
 
 type BannerProps = {
-  path?: string,
-  pathMobile?: string,
+  path?: string
+  pathMobile?: string
   children?: ReactNode
 }
 
 export default function Banner(props: Readonly<BannerProps>) {
-  const [src, setSrc] = useState(props.path);
-  const updateSrc = () => {
-    const width = window.innerWidth;
-    if (width >= 640) {
-      setSrc(props.path);
-    } else {
-      setSrc((props.pathMobile ?? "").length == 0 ? props.path : props.pathMobile!);
-    }
-  };
-  useEffect(() => {
-    updateSrc();
-    window.addEventListener('resize', updateSrc);
-    return () => window.removeEventListener('resize', updateSrc);
-  })
+  const isMobile = useIsMobile()
+
+  const useImageSrc = () =>
+    useMemo(() => {
+      if (isMobile && props.pathMobile) {
+        return props.pathMobile
+      }
+      if (!isMobile && props.path) {
+        return props.path
+      }
+      return '/images/placeholder.png'
+    }, [isMobile, props])
 
   return (
-    <div
-      className={`relative z-[999] w-full bg-cover bg-center h-screen`}
-      style={{ backgroundImage: `url(${src})` }}
-    >
+    <div className={cn(`banner relative z-[999] h-screen w-full`)}>
+      <img
+        src={useImageSrc()}
+        alt='Background'
+        className='pointer-events-none absolute inset-0 -z-10 h-full w-full select-none object-cover'
+      />
       {props.children}
     </div>
   )

@@ -25,6 +25,7 @@ export const Navbar = ({ fixedHeader }: Readonly<NavbarProps>) => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY && window.scrollY > 50) {
         setShowHeader(false)
+        setIsOpen(false)
       } else {
         setShowHeader(true)
       }
@@ -37,18 +38,18 @@ export const Navbar = ({ fixedHeader }: Readonly<NavbarProps>) => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [isOpen])
 
   return (
     <div
       className={cn('sticky-header fixed top-0 z-[9999] w-full', {
-        'show bg-transparent': showHeader,
-        '!bg-[#F2F1ED] !bg-opacity-70 shadow-lg !backdrop-blur-md': fixedHeader,
+        show: showHeader,
+        'bg-transparent': showHeader && !fixedHeader,
         'bg-[#F2F1ED] !bg-opacity-70 shadow-lg !backdrop-blur-md':
-          showHeader && topNum > 100,
+          (showHeader && topNum > 100) || fixedHeader,
       })}
     >
-      <nav className='container relative mx-auto flex flex-wrap items-center justify-between p-4 lg:justify-between xl:px-1'>
+      <nav className='container relative mx-auto flex flex-wrap items-center justify-between p-4 shadow-sm sm:shadow-none lg:justify-between xl:px-1'>
         {/* Logo  */}
         <a href='/'>
           <span className='flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100'>
@@ -61,13 +62,12 @@ export const Navbar = ({ fixedHeader }: Readonly<NavbarProps>) => {
           <button
             data-collapse-toggle='mobile-menu'
             type='button'
-            className='inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#F2F1ED] p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+            className='inline-flex h-10 w-10 items-center justify-center rounded-lg bg-transparent p-2 text-sm text-black/80 hover:bg-transparent focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700'
             aria-controls='mobile-menu'
             aria-expanded={isOpen}
             onClick={toggleMenu}
             title='Menu Mobile'
           >
-            <span className='sr-only'>Open main menu</span>
             {isOpen ? (
               <X className='block h-6 w-6' aria-hidden='true' />
             ) : (
@@ -101,23 +101,26 @@ export const Navbar = ({ fixedHeader }: Readonly<NavbarProps>) => {
         </div>
       </nav>
       {/* Mobile menu, show/hide based on menu state */}
-      <div className={cn('md:hidden', isOpen ? 'block' : 'hidden')}>
-        <div className='space-y-1 border-t border-gray-200 bg-[#F2F1ED] bg-opacity-70 px-2 pb-3 pt-2 shadow-lg !backdrop-blur-md sm:px-3'>
-          {navigation.map((menu) => (
-            <Link
-              key={menu.href}
-              to={menu.href}
-              className={cn(
-                'block rounded-md px-3 py-2 text-center text-base font-medium text-gray-900 transition-colors hover:bg-gray-100',
-                {
-                  'active-menu': menu.href === pathname,
-                }
-              )}
-            >
-              {menu.name}
-            </Link>
-          ))}
-        </div>
+      <div
+        className={cn(
+          'space-y-1 border-t border-gray-200 !bg-[#F2F1ED] bg-transparent bg-opacity-70 px-2 pb-3 pt-2 !shadow-lg !backdrop-blur-md sm:px-3 md:hidden',
+          isOpen ? 'contents' : 'hidden'
+        )}
+      >
+        {navigation.map((menu) => (
+          <Link
+            key={menu.href}
+            to={menu.href}
+            className={cn(
+              'block rounded-md px-3 py-3 text-center text-base font-medium text-gray-900 transition-colors hover:bg-gray-100',
+              {
+                'active-menu': menu.href === pathname,
+              }
+            )}
+          >
+            {menu.name}
+          </Link>
+        ))}
       </div>
     </div>
   )

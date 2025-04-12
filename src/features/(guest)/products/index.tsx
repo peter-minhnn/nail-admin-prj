@@ -5,7 +5,6 @@ import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import Banner from '@/components/(guest)/layout/banner'
 import { Container } from '@/components/(guest)/layout/container.tsx'
-import { Navbar } from '@/components/(guest)/layout/nav-bar'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import ProductSection from './components/product-section'
@@ -36,18 +35,17 @@ export default function ProductsComponent() {
       canonical={menuRoutes.products}
       image={'/images/bg-home.png'}
     >
-      <Navbar />
-      <Banner path={banner?.url ?? ''} pathMobile={banner?.urlMobile ?? ""}>
-        <div className='absolute flex left-0 top-0 right-0 bottom-0  items-center justify-center '>
+      <Banner path={banner?.url ?? ''} pathMobile={banner?.urlMobile ?? ''}>
+        <div className='absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center'>
           <p
-            className={`philosopher-regular text-center text-6xl md:text-7xl lg:text-8xl font-normal text-white`}
+            className={`philosopher-regular text-center text-6xl font-normal text-white md:text-7xl lg:text-8xl`}
           >
             {intl.formatMessage({ id: 'guest.common.product' })}
           </p>
         </div>
       </Banner>
       <div className='min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
-        <Container className='pt-6'>
+        <Container className='max-w-full pt-6'>
           <ProductSection />
         </Container>
       </div>

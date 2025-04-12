@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
+import { useIsMobile } from '@/hooks/use-mobile.tsx'
 import Banner from '@/components/(guest)/layout/banner.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import { Footer } from '@/components/(guest)/layout/footer.tsx'
-import { Navbar } from '@/components/(guest)/layout/nav-bar.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import HomeActivities from './components/activity/home-activities'
@@ -20,12 +20,13 @@ export default function Home() {
   })
 
   const [banner, setBanner] = useState<BannerPublicDataType | null>(null)
+  const isMobile = useIsMobile()
   const { data, status, isRefetching } = useGetBanners(filterParams)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const bannersData = get(data, ['data'], [])
-    if (bannersData.length > 0) {
+    if (bannersData?.length) {
       setBanner(bannersData[0])
     }
   }, [data, status, isRefetching])
@@ -37,35 +38,34 @@ export default function Home() {
       canonical={menuRoutes.home}
       image={banner?.url ?? ''}
     >
-      <Navbar />
-      <Banner path={banner?.url ?? ''} pathMobile={banner?.urlMobile}>
+      <Banner path={banner?.url} pathMobile={banner?.urlMobile}>
         <div className='flex h-screen flex-col items-center justify-center'>
           <div className='flex h-auto w-full justify-center md:justify-start md:pl-20'>
             <p
-              className={`philosopher-regular text-6xl md:text-7xl lg:text-8xl font-normal text-white `}
+              className={`philosopher-regular text-6xl font-normal text-white md:text-7xl lg:text-8xl`}
             >
               NAIL CARE
             </p>
           </div>
           <div className='flex h-auto w-full justify-center md:justify-start md:pl-[34rem]'>
             <p
-              className={`philosopher-regular text-7xl md:text-8xl lg:text-9xl  font-normal text-[#FEDE59] `}
+              className={`philosopher-regular text-7xl font-normal text-[#FEDE59] md:text-8xl lg:text-9xl`}
             >
               is
             </p>
           </div>
           <div className='flex h-auto w-full justify-center md:justify-start md:pl-80'>
             <p
-              className={`philosopher-regular  text-6xl md:text-7xl lg:text-8xl  font-normal text-white `}
+              className={`philosopher-regular text-6xl font-normal text-white md:text-7xl lg:text-8xl`}
             >
               SELF CARE
             </p>
           </div>
         </div>
       </Banner>
-      <Container footer={false}>
+      <Container footer={false} fixedHeader={isMobile}>
         <div className='items-center justify-items-center bg-[#F2F1ED]'>
-          <section className='max-w-full justify-center text-center'>
+          <section className='max-w-full justify-center pb-10 text-center sm:pb-0'>
             <ServicesSlider />
           </section>
 

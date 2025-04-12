@@ -51,16 +51,25 @@ export default function ServicesSlider() {
   return (dataSource.data ?? []).length == 0 ? (
     <div></div>
   ) : (
-    <div className=' w-full flex-col'>
-      <div>
-        <p className={`philosopher-regular mb-16 flex text-7xl`}>
+    <div className='w-full flex-col'>
+      <div className='flex flex-row items-center justify-between pb-5 sm:pb-0'>
+        <p className={`philosopher-regular flex text-5xl sm:mb-16 sm:text-7xl`}>
           {intl.formatMessage({
             id: 'homeGuest.service',
           })}
         </p>
+        <div className='roboto-regular inline-block w-max items-end justify-end sm:hidden'>
+          <Link
+            to={menuRoutes.services}
+            onClick={() => window.scrollTo(0, 0)}
+            className='home-btn'
+          >
+            <FormattedMessage id='guest.common.more' />
+          </Link>
+        </div>
       </div>
       <div className='relative h-full w-full flex-1'>
-        <div className='absolute right-0 top-0 z-10 h-24 w-full items-end justify-end  sm:w-1/2 sm:pl-0 lg:w-4/6'>
+        <div className='absolute right-0 top-0 z-10 h-auto w-full items-end justify-end sm:h-24 sm:w-1/2 sm:pl-0 lg:w-4/6'>
           <div className='flex justify-between gap-3 sm:ml-10'>
             <div
               className={`w-full items-start gap-8 ${(dataSource.data ?? []).length > 3 ? 'flex' : (dataSource.data ?? []).length > 2 ? 'flex lg:hidden' : ''}`}
@@ -80,7 +89,7 @@ export default function ServicesSlider() {
                 />
               </button>
             </div>
-            <div className='roboto-regular flex w-full items-end justify-end'>
+            <div className='roboto-regular hidden w-full items-end justify-end sm:flex'>
               <Link
                 to={menuRoutes.services}
                 onClick={() => window.scrollTo(0, 0)}

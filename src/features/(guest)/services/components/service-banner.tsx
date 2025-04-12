@@ -19,29 +19,36 @@ export default function ServiceBanner() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const list = get(data, ['data'], [])
-    const bannersData: BannerPublicDataType[] = list
+    const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
     setBanners(bannersData)
   }, [data, status, isRefetching])
   return (
-    <div className='relative flex h-screen items-center justify-center md:items-start md:justify-center bg-cover bg-center sm:h-screen'>
-      <div className='absolute flex flex-1  flex-col justify-center py-20 px-5 md:items-center'>
-        <p className={`philosopher-regular text-6xl text-center md:text-7xl lg:text-8xl text-[#000000]`}>
+    <div className='relative flex h-screen items-center justify-center bg-cover bg-center sm:h-screen md:items-start md:justify-center'>
+      <div className='absolute flex flex-1 flex-col justify-center px-5 py-20 md:items-center'>
+        <p
+          className={`philosopher-regular text-center text-6xl text-[#000000] md:text-7xl lg:text-8xl`}
+        >
           {intl.formatMessage({ id: 'guest.common.service' })}
         </p>
-        <div className='items-center w-full flex flex-col md:flex-row'>
-          <p className={`philosopher-regular text-6xl text-center md:text-7xl lg:text-8xl text-[#E48E43]`}>
+        <div className='flex w-full flex-col items-center md:flex-row'>
+          <p
+            className={`philosopher-regular text-center text-6xl text-[#E48E43] md:text-7xl lg:text-8xl`}
+          >
             DEJÀ VU NAL
           </p>
-          <p className={`mx-6 philosopher-regular text-4xl md:text-7xl lg:text-8xl text-[#E48E43]`}>
+          <p
+            className={`philosopher-regular mx-6 text-4xl text-[#E48E43] md:text-7xl lg:text-8xl`}
+          >
             &
           </p>
-          <p className={`philosopher-regular text-6xl md:text-7xl lg:text-8xl text-[#E48E43]`}>
+          <p
+            className={`philosopher-regular text-6xl text-[#E48E43] md:text-7xl lg:text-8xl`}
+          >
             SPA
           </p>
         </div>
       </div>
-      <div className=' flex h-full min-w-full items-center'>
+      <div className='flex h-full min-w-full items-center'>
         <div className='flex h-full w-full items-end lg:mx-16 lg:w-[192px] lg:py-32'>
           <ServiceBannerItem
             className='h-full w-full lg:h-[288px]'

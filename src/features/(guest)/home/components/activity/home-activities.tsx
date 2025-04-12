@@ -39,12 +39,14 @@ export default function HomeActivities() {
   const intl = useIntl()
   if ((dataSource.data ?? []).length == 0) return <div />
   return (
-    <div className='grid h-fit grid-cols-1 grid-rows-2 gap-8  pt-0 py-32 md:py-32 md:grid-cols-2 '>
-      <div className='flex flex-col items-start justify-start pb-5  pt-24 md:pt-0 md:pb-24'>
-        <h3 className={`font-philosopher pb-[68px] text-start text-7xl  font-normal`}>
+    <div className='h-fit grid-cols-1 grid-rows-2 gap-8 py-32 pt-0 sm:grid md:grid-cols-2 md:py-32'>
+      <div className='flex w-full flex-row items-center justify-between pb-7 pt-24 sm:flex-col sm:items-start sm:justify-start md:pb-24 md:pt-0'>
+        <h3
+          className={`w-max text-start font-philosopher text-5xl font-normal sm:pb-[68px] md:text-7xl`}
+        >
           {intl.formatMessage({ id: 'guest.common.activity' })}
         </h3>
-        <div className='flex h-full w-full items-end justify-start'>
+        <div className='flex items-end justify-start'>
           <Link
             to={menuRoutes.activity}
             onClick={() => window.scrollTo(0, 0)}

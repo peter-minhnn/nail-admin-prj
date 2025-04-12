@@ -7,6 +7,7 @@ import ServicePostsSection from './components/service-posts-section'
 
 export default function ServicesComponent() {
   const intl = useIntl()
+
   return (
     <PageContainer
       title={intl.formatMessage({ id: 'guest.common.service' })}
@@ -18,7 +19,7 @@ export default function ServicesComponent() {
         <ServiceBanner />
       </div>
       <Container>
-        <div className=' mt-16 mb-32 grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
+        <div className='mb-32 mt-16 grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
           <section className='w-full'>
             <ServicePostsSection />
           </section>

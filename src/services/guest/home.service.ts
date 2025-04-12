@@ -1,13 +1,15 @@
 import { apiGuestRoutes } from '@/config/guest.api.route.ts'
-
 import {
   handleApiCatchResponse,
   handleApiResponse,
 } from '@/services/api.service.ts'
 import { BaseResponseType, PostsFilterParams } from '@/types'
-import { useGlobalAxios } from '@/hooks/use-axios.ts'
-import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)/banner.type'
 import { PostPublicType } from '@/types/(guest)'
+import {
+  BannerPublicDataType,
+  BannerPublicFilterParams,
+} from '@/types/(guest)/banner.type'
+import { useGlobalAxios } from '@/hooks/use-axios.ts'
 
 export const getPosts = async (params: PostsFilterParams) => {
   try {

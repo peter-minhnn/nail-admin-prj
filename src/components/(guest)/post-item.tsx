@@ -23,7 +23,7 @@ export default function PostPublicItemView(
         onClick={() => {
           setPostsItem(props.data! ?? null)
           navigate({
-            href: `${pagePublicRouters.postDetail}/${stringToSlug(props.data?.title ?? "")}`,
+            href: `${pagePublicRouters.postDetail}/${stringToSlug(props.data?.title ?? '')}`,
           }).finally()
         }}
         className='h-full w-full'

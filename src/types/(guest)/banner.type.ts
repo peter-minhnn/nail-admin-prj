@@ -3,6 +3,7 @@ type BannerPublicDataType = {
   title: string
   content: string
   url: string
+  urlMobile: string
 }
 type BannerPublicFilterParams = {
   type?: number
