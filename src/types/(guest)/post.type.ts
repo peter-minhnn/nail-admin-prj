@@ -2,6 +2,7 @@ type PostPublicType = {
   id: number
   title: string
   content: string
+  desc: string
   thumbnail: string
   slugId: string
 }

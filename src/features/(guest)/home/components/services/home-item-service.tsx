@@ -4,7 +4,7 @@ import { PostPublicType } from '@/types/(guest)'
 interface ServiceProps {
   item: PostPublicType
   height?: string
-  imgheight?: string
+  imgHeight?: string
 }
 
 export default function HomeItemService(props: Readonly<ServiceProps>) {
@@ -15,7 +15,7 @@ export default function HomeItemService(props: Readonly<ServiceProps>) {
           <img
             alt=''
             src={props.item.thumbnail}
-            className={`aspect-square w-full flex-1 rounded-sm ${props.imgheight} object-cover transition-transform duration-300 hover:scale-110`}
+            className={`aspect-square w-full flex-1 rounded-sm ${props.imgHeight} object-cover transition-transform duration-300 hover:scale-110`}
           />
         </div>
         <p
@@ -23,12 +23,11 @@ export default function HomeItemService(props: Readonly<ServiceProps>) {
         >
           {props.item.title}
         </p>
-        <div
+        <p
           className={`roboto-light line-clamp-2 bg-transparent text-start text-base`}
-          dangerouslySetInnerHTML={{
-            __html: props.item.content.replace('background-color', ''),
-          }}
-        />
+        >
+          {props.item.desc}
+        </p>
       </div>
     </a>
   )

@@ -40,7 +40,7 @@ export default function HomeActivities() {
   if ((dataSource.data ?? []).length == 0) return <div />
   return (
     <div className='h-fit grid-cols-1 grid-rows-2 gap-8 py-32 pt-0 sm:grid md:grid-cols-2 md:py-32'>
-      <div className='flex w-full flex-row items-center  justify-between pb-7 sm:flex-col sm:items-start sm:justify-start md:pb-24 md:pt-0'>
+      <div className='flex w-full flex-row items-center justify-between pb-7 sm:flex-col sm:items-start sm:justify-start md:pb-24 md:pt-0'>
         <p className={`philosopher-regular flex text-5xl sm:mb-16 sm:text-7xl`}>
           {intl.formatMessage({
             id: 'guest.common.activity',

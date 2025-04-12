@@ -23,6 +23,7 @@
   "posts.postType": "Loại bài viết",
   "posts.errors.titleViRequired": "Tiêu đề (Tiếng Việt) không được để trống",
   "posts.errors.contentViRequired": "Nội dung (Tiếng Việt) không được để trống",
+  "posts.errors.thumbnailRequired": "Hình ảnh đại diện không được để trống",
   "posts.showContentEn": "Hiển thị nội dung (Tiếng Anh)",
   "posts.hideContentEn": "Ẩn nội dung (Tiếng Anh)",
   "posts.showContent": "Xem nội dung",

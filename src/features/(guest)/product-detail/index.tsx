@@ -8,6 +8,7 @@ import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import ReactQuill from 'react-quill-new'
 import { useProductStore } from '@/stores/product-store.ts'
+import { addAltToImages } from '@/utils/common.ts'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetProductDetail } from '../hook/use-guest-queries'
@@ -60,7 +61,10 @@ export default function ProductDetailComponent({
     >
       <Container fixedHeader>
         <div className='custom-quill grid min-h-screen bg-[#F2F1ED]'>
-          <ReactQuill value={postDetail?.content ?? ''} readOnly />
+          <ReactQuill
+            value={addAltToImages(postDetail?.content ?? '')}
+            readOnly
+          />
         </div>
       </Container>
     </PageContainer>

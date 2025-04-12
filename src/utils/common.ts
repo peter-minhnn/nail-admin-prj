@@ -1,3 +1,5 @@
+import sanitizeHtml from 'sanitize-html'
+
 const append = (params: Record<string, string | number | boolean>) => {
   let objParams = {}
   for (const key of Object.keys(params)) {
@@ -106,4 +108,26 @@ export function stringToSlug(input: string): string {
     .trim() // Remove leading and trailing spaces
     .replace(/[\s-]+/g, '-') // Replace spaces and hyphens with a single hyphen
     .replace(/^-+|-+$/g, '') // Remove leading and trailing hyphens
+}
+
+export const addAltToImages = (html: string) => {
+  if (!html) {
+    return html
+  }
+  // Parse the HTML string to a DOM object
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(html || '<div></div>', 'text/html')
+  const images = doc.querySelectorAll('img')
+
+  images.forEach((img) => {
+    if (!img.hasAttribute('alt')) {
+      img.setAttribute('alt', 'Default description')
+    }
+  })
+
+  // Sanitize the output
+  return sanitizeHtml(doc.body.innerHTML, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+    allowedAttributes: { img: ['src', 'alt'] },
+  })
 }

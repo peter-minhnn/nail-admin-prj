@@ -130,7 +130,7 @@ export default function ServicesSlider() {
                     <HomeItemService
                       item={item}
                       height={height}
-                      imgheight={itemHeight}
+                      imgHeight={itemHeight}
                     />
                   </div>
                 </SwiperSlide>

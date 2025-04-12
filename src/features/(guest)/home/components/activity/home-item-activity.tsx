@@ -27,7 +27,7 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
     <button
       type='button'
       onClick={handleClick}
-      className='w-full mb-10 sm:mb-0'
+      className='mb-10 w-full sm:mb-0'
       title='Home Activities'
     >
       <div className='w-full'>
