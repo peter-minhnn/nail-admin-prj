@@ -120,7 +120,10 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
           const imageUrl = await uploadImage(file)
           const editor = (quillRef.current! as any)?.getEditor()
           const range = editor.getSelection() || { index: 0 }
-          editor.insertEmbed(range.index, 'image', imageUrl)
+          editor.insertEmbed(range.index, 'image', {
+            src: imageUrl,
+            alt: '',
+          })
         } catch (error) {
           alert('Failed to upload image')
         } finally {

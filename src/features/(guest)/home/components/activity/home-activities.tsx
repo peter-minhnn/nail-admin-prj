@@ -46,7 +46,7 @@ export default function HomeActivities() {
             id: 'guest.common.activity',
           })}
         </p>
-        <div className='roboto-regular inline-block w-max items-end justify-end sm:hidden'>
+        <div className='roboto-regular inline-block w-max items-end justify-end'>
           <Link
             to={menuRoutes.activity}
             onClick={() => window.scrollTo(0, 0)}
