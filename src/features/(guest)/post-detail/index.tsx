@@ -5,9 +5,8 @@ import { LocalStorageKeys } from '@/entities/languages'
 import { LocalStorageStateType } from '@/types'
 import { PostPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
-import ReactQuill from 'react-quill-new'
 import { usePostsStore } from '@/stores/posts-store.ts'
-import { addAltToImages } from '@/utils/common.ts'
+import QuillEditor from '@/components/(admin)/quill-editor.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetPostDetail } from '../hook/use-guest-queries'
@@ -58,11 +57,8 @@ export default function PostDetailComponent({
       image={''}
     >
       <Container fixedHeader>
-        <div className='custom-quill min-h-screen w-full bg-[#F2F1ED]'>
-          <ReactQuill
-            value={addAltToImages(postDetail?.content ?? '')}
-            readOnly
-          />
+        <div className='custom-quill w-full bg-[#F2F1ED] pb-20 pt-10'>
+          <QuillEditor value={postDetail?.content ?? ''} hideToolbar readOnly />
         </div>
       </Container>
     </PageContainer>

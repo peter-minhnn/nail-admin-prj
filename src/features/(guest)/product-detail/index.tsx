@@ -6,9 +6,9 @@ import { LocalStorageStateType } from '@/types'
 import { GuestProductDetailType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
-import ReactQuill from 'react-quill-new'
 import { useProductStore } from '@/stores/product-store.ts'
 import { addAltToImages } from '@/utils/common.ts'
+import QuillEditor from '@/components/(admin)/quill-editor.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import { useGetProductDetail } from '../hook/use-guest-queries'
@@ -64,9 +64,10 @@ export default function ProductDetailComponent({
     >
       <Container fixedHeader>
         <div className='custom-quill grid min-h-screen bg-[#F2F1ED]'>
-          <ReactQuill
+          <QuillEditor
             value={addAltToImages(productDetail?.content ?? '')}
             readOnly
+            hideToolbar
           />
         </div>
       </Container>

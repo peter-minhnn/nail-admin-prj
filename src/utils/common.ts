@@ -1,5 +1,3 @@
-import sanitizeHtml from 'sanitize-html'
-
 const append = (params: Record<string, string | number | boolean>) => {
   let objParams = {}
   for (const key of Object.keys(params)) {
@@ -125,9 +123,5 @@ export const addAltToImages = (html: string) => {
     }
   })
 
-  // Sanitize the output
-  return sanitizeHtml(doc.body.innerHTML, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
-    allowedAttributes: { img: ['src', 'alt'] },
-  })
+  return doc.body.innerHTML
 }

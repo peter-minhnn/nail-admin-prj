@@ -79,6 +79,8 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
       const items = clipboardData.items
 
       for (const element of items) {
+        if (!isUploading) break
+
         if (element.type.indexOf('image') !== -1) {
           e.preventDefault() // Prevent default paste behavior
           const file = element.getAsFile()
@@ -100,7 +102,7 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
         }
       }
     },
-    [uploadImage]
+    [isUploading]
   )
 
   // Handle image upload from toolbar button

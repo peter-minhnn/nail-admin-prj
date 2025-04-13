@@ -230,6 +230,14 @@
   text-align: center;
 }
 
+.custom-quill .ql-editor h1 {
+  font-size: 2em;
+}
+
+.custom-quill .ql-editor h1 strong {
+  background-color: transparent !important;
+}
+
 .ql-container {
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
