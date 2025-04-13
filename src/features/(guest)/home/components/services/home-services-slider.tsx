@@ -7,7 +7,6 @@ import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useIsMobile } from '@/hooks/use-mobile.tsx'
 import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
 import HomeItemService from './home-item-service'
 
@@ -15,7 +14,6 @@ export default function ServicesSlider() {
   const intl = useIntl()
 
   const swiperRef = useRef<any>(null)
-  const isMobile = useIsMobile()
   const [activeIndex, setActiveIndex] = useState<number>(0)
 
   const goNext = () => swiperRef.current?.swiper.slideNext()
@@ -109,7 +107,7 @@ export default function ServicesSlider() {
                 setActiveIndex(swiper.activeIndex)
               }
             }}
-            spaceBetween={isMobile ? 0 : 44}
+            spaceBetween={44}
             modules={[Navigation, Pagination]}
             slidesPerView={'auto'}
             breakpoints={{
@@ -117,7 +115,7 @@ export default function ServicesSlider() {
               640: { slidesPerView: 'auto' },
             }}
             loop={false}
-            className='relative flex h-[624px] w-full'
+            className='flex h-[624px] w-full'
           >
             {(dataSource.data ?? []).map((item, index) => {
               const itemHeight: string =
@@ -125,7 +123,7 @@ export default function ServicesSlider() {
               const height: string =
                 index == activeIndex ? 'md:h-[624px] h-[528px]' : 'h-[528px]'
               return (
-                <SwiperSlide key={item.id} className='w-auto md:w-[416px]'>
+                <SwiperSlide key={item.id} className='w-full md:w-[416px]'>
                   <div className={`flex h-[624px] w-full items-end`}>
                     <HomeItemService
                       item={item}

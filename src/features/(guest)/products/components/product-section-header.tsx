@@ -42,11 +42,11 @@ export default function ProductSectionHeader(
 
   return (props.leftSide ?? true) || isMobile ? (
     <div className='container h-fit flex-col px-4 md:pl-20 lg:pl-44'>
-      <p className='philosopher-regular pb-5 text-5xl sm:text-7xl'>
+      <p className='philosopher-regular pb-5 text-4xl sm:text-7xl'>
         {props.title}
       </p>
       <div className='flex w-full flex-1 flex-col justify-between gap-9 md:flex-row'>
-        <p className={`roboto-regular w-full flex-1 *:text-base`}>
+        <p className={`roboto-regular w-full flex-1 text-sm sm:text-base`}>
           {props.description}
         </p>
         <div className='w-fit'>
@@ -60,7 +60,7 @@ export default function ProductSectionHeader(
   ) : (
     !isMobile && (
       <div className='container flex h-fit flex-1 flex-col items-end justify-end px-4'>
-        <p className={`philosopher-regular w-fit text-5xl sm:text-7xl`}>
+        <p className={`philosopher-regular w-fit text-4xl sm:text-7xl`}>
           {props.title}
         </p>
         <div className='flex w-full flex-col justify-between gap-9 md:flex-row'>
@@ -70,7 +70,9 @@ export default function ProductSectionHeader(
               goPrev={props.onPreviousClick}
             />
           </div>
-          <p className={`roboto-regular w-fit flex-1 text-end text-base`}>
+          <p
+            className={`roboto-regular w-fit flex-1 text-end text-sm sm:text-base`}
+          >
             {props.description}
           </p>
         </div>

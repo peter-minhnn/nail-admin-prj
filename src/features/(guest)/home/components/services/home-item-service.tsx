@@ -10,7 +10,9 @@ interface ServiceProps {
 export default function HomeItemService(props: Readonly<ServiceProps>) {
   return (
     <a href={`${pagePublicRouters.postDetail}/${props.item.id}`}>
-      <div className={`flex flex-col ${props.height} w-[416px]`}>
+      <div
+        className={`flex flex-col ${props.height} w-full rounded-sm sm:w-[416px]`}
+      >
         <div className='w-full items-start overflow-hidden text-start'>
           <img
             alt=''
