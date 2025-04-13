@@ -23,7 +23,7 @@ export default function ProductsComponent() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
-    if (bannersData.length > 0) {
+    if (bannersData.length) {
       setBanner(bannersData[0])
     }
   }, [data, status, isRefetching])
@@ -45,7 +45,7 @@ export default function ProductsComponent() {
         </div>
       </Banner>
       <div className='min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
-        <Container className='max-w-full pt-6'>
+        <Container className='max-w-screen-2xl pt-6'>
           <ProductSection />
         </Container>
       </div>

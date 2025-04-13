@@ -18,8 +18,8 @@ export default function ServicesComponent() {
       <div className='relative min-h-screen w-full bg-[#EFE5D2] bg-cover bg-center sm:h-screen'>
         <ServiceBanner />
       </div>
-      <Container>
-        <div className='mb-32 mt-16 grid min-h-screen items-center justify-items-center bg-[#F2F1ED]'>
+      <Container className='max-w-screen-2xl'>
+        <div className='mb-32 mt-16 grid items-center justify-items-center bg-[#F2F1ED]'>
           <section className='w-full'>
             <ServicePostsSection />
           </section>

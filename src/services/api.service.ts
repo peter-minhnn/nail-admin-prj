@@ -56,7 +56,6 @@ export async function handleApiCatchResponse<T>(e: any): Promise<ResultType> {
 
 async function redirectPageErrors(e: any) {
   const isAdminPage = window.location.pathname.includes('/admin')
-
   switch (e?.status) {
     case StatusCodes.NOT_FOUND:
       if (isAdminPage) window.location.href = '/admin/404'

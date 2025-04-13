@@ -47,7 +47,7 @@ export default function ProductsComponent() {
           </p>
         </div>
       </Banner>
-      <Container>
+      <Container className='max-w-screen-2xl'>
         <div className='min-h-screen items-center justify-items-center bg-[#F2F1ED] md:m-32'>
           <div className='h-fit w-full'>
             <p className='text-center font-philosopher text-4xl md:text-7xl'>

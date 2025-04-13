@@ -49,21 +49,23 @@ export default function AlbumComponent() {
     >
       <div className={``}>
         <Banner path={''}>
-          <div className='flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#EFE5D2] pt-20'>
-            <p className='philosopher-regular text-7xl uppercase'>
-              <FormattedMessage id='albums.headerTitle' />
-            </p>
-            <p className='philosopher-regular text-7xl text-[#E48E43]'>
-              DEJÀ VU
-            </p>
+          <div className='flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#EFE5D2] pt-32'>
+            <div className='flex flex-col items-center'>
+              <p className='philosopher-regular pt-7 text-5xl uppercase sm:pt-0 sm:text-7xl'>
+                <FormattedMessage id='albums.headerTitle' />
+              </p>
+              <p className='philosopher-regular text-5xl uppercase text-[#E48E43] sm:text-7xl'>
+                DEJÀ VU
+              </p>
+            </div>
             <img
-              className='my-7 flex-1 object-contain'
+              className='mb-7 mt-2 flex-1 object-contain'
               srcSet='/images/hompage_footer_2.png'
               alt=''
             />
           </div>
         </Banner>
-        <Container>
+        <Container className='max-w-screen-2xl'>
           <h1 className='relative my-10 text-center text-2xl font-bold uppercase text-[#E48E43]'>
             <FormattedMessage id='albums.listAlbums' />
             <span className='absolute bottom-[-5px] left-1/2 w-24 -translate-x-1/2 transform border-2 border-b-2 border-[#E48E43]'></span>

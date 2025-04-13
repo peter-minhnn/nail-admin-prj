@@ -24,7 +24,7 @@ export default function ServiceBanner() {
   }, [data, status, isRefetching])
   return (
     <div className='relative flex h-screen items-center justify-center bg-cover bg-center sm:h-screen md:items-start md:justify-center'>
-      <div className='absolute flex flex-1 flex-col justify-center px-5 py-20 md:items-center'>
+      <div className='absolute flex flex-1 flex-col justify-center px-5 py-32 md:items-center'>
         <p
           className={`philosopher-regular text-center text-6xl text-[#000000] md:text-7xl lg:text-8xl`}
         >
@@ -34,7 +34,7 @@ export default function ServiceBanner() {
           <p
             className={`philosopher-regular text-center text-6xl text-[#E48E43] md:text-7xl lg:text-8xl`}
           >
-            DEJÀ VU NAL
+            DEJÀ VU NAIL
           </p>
           <p
             className={`philosopher-regular mx-6 text-4xl text-[#E48E43] md:text-7xl lg:text-8xl`}
@@ -52,21 +52,21 @@ export default function ServiceBanner() {
         <div className='flex h-full w-full items-end lg:mx-16 lg:w-[192px] lg:py-32'>
           <ServiceBannerItem
             className='h-full w-full lg:h-[288px]'
-            item={banners[0]}
+            item={banners?.[0]}
           />
         </div>
         <div className='mx-16 mt-24 hidden h-fit w-fit flex-1 pb-32 pt-20 lg:block'>
           <div className='flex h-full w-full items-center justify-center'>
             <ServiceBannerItem
               className='h-[584px] w-[416px]'
-              item={banners[1]}
+              item={banners?.[1]}
             />
           </div>
         </div>
         <div className='mx-16 my-16 hidden h-full w-[192px] pt-20 lg:block'>
           <ServiceBannerItem
             className='h-full w-full lg:h-[288px]'
-            item={banners[2]}
+            item={banners?.[2]}
           />
         </div>
       </div>

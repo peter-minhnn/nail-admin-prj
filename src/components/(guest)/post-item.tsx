@@ -26,15 +26,15 @@ export default function PostPublicItemView(
             href: `${pagePublicRouters.postDetail}/${stringToSlug(props.data?.title ?? '')}`,
           }).finally()
         }}
-        className='h-full w-full'
+        className='h-full w-full rounded'
         title='Posts Detail'
       >
         <div className='group relative h-full w-full'>
-          <div className={`rounded-sm bg-cover bg-center`}>
+          <div className={`rounded`}>
             <div className='absolute h-full w-full'>
               <img
                 src={props.data?.thumbnail}
-                className='h-full w-full rounded object-cover'
+                className='h-full w-full rounded object-cover md:aspect-square'
                 alt=''
               />
             </div>

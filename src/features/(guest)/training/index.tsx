@@ -15,7 +15,7 @@ export default function TrainingComponent() {
       <div className='relative min-h-screen w-full bg-[#EFE5D2] bg-cover bg-center sm:h-screen'>
         <TrainingBanner />
       </div>
-      <Container>
+      <Container className='max-w-screen-2xl'>
         <div className='flex items-center justify-items-center'>
           <TrainingPostsSection />
         </div>

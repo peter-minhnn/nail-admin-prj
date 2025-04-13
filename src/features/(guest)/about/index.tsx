@@ -59,7 +59,7 @@ export default function AboutUsComponent() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const bannersData = get(data, ['data'], [])
-    if (bannersData.length > 0) {
+    if (bannersData.length) {
       setBanner(bannersData[0])
     }
   }, [data, status, isRefetching])

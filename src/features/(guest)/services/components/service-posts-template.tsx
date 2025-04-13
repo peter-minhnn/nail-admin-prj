@@ -22,12 +22,12 @@ export default function ServicePostsTemplate(
           </p>
 
           <AlbumPublicItemView
-            className={`flex h-[416px] md:h-[300px] md:flex-1`}
-            data={props.items[0]}
+            className={`flex h-[416px] rounded md:h-[300px] md:flex-1`}
+            data={props.items?.[0]}
           />
           <AlbumPublicItemView
-            className={`flex h-[416px] md:h-[300px] md:flex-1`}
-            data={props.items[1]}
+            className={`flex h-[416px] rounded md:h-[300px] md:flex-1`}
+            data={props.items?.[1]}
           />
         </div>
         <div className='flex flex-col gap-8 md:flex-row'>
@@ -35,24 +35,24 @@ export default function ServicePostsTemplate(
             className={`${props.items.length > 2 ? 'flex' : 'hidden'} ${props.items.length == 4 ? 'flex-row' : 'flex-col'} h-fit gap-8 md:h-[416px] md:flex-1`}
           >
             <AlbumPublicItemView
-              className={`h-[416px] md:flex md:flex-1`}
-              data={props.items[2]}
+              className={`h-[416px] rounded md:flex md:flex-1`}
+              data={props.items?.[2]}
             />
             <AlbumPublicItemView
-              className={`h-[416px] md:flex md:flex-1`}
-              data={props.items[3]}
+              className={`h-[416px] rounded md:flex md:flex-1`}
+              data={props.items?.[3]}
             />
           </div>
           <div
             className={`${props.items.length > 4 ? 'flex' : 'hidden'} flex-col gap-8 md:h-[416px] md:flex-1 md:flex-row`}
           >
             <AlbumPublicItemView
-              className={`flex h-[416px] md:flex-1`}
-              data={props.items[4]}
+              className={`flex h-[416px] rounded md:flex-1`}
+              data={props.items?.[4]}
             />
             <AlbumPublicItemView
-              className={`flex h-[416px] md:flex-1`}
-              data={props.items[5]}
+              className={`flex h-[416px] rounded md:flex-1`}
+              data={props.items?.[5]}
             />
           </div>
         </div>

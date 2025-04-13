@@ -1,5 +1,10 @@
 import { QueryClient } from '@tanstack/react-query'
-import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
+import {
+  createRootRouteWithContext,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from '@tanstack/react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { Toaster } from '@/components/(admin)/ui/toaster'
@@ -24,5 +29,15 @@ export const Route = createRootRouteWithContext<{
     )
   },
   notFoundComponent: NotFoundError,
-  errorComponent: GeneralError,
+  errorComponent: () => {
+    const { pathname } = useLocation()
+    const isAdminPage = pathname.includes('/admin')
+    const navigate = useNavigate()
+    if (!isAdminPage) {
+      navigate({
+        href: pathname,
+      }).finally()
+    }
+    return <GeneralError />
+  },
 })

@@ -63,7 +63,11 @@ export default function Home() {
           </div>
         </div>
       </Banner>
-      <Container footer={false} fixedHeader={isMobile}>
+      <Container
+        footer={false}
+        fixedHeader={isMobile}
+        className='max-w-screen-2xl'
+      >
         <div className='items-center justify-items-center bg-[#F2F1ED]'>
           <section className='max-w-full justify-center pb-32 text-center sm:pb-0'>
             <ServicesSlider />

@@ -1,9 +1,10 @@
-import { useNavigate, useRouter } from '@tanstack/react-router'
+import { useLocation, useNavigate, useRouter } from '@tanstack/react-router'
 import { Button } from '@/components/(admin)/ui/button.tsx'
 
 export default function NotFoundError() {
   const navigate = useNavigate()
   const { history } = useRouter()
+  const { pathname } = useLocation()
   return (
     <div className='h-svh'>
       <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
@@ -17,7 +18,11 @@ export default function NotFoundError() {
           <Button variant='outline' onClick={() => history.go(-1)}>
             Go Back
           </Button>
-          <Button onClick={() => navigate({ to: '/admin' })}>
+          <Button
+            onClick={() =>
+              navigate({ to: pathname.includes('/admin') ? '/admin' : '/' })
+            }
+          >
             Back to Home
           </Button>
         </div>
