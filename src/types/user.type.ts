@@ -6,9 +6,9 @@ export type UserLoginRequestType = {
 }
 
 export type LoginResponseType = {
-  access_token: string
-  companyId: number
-  user: AuthUserType
+  userName: string
+  roleCode?: string
+  companyId?: number
 }
 
 export type AuthUserType = {
