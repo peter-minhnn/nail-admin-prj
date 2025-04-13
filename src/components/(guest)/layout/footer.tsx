@@ -22,13 +22,13 @@ export function Footer() {
                 className='h-auto w-auto'
               />
               <span className='text-center text-2xl font-semibold uppercase text-black/80 sm:text-left sm:text-4xl'>
-                DeJaVu Nail spa
+                DéJà Vu Nail Spa
               </span>
             </a>
           </div>
 
           <div className='mt-4 max-w-md text-center text-black dark:text-gray-400 sm:text-left'>
-            DeJa Vu nail spa is a landing page
+            DéJà Vu Nail Spa is a landing page
           </div>
         </div>
 

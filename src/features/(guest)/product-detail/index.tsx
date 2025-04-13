@@ -24,14 +24,14 @@ export default function ProductDetailComponent({
   const navigate = useNavigate()
   const { product, setProductItem } = useProductStore()
 
-  const [postDetail, setPostDetail] = useState<GuestProductDetailType>()
+  const [productDetail, setProductDetail] = useState<GuestProductDetailType>()
 
   const { data, status, isRefetching } = useGetProductDetail(product?.id!)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const result = get(data, ['data'])
-    setPostDetail(result)
+    setProductDetail(result)
     window.scrollTo({
       top: 0,
       left: 0,
@@ -54,15 +54,18 @@ export default function ProductDetailComponent({
 
   return (
     <PageContainer
-      title={intl.formatMessage({ id: 'guest.common.service' })}
-      description={intl.formatMessage({ id: 'guest.common.service' })}
+      title={`${productDetail?.productName}`}
+      description={
+        productDetail?.description ??
+        intl.formatMessage({ id: 'guest.common.productDetailDescription' })
+      }
       canonical={`${pagePublicRouters.productDetail}/${slugId}`}
       image={''}
     >
       <Container fixedHeader>
         <div className='custom-quill grid min-h-screen bg-[#F2F1ED]'>
           <ReactQuill
-            value={addAltToImages(postDetail?.content ?? '')}
+            value={addAltToImages(productDetail?.content ?? '')}
             readOnly
           />
         </div>

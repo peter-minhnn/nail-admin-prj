@@ -5,7 +5,6 @@ import { LocalStorageKeys } from '@/entities/languages'
 import { LocalStorageStateType } from '@/types'
 import { PostPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
-import { useIntl } from 'react-intl'
 import ReactQuill from 'react-quill-new'
 import { usePostsStore } from '@/stores/posts-store.ts'
 import { addAltToImages } from '@/utils/common.ts'
@@ -20,7 +19,6 @@ type PostDetailComponentProps = {
 export default function PostDetailComponent({
   slugId,
 }: Readonly<PostDetailComponentProps>) {
-  const intl = useIntl()
   const { postsItem, setPostsItem } = usePostsStore()
   const navigate = useNavigate()
 
@@ -54,8 +52,8 @@ export default function PostDetailComponent({
 
   return (
     <PageContainer
-      title={intl.formatMessage({ id: 'guest.common.service' })}
-      description={intl.formatMessage({ id: 'guest.common.service' })}
+      title={postDetail?.title ?? ''}
+      description={postDetail?.desc ?? ''}
       canonical={`${pagePublicRouters.postDetail}/${slugId}`}
       image={''}
     >

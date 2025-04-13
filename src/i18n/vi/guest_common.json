@@ -3,5 +3,6 @@
   "guest.common.service": "Dịch Vụ",
   "guest.common.activity": "Hoạt Động",
   "guest.common.product": "Sản phẩm",
-  "guest.common.listActivity": "Hoạt động tiêu biểu"
+  "guest.common.listActivity": "Hoạt động tiêu biểu",
+  "guest.common.productDetailDescription": "Mô tả sản phẩm"
 }

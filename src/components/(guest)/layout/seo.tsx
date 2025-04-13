@@ -17,7 +17,7 @@ const Seo = memo(
     schemaMarkup,
   }: Readonly<SeoProps>) => (
     <>
-      <title>{`${title ? title + ' - ' : ''}DEJAVU NAIL SPA`}</title>
+      <title>{`${title ? title + ' - ' : ''}DÉJÀ VU NAIL SPA`}</title>
       <meta name='description' content={description} />
       <link
         rel='canonical'
@@ -27,12 +27,26 @@ const Seo = memo(
       {/* Open Graph for Facebook, LinkedIn */}
       <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
-      <meta property='og:image' content={image} />
+      <meta
+        property='og:image'
+        content={
+          image
+            ? `${import.meta.env.VITE_PUBLIC_DOMAIN}${image}`
+            : `${import.meta.env.VITE_PUBLIC_DOMAIN}/images/logo.svg`
+        }
+      />
 
       {/* Twitter Card */}
       <meta name='twitter:title' content={title} />
       <meta name='twitter:description' content={description} />
-      <meta name='twitter:image' content={image} />
+      <meta
+        name='twitter:image'
+        content={
+          image
+            ? `${import.meta.env.VITE_PUBLIC_DOMAIN}${image}`
+            : `${import.meta.env.VITE_PUBLIC_DOMAIN}/images/logo.svg`
+        }
+      />
 
       {/* Structured Data (Schema Markup) */}
       {schemaMarkup && (
