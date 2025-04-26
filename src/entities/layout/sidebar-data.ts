@@ -81,16 +81,6 @@ export const sidebarNoProductData: SidebarData = {
   ],
   navGroups: [
     {
-      title: 'menu.group.general',
-      items: [
-        {
-          title: 'menu.dashboard',
-          url: '/admin',
-          icon: IconLayoutDashboard,
-        },
-      ],
-    },
-    {
       title: 'menu.group.homepage',
       items: [
         {
