@@ -40,13 +40,13 @@ export default function HomeActivities() {
   if ((dataSource.data ?? []).length == 0) return <div />
   return (
     <div className='h-fit grid-cols-1 grid-rows-2 gap-8 py-32 pt-0 sm:grid md:grid-cols-2 md:py-32'>
-      <div className='flex w-full flex-row items-center justify-between pb-7 sm:flex-col sm:items-start sm:justify-start md:pb-24 md:pt-0'>
-        <p className={`philosopher-regular flex text-5xl sm:mb-16 sm:text-7xl`}>
+      <div className='flex flex-row items-start justify-between pb-7 sm:flex-col sm:items-start sm:justify-start md:pb-24 md:pt-0'>
+        <p className={` philosopher-regular text-start text-5xl sm:mb-16 sm:text-7xl`}>
           {intl.formatMessage({
-            id: 'guest.common.activity',
+            id: 'homeGuest.activity',
           })}
         </p>
-        <div className='roboto-regular inline-block w-max items-end justify-end'>
+        <div className='roboto-regular w-full flex items-start md:justify-start justify-end'>
           <Link
             to={menuRoutes.activity}
             onClick={() => window.scrollTo(0, 0)}
@@ -55,6 +55,7 @@ export default function HomeActivities() {
             <FormattedMessage id='guest.common.more' />
           </Link>
         </div>
+
       </div>
       <HomeItemActivity
         item={dataSource.data[0]}

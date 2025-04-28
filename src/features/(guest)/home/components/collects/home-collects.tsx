@@ -15,7 +15,7 @@ export default function HomeCollects() {
       <div className='flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#EFE5D2] py-10'>
         <p className='philosopher-regular text-5xl md:text-7xl'>BỘ SƯU TẬP</p>
         <p className='philosopher-regular text-5xl text-[#E48E43] md:text-7xl'>
-          DEJÀ VU
+          DÉJÀ VU
         </p>
         <img
           className='my-7 object-contain md:h-1/2 md:w-1/2'

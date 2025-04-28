@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 import { cn } from '@/lib/utils.ts'
 import { useIsMobile } from '@/hooks/use-mobile.tsx'
 
@@ -10,6 +10,7 @@ type BannerProps = {
 
 export default function Banner(props: Readonly<BannerProps>) {
   const isMobile = useIsMobile()
+  const [isLoading, setIsLoading] = useState(true);
 
   const useImageSrc = () =>
     useMemo(() => {
@@ -19,16 +20,22 @@ export default function Banner(props: Readonly<BannerProps>) {
       if (!isMobile && props.path) {
         return props.path
       }
-      return '/images/placeholder.png'
+      return ''
     }, [isMobile, props])
 
   return (
     <div className={cn(`banner relative z-[999] h-screen w-full`)}>
-      <img
-        src={useImageSrc()}
-        alt='Background'
-        className='pointer-events-none absolute inset-0 -z-10 h-full w-full select-none object-cover'
-      />
+      <div className='relative h-full w-full'>
+        {isLoading && (
+          <div className="absolute inset-0 bg-gray-300 animate-pulse rounded-lg"></div>
+        )}
+        <img
+          src={useImageSrc()}
+          alt='Background'
+          onLoad={() => setIsLoading(false)}
+          className={`pointer-events-none absolute inset-0 -z-10 h-full w-full select-none object-covertransition-opacity duration-500 ${isLoading ? "opacity-0" : "opacity-100"}`}
+        />
+      </div>
       {props.children}
     </div>
   )

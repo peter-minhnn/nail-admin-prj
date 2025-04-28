@@ -61,12 +61,12 @@ export default function ProductsComponent() {
                 />
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.phone' })}
-                  value={'+84 98 982 10 42'}
+                  value={'+84 35 73 69 226'}
                 />
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.address' })}
                   value={
-                    '839/3 Lê Hồng Phong Phường 12, Quận 10 TP. Hồ Chí Minh'
+                    '71/6 Hoàng Hoa Thám, Phường 7, Quận Bình Thạnh, TP.HCM'
                   }
                 />
                 <ContactSocialView />
