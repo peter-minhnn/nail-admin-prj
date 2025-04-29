@@ -6,8 +6,8 @@ export default function Dashboard() {
     <AdminPageContainer title='Dashboard'>
       {/* ===== Main ===== */}
       <Main>
-        <div className='mb-2 flex items-center justify-center space-y-2 h-[calc(100vh_-_18vh)]'>
-          <h1 className='text-lg sm:text-6xl font-bold tracking-tight text-accent-foreground h-full flex items-center'>
+        <div className='mb-2 flex h-[calc(100vh_-_18vh)] items-center justify-center space-y-2'>
+          <h1 className='flex h-full items-center text-lg font-bold tracking-tight text-accent-foreground sm:text-6xl'>
             DÉJÀ VU
           </h1>
         </div>

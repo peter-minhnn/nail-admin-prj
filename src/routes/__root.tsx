@@ -8,6 +8,7 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { Toaster } from '@/components/(admin)/ui/toaster'
+import LoadingPage from '@/components/(guest)/loading.tsx'
 import GeneralError from '@/features/(admin)/errors/general-error'
 import NotFoundError from '@/features/(admin)/errors/not-found-error'
 
@@ -40,4 +41,5 @@ export const Route = createRootRouteWithContext<{
     }
     return <GeneralError />
   },
+  pendingComponent: LoadingPage,
 })

@@ -41,12 +41,14 @@ export default function HomeActivities() {
   return (
     <div className='h-fit grid-cols-1 grid-rows-2 gap-8 py-32 pt-0 sm:grid md:grid-cols-2 md:py-32'>
       <div className='flex flex-row items-start justify-between pb-7 sm:flex-col sm:items-start sm:justify-start md:pb-24 md:pt-0'>
-        <p className={` philosopher-regular text-start text-5xl sm:mb-16 sm:text-7xl`}>
+        <p
+          className={`philosopher-regular text-start text-5xl sm:mb-16 sm:text-7xl`}
+        >
           {intl.formatMessage({
             id: 'homeGuest.activity',
           })}
         </p>
-        <div className='roboto-regular w-full flex items-start md:justify-start justify-end'>
+        <div className='roboto-regular flex w-full items-start justify-end md:justify-start'>
           <Link
             to={menuRoutes.activity}
             onClick={() => window.scrollTo(0, 0)}
@@ -55,7 +57,6 @@ export default function HomeActivities() {
             <FormattedMessage id='guest.common.more' />
           </Link>
         </div>
-
       </div>
       <HomeItemActivity
         item={dataSource.data[0]}

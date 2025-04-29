@@ -1,9 +1,9 @@
 import { navigation } from '@/entities/(guest)'
+import { useIntl } from 'react-intl'
 import FacebookIcon from './facebook'
+import GoogleMapIcon from './google-map'
 import InstagramIcon from './instagram'
 import TiktokIcon from './tiktok'
-import { useIntl } from 'react-intl'
-import GoogleMapIcon from './google-map'
 
 export function Footer() {
   const intl = useIntl()
@@ -52,20 +52,36 @@ export function Footer() {
         </div>
         <div className='flex w-full flex-col items-center justify-center sm:justify-start'>
           <div className='py-2'>Liên kết với chúng tôi</div>
-          <div className='mt-5 flex space-x-5 text-black h-[60px] items-center'>
-            <a href='https://web.facebook.com/deja.vu.nail.spa.room' target='_blank' rel='noopener'>
+          <div className='mt-5 flex h-[60px] items-center space-x-5 text-black'>
+            <a
+              href='https://web.facebook.com/deja.vu.nail.spa.room'
+              target='_blank'
+              rel='noopener'
+            >
               <span className='sr-only'>Facebook</span>
               <FacebookIcon width={40} height={40} />
             </a>
-            <a href=' https://www.tiktok.com/@dejavunailspa?_t=ZS-8vsS7dMJtty&_r=1 ' target='_blank' rel='noopener'>
+            <a
+              href=' https://www.tiktok.com/@dejavunailspa?_t=ZS-8vsS7dMJtty&_r=1 '
+              target='_blank'
+              rel='noopener'
+            >
               <span className='sr-only'>Tiktok</span>
               <TiktokIcon width={40} height={40} />
             </a>
-            <a href='https://www.instagram.com/deja_vu_nail_spa?igsh=YnFsajc0ODllbmJj ' target='_blank' rel='noopener'>
+            <a
+              href='https://www.instagram.com/deja_vu_nail_spa?igsh=YnFsajc0ODllbmJj '
+              target='_blank'
+              rel='noopener'
+            >
               <span className='sr-only'>Instagram</span>
               <InstagramIcon width={40} height={40} />
             </a>
-            <a href='https://www.google.com/search?sca_esv=71184720c2de0b63&rlz=1C1GCEA_enVN1017VN1017&sxsrf=AHTn8zreUvV7x-1_lCnvNSX4_O6lCO0vmg:1745740763522&q=D%C3%A9j%C3%A0+Vu+Nail+%26+Spa&source=lnms&fbs=ABzOT_CWdhQLP1FcmU5B0fn3xuWpA-dk4wpBWOGsoR7DG5zJBtmuEdhfywyzhendkLDnhcplOw24T1Nea9214smElZgKMnNKMLpgnaL3bkvfuk-tTHKr0t9MCrwp6EZcBQZh91GDgw7AfFki66u7GMViBhyhXDek7YYaVqrFX9VDTa3sb5P-9aVaV8pE1We4VYZ1-QMAaAC31o2pDurRLMsfcFQeUYISpw&sa=X&ved=2ahUKEwjWqdGQ3_eMAxXTdfUHHTNxK4AQ0pQJegQIEBAB&biw=767&bih=730&dpr=1.25' target='_blank' rel='noopener'>
+            <a
+              href='https://www.google.com/search?sca_esv=71184720c2de0b63&rlz=1C1GCEA_enVN1017VN1017&sxsrf=AHTn8zreUvV7x-1_lCnvNSX4_O6lCO0vmg:1745740763522&q=D%C3%A9j%C3%A0+Vu+Nail+%26+Spa&source=lnms&fbs=ABzOT_CWdhQLP1FcmU5B0fn3xuWpA-dk4wpBWOGsoR7DG5zJBtmuEdhfywyzhendkLDnhcplOw24T1Nea9214smElZgKMnNKMLpgnaL3bkvfuk-tTHKr0t9MCrwp6EZcBQZh91GDgw7AfFki66u7GMViBhyhXDek7YYaVqrFX9VDTa3sb5P-9aVaV8pE1We4VYZ1-QMAaAC31o2pDurRLMsfcFQeUYISpw&sa=X&ved=2ahUKEwjWqdGQ3_eMAxXTdfUHHTNxK4AQ0pQJegQIEBAB&biw=767&bih=730&dpr=1.25'
+              target='_blank'
+              rel='noopener'
+            >
               <img src='/images/googlemap.png' height={40} width={40} />
             </a>
           </div>

@@ -7,6 +7,7 @@ import Banner from '@/components/(guest)/layout/banner.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import { Footer } from '@/components/(guest)/layout/footer.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
+import LoadingPage from '@/components/(guest)/loading.tsx'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import HomeActivities from './components/activity/home-activities'
 import HomeCollects from './components/collects/home-collects'
@@ -20,16 +21,23 @@ export default function Home() {
   })
 
   const [banner, setBanner] = useState<BannerPublicDataType | null>(null)
+  const [isMounted, setIsMounted] = useState(false)
+
   const isMobile = useIsMobile()
   const { data, status, isRefetching } = useGetBanners(filterParams)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
+    setTimeout(() => setIsMounted(true), 500)
     const bannersData = get(data, ['data'], [])
     if (bannersData?.length) {
       setBanner(bannersData[0])
     }
   }, [data, status, isRefetching])
+
+  if (!isMounted) {
+    return <LoadingPage />
+  }
 
   return (
     <PageContainer

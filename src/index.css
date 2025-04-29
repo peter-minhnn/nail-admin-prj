@@ -308,3 +308,46 @@
   font-style: normal;
   font-variation-settings: 'wdth' 100;
 }
+
+.spinner {
+  border: 2px solid #ff9900;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  animation: spin 3s linear infinite; /* Slower spin with 3s duration */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mosaic-placeholder {
+  background: repeating-linear-gradient(
+    45deg,
+    #e0e0e0,
+    #e0e0e0 10px,
+    #c0c0c0 10px,
+    #c0c0c0 20px
+  );
+  filter: blur(5px);
+  opacity: 0.8;
+  transition:
+    opacity 0.5s ease,
+    filter 0.5s ease;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
