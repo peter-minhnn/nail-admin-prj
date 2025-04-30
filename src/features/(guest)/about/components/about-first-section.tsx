@@ -29,23 +29,33 @@ export default function AboutFirstSection(
           <p className={`philosopher-regular text-5xl md:text-7xl`}>
             {intl.formatMessage({ id: 'aboutUs.section1Title' })}
           </p>
-          <div className="flex w-full items-center ">
-            <div className="flex-grow border-t border-gray-300" />
-            <span className="mb-5 text-sm font-philosopher italic">
+          <div className='flex w-full items-center'>
+            <div className='flex-grow border-t border-gray-300' />
+            <span className='mb-5 font-philosopher text-sm italic'>
               {intl.formatMessage({ id: 'aboutUs.section1ShortTitle' })}
             </span>
-            <div className="flex-grow border-t border-gray-300" />
+            <div className='flex-grow border-t border-gray-300' />
           </div>
           <span className={`philosopher-regular text-base font-light`}>
-            <span className="font-bold">{intl.formatMessage({ id: 'aboutUs.sectionStore' })} </span>
-            {intl.formatMessage({ id: 'aboutUs.sectionStoreDescription' })}</span>
+            <span className='font-bold'>
+              {intl.formatMessage({ id: 'aboutUs.sectionStore' })}{' '}
+            </span>
+            {intl.formatMessage({ id: 'aboutUs.sectionStoreDescription' })}
+          </span>
           <span className={`philosopher-regular text-base font-light`}>
-            <span className="font-bold">{intl.formatMessage({ id: 'aboutUs.sectionVision' })} </span>
-            {intl.formatMessage({ id: 'aboutUs.sectionVisionDescription' })}</span>
+            <span className='font-bold'>
+              {intl.formatMessage({ id: 'aboutUs.sectionVision' })}{' '}
+            </span>
+            {intl.formatMessage({ id: 'aboutUs.sectionVisionDescription' })}
+          </span>
           <span className={`philosopher-regular text-base font-light`}>
             {intl.formatMessage({ id: 'aboutUs.sectionMissionStart' })}
-            <span className="font-bold"> {intl.formatMessage({ id: 'aboutUs.sectionMission' })} </span>
-            {intl.formatMessage({ id: 'aboutUs.sectionMissionEnd' })}</span>
+            <span className='font-bold'>
+              {' '}
+              {intl.formatMessage({ id: 'aboutUs.sectionMission' })}{' '}
+            </span>
+            {intl.formatMessage({ id: 'aboutUs.sectionMissionEnd' })}
+          </span>
         </div>
       </div>
     </div>

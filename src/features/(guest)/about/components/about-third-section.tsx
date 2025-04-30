@@ -1,6 +1,6 @@
+import { useIntl } from 'react-intl'
 import { v4 as uuid } from 'uuid'
 import AboutThirdItemView from './about-third-item'
-import { useIntl } from 'react-intl'
 
 export interface AboutThirdItem {
   title?: string
@@ -14,7 +14,6 @@ interface AboutThirdSectionProps {
 export default function AboutThirdSection(
   props: Readonly<AboutThirdSectionProps>
 ) {
-
   const intl = useIntl()
   return (
     <div className='min-h-screen'>
@@ -27,7 +26,7 @@ export default function AboutThirdSection(
               alt=''
             />
           </div>
-          <div className='absolute flex h-[228px] w-full  items-center justify-center '>
+          <div className='absolute flex h-[228px] w-full items-center justify-center'>
             <p
               className={`philosopher-regular text-3xl md:text-7xl lg:text-8xl`}
             >
