@@ -25,30 +25,30 @@ export default function AboutFirstSection(
         </div>
       </div>
       <div className='flex min-h-[250px] w-full flex-col items-center justify-center overflow-hidden'>
-        <div className='flex h-fit w-full flex-col items-center justify-center md:w-9/12'>
-          <p className={`philosopher-regular text-5xl md:text-7xl`}>
+        <div className='flex h-fit w-full flex-col items-center justify-center md:w-9/12 gap-2 mt-4'>
+          <p className={`philosopher-regular text-center text-4xl md:text-6xl`}>
             {intl.formatMessage({ id: 'aboutUs.section1Title' })}
           </p>
           <div className='flex w-full items-center'>
             <div className='flex-grow border-t border-gray-300' />
-            <span className='mb-5 font-philosopher text-sm italic'>
+            <span className='mb-5 font-philosopher text-base italic'>
               {intl.formatMessage({ id: 'aboutUs.section1ShortTitle' })}
             </span>
             <div className='flex-grow border-t border-gray-300' />
           </div>
-          <span className={`philosopher-regular text-base font-light`}>
+          <span className={`philosopher-regular text-base font-light text-justify`}>
             <span className='font-bold'>
               {intl.formatMessage({ id: 'aboutUs.sectionStore' })}{' '}
             </span>
             {intl.formatMessage({ id: 'aboutUs.sectionStoreDescription' })}
           </span>
-          <span className={`philosopher-regular text-base font-light`}>
+          <span className={`philosopher-regular text-base font-light text-justify`}>
             <span className='font-bold'>
               {intl.formatMessage({ id: 'aboutUs.sectionVision' })}{' '}
             </span>
             {intl.formatMessage({ id: 'aboutUs.sectionVisionDescription' })}
           </span>
-          <span className={`philosopher-regular text-base font-light`}>
+          <span className={`philosopher-regular text-base font-light text-justify`}>
             {intl.formatMessage({ id: 'aboutUs.sectionMissionStart' })}
             <span className='font-bold'>
               {' '}

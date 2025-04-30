@@ -57,7 +57,7 @@ export default function ProductsComponent() {
               <div className='col-span-1 flex h-full w-full flex-col gap-9'>
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.email' })}
-                  value={'LinhVu@dejavunailspa.net'}
+                  value={'minhtu2902@dejavunailspa.net'}
                 />
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.phone' })}
