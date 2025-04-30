@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useState } from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 import { cn } from '@/lib/utils.ts'
 import { useIsMobile } from '@/hooks/use-mobile.tsx'
 
@@ -6,52 +6,31 @@ type BannerProps = {
   path?: string
   pathMobile?: string
   children?: ReactNode
-  placeholder?: string
-}
-
-const useImageLoading = () => {
-  const [isLoaded, setIsLoaded] = useState(true)
-
-  const handleImageLoaded = () => {
-    setIsLoaded(false)
-  }
-
-  return { isLoaded, handleImageLoaded }
 }
 
 export default function Banner(props: Readonly<BannerProps>) {
   const isMobile = useIsMobile()
-  const { isLoaded, handleImageLoaded } = useImageLoading()
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { placeholder = '', path, pathMobile } = props
-
-  const handleGetImgSrc = useCallback(() => {
-    if (isMobile && pathMobile) {
-      return pathMobile
-    }
-    if (!isMobile && path) {
-      return path
-    }
-    return ''
-  }, [isMobile, props])
+  const useImageSrc = () =>
+    useMemo(() => {
+      if (isMobile && props.pathMobile) {
+        return props.pathMobile
+      }
+      if (!isMobile && props.path) {
+        return props.path
+      }
+      return ''
+    }, [isMobile, props])
 
   return (
     <div className={cn(`banner relative z-[999] h-screen w-full`)}>
-      <div className='relative h-full w-full'>
-        {isLoaded && (
-          <img
-            src={placeholder}
-            alt='Placeholder'
-            className='absolute inset-0 -z-10 h-full w-full object-cover'
-          />
-        )}
-        <img
-          src={handleGetImgSrc()}
-          alt='Banner'
-          onLoad={handleImageLoaded}
-          className='absolute inset-0 -z-10 h-full w-full object-cover'
-        />
-      </div>
+      <img
+        src={useImageSrc()}
+        alt='Background'
+        onLoad={() => setIsLoading(false)}
+        className={`pointer-events-none absolute inset-0 -z-10 h-full w-full select-none object-covertransition-opacity duration-500 ${isLoading ? "opacity-0" : "opacity-100"}`}
+      />
       {props.children}
     </div>
   )

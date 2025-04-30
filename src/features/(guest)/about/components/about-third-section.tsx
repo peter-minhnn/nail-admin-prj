@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import AboutThirdItemView from './about-third-item'
+import { useIntl } from 'react-intl'
 
 export interface AboutThirdItem {
   title?: string
@@ -13,6 +14,8 @@ interface AboutThirdSectionProps {
 export default function AboutThirdSection(
   props: Readonly<AboutThirdSectionProps>
 ) {
+
+  const intl = useIntl()
   return (
     <div className='min-h-screen'>
       <div className='my-32 w-fit flex-col'>
@@ -24,12 +27,11 @@ export default function AboutThirdSection(
               alt=''
             />
           </div>
-          <div className='absolute flex h-[228px] w-screen items-center truncate'>
+          <div className='absolute flex h-[228px] w-full  items-center justify-center '>
             <p
-              className={`philosopher-regular text-4xl md:text-7xl lg:text-8xl`}
+              className={`philosopher-regular text-3xl md:text-7xl lg:text-8xl`}
             >
-              VU NAIL & SPA DEJÀ VU NAIL & SPA DEJÀ VU NAIL & SPA DEJÀ VU NAIL &
-              SPA
+              {intl.formatMessage({ id: 'aboutUs.section3Title' })}
             </p>
           </div>
         </div>

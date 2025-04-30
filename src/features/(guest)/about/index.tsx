@@ -40,6 +40,38 @@ const aboutThirdData = (intl: IntlShape) => {
         id: 'aboutUs.section3Item3Description',
       }),
     },
+    {
+      title: intl.formatMessage({
+        id: 'aboutUs.section3Item4Title',
+      }),
+      description: intl.formatMessage({
+        id: 'aboutUs.section3Item4Description',
+      }),
+    },
+    {
+      title: intl.formatMessage({
+        id: 'aboutUs.section3Item5Title',
+      }),
+      description: intl.formatMessage({
+        id: 'aboutUs.section3Item5Description',
+      }),
+    },
+    {
+      title: intl.formatMessage({
+        id: 'aboutUs.section3Item6Title',
+      }),
+      description: intl.formatMessage({
+        id: 'aboutUs.section3Item6Description',
+      }),
+    },
+    {
+      title: intl.formatMessage({
+        id: 'aboutUs.section3Item7Title',
+      }),
+      description: intl.formatMessage({
+        id: 'aboutUs.section3Item7Description',
+      }),
+    },
   ]
 }
 
@@ -89,16 +121,12 @@ export default function AboutUsComponent() {
             '/images/aboutus_section1_3.png',
             '/images/aboutus_section1_4.png',
           ]}
-          title={intl.formatMessage({ id: 'aboutUs.section1Title' })}
-          description={intl.formatMessage({
-            id: 'aboutUs.section1Description',
-          })}
         />
       </Container>
       <AboutSecondsSection
         mainImage={'/images/aboutus_section2_1.png'}
         subImage={'/images/aboutus_section2_2.png'}
-        title={intl.formatMessage({ id: 'aboutUs.section2Title' })}
+        title={intl.formatMessage({ id: 'aboutUs.section2' })}
         description={intl.formatMessage({
           id: 'aboutUs.section2Description',
         })}

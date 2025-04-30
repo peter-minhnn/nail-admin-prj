@@ -9,7 +9,7 @@ export default function AboutThirdItemView(
 ) {
   return (
     <div className='flex flex-col py-4 md:flex-row'>
-      <p className={`roboto-regular md:w-3/7 w-full text-xl`}>
+      <p className={`roboto-regular md:w-3/7 w-full text-2xl`}>
         {props.item.title}
       </p>
       <hr className='border-t-1 my-4 w-full border-[#A1A1AA] md:mx-8 md:w-1/2' />
