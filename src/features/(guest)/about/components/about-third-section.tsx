@@ -28,7 +28,7 @@ export default function AboutThirdSection(
           </div>
           <div className='absolute flex h-[228px] w-full items-center justify-center'>
             <p
-              className={`philosopher-regular text-3xl text-center md:text-5xl lg:text-7xl`}
+              className={`philosopher-regular text-center text-3xl md:text-5xl lg:text-7xl`}
             >
               {intl.formatMessage({ id: 'aboutUs.section3Title' })}
             </p>

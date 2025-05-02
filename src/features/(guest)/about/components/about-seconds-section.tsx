@@ -28,7 +28,9 @@ export default function AboutSecondsSection(
           </div>
         </div>
         <div className='h-full flex-1 flex-col items-center justify-center'>
-          <p className={`philosopher-regular text-center w-fit text-4xl lg:text-7xl`}>
+          <p
+            className={`philosopher-regular w-fit text-center text-4xl lg:text-7xl`}
+          >
             {props.title}
           </p>
           <p

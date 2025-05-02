@@ -42,8 +42,10 @@ export default function AlbumsComponent() {
 
   const onSuccess = async (response: ResultType) => {
     handleServerResponse(response)
-    refetch().finally()
-    setOpen('')
+    if (response.type === 'success') {
+      refetch().finally()
+      setOpen('')
+    }
   }
 
   const onError = (error: Error) => {

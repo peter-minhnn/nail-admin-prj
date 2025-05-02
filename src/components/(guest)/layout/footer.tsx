@@ -1,7 +1,6 @@
 import { navigation } from '@/entities/(guest)'
 import { useIntl } from 'react-intl'
 import FacebookIcon from './facebook'
-import GoogleMapIcon from './google-map'
 import InstagramIcon from './instagram'
 import TiktokIcon from './tiktok'
 
@@ -57,6 +56,7 @@ export function Footer() {
               href='https://web.facebook.com/deja.vu.nail.spa.room'
               target='_blank'
               rel='noopener'
+              aria-label='dejavu nail & spa facebook'
             >
               <span className='sr-only'>Facebook</span>
               <FacebookIcon width={40} height={40} />
@@ -65,6 +65,7 @@ export function Footer() {
               href=' https://www.tiktok.com/@dejavunailspa?_t=ZS-8vsS7dMJtty&_r=1 '
               target='_blank'
               rel='noopener'
+              aria-label='dejavu nail & spa tiktok'
             >
               <span className='sr-only'>Tiktok</span>
               <TiktokIcon width={40} height={40} />
@@ -73,6 +74,7 @@ export function Footer() {
               href='https://www.instagram.com/deja_vu_nail_spa?igsh=YnFsajc0ODllbmJj '
               target='_blank'
               rel='noopener'
+              aria-label='dejavu nail & spa instagram'
             >
               <span className='sr-only'>Instagram</span>
               <InstagramIcon width={40} height={40} />
@@ -81,8 +83,9 @@ export function Footer() {
               href='https://www.google.com/search?sca_esv=71184720c2de0b63&rlz=1C1GCEA_enVN1017VN1017&sxsrf=AHTn8zreUvV7x-1_lCnvNSX4_O6lCO0vmg:1745740763522&q=D%C3%A9j%C3%A0+Vu+Nail+%26+Spa&source=lnms&fbs=ABzOT_CWdhQLP1FcmU5B0fn3xuWpA-dk4wpBWOGsoR7DG5zJBtmuEdhfywyzhendkLDnhcplOw24T1Nea9214smElZgKMnNKMLpgnaL3bkvfuk-tTHKr0t9MCrwp6EZcBQZh91GDgw7AfFki66u7GMViBhyhXDek7YYaVqrFX9VDTa3sb5P-9aVaV8pE1We4VYZ1-QMAaAC31o2pDurRLMsfcFQeUYISpw&sa=X&ved=2ahUKEwjWqdGQ3_eMAxXTdfUHHTNxK4AQ0pQJegQIEBAB&biw=767&bih=730&dpr=1.25'
               target='_blank'
               rel='noopener'
+              aria-label='dejavu nail & spa google map'
             >
-              <img src='/images/googlemap.png' height={40} width={40} />
+              <img src='/images/googlemap.png' height={40} width={40} alt='' />
             </a>
           </div>
         </div>

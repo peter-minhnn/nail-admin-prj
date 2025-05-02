@@ -25,7 +25,7 @@ export default function AboutFirstSection(
         </div>
       </div>
       <div className='flex min-h-[250px] w-full flex-col items-center justify-center overflow-hidden'>
-        <div className='flex h-fit w-full flex-col items-center justify-center md:w-9/12 gap-2 mt-4'>
+        <div className='mt-4 flex h-fit w-full flex-col items-center justify-center gap-2 md:w-9/12'>
           <p className={`philosopher-regular text-center text-4xl md:text-6xl`}>
             {intl.formatMessage({ id: 'aboutUs.section1Title' })}
           </p>
@@ -36,19 +36,25 @@ export default function AboutFirstSection(
             </span>
             <div className='flex-grow border-t border-gray-300' />
           </div>
-          <span className={`philosopher-regular text-base font-light text-justify`}>
+          <span
+            className={`philosopher-regular text-justify text-base font-light`}
+          >
             <span className='font-bold'>
               {intl.formatMessage({ id: 'aboutUs.sectionStore' })}{' '}
             </span>
             {intl.formatMessage({ id: 'aboutUs.sectionStoreDescription' })}
           </span>
-          <span className={`philosopher-regular text-base font-light text-justify`}>
+          <span
+            className={`philosopher-regular text-justify text-base font-light`}
+          >
             <span className='font-bold'>
               {intl.formatMessage({ id: 'aboutUs.sectionVision' })}{' '}
             </span>
             {intl.formatMessage({ id: 'aboutUs.sectionVisionDescription' })}
           </span>
-          <span className={`philosopher-regular text-base font-light text-justify`}>
+          <span
+            className={`philosopher-regular text-justify text-base font-light`}
+          >
             {intl.formatMessage({ id: 'aboutUs.sectionMissionStart' })}
             <span className='font-bold'>
               {' '}
