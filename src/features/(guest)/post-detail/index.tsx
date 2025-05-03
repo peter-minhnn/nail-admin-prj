@@ -56,7 +56,7 @@ export default function PostDetailComponent({
       canonical={`${pagePublicRouters.postDetail}/${slugId}`}
       image={''}
     >
-      <Container fixedHeader className='px-0 sm:px-8'>
+      <Container fixedHeader className='px-5 sm:px-8'>
         {postDetail?.title && (
           <div className='flex flex-col items-start justify-center'>
             <h1 className='text-center text-3xl font-bold text-[#2A2A2A]'>
