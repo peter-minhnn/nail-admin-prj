@@ -56,9 +56,24 @@ export default function PostDetailComponent({
       canonical={`${pagePublicRouters.postDetail}/${slugId}`}
       image={''}
     >
-      <Container fixedHeader>
+      <Container fixedHeader className='px-0 sm:px-8'>
+        {postDetail?.title && (
+          <div className='flex flex-col items-start justify-center'>
+            <h1 className='text-center text-3xl font-bold text-[#2A2A2A]'>
+              {postDetail?.title}
+            </h1>
+            {postDetail?.desc && (
+              <p className='mt-2 text-sm text-[#7D7C7C]'>{postDetail.desc}</p>
+            )}
+          </div>
+        )}
         <div className='custom-quill w-full bg-[#F2F1ED] pb-20 pt-10'>
-          <QuillEditor value={postDetail?.content ?? ''} hideToolbar readOnly />
+          <QuillEditor
+            value={postDetail?.content ?? ''}
+            hideToolbar
+            readOnly
+            className='!p-0'
+          />
         </div>
       </Container>
     </PageContainer>

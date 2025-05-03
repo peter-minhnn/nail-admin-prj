@@ -62,7 +62,17 @@ export default function ProductDetailComponent({
       canonical={`${pagePublicRouters.productDetail}/${slugId}`}
       image={''}
     >
-      <Container fixedHeader>
+      <Container fixedHeader className='px-0 sm:px-8'>
+        {productDetail?.productName && (
+          <div className='flex flex-col items-start justify-center'>
+            <h1 className='text-center text-3xl font-bold text-[#2A2A2A]'>
+              {productDetail?.productName}
+            </h1>
+            {productDetail?.description && (
+              <p className='mt-2 text-sm text-[#7D7C7C]'>{productDetail.description}</p>
+            )}
+          </div>
+        )}
         <div className='custom-quill grid min-h-screen bg-[#F2F1ED]'>
           <QuillEditor
             value={addAltToImages(productDetail?.content ?? '')}

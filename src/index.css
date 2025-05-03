@@ -226,6 +226,11 @@
   border: none;
 }
 
+.custom-quill .ql-editor {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .custom-quill .ql-editor .ql-align-center {
   text-align: center;
 }
@@ -249,6 +254,13 @@
 
 .ql-container.ql-snow img {
   display: inline-block;
+  max-width: 700px !important;
+}
+
+@media screen and (max-width: 767px) {
+  .ql-container.ql-snow img {
+    max-width: 100% !important;
+  }
 }
 
 /* Navbar */

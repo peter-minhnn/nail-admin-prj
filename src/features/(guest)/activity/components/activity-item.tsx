@@ -40,9 +40,10 @@ export default function ActivityItem(props: Readonly<ActivityItemProps>) {
           {props.item.title}
         </p>
         <div className='flex w-full flex-1'>
-          <p
-            className='roboto-light mb-3 line-clamp-3 text-left text-base'
-          >  {props.item.desc}</p>
+          <p className='roboto-light mb-3 line-clamp-3 text-left text-base'>
+            {' '}
+            {props.item.desc}
+          </p>
         </div>
         <div className='flex w-full flex-row items-end justify-between'>
           <p className='roboto-regular text-xl group-hover:text-[#E48E43]'>
