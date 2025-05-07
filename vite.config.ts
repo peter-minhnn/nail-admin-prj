@@ -30,7 +30,7 @@ export default defineConfig({
         defaultLanguage: 'vi',
       },
       generateRobotsTxt: true,
-      readable: true, // Makes the XML more readable
+      readable: true, // Makes the XML more readable,
     }),
     compression({ algorithm: 'brotliCompress' }), // Use Brotli
     compression({ algorithm: 'gzip' }), // Use Gzip

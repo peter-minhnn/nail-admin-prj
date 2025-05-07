@@ -2,7 +2,6 @@ import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)'
 import { PostPublicType } from '@/types/(guest)'
 import { usePostsStore } from '@/stores/posts-store.ts'
-import { stringToSlug } from '@/utils/common.ts'
 
 interface PostPublicItemProps {
   data?: PostPublicType
@@ -23,7 +22,7 @@ export default function PostPublicItemView(
         onClick={() => {
           setPostsItem(props.data! ?? null)
           navigate({
-            href: `${pagePublicRouters.postDetail}/${stringToSlug(props.data?.title ?? '')}`,
+            href: `${pagePublicRouters.postDetail}/${props.data?.id}`,
           }).finally()
         }}
         className='h-full w-full rounded'

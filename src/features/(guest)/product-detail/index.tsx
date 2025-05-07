@@ -26,7 +26,9 @@ export default function ProductDetailComponent({
 
   const [productDetail, setProductDetail] = useState<GuestProductDetailType>()
 
-  const { data, status, isRefetching } = useGetProductDetail(product?.id!)
+  const { data, status, isRefetching } = useGetProductDetail(
+    product?.id! ?? slugId
+  )
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
@@ -69,7 +71,9 @@ export default function ProductDetailComponent({
               {productDetail?.productName}
             </h1>
             {productDetail?.description && (
-              <p className='mt-2 text-sm text-[#7D7C7C]'>{productDetail.description}</p>
+              <p className='mt-2 text-sm text-[#7D7C7C]'>
+                {productDetail.description}
+              </p>
             )}
           </div>
         )}

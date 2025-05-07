@@ -76,7 +76,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
                     slugId: stringToSlug(item.productName),
                   })
                   navigate({
-                    href: `${pagePublicRouters.productDetail}/${stringToSlug(item.productName)}`,
+                    href: `${pagePublicRouters.productDetail}/${item.id}`,
                   }).finally()
                 }}
                 className='flex w-full flex-col'

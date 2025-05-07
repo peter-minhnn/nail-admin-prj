@@ -23,7 +23,9 @@ export default function PostDetailComponent({
 
   const [postDetail, setPostDetail] = useState<PostPublicType>()
 
-  const { data, status, isRefetching } = useGetPostDetail(postsItem?.id!)
+  const { data, status, isRefetching } = useGetPostDetail(
+    postsItem?.id! ?? slugId
+  )
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return

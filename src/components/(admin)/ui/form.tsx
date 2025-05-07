@@ -154,6 +154,7 @@ const FormMessage = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField()
   const intl = useIntl()
+  console.log(error?.message)
   const body = error?.message
     ? intl.formatMessage({ id: error.message })
     : children

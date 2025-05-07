@@ -18,11 +18,12 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
     const slugId = stringToSlug(props.item.title)
     setPostsItem({ ...props.item, slugId })
     navigate({
-      to: `${pagePublicRouters.postDetail}/${slugId}`,
+      to: `${pagePublicRouters.postDetail}/${props.item.id}`,
     }).finally()
   }
 
-  if (props.item == null) return <div />
+  if (props.item == null) return null
+
   return (
     <button
       type='button'
