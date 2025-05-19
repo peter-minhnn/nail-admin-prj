@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)'
-import { LocalStorageKeys } from '@/entities/languages'
-import { LocalStorageStateType } from '@/types'
 import { GuestProductDetailType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
@@ -21,38 +18,25 @@ export default function ProductDetailComponent({
   slugId,
 }: Readonly<ProductDetailComponentProps>) {
   const intl = useIntl()
-  const navigate = useNavigate()
   const { product, setProductItem } = useProductStore()
 
   const [productDetail, setProductDetail] = useState<GuestProductDetailType>()
 
   const { data, status, isRefetching } = useGetProductDetail(
-    product?.id! ?? slugId
+    slugId ? Number(slugId) : product?.id!
   )
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const result = get(data, ['data'])
     setProductDetail(result)
+    setProductItem(result)
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth',
     })
   }, [data, status, isRefetching])
-
-  useEffect(() => {
-    const productItem = localStorage.getItem(LocalStorageKeys.PRODUCT)
-    if (!productItem) {
-      navigate({ href: '/san-pham' }).finally()
-      return
-    }
-
-    const data = JSON.parse(productItem) as LocalStorageStateType<{
-      product: GuestProductDetailType
-    }>
-    setProductItem(data.state.product)
-  }, [])
 
   return (
     <PageContainer

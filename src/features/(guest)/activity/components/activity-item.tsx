@@ -14,10 +14,10 @@ export default function ActivityItem(props: Readonly<ActivityItemProps>) {
   const { setPostsItem } = usePostsStore()
 
   const handleClick = () => {
-    const slutId = stringToSlug(props.item.title)
-    setPostsItem({ ...props.item, slugId: slutId })
+    const slugId = stringToSlug(props.item.title)
+    setPostsItem({ ...props.item, slugId: slugId })
     navigate({
-      to: `${pagePublicRouters.postDetail}/${slutId}`,
+      to: `${pagePublicRouters.postDetail}/${props.item?.id}`,
     }).finally()
   }
 

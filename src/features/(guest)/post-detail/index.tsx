@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from '@tanstack/react-router'
 import { pagePublicRouters } from '@/entities/(guest)'
-import { LocalStorageKeys } from '@/entities/languages'
-import { LocalStorageStateType } from '@/types'
 import { PostPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { usePostsStore } from '@/stores/posts-store.ts'
@@ -19,37 +16,24 @@ export default function PostDetailComponent({
   slugId,
 }: Readonly<PostDetailComponentProps>) {
   const { postsItem, setPostsItem } = usePostsStore()
-  const navigate = useNavigate()
 
   const [postDetail, setPostDetail] = useState<PostPublicType>()
 
   const { data, status, isRefetching } = useGetPostDetail(
-    postsItem?.id! ?? slugId
+    slugId ? Number(slugId) : postsItem?.id!
   )
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     const result = get(data, ['data'])
     setPostDetail(result)
+    setPostsItem(result)
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth',
     })
   }, [data, status, isRefetching])
-
-  useEffect(() => {
-    const item = localStorage.getItem(LocalStorageKeys.POST)
-    if (!item) {
-      navigate({ href: '/' }).finally()
-      return
-    }
-
-    const data = JSON.parse(item) as LocalStorageStateType<{
-      postsItem: PostPublicType
-    }>
-    setPostsItem(data.state.postsItem)
-  }, [])
 
   return (
     <PageContainer
