@@ -55,7 +55,6 @@ type CommonDialogsProps = {
 
 type PopupAddDialogsProps = {
   type: 'create'
-  maxPopup: number
 } & CommonDialogsProps
 
 type PopupEditDialogsProps = {
@@ -76,7 +75,7 @@ const defaultValues: PopupDataType = {
 }
 
 export const PopupDialogAction: FC<PopupDialogsProps> = (props) => {
-  const { open, setOpen, title, description } = props
+  const { open, setOpen, title, description, intl } = props
 
   const queryClient = useQueryClient()
   const isEdit = props.type === 'update' && !!props.currentRow
@@ -102,12 +101,6 @@ export const PopupDialogAction: FC<PopupDialogsProps> = (props) => {
   }
 
   const onSubmit = async (data: PopupDataType) => {
-    console.log(data)
-    if (props.type === 'create' && props.maxPopup === 5) {
-      toast.error('popup.maxPopup')
-      return
-    }
-
     if (data.type === 'image' && !files.length) {
       data.image = null
     }
@@ -306,7 +299,7 @@ export const PopupDialogAction: FC<PopupDialogsProps> = (props) => {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder={props.intl.formatMessage({
+                          placeholder={intl.formatMessage({
                             id: 'popup.titlePlaceholder',
                           })}
                           className='w-full'
@@ -332,7 +325,7 @@ export const PopupDialogAction: FC<PopupDialogsProps> = (props) => {
                         <QuillEditor
                           onChange={field.onChange}
                           value={field.value as string}
-                          placeholder={props.intl.formatMessage({
+                          placeholder={intl.formatMessage({
                             id: 'popup.contentPlaceholder',
                           })}
                           hasError={!!form.formState.errors?.content?.message}

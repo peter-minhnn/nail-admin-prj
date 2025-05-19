@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   DialogType,
   ListResponseType,
@@ -27,7 +27,6 @@ import {
 import {
   useDeletePopup,
   useGetPopups,
-  useGetPopupsPublished,
 } from '@/features/(admin)/popup/hooks/use-queries.ts'
 
 const defaultPagination = {
@@ -79,19 +78,10 @@ export default function PopupComponent() {
 
   const { data, refetch, status, isRefetching } = useGetPopups(filterParams)
 
-  const { data: popupPublishedData, status: popupPublishedStatus } =
-    useGetPopupsPublished()
-
   const { mutateAsync: deletePopup } = useDeletePopup({
     onSuccess,
     onError,
   })
-
-  const publishedCount = useMemo(() => {
-    if (popupPublishedStatus === 'pending') return 0
-    const list = get(popupPublishedData, ['list'], []) as PopupDataType[]
-    return (list ?? []).filter((v) => v.isPublished).length
-  }, [popupPublishedData, popupPublishedStatus])
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
@@ -147,7 +137,6 @@ export default function PopupComponent() {
             title='popup.createDialog.title'
             description='popup.createDialog.description'
             setOpen={setOpen}
-            maxPopup={publishedCount}
             intl={intl}
           />
         )}
