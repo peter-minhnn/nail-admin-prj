@@ -6,7 +6,7 @@ import { BaseResponseType, ResultType } from '@/types/base.type'
 import get from 'lodash/get'
 import { toast } from 'sonner'
 
-export function handleApiResponse<T>(response: any) {
+export function handleApiResponse<T = never>(response: any) {
   const isSuccess = get(response.data, 'success', false)
   if (isSuccess) {
     return {
@@ -18,7 +18,7 @@ export function handleApiResponse<T>(response: any) {
   return {
     type: 'error',
     result: {
-      data: {} as T,
+      data: null,
       success: false,
       message: get(response, 'data.message', 'Something went wrong'),
     } as BaseResponseType<T>,

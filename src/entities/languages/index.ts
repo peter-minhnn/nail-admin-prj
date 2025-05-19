@@ -15,6 +15,7 @@ const languages = [
   'guest_common',
   'guest_contact',
   'products',
+  'popup',
 ]
 
 enum LocalStorageKeys {

@@ -89,10 +89,10 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
             try {
               const imageUrl = await uploadImage(file)
               const editor = (quillRef.current! as any)?.getEditor()
-              const range = editor.getSelection() || { index: 0 }
+              const range = editor.getSelection() ?? { index: 0 }
               editor.insertEmbed(range.index, 'image', imageUrl)
               editor.insertText(range.index + 1, '', { alt: '' })
-            } catch (error) {
+            } catch {
               alert('Failed to upload pasted image')
             } finally {
               setIsUploading(false)
@@ -119,10 +119,10 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
         try {
           const imageUrl = await uploadImage(file)
           const editor = (quillRef.current! as any)?.getEditor()
-          const range = editor.getSelection() || { index: 0 }
+          const range = editor.getSelection() ?? { index: 0 }
           editor.insertEmbed(range.index, 'image', imageUrl)
           editor.insertText(range.index + 1, '', { alt: '' })
-        } catch (error) {
+        } catch {
           alert('Failed to upload image')
         } finally {
           setIsUploading(false)
@@ -185,7 +185,7 @@ const QuillEditor = (props: Readonly<QuillEditorProps>) => {
           placeholder={placeholder}
           readOnly={readOnly}
         />
-        {hasError && (
+        {helperText && (
           <p className='mt-1 text-sm text-red-500'>
             <FormattedMessage id={helperText} />
           </p>

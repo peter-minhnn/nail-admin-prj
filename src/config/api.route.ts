@@ -1,6 +1,7 @@
 import { PaginationState } from '@tanstack/react-table'
 import {
   ContactFilterParams,
+  PopupFilterParams,
   PostsFilterParams,
   ProductFilterParams,
 } from '@/types'
@@ -49,5 +50,12 @@ export const apiRoutes = {
         `/productTypes${createQueryParams({ page: params.pageIndex + 1, take: params.pageSize, order: 'DESC' })}`,
       withId: (id: number) => `/productTypes/${id}`,
     },
+  },
+  popup: {
+    general: '/popups',
+    withParams: (params: PopupFilterParams) =>
+      `/popups${createQueryParams({ ...params, order: 'DESC' })}`,
+    withId: (id: number) => `/popups/${id}`,
+    published: '/popups/published',
   },
 }

@@ -99,7 +99,10 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
   const onSuccess = async (response: ResultType) => {
     handleServerResponse(response)
     if (response.type === 'success') {
-      await queryClient.invalidateQueries({ queryKey: ['posts'] })
+      await queryClient.invalidateQueries({
+        queryKey: ['posts'],
+        refetchType: 'all',
+      })
       props.setOpen('')
     }
   }

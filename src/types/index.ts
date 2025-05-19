@@ -44,3 +44,4 @@ export type {
   ProductFilterParams,
   ProductType,
 } from './products.type'
+export type { PopupFilterParams, Popup, PopupType } from './popup.type'

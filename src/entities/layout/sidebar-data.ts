@@ -5,6 +5,7 @@ import {
   IconImageInPicture,
   IconLayoutDashboard,
   IconShoppingCart,
+  IconStackPop,
 } from '@tabler/icons-react'
 import { Command } from 'lucide-react'
 import { SidebarData } from '@/components/(admin)/layout/types.ts'
@@ -60,6 +61,11 @@ export const sidebarData: SidebarData = {
           title: 'menu.products',
           url: '/admin/products',
           icon: IconShoppingCart,
+        },
+        {
+          title: 'menu.popup',
+          url: '/admin/popup',
+          icon: IconStackPop,
         },
       ],
     },
