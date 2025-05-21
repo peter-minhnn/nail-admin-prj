@@ -29,6 +29,7 @@ export default function ButtonWithIcon({ type }: Readonly<ButtonWithIconProps>) 
   return (
     <a
       className='relative rounded-full p-[3px] transition-transform duration-200 hover:scale-105 hover:shadow-lg'
+      target="_empty"
       href={contactLink}
     >
       <div

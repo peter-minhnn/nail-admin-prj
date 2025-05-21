@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { usePopupStore } from '@/stores/popup-store'
 import { PopupDataType } from '@/features/(admin)/popup/data/schema'
 import { useGetPopupsPublished } from '@/features/(admin)/popup/hooks/use-queries'
+import PopupImage from './popup-image'
+import PopupContent from './popup-content'
 
 export default function PopupDialog() {
   const [popupsData, setPopupsData] = useState<PopupDataType>()
@@ -34,18 +36,14 @@ export default function PopupDialog() {
 
   if (popupsData == null) return null
   return (
-    <div className='fixed inset-0 z-[9999] flex items-center justify-center bg-white/30 backdrop-blur-md'>
+    <div className='fixed inset-0 z-[9999] flex items-center justify-center '>
       <div
         className='overflow-hidden rounded-3xl bg-white p-[2px]'
         style={{ width: '30vw', height: '40vw' }}
       >
         <div className='flex h-full w-full flex-col gap-1 overflow-hidden rounded-3xl'>
           <div className='flex flex-1'>
-            <img
-              src={popupsData.image ?? ''}
-              alt=''
-              className='h-auto w-auto'
-            />
+            {popupsData.type === 'image' ? <PopupImage popup={popupsData} /> : <PopupContent popup={popupsData} />}
           </div>
           <div className='flex h-[60px] flex-row'>
             <div className='flex flex-1 items-center gap-2 bg-gray-50 px-3'>

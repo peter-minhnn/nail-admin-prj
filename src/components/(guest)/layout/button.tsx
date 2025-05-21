@@ -15,7 +15,7 @@ export default function Button(props: Readonly<ButtonProps>) {
   return (
     <div
       onClick={props.onClick}
-      className='hover: w-fit rounded-sm bg-[#E48E43] px-10 py-3'
+      className='hover: w-fit rounded-sm bg-[#E48E43] px-10 py-3 '
     >
       <p className={`text-base text-white`}>{props.title}</p>
     </div>
