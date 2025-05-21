@@ -49,7 +49,6 @@ export default function ProductsComponent() {
           <ProductSection />
         </Container>
       </div>
-      <PopupDialog />
     </PageContainer>
   )
 }
