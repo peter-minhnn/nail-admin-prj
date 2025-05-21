@@ -9,10 +9,10 @@ import { Footer } from '@/components/(guest)/layout/footer.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import LoadingPage from '@/components/(guest)/loading.tsx'
 import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
+import GlobalPopup from '../popup/components/popup-global'
 import HomeActivities from './components/activity/home-activities'
 import HomeCollects from './components/collects/home-collects'
 import ServicesSlider from './components/services/home-services-slider'
-import GlobalPopup from '../popup/components/popup-global'
 
 export default function Home() {
   const [filterParams] = useState<BannerPublicFilterParams>({

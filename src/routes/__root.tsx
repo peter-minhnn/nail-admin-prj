@@ -5,13 +5,10 @@ import {
   useLocation,
   useNavigate,
 } from '@tanstack/react-router'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { Toaster } from '@/components/(admin)/ui/toaster'
 import LoadingPage from '@/components/(guest)/loading.tsx'
 import GeneralError from '@/features/(admin)/errors/general-error'
 import NotFoundError from '@/features/(admin)/errors/not-found-error'
-import ContactButtonGroup from '@/features/(guest)/contact/components/contact-button-group'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -21,13 +18,6 @@ export const Route = createRootRouteWithContext<{
       <>
         <Outlet />
         <Toaster position='top-right' richColors />
-        {import.meta.env.MODE === 'development' && (
-          <>
-            <ReactQueryDevtools buttonPosition='bottom-left' />
-            <TanStackRouterDevtools position='bottom-right' />
-            <ContactButtonGroup />
-          </>
-        )}
       </>
     )
   },

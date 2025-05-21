@@ -30,8 +30,7 @@ export const useGetPopupsPublished = () => {
   return useQuery({
     queryKey: ['popup-published'],
     queryFn: async () => await getPopupsPublished(),
-    select: (response) =>
-      get(response, ['result']),
+    select: (response) => get(response, ['result']),
     refetchOnWindowFocus: false,
   })
 }
