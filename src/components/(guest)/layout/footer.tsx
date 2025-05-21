@@ -3,6 +3,8 @@ import { useIntl } from 'react-intl'
 import FacebookIcon from './facebook'
 import InstagramIcon from './instagram'
 import TiktokIcon from './tiktok'
+import Button from './button'
+import Subscribe from '@/features/(guest)/subscribe'
 
 export function Footer() {
   const intl = useIntl()
@@ -29,8 +31,9 @@ export function Footer() {
             </a>
           </div>
 
-          <div className='mt-4 max-w-md text-start text-black dark:text-gray-400 sm:text-left'>
+          <div className=' flex flex-col mt-4 max-w-md text-start text-black dark:text-gray-400 sm:text-left gap-5'>
             {intl.formatMessage({ id: 'homeGuest.footer.storeDescription' })}
+            <Subscribe />
           </div>
         </div>
 

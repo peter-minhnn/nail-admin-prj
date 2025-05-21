@@ -15,8 +15,15 @@ import { PostsFilterParams, ResultType } from '@/types'
 import { BannerPublicFilterParams, ProductFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
 import { ContactDataType } from '../contact/data/shema'
+import SubscribeDataType from '../subscribe/data/shema'
+import { sendSubscribe } from '@/services/guest/subscribe.service'
 
-type ContatcsQueryType = {
+type ContactQueryType = {
+  onSuccess?: (response: ResultType) => Promise<void>
+  onError?: (error: Error) => void
+}
+
+type SubscribeQueryType = {
   onSuccess?: (response: ResultType) => Promise<void>
   onError?: (error: Error) => void
 }
@@ -108,9 +115,21 @@ export const useGetProductDetail = (id: number) => {
 export const useSendContact = ({
   onSuccess,
   onError,
-}: Readonly<ContatcsQueryType>) => {
+}: Readonly<ContactQueryType>) => {
   return useMutation({
     mutationFn: async (data: ContactDataType) => await sendRequests(data),
+    onSuccess: async (response) => await onSuccess?.(response as ResultType),
+    onError: (error) => onError?.(error),
+  })
+}
+
+
+export const useSendSubscribe = ({
+  onSuccess,
+  onError,
+}: Readonly<SubscribeQueryType>) => {
+  return useMutation({
+    mutationFn: async (data: SubscribeDataType) => await sendSubscribe(data),
     onSuccess: async (response) => await onSuccess?.(response as ResultType),
     onError: (error) => onError?.(error),
   })

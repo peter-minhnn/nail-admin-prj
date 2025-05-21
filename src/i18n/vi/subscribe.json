@@ -1,0 +1,6 @@
+{
+    "subscribe.email": "Email",
+    "subscribe.email.hint" : "Nhập email",
+    "subscribe.errors.email.inValid": "Email không đúng định dạng",
+    "subscribe.button" : "Đăng ký"
+}
