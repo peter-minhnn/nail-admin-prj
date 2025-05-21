@@ -11,6 +11,7 @@ import { Toaster } from '@/components/(admin)/ui/toaster'
 import LoadingPage from '@/components/(guest)/loading.tsx'
 import GeneralError from '@/features/(admin)/errors/general-error'
 import NotFoundError from '@/features/(admin)/errors/not-found-error'
+import ContactButtonGroup from '@/features/(guest)/contact/components/contact-button-group'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -24,6 +25,7 @@ export const Route = createRootRouteWithContext<{
           <>
             <ReactQueryDevtools buttonPosition='bottom-left' />
             <TanStackRouterDevtools position='bottom-right' />
+            <ContactButtonGroup />
           </>
         )}
       </>

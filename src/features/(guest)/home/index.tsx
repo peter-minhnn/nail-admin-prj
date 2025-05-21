@@ -12,6 +12,7 @@ import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import HomeActivities from './components/activity/home-activities'
 import HomeCollects from './components/collects/home-collects'
 import ServicesSlider from './components/services/home-services-slider'
+import GlobalPopup from '../popup/components/popup-global'
 
 export default function Home() {
   const [filterParams] = useState<BannerPublicFilterParams>({
@@ -92,6 +93,7 @@ export default function Home() {
         <HomeCollects />
       </section>
       <Footer />
+      <GlobalPopup />
     </PageContainer>
   )
 }

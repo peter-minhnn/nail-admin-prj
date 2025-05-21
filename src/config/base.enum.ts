@@ -1,6 +1,7 @@
 export enum LocalStorageKey {
   LOCALE = 'locale',
   PRODUCT = 'product',
+  SKIP_POPUP = 'skipPopupOn'
 }
 
 export enum StatusCodes {
