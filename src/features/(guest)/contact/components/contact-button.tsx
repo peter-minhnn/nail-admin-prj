@@ -28,15 +28,15 @@ export default function ButtonWithIcon({ type }: Readonly<ButtonWithIconProps>) 
 
   return (
     <a
-      className='relative rounded-full p-[3px] transition-transform duration-200 hover:scale-105 hover:shadow-lg'
+      className='relative rounded-full  transition-transform duration-200 hover:scale-105 hover:shadow-lg '
       target="_empty"
       href={contactLink}
     >
       <div
-        className={`h-12 w-12 animate-pulse rounded-full ${backgroundColor}`}
+        className={`h-12 w-12 p-[3px] animate-pulse rounded-full ${backgroundColor}`}
       />
-      <div className='absolute inset-0 rounded-full p-2'>
-        <img src={icon} alt={type} className='h-10 w-10' />
+      <div className='absolute inset-0 rounded-full p-2 flex items-center justify-center'>
+        <img src={icon} alt={type} className='h-10 w-10 ' />
       </div>
     </a>
   )

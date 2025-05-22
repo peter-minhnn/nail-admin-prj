@@ -41,7 +41,7 @@ export default function Subscribe() {
     }
 
 
-    return (<div className='flex md:flex-row flex-col mr-5 gap-4 md:gap-0'>
+    return (<div className='flex md:flex-row flex-col gap-4 md:gap-0 '>
         <Toaster position='top-right' />
         <Form {...form}>
             <form id='contacts-form'

@@ -36,10 +36,13 @@ export default function PopupDialog() {
 
   if (popupsData == null) return null
   return (
-    <div className='fixed inset-0 z-[9999] flex items-center justify-center '>
+    <div className='fixed inset-0 z-[99999] flex items-center justify-center  bg-black/10' onClick={(e) => {
+      e.stopPropagation()
+      handleClose()
+    }}>
       <div
-        className='overflow-hidden rounded-3xl bg-white p-[2px]'
-        style={{ width: '30vw', height: '40vw' }}
+        className='overflow-hidden rounded-3xl bg-white p-[2px] w-[90%] max-w-[360px] aspect-[2/3]'
+      // style={{ width: '30vw', height: '40vw' }}
       >
         <div className='flex h-full w-full flex-col gap-1 overflow-hidden rounded-3xl'>
           <div className='flex flex-1'>

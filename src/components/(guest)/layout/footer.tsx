@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl'
 import FacebookIcon from './facebook'
 import InstagramIcon from './instagram'
 import TiktokIcon from './tiktok'
-import Button from './button'
 import Subscribe from '@/features/(guest)/subscribe'
 
 export function Footer() {
@@ -11,7 +10,7 @@ export function Footer() {
   return (
     <div className='bg-footer relative flex w-full flex-col items-center px-6 pb-2'>
       <div className='mt-5 flex w-full max-w-screen-xl grid-cols-1 flex-col items-center justify-center gap-10 pt-10 sm:grid sm:items-baseline sm:justify-start lg:grid-cols-5'>
-        <div className='mx-auto w-full lg:col-span-2'>
+        <div className='mx-auto w-full lg:col-span-2 '>
           <div className='flex justify-center sm:justify-start'>
             {' '}
             <a
@@ -31,7 +30,7 @@ export function Footer() {
             </a>
           </div>
 
-          <div className=' flex flex-col mt-4 max-w-md text-start text-black dark:text-gray-400 sm:text-left gap-5'>
+          <div className=' flex flex-col mt-4  text-start text-black dark:text-gray-400 sm:text-left gap-5 '>
             {intl.formatMessage({ id: 'homeGuest.footer.storeDescription' })}
             <Subscribe />
           </div>
