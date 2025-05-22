@@ -21,22 +21,24 @@ const CONTACT_LINK: Record<ButtonType, string> = {
   facebook: 'https://m.me/deja.vu.nail.spa.room',
   phone: 'tel:0357369226',
 }
-export default function ButtonWithIcon({ type }: Readonly<ButtonWithIconProps>) {
+export default function ButtonWithIcon({
+  type,
+}: Readonly<ButtonWithIconProps>) {
   const icon = ICONS[type]
   const backgroundColor = BACKGROUND[type]
   const contactLink = CONTACT_LINK[type]
 
   return (
     <a
-      className='relative rounded-full  transition-transform duration-200 hover:scale-105 hover:shadow-lg '
-      target="_empty"
+      className='relative rounded-full transition-transform duration-200 hover:scale-105 hover:shadow-lg'
+      target='_empty'
       href={contactLink}
     >
       <div
-        className={`h-12 w-12 p-[3px] animate-pulse rounded-full ${backgroundColor}`}
+        className={`h-12 w-12 animate-pulse rounded-full p-[3px] ${backgroundColor}`}
       />
-      <div className='absolute inset-0 rounded-full p-2 flex items-center justify-center'>
-        <img src={icon} alt={type} className='h-10 w-10 ' />
+      <div className='absolute inset-0 flex items-center justify-center rounded-full p-2'>
+        <img src={icon} alt={type} className='h-10 w-10' />
       </div>
     </a>
   )

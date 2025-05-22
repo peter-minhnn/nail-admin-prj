@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { usePopupStore } from '@/stores/popup-store'
 import { PopupDataType } from '@/features/(admin)/popup/data/schema'
 import { useGetPopupsPublished } from '@/features/(admin)/popup/hooks/use-queries'
-import PopupImage from './popup-image'
 import PopupContent from './popup-content'
+import PopupImage from './popup-image'
 
 export default function PopupDialog() {
   const [popupsData, setPopupsData] = useState<PopupDataType>()
@@ -36,16 +36,22 @@ export default function PopupDialog() {
 
   if (popupsData == null) return null
   return (
-    <div className='fixed inset-0 z-[99999] flex items-center justify-center  bg-black/10' onClick={(e) => {
-      e.stopPropagation()
-      handleClose()
-    }}>
-      <div
-        className='overflow-hidden rounded-3xl bg-white p-[2px] w-[90%] max-w-[360px] aspect-[2/3]'
-      >
+    <button
+      type='button'
+      className='fixed inset-0 z-[99999] flex items-center justify-center bg-black/10'
+      onClick={(e) => {
+        e.stopPropagation()
+        handleClose()
+      }}
+    >
+      <div className='aspect-[2/3] w-[90%] max-w-[360px] overflow-hidden rounded-3xl bg-white p-[2px]'>
         <div className='flex h-full w-full flex-col gap-1 overflow-hidden rounded-3xl'>
           <div className='flex flex-1'>
-            {popupsData.type === 'image' ? <PopupImage popup={popupsData} /> : <PopupContent popup={popupsData} />}
+            {popupsData.type === 'image' ? (
+              <PopupImage popup={popupsData} />
+            ) : (
+              <PopupContent popup={popupsData} />
+            )}
           </div>
           <div className='flex h-[60px] flex-row'>
             <div className='flex flex-1 items-center gap-2 bg-gray-50 px-3'>
@@ -89,6 +95,6 @@ export default function PopupDialog() {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   )
 }

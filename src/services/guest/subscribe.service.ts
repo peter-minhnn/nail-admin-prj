@@ -1,12 +1,12 @@
 import { apiGuestRoutes } from '@/config/guest.api.route'
 import { BaseResponseType } from '@/types'
 import { useGlobalAxios } from '@/hooks/use-axios'
-import { handleApiCatchResponse, handleApiResponse } from '../api.service'
 import SubscribeDataType from '@/features/(guest)/subscribe/data/shema'
+import { handleApiCatchResponse, handleApiResponse } from '../api.service'
 
 export const sendSubscribe = async (data: SubscribeDataType) => {
   const body = {
-    email: data.email
+    email: data.email,
   }
   try {
     const response = await useGlobalAxios.post<null, BaseResponseType, object>(

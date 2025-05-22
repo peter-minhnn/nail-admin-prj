@@ -1,7 +1,6 @@
 import { PostsFilterParams } from '@/types'
 import { BannerPublicFilterParams } from '@/types/(guest)'
 import { createQueryParams } from '@/utils'
-import { subscribe } from 'diagnostics_channel'
 
 export const apiGuestRoutes = {
   post: {
@@ -40,5 +39,5 @@ export const apiGuestRoutes = {
   },
   subscribe: {
     general: '/subscribes',
-  }
+  },
 }

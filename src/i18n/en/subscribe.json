@@ -1,6 +1,6 @@
 {
   "subscribe.email": "Email",
-  "subscribe.email.hint" : "Enter your email",
+  "subscribe.email.hint": "Enter your email",
   "subscribe.errors.email.inValid": "Invalid email format",
-  "subscribe.button" : "Subscribe"
+  "subscribe.button": "Subscribe"
 }
