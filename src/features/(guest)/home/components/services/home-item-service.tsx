@@ -9,7 +9,7 @@ interface ServiceProps {
 
 export default function HomeItemService(props: Readonly<ServiceProps>) {
   return (
-    <a href={`${pagePublicRouters.postDetail}/${props.item.id}`}>
+    <a href={`${pagePublicRouters.serviceDetail}/${props.item.id}`}>
       <div
         className={`flex flex-col ${props.height} w-full rounded-sm sm:w-[416px]`}
       >
