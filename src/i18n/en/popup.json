@@ -25,5 +25,6 @@
   "popup.dontShowAgain": "Không hiển thị lại",
   "popup.closePreview": "Đóng",
   "popup.viewContent": "Xem nội dung",
-  "popup.viewSavedImage": "Xem hình ảnh đã lưu"
+  "popup.viewSavedImage": "Xem hình ảnh đã lưu",
+  "popup.publish.skipToDay": "Don't show again today"
 }
