@@ -3,10 +3,10 @@ import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
+import { useGetBanners } from '@/hooks/use-guest-queries.ts'
 import Banner from '@/components/(guest)/layout/banner'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
-import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
 import ProductSection from './components/product-section'
 
 export default function ProductsComponent() {

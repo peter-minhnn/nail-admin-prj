@@ -4,7 +4,7 @@ import { PostPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
 import { v4 as uuid } from 'uuid'
-import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
+import { useGetPosts } from '@/hooks/use-guest-queries.ts'
 import TrainingPostTemplate from './training-post-template'
 
 export default function TrainingPostsSection() {

@@ -6,7 +6,7 @@ import { usePostsStore } from '@/stores/posts-store.ts'
 import QuillEditor from '@/components/(admin)/quill-editor.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
-import { useGetPostDetail } from '../hook/use-guest-queries'
+import { useGetPostDetail } from '../../../hooks/use-guest-queries.ts'
 
 type PostDetailComponentProps = {
   slugId: string

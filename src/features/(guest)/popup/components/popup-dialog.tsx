@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { usePopupStore } from '@/stores/popup-store'
+import useClickOutsideDialog from '@/hooks/use-click-outside.tsx'
 import { PopupDataType } from '@/features/(admin)/popup/data/schema'
 import { useGetPopupsPublished } from '@/features/(admin)/popup/hooks/use-queries'
 import PopupContent from './popup-content'
@@ -26,7 +27,10 @@ export default function PopupDialog() {
     setDoNotShowToday(e.target.checked)
     const isSkip: boolean = e.target.checked as boolean
     skipToDay(isSkip)
+    handleClose()
   }
+
+  useClickOutsideDialog('dialog-content', handleClose)
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
@@ -36,23 +40,16 @@ export default function PopupDialog() {
   }, [data, status, isRefetching])
 
   if (popupsData == null) return null
+
   return (
     <div className='fixed inset-0 z-[99999] flex items-center justify-center bg-black/10'>
-      <button
-        onClick={(e) => {
-          e.stopPropagation()
-          handleClose()
-        }}
-        className='flex h-full w-full items-center justify-center'
-      >
-        <button
-          onClick={(e) => {
-            e.stopPropagation()
-          }}
-          className='flex max-h-[90%] w-[90%] max-w-[600px] items-center justify-center overflow-hidden rounded-3xl'
-        >
+      <div className='flex h-full w-full items-center justify-center'>
+        <div className='flex max-h-[90%] w-[90%] max-w-[600px] items-center justify-center overflow-hidden rounded-3xl'>
           <div className='flex h-fit w-full flex-col items-center justify-center gap-1 overflow-hidden rounded-3xl bg-white p-[2px]'>
-            <div className='h-f w-full overflow-hidden rounded-3xl'>
+            <div
+              id='dialog-content'
+              className='w-full overflow-hidden rounded-3xl'
+            >
               <div className='flex flex-1'>
                 {popupsData.type === 'image' ? (
                   <PopupImage popup={popupsData} />
@@ -102,8 +99,8 @@ export default function PopupDialog() {
               </div>
             </div>
           </div>
-        </button>
-      </button>
+        </div>
+      </div>
     </div>
   )
 }

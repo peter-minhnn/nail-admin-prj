@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
 import { useIntl } from 'react-intl'
-import { useGetBanners } from '@/features/(guest)/hook/use-guest-queries'
+import { useGetBanners } from '@/hooks/use-guest-queries.ts'
 
 export default function TrainingBanner() {
   const [filterParams] = useState<BannerPublicFilterParams>({

@@ -6,7 +6,7 @@ import get from 'lodash/get'
 import { Pagination } from 'swiper/modules'
 import { Swiper } from 'swiper/react'
 import { v4 as uuid } from 'uuid'
-import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
+import { useGetPosts } from '@/hooks/use-guest-queries.ts'
 import ActivitiesGrid from './activity-grid'
 
 export default function ActivitiesSlider() {

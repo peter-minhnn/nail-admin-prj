@@ -4,11 +4,11 @@ import { AlbumPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { cn } from '@/lib/utils.ts'
+import { useGetAlbums } from '@/hooks/use-guest-queries.ts'
 import Banner from '@/components/(guest)/layout/banner'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
 import Lightbox from '@/components/(guest)/lightbox.tsx'
-import { useGetAlbums } from '@/features/(guest)/hook/use-guest-queries'
 
 export default function AlbumComponent() {
   const intl = useIntl()

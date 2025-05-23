@@ -10,7 +10,7 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/(admin)/ui'
-import { useSendSubscribe } from '../hook/use-guest-queries'
+import { useSendSubscribe } from '../../../hooks/use-guest-queries.ts'
 import { SubscribeInput } from './components/subscribe-input'
 import SubscribeDataType, { subscribeSchema } from './data/shema'
 

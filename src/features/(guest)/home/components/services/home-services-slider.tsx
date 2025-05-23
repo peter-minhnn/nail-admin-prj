@@ -7,7 +7,7 @@ import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
+import { useGetPosts } from '@/hooks/use-guest-queries.ts'
 import HomeItemService from './home-item-service'
 
 export default function ServicesSlider() {

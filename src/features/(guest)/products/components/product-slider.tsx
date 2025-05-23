@@ -12,7 +12,7 @@ import type { SwiperRef } from 'swiper/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useProductStore } from '@/stores/product-store.ts'
 import { stringToSlug } from '@/utils/common.ts'
-import { useGetProducts } from '../../hook/use-guest-queries'
+import { useGetProducts } from '../../../../hooks/use-guest-queries.ts'
 import ProductSectionHeader from './product-section-header'
 
 interface ProductsSliderProps {

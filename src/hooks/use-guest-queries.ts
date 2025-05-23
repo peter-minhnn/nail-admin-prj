@@ -1,22 +1,22 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { sendRequests } from '@/services/guest/contact.service'
-import { getAlbums } from '@/services/guest/guest.album.service'
+import { sendRequests } from '@/services/guest/contact.service.ts'
+import { getAlbums } from '@/services/guest/guest.album.service.ts'
 import {
   getProductDetail,
   getProducts,
   getProductTypes,
-} from '@/services/guest/guest.product.service'
+} from '@/services/guest/guest.product.service.ts'
 import {
   getBanners,
   getPostDetail,
   getPosts,
-} from '@/services/guest/home.service'
-import { sendSubscribe } from '@/services/guest/subscribe.service'
+} from '@/services/guest/home.service.ts'
+import { sendSubscribe } from '@/services/guest/subscribe.service.ts'
 import { PostsFilterParams, ResultType } from '@/types'
 import { BannerPublicFilterParams, ProductFilterParams } from '@/types/(guest)'
 import get from 'lodash/get'
-import { ContactDataType } from '../contact/data/shema'
-import SubscribeDataType from '../subscribe/data/shema'
+import { ContactDataType } from '../features/(guest)/contact/data/shema.ts'
+import SubscribeDataType from '../features/(guest)/subscribe/data/shema.ts'
 
 type ContactQueryType = {
   onSuccess?: (response: ResultType) => Promise<void>

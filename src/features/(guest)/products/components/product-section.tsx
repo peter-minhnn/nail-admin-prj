@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GuestProductTypeType } from '@/types/(guest)'
 import get from 'lodash/get'
-import { useGetProductTypes } from '../../hook/use-guest-queries'
+import { useGetProductTypes } from '../../../../hooks/use-guest-queries.ts'
 import ProductSlider from './product-slider'
 
 export default function ProductSection() {

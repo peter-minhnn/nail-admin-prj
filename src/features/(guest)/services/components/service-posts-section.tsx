@@ -3,7 +3,7 @@ import { PostPublicType } from '@/types/(guest)'
 import { PostsFilterParams } from '@/types/posts.type'
 import get from 'lodash/get'
 import { v4 as uuid } from 'uuid'
-import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
+import { useGetPosts } from '@/hooks/use-guest-queries.ts'
 import ServicePostsTemplate from './service-posts-template'
 
 export default function ServicePostsSection() {

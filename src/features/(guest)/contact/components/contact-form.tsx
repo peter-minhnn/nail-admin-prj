@@ -14,7 +14,7 @@ import {
   ContactDataType,
   contactsSchema,
 } from '@/features/(guest)/contact/data/shema.ts'
-import { useSendContact } from '../../hook/use-guest-queries'
+import { useSendContact } from '../../../../hooks/use-guest-queries.ts'
 import { ContactInputView } from './contact-input-view'
 
 export default function ContactForm() {

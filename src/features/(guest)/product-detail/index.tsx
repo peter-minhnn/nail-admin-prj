@@ -8,7 +8,7 @@ import { addAltToImages } from '@/utils/common.ts'
 import QuillEditor from '@/components/(admin)/quill-editor.tsx'
 import { Container } from '@/components/(guest)/layout/container.tsx'
 import PageContainer from '@/components/(guest)/layout/page-container.tsx'
-import { useGetProductDetail } from '../hook/use-guest-queries'
+import { useGetProductDetail } from '../../../hooks/use-guest-queries.ts'
 
 type ProductDetailComponentProps = {
   slugId: string

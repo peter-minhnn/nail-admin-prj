@@ -5,7 +5,7 @@ import { ListResponseType, PostsFilterParams } from '@/types'
 import { PostPublicType } from '@/types/(guest)'
 import get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { useGetPosts } from '@/features/(guest)/hook/use-guest-queries'
+import { useGetPosts } from '@/hooks/use-guest-queries.ts'
 import HomeItemActivity from './home-item-activity'
 
 export default function HomeActivities() {
