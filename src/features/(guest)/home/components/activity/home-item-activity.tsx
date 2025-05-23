@@ -18,7 +18,7 @@ export default function HomeItemActivity(props: Readonly<ActivitiesProps>) {
     const slugId = stringToSlug(props.item.title)
     setPostsItem({ ...props.item, slugId })
     navigate({
-      to: `${pagePublicRouters.postDetail}/${props.item.id}`,
+      to: `${pagePublicRouters.activityDetail}/${props.item.id}`,
     }).finally()
   }
 

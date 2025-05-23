@@ -8,6 +8,6 @@ export default function PopupImage(props: Readonly<PopupImageProps>) {
     return (<img
         src={props.popup.image ?? ''}
         alt=''
-        className='h-auto w-auto'
+        className='h-full w-full'
     />)
 }
