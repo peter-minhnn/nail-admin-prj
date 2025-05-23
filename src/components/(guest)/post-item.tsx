@@ -3,9 +3,11 @@ import { pagePublicRouters } from '@/entities/(guest)'
 import { PostPublicType } from '@/types/(guest)'
 import { usePostsStore } from '@/stores/posts-store.ts'
 
+type PostType = 'service' | 'training'
 interface PostPublicItemProps {
   data?: PostPublicType
   className?: string
+  type: PostType
 }
 
 export default function PostPublicItemView(
@@ -22,7 +24,7 @@ export default function PostPublicItemView(
         onClick={() => {
           setPostsItem(props.data! ?? null)
           navigate({
-            href: `${pagePublicRouters.postDetail}/${props.data?.id}`,
+            href: `${props.type === 'service' ? pagePublicRouters.serviceDetail : props.type === 'training' ? pagePublicRouters.trainingDetail : pagePublicRouters.postDetail}/${props.data?.id}`,
           }).finally()
         }}
         className='h-full w-full rounded'

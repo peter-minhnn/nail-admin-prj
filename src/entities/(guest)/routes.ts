@@ -12,4 +12,7 @@ export const menuRoutes = {
 export const pagePublicRouters = {
   productDetail: '/san-pham',
   postDetail: '/bai-viet',
+  serviceDetail: '/dich-vu',
+  activityDetail: '/hoat-dong',
+  trainingDetail: '/dao-tao',
 }

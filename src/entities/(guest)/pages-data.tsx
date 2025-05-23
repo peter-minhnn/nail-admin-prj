@@ -24,4 +24,7 @@ export const pageDetailComponents = (pageId: string, id: string) =>
   ({
     'san-pham': <ProductDetailComponent slugId={id} />,
     'bai-viet': <PostDetailComponent slugId={id} />,
+    'dich-vu': <PostDetailComponent slugId={id} />,
+    'hoat-dong': <PostDetailComponent slugId={id} />,
+    'dao-tao': <PostDetailComponent slugId={id} />,
   })[pageId] ?? <GuestNotFound />

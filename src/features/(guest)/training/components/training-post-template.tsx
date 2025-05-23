@@ -18,15 +18,18 @@ export default function TrainingPostTemplate(
           <PostPublicItemView
             data={props.items[0]}
             className={`${itemMobileH} md:h-full`}
+            type={'training'}
           />
           <PostPublicItemView
             data={props.items[1]}
             className={`${itemMobileH} md:h-full`}
+            type={'training'}
           />
         </div>
         <PostPublicItemView
           data={props.items[2]}
           className={`${itemMobileH} md:flex md:h-full md:flex-1`}
+          type={'training'}
         />
       </div>
       <div className='flex h-fit flex-col gap-8 md:h-[800px]'>
@@ -34,16 +37,19 @@ export default function TrainingPostTemplate(
           <PostPublicItemView
             data={props.items[3]}
             className={`${itemMobileH} md:flex md:h-full md:flex-1`}
+            type={'training'}
           />
           <PostPublicItemView
             data={props.items[4]}
             className={`${itemMobileH} md:flex md:h-full md:flex-1`}
+            type={'training'}
           />
         </div>
 
         <PostPublicItemView
           data={props.items[5]}
           className={`${itemMobileH} bg-blue-500 md:flex md:flex-1`}
+          type={'training'}
         />
       </div>
     </div>

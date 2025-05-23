@@ -24,9 +24,11 @@ export default function ServicePostsTemplate(
           <AlbumPublicItemView
             className={`flex h-[416px] rounded md:h-[300px] md:flex-1`}
             data={props.items?.[0]}
+            type={'service'}
           />
           <AlbumPublicItemView
             className={`flex h-[416px] rounded md:h-[300px] md:flex-1`}
+            type={'service'}
             data={props.items?.[1]}
           />
         </div>
@@ -36,10 +38,12 @@ export default function ServicePostsTemplate(
           >
             <AlbumPublicItemView
               className={`h-[416px] rounded md:flex md:flex-1`}
+              type={'service'}
               data={props.items?.[2]}
             />
             <AlbumPublicItemView
               className={`h-[416px] rounded md:flex md:flex-1`}
+              type={'service'}
               data={props.items?.[3]}
             />
           </div>
@@ -48,10 +52,12 @@ export default function ServicePostsTemplate(
           >
             <AlbumPublicItemView
               className={`flex h-[416px] rounded md:flex-1`}
+              type={'service'}
               data={props.items?.[4]}
             />
             <AlbumPublicItemView
               className={`flex h-[416px] rounded md:flex-1`}
+              type={'service'}
               data={props.items?.[5]}
             />
           </div>
