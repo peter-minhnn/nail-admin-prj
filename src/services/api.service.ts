@@ -6,17 +6,17 @@ import { BaseResponseType, ResultType } from '@/types/base.type'
 import get from 'lodash/get'
 import { toast } from 'sonner'
 
-export function handleApiResponse<T = never>(response: any) {
+export function handleApiResponse<T>(response: any): ResultType<T> {
   const isSuccess = get(response.data, 'success', false)
   if (isSuccess) {
     return {
-      type: 'success',
+      type: 'success' as const,
       result: response.data as BaseResponseType<T>,
     }
   }
 
   return {
-    type: 'error',
+    type: 'error' as const,
     result: {
       data: null,
       success: false,
@@ -25,7 +25,9 @@ export function handleApiResponse<T = never>(response: any) {
   }
 }
 
-export async function handleApiCatchResponse<T>(e: any): Promise<ResultType> {
+export async function handleApiCatchResponse<T>(
+  e: any
+): Promise<ResultType<T>> {
   if (e?.code === 'ERR_NETWORK') {
     return {
       type: 'error',
@@ -42,7 +44,7 @@ export async function handleApiCatchResponse<T>(e: any): Promise<ResultType> {
   const messageError = get(
     e.response,
     ['data', 'errors', '0'],
-    e.response?.data?.message || null
+    e.response?.data?.message ?? null
   )
   return {
     type: 'error',

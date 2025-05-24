@@ -1,6 +1,9 @@
 {
   "subscribe.email": "Email",
-  "subscribe.email.hint": "Enter your email",
+  "subscribe.email.hint": "Enter email",
   "subscribe.errors.email.inValid": "Invalid email format",
-  "subscribe.button": "Subscribe"
+  "subscribe.button": "Register",
+  "subscribe.header.title": "Subscription Management",
+  "subscribe.header.description": "Manage subscriptions to receive notifications from us",
+  "subscribe.createdAt": "Subscription Time"
 }

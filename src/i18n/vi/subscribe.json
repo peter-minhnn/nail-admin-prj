@@ -2,5 +2,8 @@
   "subscribe.email": "Email",
   "subscribe.email.hint": "Nhập email",
   "subscribe.errors.email.inValid": "Email không đúng định dạng",
-  "subscribe.button": "Đăng ký"
+  "subscribe.button": "Đăng ký",
+  "subscribe.header.title": "Quản lý đăng ký",
+  "subscribe.header.description": "Quản lý đăng ký nhận thông báo từ chúng tôi",
+  "subscribe.createdAt": "Thời gian đăng ký"
 }

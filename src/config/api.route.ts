@@ -38,6 +38,8 @@ export const apiRoutes = {
       `/contacts/export${createQueryParams(params)}`,
     withParams: (params: ContactFilterParams) =>
       `/contacts${createQueryParams({ ...params, order: 'DESC' })}`,
+    withSubscribesParams: (params: ContactFilterParams) =>
+      `/subscribes${createQueryParams({ ...params, order: 'DESC' })}`,
   },
   product: {
     general: '/products',

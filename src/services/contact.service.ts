@@ -4,8 +4,13 @@ import {
   handleApiCatchResponse,
   handleApiResponse,
 } from '@/services/api.service.ts'
-import { BaseResponseType, ContactFilterParams, ContactType } from '@/types'
-import { ContactExportParams } from '@/types/contact.type.ts'
+import {
+  BaseResponseType,
+  ContactFilterParams,
+  ContactType,
+  ResultType,
+} from '@/types'
+import { ContactExportParams, SubscibesType } from '@/types/contact.type.ts'
 import { useAuthAxios } from '@/hooks/use-axios.ts'
 
 export const getContacts = async (params: ContactFilterParams) => {
@@ -28,5 +33,20 @@ export const exportExcel = async (params: ContactExportParams) => {
     })
   } catch (e) {
     console.log('[ERROR] [downloadFile]: ', e)
+  }
+}
+
+export const getSubscribes = async (
+  params: ContactFilterParams
+): Promise<ResultType<SubscibesType[]>> => {
+  try {
+    const response = await useAuthAxios.get<
+      null,
+      BaseResponseType,
+      ContactFilterParams
+    >(apiRoutes.contacts.withSubscribesParams(params))
+    return handleApiResponse(response)
+  } catch (e) {
+    return handleApiCatchResponse(e)
   }
 }

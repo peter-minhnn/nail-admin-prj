@@ -19,3 +19,8 @@ export type ContactExportParams = {
   content?: string
   status?: number
 }
+
+export type SubscibesType = {
+  email: string
+  createdAt: Date | null
+}

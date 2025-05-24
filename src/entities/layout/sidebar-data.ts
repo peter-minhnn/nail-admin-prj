@@ -4,6 +4,7 @@ import {
   IconCards,
   IconImageInPicture,
   IconLayoutDashboard,
+  IconLetterS,
   IconShoppingCart,
   IconStackPop,
 } from '@tabler/icons-react'
@@ -66,6 +67,11 @@ export const sidebarData: SidebarData = {
           title: 'menu.popup',
           url: '/admin/popup',
           icon: IconStackPop,
+        },
+        {
+          title: 'menu.subscribes',
+          url: '/admin/subscribes',
+          icon: IconLetterS,
         },
       ],
     },
