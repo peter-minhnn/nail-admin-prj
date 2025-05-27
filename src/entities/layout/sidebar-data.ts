@@ -115,6 +115,21 @@ export const sidebarNoProductData: SidebarData = {
           url: '/admin/contacts',
           icon: IconCards,
         },
+        {
+          title: 'menu.products',
+          url: '/admin/products',
+          icon: IconShoppingCart,
+        },
+        {
+          title: 'menu.popup',
+          url: '/admin/popup',
+          icon: IconStackPop,
+        },
+        {
+          title: 'menu.subscribes',
+          url: '/admin/subscribes',
+          icon: IconLetterS,
+        },
       ],
     },
   ],
