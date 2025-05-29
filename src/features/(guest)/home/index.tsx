@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { menuRoutes } from '@/entities/(guest)/routes.ts'
 import { BannerPublicDataType, BannerPublicFilterParams } from '@/types/(guest)'
-import get from 'lodash/get'
 import { useGetBanners } from '@/hooks/use-guest-queries.ts'
 import { useIsMobile } from '@/hooks/use-mobile.tsx'
 import Banner from '@/components/(guest)/layout/banner.tsx'
@@ -30,7 +29,7 @@ export default function Home() {
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
     setTimeout(() => setIsMounted(true), 500)
-    const bannersData = get(data, ['data'], [])
+    const bannersData = data as BannerPublicDataType[]
     if (bannersData?.length) {
       setBanner(bannersData[0])
     }

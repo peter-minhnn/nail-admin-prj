@@ -55,10 +55,7 @@ export const useGetBanners = (params: BannerPublicFilterParams) => {
   return useQuery({
     queryKey: ['banner', params],
     queryFn: async () => await getBanners(params),
-    select: (response) =>
-      get(response, ['result'], {
-        data: [],
-      }),
+    select: (response) => get(response, ['result', 'data'], []),
     refetchOnWindowFocus: false,
   })
 }

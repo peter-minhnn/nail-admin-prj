@@ -8,7 +8,7 @@ import PopupContent from './popup-content'
 import PopupImage from './popup-image'
 
 export default function PopupDialog() {
-  const [popupsData, setPopupsData] = useState<PopupDataType>()
+  const [popupsData, setPopupsData] = useState<PopupDataType | null>(null)
 
   const { data, status, isRefetching } = useGetPopupsPublished()
 
@@ -34,9 +34,7 @@ export default function PopupDialog() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    if (data?.data) {
-      setPopupsData(data?.data)
-    }
+    setPopupsData(data ?? null)
   }, [data, status, isRefetching])
 
   if (popupsData == null) return null
