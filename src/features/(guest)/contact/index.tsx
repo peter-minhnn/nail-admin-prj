@@ -66,7 +66,7 @@ export default function ProductsComponent() {
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.address' })}
                   value={
-                    '71/6 Hoàng Hoa Thám, Phường 7, Quận Bình Thạnh, TP.HCM'
+                    '71/6 Hoàng Hoa Thám, Phường Gia Định, Tp.HCM, Việt Nam (Phường 7, Quận Bình Thạnh cũ)'
                   }
                 />
                 <ContactSocialView />
