@@ -34,7 +34,7 @@ export default function ServiceBanner() {
           <p
             className={`philosopher-regular text-center text-6xl text-[#E48E43] md:text-7xl lg:text-8xl`}
           >
-            DEJÀ VU NAIL
+            DEJÀ VU NAILS
           </p>
           <p
             className={`philosopher-regular mx-6 text-4xl text-[#E48E43] md:text-7xl lg:text-8xl`}

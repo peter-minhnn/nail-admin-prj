@@ -52,7 +52,7 @@ export default function Home() {
             <p
               className={`philosopher-regular text-6xl font-normal text-white md:text-7xl lg:text-8xl`}
             >
-              NAIL CARE
+              BEAUTY CARE
             </p>
           </div>
           <div className='flex h-auto w-full justify-center md:justify-start md:pl-[34rem]'>
