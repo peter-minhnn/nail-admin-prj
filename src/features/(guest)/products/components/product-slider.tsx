@@ -17,7 +17,8 @@ import ProductSectionHeader from './product-section-header'
 
 interface ProductsSliderProps {
   item: GuestProductTypeType
-  leftSide?: boolean
+  leftSide?: boolean,
+  onDataLoaded: (typeId: number, listSize: number) => void
 }
 
 export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
@@ -41,6 +42,7 @@ export default function ProductSlider(props: Readonly<ProductsSliderProps>) {
     if (status === 'pending' || isRefetching) return
     const items: GuestProductDetailType[] = get(data, ['list'], [])
     setProducts(items)
+    props.onDataLoaded(props.item.id, items?.length ?? 0)
   }, [data, status, isRefetching])
 
   if (products.length == 0) return <div />
