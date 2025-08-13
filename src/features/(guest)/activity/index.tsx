@@ -22,8 +22,8 @@ export default function ActivitiesComponent() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
-    if (bannersData.length > 0) {
+    const bannersData = data as BannerPublicDataType[]
+    if (bannersData?.length) {
       setBanner(bannersData[0])
     }
   }, [data, status, isRefetching])

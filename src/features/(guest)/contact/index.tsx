@@ -25,7 +25,7 @@ export default function ProductsComponent() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
+    const bannersData = data as BannerPublicDataType[]
     if (bannersData?.length) {
       setBanner(bannersData[0])
     }

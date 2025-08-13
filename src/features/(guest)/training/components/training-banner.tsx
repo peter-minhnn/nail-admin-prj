@@ -17,7 +17,7 @@ export default function TrainingBanner() {
 
   useEffect(() => {
     if (status === 'pending' || isRefetching) return
-    const bannersData: BannerPublicDataType[] = get(data, ['data'], [])
+    const bannersData = data as BannerPublicDataType[]
     setBanners(bannersData)
   }, [data, status, isRefetching])
 
