@@ -88,18 +88,6 @@ const defaultValues: PostsDataType = {
   id: 0,
 }
 
-/**
- * Posts Detail Dialog Component
- *
- * Features:
- * - Form for creating/editing posts with Vietnamese and English content
- * - Automatic cleanup of uploaded files when dialog is closed without saving
- * - File cleanup is triggered when:
- *   1. User clicks Cancel button
- *   2. User closes dialog via ESC key or clicking outside
- *   3. Component unmounts unexpectedly
- *   4. Dialog state changes to closed
- */
 export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
   const queryClient = useQueryClient()
   const isEdit = props.type === 'update' && !!props.currentRow
@@ -124,7 +112,6 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
   const onSuccess = async (response: ResultType) => {
     handleServerResponse(response)
     if (response.type === 'success') {
-      // Clear uploaded files tracking since they were successfully saved
       setUploadedContentFiles([])
       await queryClient.invalidateQueries({
         queryKey: ['posts'],
