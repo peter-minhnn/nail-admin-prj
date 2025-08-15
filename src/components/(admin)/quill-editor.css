@@ -1,0 +1,357 @@
+/* Custom Quill Editor Styles for Better Video Experience */
+
+/* Make videos responsive and larger */
+.ql-editor video {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 400px !important;
+  max-height: 600px !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
+  background: #000;
+  transition: all 0.3s ease;
+}
+
+/* Video container styling */
+.ql-editor .ql-video {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 400px !important;
+  max-height: 600px !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
+  background: #000;
+  transition: all 0.3s ease;
+}
+
+/* Enhanced video controls */
+.ql-editor video::-webkit-media-controls {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ql-editor video:hover::-webkit-media-controls {
+  opacity: 1;
+}
+
+.ql-editor video::-webkit-media-controls-panel {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.ql-editor video::-webkit-media-controls-play-button {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+
+.ql-editor video::-webkit-media-controls-play-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.ql-editor video::-webkit-media-controls-timeline {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  height: 6px;
+  transition: all 0.3s ease;
+}
+
+.ql-editor video::-webkit-media-controls-timeline:hover {
+  background: rgba(255, 255, 255, 0.5);
+  height: 8px;
+}
+
+.ql-editor video::-webkit-media-controls-current-time-display,
+.ql-editor video::-webkit-media-controls-time-remaining-display {
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.ql-editor video::-webkit-media-controls-volume-slider {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  height: 6px;
+  transition: all 0.3s ease;
+}
+
+.ql-editor video::-webkit-media-controls-volume-slider:hover {
+  background: rgba(255, 255, 255, 0.5);
+  height: 8px;
+}
+
+.ql-editor video::-webkit-media-controls-fullscreen-button {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  transition: all 0.3s ease;
+}
+
+.ql-editor video::-webkit-media-controls-fullscreen-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+/* Custom video player wrapper */
+.ql-editor .video-wrapper {
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  max-height: 600px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
+  background: #000;
+}
+
+/* Video controls overlay */
+.ql-editor .video-wrapper .video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 20px 16px 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ql-editor .video-wrapper:hover .video-controls {
+  opacity: 1;
+}
+
+/* Custom play button */
+.ql-editor .video-wrapper .play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.ql-editor .video-wrapper .play-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.ql-editor .video-wrapper .play-button svg {
+  width: 32px;
+  height: 32px;
+  fill: #000;
+  margin-left: 4px;
+}
+
+/* Progress bar styling */
+.ql-editor .video-wrapper .progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.ql-editor .video-wrapper .progress-fill {
+  height: 100%;
+  background: #e48e43;
+  border-radius: 2px;
+  transition: width 0.1s ease;
+}
+
+/* Volume control */
+.ql-editor .video-wrapper .volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.ql-editor .video-wrapper .volume-slider {
+  width: 80px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.ql-editor .video-wrapper .volume-fill {
+  height: 100%;
+  background: #e48e43;
+  border-radius: 2px;
+  transition: width 0.1s ease;
+}
+
+/* Enhanced video focus and hover states */
+.ql-editor video:focus,
+.ql-editor .ql-video:focus {
+  outline: 2px solid #e48e43;
+  outline-offset: 2px;
+  transform: scale(1.02);
+}
+
+.ql-editor video:hover,
+.ql-editor .ql-video:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading state for videos */
+.ql-editor video:not([src]) {
+  background:
+    linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+    linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+    linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0px;
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position:
+      0 0,
+      0 10px,
+      10px -10px,
+      -10px 0px;
+  }
+  100% {
+    background-position:
+      20px 20px,
+      20px 30px,
+      30px 10px,
+      10px 20px;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ql-editor video,
+  .ql-editor .ql-video,
+  .ql-editor .video-wrapper {
+    min-height: 300px;
+    max-height: 400px;
+  }
+
+  .ql-editor .video-wrapper .play-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .ql-editor .video-wrapper .play-button svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Smooth transitions for all video elements */
+.ql-editor video,
+.ql-editor .ql-video,
+.ql-editor .video-wrapper {
+  transition: all 0.3s ease;
+}
+
+/* Focus states for accessibility */
+.ql-editor video:focus,
+.ql-editor .ql-video:focus,
+.ql-editor .video-wrapper:focus {
+  outline: 2px solid #e48e43;
+  outline-offset: 2px;
+}
+
+/* Enhanced video controls visibility */
+.ql-editor video::-webkit-media-controls-enclosure {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* Better video control button spacing */
+.ql-editor video::-webkit-media-controls-panel > * {
+  margin: 0 2px;
+}
+
+/* Enhanced video loading states */
+.ql-editor video[data-loading='true'] {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Video error state */
+.ql-editor video[data-error='true'] {
+  background: #fee;
+  border: 2px solid #f56565;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c53030;
+  font-weight: 500;
+}
+
+/* Enhanced video focus ring */
+.ql-editor video:focus-visible {
+  outline: 2px solid #e48e43;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Video container hover effects */
+.ql-editor .ql-video:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom video controls for better mobile experience */
+@media (max-width: 768px) {
+  .ql-editor video::-webkit-media-controls-panel {
+    padding: 12px;
+  }
+
+  .ql-editor video::-webkit-media-controls-play-button,
+  .ql-editor video::-webkit-media-controls-fullscreen-button {
+    width: 48px;
+    height: 48px;
+  }
+
+  .ql-editor video::-webkit-media-controls-timeline,
+  .ql-editor video::-webkit-media-controls-volume-slider {
+    height: 8px;
+  }
+}
