@@ -55,7 +55,7 @@ const aboutThirdData = (intl: IntlShape) => {
       description: intl.formatMessage({
         id: 'aboutUs.section3Item6Description',
       }),
-    }
+    },
   ]
 }
 
