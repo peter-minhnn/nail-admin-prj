@@ -55,17 +55,49 @@ type UploadState = {
   progress?: number
 }
 
-// Custom clipboard matcher to handle pasted images and videos
 const mediaHandlerClipboard = (_: unknown, delta: unknown) => {
-  // Return the delta as-is; we'll handle the media in the paste event
   return delta
 }
 
 // File size limits (in MB)
 const FILE_SIZE_LIMITS = {
-  IMAGE: 10, // 10MB for images
+  IMAGE: 5, // 5MB for images
   VIDEO: 150, // 150MB for videos
 } as const
+
+// Video dimension constants
+const VIDEO_DIMENSIONS = {
+  MAX_WIDTH: 1200, // Maximum width for editor (increased for better quality)
+  MAX_HEIGHT: 800, // Maximum height for editor (increased for better quality)
+  MIN_HEIGHT: 300, // Minimum height for better visibility
+} as const
+
+const calculateVideoDimensions = (videoWidth: number, videoHeight: number) => {
+  let finalWidth = videoWidth
+  let finalHeight = videoHeight
+
+  if (
+    videoWidth > VIDEO_DIMENSIONS.MAX_WIDTH ||
+    videoHeight > VIDEO_DIMENSIONS.MAX_HEIGHT
+  ) {
+    const aspectRatio = videoWidth / videoHeight
+    if (videoWidth > videoHeight) {
+      finalWidth = VIDEO_DIMENSIONS.MAX_WIDTH
+      finalHeight = VIDEO_DIMENSIONS.MAX_WIDTH / aspectRatio
+    } else {
+      finalHeight = VIDEO_DIMENSIONS.MAX_HEIGHT
+      finalWidth = VIDEO_DIMENSIONS.MAX_HEIGHT * aspectRatio
+    }
+  }
+
+  if (finalHeight < VIDEO_DIMENSIONS.MIN_HEIGHT) {
+    const aspectRatio = finalWidth / finalHeight
+    finalHeight = VIDEO_DIMENSIONS.MIN_HEIGHT
+    finalWidth = VIDEO_DIMENSIONS.MIN_HEIGHT * aspectRatio
+  }
+
+  return { width: finalWidth, height: finalHeight }
+}
 
 const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
   (props, ref) => {
@@ -85,6 +117,7 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
     } = props
 
     const quillRef = useRef(null)
+    const isMountedRef = useRef(false)
     const [isLayoutReady, setIsLayoutReady] = useState<boolean>(false)
     const [uploadState, setUploadState] = useState<UploadState>({
       isUploading: false,
@@ -92,7 +125,6 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
     })
     const [uploadedFiles, setUploadedFiles] = useState<string[]>([])
 
-    // Extract filename from URL for deletion
     const extractFilenameFromUrl = useCallback((url: string): string => {
       try {
         const urlObj = new URL(url)
@@ -100,15 +132,14 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         const filename = pathname.split('/').pop()
         return filename || ''
       } catch {
-        // If URL parsing fails, try to extract filename from the end of the string
         const parts = url.split('/')
         return parts[parts.length - 1] || ''
       }
     }, [])
 
-    // Add file to uploaded files tracking
     const addUploadedFile = useCallback(
       (url: string) => {
+        if (!isMountedRef.current) return
         setUploadedFiles((prev) => {
           const newFiles = [...prev, url]
           onUploadedFilesChange?.(newFiles)
@@ -118,9 +149,9 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       [onUploadedFilesChange]
     )
 
-    // Remove file from uploaded files tracking
     const removeUploadedFile = useCallback(
       (url: string) => {
+        if (!isMountedRef.current) return
         setUploadedFiles((prev) => {
           const newFiles = prev.filter((file) => file !== url)
           onUploadedFilesChange?.(newFiles)
@@ -130,13 +161,11 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       [onUploadedFilesChange]
     )
 
-    // Cleanup uploaded files that are no longer in the content
-    const _cleanupOrphanedFiles = useCallback(() => {
+    const cleanupOrphanedFiles = useCallback(() => {
       if (!value) return
 
       const contentUrls: string[] = []
 
-      // Extract all image and video URLs from the content
       const imgRegex = /<img[^>]+src="([^"]+)"/g
       const videoRegex = /<video[^>]+src="([^"]+)"/g
 
@@ -148,12 +177,10 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         contentUrls.push(match[1])
       }
 
-      // Find orphaned files (uploaded but not in content)
       const orphanedFiles = uploadedFiles.filter(
         (file) => !contentUrls.includes(file)
       )
 
-      // Delete orphaned files from server
       orphanedFiles.forEach(async (fileUrl) => {
         try {
           const filename = extractFilenameFromUrl(fileUrl)
@@ -168,7 +195,6 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       })
     }, [value, uploadedFiles, extractFilenameFromUrl, removeUploadedFile])
 
-    // Cleanup all uploaded files (call this when form is cancelled or closed without saving)
     const cleanupAllUploadedFiles = useCallback(async () => {
       if (uploadedFiles.length === 0) return
 
@@ -186,11 +212,12 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         }
       }
 
-      setUploadedFiles([])
-      onUploadedFilesChange?.([])
+      if (isMountedRef.current) {
+        setUploadedFiles([])
+        onUploadedFilesChange?.([])
+      }
     }, [uploadedFiles, extractFilenameFromUrl, onUploadedFilesChange])
 
-    // Expose cleanup function to parent component through ref
     useImperativeHandle(
       ref,
       () => ({
@@ -199,10 +226,9 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       [cleanupAllUploadedFiles]
     )
 
-    // Validate file size
     const validateFileSize = useCallback(
       (file: File, maxSizeMB: number = 150) => {
-        const maxSize = maxSizeMB * 1024 * 1024 // Convert MB to bytes
+        const maxSize = maxSizeMB * 1024 * 1024
         if (file.size > maxSize) {
           const currentSizeMB = (file.size / (1024 * 1024)).toFixed(2)
           throw new Error(
@@ -214,7 +240,6 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       []
     )
 
-    // Upload file to server (images and videos)
     const uploadFile = useCallback(
       async (file: File) => {
         const formData = new FormData()
@@ -228,7 +253,6 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
           >('/files', formData)
           const fileUrl = get(response, ['data', 'data', 'url'], '')
 
-          // Track uploaded file
           if (fileUrl) {
             addUploadedFile(fileUrl)
           }
@@ -243,7 +267,6 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       [addUploadedFile]
     )
 
-    // Enhance existing videos in the editor
     const enhanceExistingVideos = useCallback(() => {
       const editorElement = quillRef.current
         ? (
@@ -255,21 +278,68 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         videoElements.forEach((video) => {
           if (!video.classList.contains('enhanced')) {
             video.classList.add('enhanced')
-            video.style.cssText = `
-            max-width: 100% !important;
-            width: 100% !important;
-            height: auto !important;
-            min-height: 400px !important;
-            max-height: 600px !important;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin: 16px 0;
-            background: #000;
-            object-fit: cover;
-            transition: all 0.3s ease;
-          `
 
-            // Add enhanced attributes
+            const handleLoadedMetadata = () => {
+              const videoWidth = video.videoWidth
+              const videoHeight = video.videoHeight
+
+              const { width: finalWidth, height: finalHeight } =
+                calculateVideoDimensions(videoWidth, videoHeight)
+
+              video.style.cssText = `
+                width: ${finalWidth}px !important;
+                height: ${finalHeight}px !important;
+                max-width: 100% !important;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                margin: 16px 0;
+                background: #000;
+                object-fit: contain;
+                transition: all 0.3s ease;
+              `
+
+              video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+            }
+
+            video.addEventListener('loadedmetadata', handleLoadedMetadata)
+
+            video.addEventListener('error', () => {
+              video.setAttribute('data-error', 'true')
+              video.style.cssText = `
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: ${VIDEO_DIMENSIONS.MIN_HEIGHT}px !important;
+                max-height: ${VIDEO_DIMENSIONS.MAX_HEIGHT}px !important;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                margin: 16px 0;
+                background: #fee;
+                border: 2px solid #f56565;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #c53030;
+                font-weight: 500;
+                object-fit: cover;
+                transition: all 0.3s ease;
+              `
+            })
+
+            video.style.cssText = `
+              max-width: 100% !important;
+              width: 100% !important;
+              height: auto !important;
+              min-height: ${VIDEO_DIMENSIONS.MIN_HEIGHT}px !important;
+              max-height: ${VIDEO_DIMENSIONS.MAX_HEIGHT}px !important;
+              border-radius: 8px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              margin: 16px 0;
+              background: #000;
+              object-fit: cover;
+              transition: all 0.3s ease;
+            `
+
             video.controls = true
             video.preload = 'metadata'
             video.playsInline = true
@@ -281,7 +351,6 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       }
     }, [])
 
-    // Insert media into editor
     const insertMedia = useCallback((url: string, type: 'image' | 'video') => {
       const editor = (
         quillRef.current! as {
@@ -309,7 +378,6 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         editor.insertEmbed(range.index, 'image', url)
         editor.insertText(range.index + 1, '', { alt: '' })
       } else if (type === 'video') {
-        // Enhanced video attributes for better playback experience
         const videoAttributes = {
           controls: true,
           preload: 'metadata',
@@ -320,14 +388,12 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
           width: '100%',
           height: 'auto',
           style:
-            'min-height: 400px; max-height: 600px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);',
+            'min-height: 300px; max-height: 600px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);',
         }
 
-        // Use enhanced video insertion for better experience
         editor.insertEmbed(range.index, 'video', url, videoAttributes)
         editor.insertText(range.index + 1, '', { alt: '' })
 
-        // Apply enhanced styling after insertion
         setTimeout(() => {
           const editorElement = quillRef.current
             ? (
@@ -339,25 +405,78 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
               `video[src="${url}"]`
             ) as HTMLVideoElement
             if (videoElement) {
+              const handleLoadedMetadata = () => {
+                const videoWidth = videoElement.videoWidth
+                const videoHeight = videoElement.videoHeight
+
+                const { width: finalWidth, height: finalHeight } =
+                  calculateVideoDimensions(videoWidth, videoHeight)
+
+                videoElement.style.cssText = `
+                  width: ${finalWidth}px !important;
+                  height: ${finalHeight}px !important;
+                  max-width: 100% !important;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                  margin: 16px 0;
+                  background: #000;
+                  object-fit: contain;
+                  transition: all 0.3s ease;
+                `
+
+                videoElement.removeEventListener(
+                  'loadedmetadata',
+                  handleLoadedMetadata
+                )
+              }
+
+              videoElement.addEventListener(
+                'loadedmetadata',
+                handleLoadedMetadata
+              )
+
+              videoElement.addEventListener('error', () => {
+                videoElement.setAttribute('data-error', 'true')
+                videoElement.style.cssText = `
+                  max-width: 100% !important;
+                  width: 100% !important;
+                  height: auto !important;
+                  min-height: ${VIDEO_DIMENSIONS.MIN_HEIGHT}px !important;
+                  max-height: ${VIDEO_DIMENSIONS.MAX_HEIGHT}px !important;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                  margin: 16px 0;
+                  background: #fee;
+                  border: 2px solid #f56565;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #c53030;
+                  font-weight: 500;
+                  object-fit: cover;
+                  transition: all 0.3s ease;
+                `
+              })
+
               videoElement.style.cssText = `
-              max-width: 100% !important;
-              width: 100% !important;
-              height: auto !important;
-              min-height: 400px !important;
-              max-height: 600px !important;
-              border-radius: 8px;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-              margin: 16px 0;
-              background: #000;
-              object-fit: cover;
-            `
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: ${VIDEO_DIMENSIONS.MIN_HEIGHT}px !important;
+                max-height: ${VIDEO_DIMENSIONS.MAX_HEIGHT}px !important;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                margin: 16px 0;
+                background: #000;
+                object-fit: cover;
+                transition: all 0.3s ease;
+              `
             }
           }
         }, 100)
       }
     }, [])
 
-    // Handle paste event for images and videos
     const handlePaste = useCallback(
       async (e: ClipboardEvent) => {
         const clipboardData = e.clipboardData
@@ -369,14 +488,15 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
           if (uploadState.isUploading) break
 
           if (element.type.indexOf('image') !== -1) {
-            e.preventDefault() // Prevent default paste behavior
+            e.preventDefault()
             const file = element.getAsFile()
             if (file) {
               try {
-                // Validate pasted image file size
                 validateFileSize(file, FILE_SIZE_LIMITS.IMAGE)
 
-                setUploadState({ isUploading: true, uploadType: 'image' })
+                if (isMountedRef.current) {
+                  setUploadState({ isUploading: true, uploadType: 'image' })
+                }
                 const fileUrl = await uploadFile(file)
                 insertMedia(fileUrl, 'image')
               } catch (error) {
@@ -386,17 +506,18 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
                   alert('Failed to upload pasted image')
                 }
               } finally {
-                setUploadState({ isUploading: false, uploadType: null })
+                if (isMountedRef.current) {
+                  setUploadState({ isUploading: false, uploadType: null })
+                }
               }
             }
-            break // Handle only one media per paste
+            break
           }
         }
       },
       [uploadState.isUploading, uploadFile, insertMedia, validateFileSize]
     )
 
-    // Handle image upload from toolbar button
     const imageHandler = useCallback(() => {
       const input = document.createElement('input')
       input.setAttribute('type', 'file')
@@ -407,10 +528,11 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         const file = input.files?.[0]
         if (file) {
           try {
-            // Validate image file size
             validateFileSize(file, FILE_SIZE_LIMITS.IMAGE)
 
-            setUploadState({ isUploading: true, uploadType: 'image' })
+            if (isMountedRef.current) {
+              setUploadState({ isUploading: true, uploadType: 'image' })
+            }
             const fileUrl = await uploadFile(file)
             insertMedia(fileUrl, 'image')
           } catch (error) {
@@ -420,13 +542,14 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
               alert('Failed to upload image')
             }
           } finally {
-            setUploadState({ isUploading: false, uploadType: null })
+            if (isMountedRef.current) {
+              setUploadState({ isUploading: false, uploadType: null })
+            }
           }
         }
       }
     }, [uploadFile, insertMedia, validateFileSize])
 
-    // Handle video upload from toolbar button
     const videoHandler = useCallback(() => {
       const input = document.createElement('input')
       input.setAttribute('type', 'file')
@@ -437,10 +560,11 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         const file = input.files?.[0]
         if (file) {
           try {
-            // Validate video file size
             validateFileSize(file, FILE_SIZE_LIMITS.VIDEO)
 
-            setUploadState({ isUploading: true, uploadType: 'video' })
+            if (isMountedRef.current) {
+              setUploadState({ isUploading: true, uploadType: 'video' })
+            }
             const fileUrl = await uploadFile(file)
             insertMedia(fileUrl, 'video')
           } catch (error) {
@@ -450,13 +574,14 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
               alert('Failed to upload video')
             }
           } finally {
-            setUploadState({ isUploading: false, uploadType: null })
+            if (isMountedRef.current) {
+              setUploadState({ isUploading: false, uploadType: null })
+            }
           }
         }
       }
     }, [uploadFile, insertMedia, validateFileSize])
 
-    // Quill modules configuration
     const modules = useMemo(() => {
       if (!isLayoutReady || hideToolbar) {
         return {
@@ -482,13 +607,12 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
             video: videoHandler,
           },
           clipboard: {
-            matchers: [['img', mediaHandlerClipboard]], // Custom matcher for clipboard
+            matchers: [['img', mediaHandlerClipboard]],
           },
         },
       }
     }, [isLayoutReady, hideToolbar, imageHandler, videoHandler])
 
-    // Handle editor content change
     const handleChange = useCallback(
       (html: string) => {
         setValue?.(html)
@@ -497,7 +621,6 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       [setValue, onChange]
     )
 
-    // Custom video formats for Quill
     const formats = useMemo(
       () => [
         'header',
@@ -566,12 +689,15 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
     ])
 
     useEffect(() => {
+      isMountedRef.current = true
       setIsLayoutReady(true)
 
-      return () => setIsLayoutReady(false)
+      return () => {
+        isMountedRef.current = false
+        setIsLayoutReady(false)
+      }
     }, [])
 
-    // Register paste event listener when component mounts
     useEffect(() => {
       if (quillRef.current && isLayoutReady) {
         const editor = (
@@ -579,19 +705,22 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         )?.getEditor()
         editor.root.addEventListener('paste', handlePaste)
 
-        // Cleanup listener on unmount
         return () => {
           editor.root.removeEventListener('paste', handlePaste)
         }
       }
     }, [handlePaste, isLayoutReady])
 
-    // Enhance existing videos when the editor is ready
     useEffect(() => {
-      enhanceExistingVideos()
-    }, [enhanceExistingVideos])
+      if (isLayoutReady) {
+        requestAnimationFrame(() => {
+          if (isMountedRef.current) {
+            enhanceExistingVideos()
+          }
+        })
+      }
+    }, [enhanceExistingVideos, isLayoutReady])
 
-    // Set up mutation observer to enhance videos as they're added and track content changes
     useEffect(() => {
       if (quillRef.current && isLayoutReady) {
         const editorElement = (
@@ -599,23 +728,32 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
         ).getEditor()
 
         const observer = new MutationObserver((mutations) => {
+          if (!isLayoutReady || !isMountedRef.current) return
+
           mutations.forEach((mutation) => {
             if (mutation.type === 'childList') {
               mutation.addedNodes.forEach((node) => {
                 if (node.nodeType === Node.ELEMENT_NODE) {
                   const element = node as Element
                   if (element.tagName === 'VIDEO') {
-                    setTimeout(() => enhanceExistingVideos(), 100)
+                    requestAnimationFrame(() => {
+                      if (isMountedRef.current) {
+                        enhanceExistingVideos()
+                      }
+                    })
                   } else if (element.querySelectorAll) {
                     const videos = element.querySelectorAll('video')
                     if (videos.length > 0) {
-                      setTimeout(() => enhanceExistingVideos(), 100)
+                      requestAnimationFrame(() => {
+                        if (isMountedRef.current) {
+                          enhanceExistingVideos()
+                        }
+                      })
                     }
                   }
                 }
               })
 
-              // Check for removed nodes to track orphaned files
               mutation.removedNodes.forEach((node) => {
                 if (node.nodeType === Node.ELEMENT_NODE) {
                   const element = node as Element
@@ -625,8 +763,11 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
                   ) {
                     const src = element.getAttribute('src')
                     if (src && uploadedFiles.includes(src)) {
-                      // File was removed from content, mark for cleanup
-                      setTimeout(() => _cleanupOrphanedFiles(), 100)
+                      requestAnimationFrame(() => {
+                        if (isMountedRef.current) {
+                          cleanupOrphanedFiles()
+                        }
+                      })
                     }
                   }
                 }
@@ -646,15 +787,15 @@ const QuillEditor = forwardRef<QuillEditorRef, QuillEditorProps>(
       isLayoutReady,
       enhanceExistingVideos,
       uploadedFiles,
-      _cleanupOrphanedFiles,
+      cleanupOrphanedFiles,
     ])
 
-    // Cleanup uploaded files when component unmounts if not saved
     useEffect(() => {
       return () => {
-        // Only cleanup if there are uploaded files and the content is empty or minimal
         if (uploadedFiles.length > 0 && (!value || value.length < 50)) {
-          cleanupAllUploadedFiles()
+          if (isMountedRef.current) {
+            cleanupAllUploadedFiles()
+          }
         }
       }
     }, [uploadedFiles, value, cleanupAllUploadedFiles])

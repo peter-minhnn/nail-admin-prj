@@ -112,7 +112,6 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
   const onSuccess = async (response: ResultType) => {
     handleServerResponse(response)
     if (response.type === 'success') {
-      setUploadedContentFiles([])
       await queryClient.invalidateQueries({
         queryKey: ['posts'],
         refetchType: 'all',
@@ -162,20 +161,37 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
 
   const onSubmit = async (data: PostsDataType) => {
     if (!validate()) return
-    if (!isEdit) {
-      await mutateAsync({
-        ...data,
-        thumbnail: thumbnailFiles[0],
-        contentVi: updateSpanBackgrounds(data.contentVi),
-        contentEn: updateSpanBackgrounds(data.contentEn),
-      })
-    } else {
-      await updateMutateAsync({
-        ...data,
-        thumbnail: thumbnailFiles.length ? thumbnailFiles[0] : data.thumbnail,
-        contentVi: updateSpanBackgrounds(data.contentVi),
-        contentEn: updateSpanBackgrounds(data.contentEn),
-      })
+
+    try {
+      if (!isEdit) {
+        await mutateAsync({
+          ...data,
+          thumbnail: thumbnailFiles[0],
+          contentVi: updateSpanBackgrounds(data.contentVi),
+          contentEn: updateSpanBackgrounds(data.contentEn),
+        })
+      } else {
+        await updateMutateAsync({
+          ...data,
+          thumbnail: thumbnailFiles.length ? thumbnailFiles[0] : data.thumbnail,
+          contentVi: updateSpanBackgrounds(data.contentVi),
+          contentEn: updateSpanBackgrounds(data.contentEn),
+        })
+      }
+    } catch (error) {
+      if (uploadedContentFiles.length > 0) {
+        try {
+          await cleanupUploadedFiles()
+          setUploadedContentFiles([])
+        } catch (cleanupError) {
+          // eslint-disable-next-line no-console
+          console.error(
+            'Failed to cleanup files after save error:',
+            cleanupError
+          )
+        }
+      }
+      throw error
     }
   }
 
@@ -190,6 +206,7 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
     }
     props.setOpen('')
     form.reset()
+    setUploadedContentFiles([])
   }
 
   useEffect(() => {
@@ -209,6 +226,7 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
         // eslint-disable-next-line no-console
         console.error('Failed to cleanup files when dialog closed:', error)
       })
+      setUploadedContentFiles([])
     }
   }, [props.open, uploadedContentFiles.length, cleanupUploadedFiles])
 
