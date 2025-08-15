@@ -17,7 +17,7 @@ import ProductSectionHeader from './product-section-header'
 
 interface ProductsSliderProps {
   item: GuestProductTypeType
-  leftSide?: boolean,
+  leftSide?: boolean
   onDataLoaded: (typeId: number, listSize: number) => void
 }
 
