@@ -55,6 +55,22 @@ const aboutThirdData = (intl: IntlShape) => {
       description: intl.formatMessage({
         id: 'aboutUs.section3Item6Description',
       }),
+    },
+    {
+      title: intl.formatMessage({
+        id: 'aboutUs.section3Item5Title',
+      }),
+      description: intl.formatMessage({
+        id: 'aboutUs.section3Item5Description',
+      }),
+    },
+    {
+      title: intl.formatMessage({
+        id: 'aboutUs.section3Item7Title',
+      }),
+      description: intl.formatMessage({
+        id: 'aboutUs.section3Item7Description',
+      }),
     }
   ]
 }

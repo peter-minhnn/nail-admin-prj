@@ -54,7 +54,7 @@ export default function TrainingBanner() {
               <p
                 className={`philosopher-regular py-2 text-center text-3xl text-[#E48E43] sm:text-start sm:text-5xl`}
               >
-                DEJÀ VU NAIL & SPA
+                DEJÀ VU NAILS & SPA
               </p>
               <p
                 className={`roboto-regular break-all text-center text-base sm:text-start`}
