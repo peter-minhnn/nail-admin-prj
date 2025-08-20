@@ -1,4 +1,13 @@
-import { Dispatch, FC, SetStateAction, useMemo, useState } from 'react'
+import {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useMemo,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
@@ -10,7 +19,9 @@ import { toast } from 'sonner'
 import { cn } from '@/lib/utils.ts'
 import { updateSpanBackgrounds } from '@/utils/common.ts'
 import { NumberInput } from '@/components/(admin)/number-input.tsx'
-import QuillEditor from '@/components/(admin)/quill-editor.tsx'
+import QuillEditor, {
+  QuillEditorRef,
+} from '@/components/(admin)/quill-editor.tsx'
 import { SelectDropdown } from '@/components/(admin)/select-dropdown.tsx'
 import {
   Button,
@@ -95,6 +106,8 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
 
   const [thumbnailFiles, setThumbnailFiles] = useState<File[]>([])
   const [showContentEn, setShowContentEn] = useState<boolean>(false)
+  const [uploadedContentFiles, setUploadedContentFiles] = useState<string[]>([])
+  const quillEditorRef = useRef<QuillEditorRef>(null)
 
   const onSuccess = async (response: ResultType) => {
     handleServerResponse(response)
@@ -107,8 +120,7 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
     }
   }
 
-  const onError = (error: Error) => {
-    console.log(error.message)
+  const onError = () => {
     toast.error('common.messages.errorOccurred')
   }
 
@@ -123,6 +135,19 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
     [status, updateStatus]
   )
 
+  // Cleanup uploaded files when dialog is closed without saving
+  const cleanupUploadedFiles = useCallback(async () => {
+    if (quillEditorRef.current?.cleanupAllUploadedFiles) {
+      try {
+        await quillEditorRef.current.cleanupAllUploadedFiles()
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to cleanup uploaded files:', error)
+        throw error
+      }
+    }
+  }, [])
+
   const validate = () => {
     let check = true
     if (!thumbnailFiles.length && !isEdit) {
@@ -136,29 +161,82 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
 
   const onSubmit = async (data: PostsDataType) => {
     if (!validate()) return
-    if (!isEdit) {
-      await mutateAsync({
-        ...data,
-        thumbnail: thumbnailFiles[0],
-        contentVi: updateSpanBackgrounds(data.contentVi),
-        contentEn: updateSpanBackgrounds(data.contentEn),
-      })
-    } else {
-      await updateMutateAsync({
-        ...data,
-        thumbnail: thumbnailFiles.length ? thumbnailFiles[0] : data.thumbnail,
-        contentVi: updateSpanBackgrounds(data.contentVi),
-        contentEn: updateSpanBackgrounds(data.contentEn),
-      })
+
+    try {
+      if (!isEdit) {
+        await mutateAsync({
+          ...data,
+          thumbnail: thumbnailFiles[0],
+          contentVi: updateSpanBackgrounds(data.contentVi),
+          contentEn: updateSpanBackgrounds(data.contentEn),
+        })
+      } else {
+        await updateMutateAsync({
+          ...data,
+          thumbnail: thumbnailFiles.length ? thumbnailFiles[0] : data.thumbnail,
+          contentVi: updateSpanBackgrounds(data.contentVi),
+          contentEn: updateSpanBackgrounds(data.contentEn),
+        })
+      }
+    } catch (error) {
+      if (uploadedContentFiles.length > 0) {
+        try {
+          await cleanupUploadedFiles()
+          setUploadedContentFiles([])
+        } catch (cleanupError) {
+          // eslint-disable-next-line no-console
+          console.error(
+            'Failed to cleanup files after save error:',
+            cleanupError
+          )
+        }
+      }
+      throw error
     }
   }
+
+  const handleDialogClose = async () => {
+    if (uploadedContentFiles.length > 0) {
+      try {
+        await cleanupUploadedFiles()
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to cleanup files before closing dialog:', error)
+      }
+    }
+    props.setOpen('')
+    form.reset()
+    setUploadedContentFiles([])
+  }
+
+  useEffect(() => {
+    return () => {
+      if (uploadedContentFiles.length > 0) {
+        cleanupUploadedFiles().catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('Failed to cleanup files on unmount:', error)
+        })
+      }
+    }
+  }, [uploadedContentFiles.length, cleanupUploadedFiles])
+
+  useEffect(() => {
+    if (!props.open && uploadedContentFiles.length > 0) {
+      cleanupUploadedFiles().catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Failed to cleanup files when dialog closed:', error)
+      })
+      setUploadedContentFiles([])
+    }
+  }, [props.open, uploadedContentFiles.length, cleanupUploadedFiles])
 
   return (
     <Dialog
       open={props.open}
-      onOpenChange={() => {
-        props.setOpen('')
-        form.reset()
+      onOpenChange={(open) => {
+        if (!open) {
+          handleDialogClose()
+        }
       }}
     >
       <DialogContent className='max-w-7xl'>
@@ -356,6 +434,8 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
                             helperText={
                               form.formState.errors?.contentVi?.message
                             }
+                            ref={quillEditorRef}
+                            onUploadedFilesChange={setUploadedContentFiles}
                           />
                         </FormControl>
                       </FormItem>
@@ -427,6 +507,7 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
                             placeholder={props.intl.formatMessage({
                               id: 'posts.contentEnPlaceholder',
                             })}
+                            onUploadedFilesChange={setUploadedContentFiles}
                           />
                         </FormControl>
                       </FormItem>
@@ -441,7 +522,7 @@ export const PostsDetailDialog: FC<PostsDialogsProps> = (props) => {
           <Button
             type='button'
             variant='outline'
-            onClick={() => props.setOpen('')}
+            onClick={handleDialogClose}
             disabled={loading}
             loading={loading}
           >
