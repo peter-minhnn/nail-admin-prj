@@ -62,6 +62,7 @@ export default function ProductsComponent() {
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.phone' })}
                   value={'+84 35 73 69 226'}
+                  hint='Zalo'
                 />
                 <ContactTextInfo
                   label={intl.formatMessage({ id: 'guest.contact.address' })}
