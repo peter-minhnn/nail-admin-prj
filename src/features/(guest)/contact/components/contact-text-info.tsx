@@ -10,7 +10,7 @@ export default function ContactTextInfo(props: Readonly<ContactTextProps>) {
       <div className='mb-4 flex items-center gap-2'>
         <p className='roboto-bold text-base font-bold'>{props.label}</p>
         {props.hint && (
-          <span className='roboto-light text-base text-red-500 font-bold '>({props.hint})</span>
+          <span className='roboto-bold text-base font-bold'>({props.hint})</span>
         )}
       </div>
       <p className='roboto-light text-base font-bold'>{props.value}</p>
