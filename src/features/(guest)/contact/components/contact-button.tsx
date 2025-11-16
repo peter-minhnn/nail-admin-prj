@@ -17,9 +17,9 @@ const BACKGROUND: Record<ButtonType, string> = {
 }
 
 const CONTACT_LINK: Record<ButtonType, string> = {
-  zalo: 'https://zalo.me/0357369226',
+  zalo: 'https://zalo.me/0989821042',
   facebook: 'https://m.me/deja.vu.nail.spa.room',
-  phone: 'tel:0357369226',
+  phone: 'tel:0989821042',
 }
 export default function ButtonWithIcon({
   type,
